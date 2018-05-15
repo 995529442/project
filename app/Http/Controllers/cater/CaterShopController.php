@@ -14,37 +14,53 @@ class CaterShopController extends Controller
     public function shop(){
     	$admins   = Auth::guard('admins')->user();
     	$admin_id = $admins->id;
-    	//获取省份数据
-    	$provinces = DB::table("provinces")->select(['provinceid','province'])->get();
 
     	//获取餐厅信息
         $shops_info = CaterShop::where(['admin_id'=>$admin_id])->first();
 
     	return view('cater.shop',[
-           'provinces'  => $provinces,
            'shops_info' => $shops_info
     	]);
     }
 
+    //微餐饮-获取地址解析
+    public function map(Request $request){
+    	$province = $request -> input('province','');
+        $city = $request -> input('city','');
+        $area = $request -> input('area','');
+        $address = $request -> input('address','');
+        $longitude = "";
+        $latitude  = "";
+
+        $detail_address = $province.$city.$area.$address;
+        
+        //腾讯地图解析地址坐标
+        $url = "http://apis.map.qq.com/ws/geocoder/v1/?address=".$detail_address."&key=".env('MAP_KEY', '');
+
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        
+        $map_obj = json_decode($output);        
+
+        if($map_obj->status == 0){ //解析地址成功
+           $longitude = $map_obj->result->location->lng;
+           $latitude  = $map_obj->result->location->lat;
+
+        }
+
+        return view("cater.map",[
+           'detail_address' => $detail_address,
+           'longitude' => $longitude,
+           'latitude' => $latitude, 
+        ]);
+    }
+    
     //微餐饮-保存信息
     public function saveShop(Request $request){
-    	
-    }
-
-    //微餐饮-获取省市区
-    public function getAddress(Request $request){
-    	$type       = (int)$request -> input("type",0); //类型 1 获取省，2获取市，3获取区
-    	$provinceid = (int)$request -> input("provinceid","");
-    	$cityid     = (int)$request -> input("cityid","");
-
-    	if($type == 1){
-
-    	}elseif($type == 2 && $provinceid > 0){ //获取城市
-           $result = DB::table("cities")->where("provinceid",$provinceid)->select(['cityid','city'])->get();
-    	}elseif($type == 3 && $cityid > 0){    //获取区县
-           $result = DB::table("areas")->where("cityid",$cityid)->select(['areaid','area'])->get();
-    	}
-
-    	return json_encode($result);
+        
     }
 }

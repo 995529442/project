@@ -3,7 +3,16 @@
 <blockquote class="layui-elem-quote layui-text">
   餐厅信息
 </blockquote>
- 
+<script type="text/javascript">
+    var defaults = {
+        s1: 'provid',
+        s2: 'cityid',
+        s3: 'areaid',
+        v1: null,
+        v2: null,
+        v3: null
+    };
+</script> 
 <form class="layui-form" action="" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<input type="hidden" name="shop_id" value="{{$shops_info['id']}}">
@@ -33,29 +42,27 @@
     <div class="layui-form-item">
 	    <label class="layui-form-label">联系地址：</label>
 	    <div class="layui-input-inline">
-	      <select name="province" id="province" lay-filter="province">     
-	        <option value="0">请选择省</option>
-	        @foreach($provinces as $v)
-               <option value="{{$v->provinceid}}" @if($shops_info['province_id'] == $v->provinceid) selected="selected" @endif>{{$v->province}}</option>
-	        @endforeach
-	      </select>
+	      <select name="provid" id="provid" lay-filter="provid">
+            <option value="">请选择省</option>
+          </select>
 	    </div>
-	    <div class="layui-input-inline" id="city_display" style="display: none;">
-	      <select name="city" id="city" lay-filter="city">
-	        <option value="0">请选择市</option>
-	      </select>
+	    <div class="layui-input-inline" id="city_display">
+	      <select name="cityid" id="cityid" lay-filter="cityid">
+            <option value="">请选择市</option>
+          </select>
 	    </div>
-	    <div class="layui-input-inline" id="area_display" style="display: none;">
-	      <select name="area" id="area" lay-filter="area">
-	        <option value="0">请选择县/区</option>
-	      </select>
+	    <div class="layui-input-inline" id="area_display">
+	       <select name="areaid" id="areaid" lay-filter="areaid">
+             <option value="">请选择县/区</option>
+          </select>
 	    </div>
     </div>
 
     <div class="layui-form-item">
 	    <label class="layui-form-label">详细地址：</label>
 	    <div class="layui-input-block">
-	      <input type="text" name="address" autocomplete="off" class="layui-input" value="{{$shops_info['address']}}" style="width:40%;">
+	      <input type="text" name="address" id="address" autocomplete="off" class="layui-input" value="{{$shops_info['address']}}" style="display:inline-block;width:40%;">
+	      <button onclick="open_map()" class="layui-btn" style="display:inline-block;margin-top:-5px;">搜索</button>
 	    </div>
 	</div> 
     
@@ -89,8 +96,9 @@
     </div>
   </div>
 </form>
-<script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
+<script type="text/javascript" src="/assets/common/layui/layui.js"></script>
+<script type="text/javascript" src="/assets/js/data.js"></script>
+<script type="text/javascript" src="/assets/js/province.js"></script>
 <script>
 	layui.use(['layer','form','laydate','element'], function(){
 	  var form = layui.form
@@ -107,40 +115,49 @@
 	    elem: '#end_time'
 	    ,type: 'time'
 	  }); 
-
-	  form.on('select(province)', function (data) {  
-	    var provinceid = data.value;  
-
-	    if(provinceid > 0){ //选择省份，遍历城市
-	        $.ajax({  
-              type: "POST",
-              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
-              url: "{{ route('cater.getAddress') }}",  
-              data: {provinceid:provinceid,type:2},  
-              dataType: "json",  
-              success: function(data){
-              console.log(data) 
-                  if(data != "" && data != null){
-                  	  var innerHtml = '<option value="0">请选择市</option>';
-                      for(var k=0;k<data.length;k++){
-                         innerHtml += '<option value="'+data[k]['cityid']+'">'+data[k]['city']+'</option>';
-                      }
-                      $("#city").html(innerHtml);
-                  	  $("#city_display").show();
-                  }
-              }  
-	        }); 
-	    }
-	    form.render(null,'city');   
-	});  
-
 	});
 
 	//提交判断
 	function check_submit(){
 		var province = $("#province option:selected").val();
-		console.log(province)
 		return false;
+	}
+
+	//地址解析
+	function open_map(){
+		var province = $("#provid option:selected").text();
+		var city = $("#cityid option:selected").text();
+		var area = $("#areaid option:selected").text();
+		var address = $("#address").val();
+
+	    if(province == "" || province == null){
+	    	layer.alert('请选择省份', {icon: 2});
+            return;
+	    }
+	    if(city == "" || city == null){
+	    	layer.alert('请选择城市', {icon: 2});
+            return;
+	    }
+	    if(area == "" || area == null){
+	    	layer.alert('请选择县区', {icon: 2});
+            return;
+	    }
+	    if(address == "" || address == null){
+	    	layer.alert('详细地址不能为空', {icon: 2});
+            return;
+	    }
+
+        layer.open({
+          type: 2,
+          title: false,
+          shadeClose: false,
+          shade: 0.1,
+          area: ['1000px', '600px'],
+          content: 'map?province='+province+"&city="+city+"&area="+area+"&address="+address,
+          end: function(){
+              
+            }
+        });
 	}
 </script>
 @endsection

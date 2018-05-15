@@ -77,7 +77,7 @@
   layui.use(['jquery','layer','element'],function(){
     window.jQuery = window.$ = layui.jquery;
     window.layer = layui.layer;
-        window.element = layui.element();
+        window.element = layui.element;
 
        $('.panel .tools .iconpx-chevron-down').click(function(){
            var el = $(this).parents(".panel").children(".panel-body");
@@ -92,7 +92,5 @@
 
   });
 </script>
-<script type="text/javascript" src="/assets/jsplug/echarts.min.js"></script>
-<script type="text/javascript" src="/assets/js/main.js"></script>
 </body>
 </html>
