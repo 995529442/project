@@ -14,11 +14,15 @@ class CaterShopController extends Controller
     public function shop(){
     	$admins   = Auth::guard('admins')->user();
     	$admin_id = $admins->id;
-
+        
+        //获取省份数据
+        $provinces = DB::table("address")->select(['id','name'])->where(['type'=>1,'pid'=>1])->get();
+        
     	//获取餐厅信息
         $shops_info = CaterShop::where(['admin_id'=>$admin_id])->first();
 
     	return view('cater.shop',[
+           'provinces'  => $provinces,
            'shops_info' => $shops_info
     	]);
     }

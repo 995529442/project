@@ -3,16 +3,6 @@
 <blockquote class="layui-elem-quote layui-text">
   餐厅信息
 </blockquote>
-<script type="text/javascript">
-    var defaults = {
-        s1: 'provid',
-        s2: 'cityid',
-        s3: 'areaid',
-        v1: null,
-        v2: null,
-        v3: null
-    };
-</script> 
 <form class="layui-form" action="" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<input type="hidden" name="shop_id" value="{{$shops_info['id']}}">
@@ -44,14 +34,17 @@
 	    <div class="layui-input-inline">
 	      <select name="provid" id="provid" lay-filter="provid">
             <option value="">请选择省</option>
+            @foreach($provinces as $v)
+                <option value="{{$v->id}}">{{$v->name}}</option>
+            @endforeach
           </select>
 	    </div>
-	    <div class="layui-input-inline" id="city_display">
+	    <div class="layui-input-inline" id="city_display" style="display:none;">
 	      <select name="cityid" id="cityid" lay-filter="cityid">
             <option value="">请选择市</option>
           </select>
 	    </div>
-	    <div class="layui-input-inline" id="area_display">
+	    <div class="layui-input-inline" id="area_display" style="display:none;">
 	       <select name="areaid" id="areaid" lay-filter="areaid">
              <option value="">请选择县/区</option>
           </select>
@@ -97,8 +90,6 @@
   </div>
 </form>
 <script type="text/javascript" src="/assets/common/layui/layui.js"></script>
-<script type="text/javascript" src="/assets/js/data.js"></script>
-<script type="text/javascript" src="/assets/js/province.js"></script>
 <script>
 	layui.use(['layer','form','laydate','element'], function(){
 	  var form = layui.form
@@ -115,7 +106,13 @@
 	    elem: '#end_time'
 	    ,type: 'time'
 	  }); 
-	});
+      
+      form.on('select(provid)', function (data) {  
+	    var provid = data.value;  
+	    console.log(provid)  
+	    form.render('select');   
+	  }); 
+	});     
 
 	//提交判断
 	function check_submit(){
