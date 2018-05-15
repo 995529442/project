@@ -30,8 +30,9 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     //微餐饮路由
     Route::group(['prefix'=>'cater'],function(){
        Route::get('shop', 'cater\CaterShopController@shop')->name('cater.shop'); //餐厅管理
-       Route::post('saveShop', 'cater\CaterShopController@saveShop')->name('cater.saveShop'); //餐厅管理
+       Route::post('saveShop', 'cater\CaterShopController@saveShop')->name('cater.saveShop'); //保存餐厅
        Route::any('map', 'cater\CaterShopController@map')->name('cater.map'); //定位地图
+       Route::post('getAddress', 'cater\CaterShopController@getAddress')->name('cater.getAddress'); //获取省市区等信息
     });    
 });
 
