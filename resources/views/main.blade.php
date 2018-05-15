@@ -70,21 +70,6 @@
     </div>
   </div>
   <!-- overview end -->
-  <div class="row">
-    <div class="col-lg-6">
-      <!-- 网站信息统计｛SEO数据统计｝ -->
-      <section class="panel">
-        <header class="panel-heading bm0">
-             <span class='span-title'>网站信息统计｛SEO数据统计｝</span>
-             <span class="tools pull-right"><a href="javascript:;" class="iconpx-chevron-down"></a></span>
-        </header>
-        <div class="panel-body laery-seo-box">
-              <div class="larry-seo-stats" id="larry-seo-stats"></div>
-        </div>
-      </section>
-    </div>
-  </div>
-
 </section>
 
 <script type="text/javascript" src="/assets/common/layui/layui.js"></script>
