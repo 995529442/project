@@ -1,10 +1,13 @@
 @extends('layouts.app')
-@section('content')         
+@section('content')  
+<style>
+  img{margin-left:120px;}
+</style>       
 <blockquote class="layui-elem-quote layui-text">
   餐厅信息
 </blockquote>
-<form class="layui-form" action="{{ route('cater.saveShop') }}" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
-	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<form class="layui-form" action="{{ route('cater.shop.saveShop') }}" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
+	<input type="hidden" name="_token" class="tag_token" value="{{ csrf_token() }}"> 
 	<input type="hidden" name="shop_id" value="{{$shops_info['id']}}">
     <div class="layui-form-item">
 	    <label class="layui-form-label">餐厅名称：</label>
@@ -25,7 +28,7 @@
     <div class="layui-form-item">
 	    <label class="layui-form-label">营业状态：</label>
 	    <div class="layui-input-block">
-	       <input type="radio" name="status" value="1" title="营业" @if($shops_info['status'] == 1) checked="checked" @endif />
+	       <input type="radio" name="status" value="1" title="营业" @if($shops_info['id'] > 0) @if($shops_info['status'] == 1) checked="checked" @endif @else checked="checked" @endif/>
 	       <input type="radio" name="status" value="2" title="打烊" @if($shops_info['status'] == 2) checked="checked" @endif />
 	    </div>
     </div>
@@ -65,7 +68,7 @@
 	    <label class="layui-form-label">详细地址：</label>
 	    <div class="layui-input-block">
 	      <input type="text" name="address" id="address" autocomplete="off" class="layui-input" value="{{$shops_info['address']}}" style="display:inline-block;width:40%;">
-	      <button onclick="open_map()" class="layui-btn" style="display:inline-block;margin-top:-5px;">搜索</button>
+	      <button onclick="open_map()" type="button" class="layui-btn" style="display:inline-block;margin-top:-5px;">搜索</button>
 	    </div>
 	</div> 
     
@@ -76,6 +79,30 @@
         <span>纬度：</span>
          <input type="text" name="latitude" id="latitude" value="{{$shops_info['latitude']}}" autocomplete="off" class="layui-input" style="display:inline-block;width:27%;" readonly="readonly">
       </div>  
+    </div>
+
+    <div class="layui-form-item">    
+      <label class="layui-form-label">LOGO：</label>
+      <div class="layui-upload">
+        <button type="button" class="layui-btn" id="preview_logo_id">上传图片</button>
+        <span>(建议：图片尺寸100px*100px,图片大小不能大于1M)</span>
+        <input type="hidden" class="layui-btn" name="logo" id="logo" value="{{$shops_info['logo']}}">
+        <div class="layui-upload-list">
+          <img class="layui-upload-img" id="preview_logo" @if($shops_info['show_logo'] != "") src="{{$shops_info['show_logo']}}" style="width:100px;height:100px;" @endif>
+          <p id="demoText"></p>
+        </div>
+      </div>  
+    </div>
+    
+    <div class="layui-form-item">    
+      <label class="layui-form-label">首页展示图：</label>
+      <div class="layui-upload">
+        <button type="button" class="layui-btn" id="test2">多图片上传</button> 
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;margin-left: 120px;">
+          预览图：
+          <div class="layui-upload-list" id="preview_figure"></div>
+       </blockquote>
+      </div> 
     </div>
 
     <div class="layui-form-item">
@@ -102,11 +129,12 @@
 <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
 <script>
-	layui.use(['layer','form','laydate','element'], function(){
+	layui.use(['layer','form','laydate','upload','element'], function(){
 	  var form = layui.form
 	  ,layer = layui.layer
 	  ,laydate = layui.laydate
-	  ,element = layui.element;
+	  ,element = layui.element
+    ,upload = layui.upload;
 	  
 	  //日期
 	  laydate.render({
@@ -129,7 +157,7 @@
 	        $.ajax({  
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
-              url: "{{ route('cater.getAddress') }}",  
+              url: "{{ route('cater.shop.getAddress') }}",  
               data: {provid:provid},  
               dataType: "json",  
               success: function(data){
@@ -154,7 +182,7 @@
 	        $.ajax({  
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
-              url: "{{ route('cater.getAddress') }}",  
+              url: "{{ route('cater.shop.getAddress') }}",  
               data: {cityid:cityid},  
               dataType: "json",  
               success: function(data){
@@ -170,7 +198,37 @@
               }  
 	        }); 
 	    }  
-	  }); 
+	  });
+
+    //上传图片
+    var tag_token = $(".tag_token").val();
+
+    var uploadInst = upload.render({
+      elem: '#preview_logo_id'
+      ,url: '{{ route("cater.shop.upload") }}'
+      ,accept: 'file' //普通文件
+      ,exts: 'jpg|png|gif|bmp|jpeg' //只允许上传图片文件
+      ,size: 1024 //限制文件大小，单位 KB
+      ,data:{'_token':tag_token}
+      ,before: function(obj){
+        //预读本地文件示例，不支持ie8
+        obj.preview(function(index, file, result){
+          $('#preview_logo').css('width', '100px'); //图片链接（base64）
+          $('#preview_logo').css('height', '100px'); //图片链接（base64）
+          $('#preview_logo').attr('src', result); //图片链接（base64）
+        });
+      }
+      ,done: function(res){
+        var status = res.status;
+
+        if(status == 1){
+           $("#logo").val(res.message);
+        }
+      }
+      ,error: function(res){
+         console.log(res)
+      }
+    }); 
 	});     
 	//提交判断
 	function check_submit(){
@@ -185,51 +243,56 @@
 		var latitude   = $("#latitude").val();
 		var latitude   = $("#latitude").val();
 		var phone      = $("#phone").val();
+    var logo       = $("#logo").val();
 
-        if(name == "" || name == null){
-        	layer.alert('餐厅名称不能为空', {icon: 2});
-            return false;
-        }
-        if(begin_time == "" || begin_time == null){
-        	layer.alert('营业开始时间不能为空', {icon: 2});
-            return false;
-        }
-        if(end_time == "" || end_time == null){
-        	layer.alert('营业结束时间不能为空', {icon: 2});
-            return false;
-        }
-        if(provid == "" || provid == null){
-        	layer.alert('请选择省', {icon: 2});
-            return false;
-        }
-        if(cityid == "" || cityid == null){
-        	layer.alert('请选择市', {icon: 2});
-            return false;
-        }
-        if(areaid == "" || areaid == null){
-        	layer.alert('请选择县/区', {icon: 2});
-            return false;
-        }
-        if(address == "" || address == null){
-        	layer.alert('详细地址不能为空', {icon: 2});
-            return false;
-        }
-        if(longitude == "" || longitude == null){
-        	layer.alert('经度不能为空', {icon: 2});
-            return false;
-        }
-        if(latitude == "" || latitude == null){
-        	layer.alert('纬度不能为空', {icon: 2});
-            return false;
-        }
-        if(phone == "" || phone == null){
-        	layer.alert('联系方式不能为空', {icon: 2});
-            return false;
-        }
-        if(!(/^1[34578]\d{9}$/.test(phone))){ 
-	        layer.alert('联系方式有误，请重填', {icon: 2}); 
-	        return false; 
-	    } 
+      if(name == "" || name == null){
+      	layer.alert('餐厅名称不能为空', {icon: 2});
+          return false;
+      }
+      if(begin_time == "" || begin_time == null){
+      	layer.alert('营业开始时间不能为空', {icon: 2});
+          return false;
+      }
+      if(end_time == "" || end_time == null){
+      	layer.alert('营业结束时间不能为空', {icon: 2});
+          return false;
+      }
+      if(provid == "" || provid == null){
+      	layer.alert('请选择省', {icon: 2});
+          return false;
+      }
+      if(cityid == "" || cityid == null){
+      	layer.alert('请选择市', {icon: 2});
+          return false;
+      }
+      if(areaid == "" || areaid == null){
+      	layer.alert('请选择县/区', {icon: 2});
+          return false;
+      }
+      if(address == "" || address == null){
+      	layer.alert('详细地址不能为空', {icon: 2});
+          return false;
+      }
+      if(longitude == "" || longitude == null){
+      	layer.alert('经度不能为空', {icon: 2});
+          return false;
+      }
+      if(latitude == "" || latitude == null){
+      	layer.alert('纬度不能为空', {icon: 2});
+          return false;
+      }
+      if(logo == "" || logo == null){
+        layer.alert('请先上传餐厅LOGO', {icon: 2});
+          return false;
+      }
+      if(phone == "" || phone == null){
+      	layer.alert('联系方式不能为空', {icon: 2});
+          return false;
+      }
+      if(!(/^1[34578]\d{9}$/.test(phone))){ 
+        layer.alert('联系方式有误，请重填', {icon: 2}); 
+        return false; 
+    } 
 	}
 
 	//地址解析
@@ -261,7 +324,7 @@
           title: false,
           shadeClose: false,
           shade: 0.1,
-          area: ['600px', '430px'],
+          area: ['700px', '550px'],
           content: 'map?province='+province.text()+"&city="+city.text()+"&area="+area.text()+"&address="+address,
           end: function(){
 
