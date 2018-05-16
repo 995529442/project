@@ -74,9 +74,9 @@
                         </a>
                     </dd>
                     <dd>
-                        <a href="javascript:;" data-url="myloginfo.html">
+                        <a href="javascript:;" data-url="{{ route('cater.goods.index') }}">
                             <i class="iconfont icon-caidan1" data-icon='icon-piliangicon'></i>
-                            <span>菜品管理</span>
+                            <span>商品管理</span>
                         </a>
                     </dd>
                     <dd>
