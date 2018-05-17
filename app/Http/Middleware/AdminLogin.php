@@ -16,8 +16,12 @@ class AdminLogin
     public function handle($request, Closure $next)
     {
         $check = \Auth::guard('admins')->check();  
-        if(!$check){  
-            return redirect('login/index');  
+        if(!$check){
+            if(in_array($request->getRequestUri(),array('/','/Index','/Index/index','/Index/main'))){
+               return redirect('login/index');
+            }else{
+               return redirect('/html/error.blade.php');
+            }              
         }  
         return $next($request);  
     }

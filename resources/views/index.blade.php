@@ -53,6 +53,24 @@
                     <span>后台首页</span>
                 </a>
             </li>
+            <!-- 后台管理 -->
+            @if($type == 1)
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <i class="iconfont icon-caidan2" ></i>
+                    <span>后台管理</span>
+                    <em class="layui-nav-more"></em>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascript:;" data-url="{{ route('manage') }}">
+                            <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
+                            <span>管理员管理</span>
+                        </a>                   
+                    </dd>
+                </dl>
+            </li> 
+            @endif
             <!-- 微餐饮 -->
             <li class="layui-nav-item">
                 <a href="javascript:;">

@@ -25,8 +25,12 @@ Route::get('login/captcha', 'LoginController@captcha')->name('login.captcha');  
 Route::group(['middleware'=>'AdminLogin'],function(){
     Route::get('/', 'IndexController@index')->name('index');   
     Route::get('Index/index', 'IndexController@index')->name('index');
+    Route::get('Index', 'IndexController@index')->name('index');
     Route::get('Index/main', 'IndexController@main')->name('main');
-
+    Route::get('Index/manage', 'IndexController@manage')->name('manage');
+    Route::get('Index/add_admin', 'IndexController@add_admin')->name('add_admin'); //新增管理员
+    Route::post('Index/save_admin', 'IndexController@save_admin')->name('save_admin'); //保存管理员信息
+    Route::post('Index/reset_admin', 'IndexController@reset_admin')->name('reset_admin'); //重置管理员密码
     //微餐饮路由
     Route::group(['prefix'=>'cater'],function(){
        //餐厅信息

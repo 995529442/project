@@ -177,6 +177,7 @@
         $("#take_out").show();
       }else{
         $("#is_take_out").val(1);
+        $("#take_out").hide();
       }
     });
     //日期
