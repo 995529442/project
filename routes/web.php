@@ -51,7 +51,8 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::get('index', 'cater\CaterGoodsController@index')->name('cater.goods.index'); //菜品管理
           Route::get('add_goods', 'cater\CaterGoodsController@add_goods')->name('cater.goods.add_goods'); //菜品管理
           Route::post('upload', 'cater\CaterGoodsController@upload')->name('cater.goods.upload'); //上传logo图片
-          Route::any('save_goods', 'cater\CaterCategoryController@save_goods')->name('cater.category.save_goods'); //保存商品
+          Route::any('save_goods', 'cater\CaterGoodsController@save_goods')->name('cater.goods.save_goods'); //保存商品
+          Route::post('del_goods', 'cater\CaterGoodsController@del_goods')->name('cater.goods.del_goods'); //删除商品
        });
     });    
 });

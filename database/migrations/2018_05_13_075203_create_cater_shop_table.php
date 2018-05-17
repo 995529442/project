@@ -20,6 +20,11 @@ class CreateCaterShopTable extends Migration
             $table->string('name',20)->default('')->comment("名称");
             $table->time('begin_time')->comment('营业开始时间');
             $table->time('end_time')->comment('营业结束时间');
+            $table->tinyInteger('is_eat_in')->default('1')->comment("是否开启堂食：1为不开启 2为开启");
+            $table->tinyInteger('is_take_out')->default('1')->comment("是否开启外卖：1为不开启 2为开启");
+            $table->decimal('shipping_fee', 8, 2)->default('0.00')->comment("配送费");
+            $table->decimal('package_fee', 8, 2)->default('0.00')->comment("包装费");
+            $table->decimal('delivery_km', 8, 2)->default('0.00')->comment("配送范围，公里为单位");
             $table->tinyInteger('status')->default('1')->comment("状态：1为营业中 2为打烊");
             $table->string('logo',50)->default('')->comment("餐厅LOGO");
             $table->string('introduce',500)->nullable()->comment("餐厅介绍");

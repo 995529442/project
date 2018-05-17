@@ -119,6 +119,11 @@ class CaterShopController extends Controller
         $cater_shop->introduce   = $request -> input('introduce','');
         $cater_shop->phone       = $request -> input('phone','');
         $cater_shop->logo        = $request -> input('logo','');
+        $cater_shop->is_eat_in   = (int)$request -> input('is_eat_in',0);
+        $cater_shop->is_take_out = (int)$request -> input('is_take_out',0);
+        $cater_shop->shipping_fee= $request -> input('shipping_fee','');
+        $cater_shop->package_fee = $request -> input('package_fee','');
+        $cater_shop->delivery_km = $request -> input('delivery_km','');
 
         $result = $cater_shop->save();
 

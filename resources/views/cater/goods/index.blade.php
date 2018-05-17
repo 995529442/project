@@ -13,6 +13,15 @@
             商品名称：
             <div class="layui-inline">
                <input type="text" name="good_name" id="good_name" autocomplete="off" class="layui-input" value="{{$good_name}}">
+            </div>
+            商品状态：
+            <div class="layui-inline">
+              <select name="status" id="status" class="layui-input" style="width:150px;">
+                  <option value="0">全部</option>
+                  <option value="1" @if($status ==1 ) selected @endif>热卖</option>
+                  <option value="2" @if($status ==2 ) selected @endif>新品</option>
+                  <option value="3" @if($status ==3 ) selected @endif>推荐</option>
+              </select>
             </div>           
             <button type="submit" class="layui-btn layui-btn-normal button">查询</button>
             <a href="{{ route('cater.goods.add_goods') }}" class="layui-btn layui-btn-normal button">新增</a>
@@ -24,11 +33,12 @@
             <tr style="background-color: #f5f5f5;">
                 <td style="width:5%;">编号</td>
                 <td style="width:15%;">商品名称</td>
-                <td style="width:10%;">缩略图</td>
-                <td style="width:10%;">原价</td>
-                <td style="width:10%;">现价</td>
-                <td style="width:20%;">介绍</td>
-                <td style="width:15%;">商品状态</td>
+                <td style="width:10%;">所属分类</td>
+                <td style="width:15%;">缩略图</td>
+                <td style="width:5%;">原价</td>
+                <td style="width:5%;">现价</td>
+                <td style="width:15%;">介绍</td>
+                <td style="width:20%;">商品状态</td>
                 <td style="width:20%;">操作</td>
             </tr>
             </thead>
@@ -37,7 +47,8 @@
                     <tr>                  
                         <td>{{$v->id}}</td>
                         <td>{{$v->good_name}}</td>
-                        <td>{{$v->thumb_img}}</td>
+                        <td>{{$v->cate_name}}</td>
+                        <td><img style="width:80px;height:80px;" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/';?>{{$v->thumb_img}}" /></td>
                         <td>{{$v->original_price}}</td>
                         <td>{{$v->now_price}}</td>
                         <td>{{$v->introduce}}</td>
@@ -60,7 +71,7 @@
                         </td>                        
                         <td>
                         	<a href="{{ route('cater.goods.add_goods') }}?goods_id={{$v->id}}" class="layui-btn layui-btn-normal button">编辑</a>
-                        	<button class="layui-btn layui-btn-danger button" onclick="good_operate({{$v->id}},'del')">删除</button>
+                        	<button class="layui-btn layui-btn-danger button" onclick="del({{$v->id}})">删除</button>
                         </td>                   
                     </tr>
                 @endforeach
@@ -74,5 +85,23 @@
 <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
 <script>
+    function del(id){
+        $.ajax({  
+          type: "POST",
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+          url: "{{ route('cater.goods.del_goods') }}",  
+          data: {goods_id:id},  
+          dataType: "json",  
+          success: function(data){
+             if(data.errcode == 1){
+                layer.alert(data.errmsg, {icon: 1},function(){
+                    location.reload();
+                }); 
+             }else{
+                layer.alert(data.errmsg, {icon: 2}); 
+             }
+          }  
+        }); 
+    }
 </script>
 @endsection

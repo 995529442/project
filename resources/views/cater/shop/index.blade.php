@@ -16,6 +16,32 @@
 	    </div>
     </div>   
     
+    <div class="layui-form-item">
+      <label class="layui-form-label">堂食：</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" name="is_eat_in_box" @if($shops_info['is_eat_in'] == 2) checked @endif id="is_eat_in_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_eat_in_box">
+        <input type="hidden" name="is_eat_in" id="is_eat_in" value="{{$shops_info['is_eat_in']}}">
+      </div>
+       <label class="layui-form-label">外卖：</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" name="is_take_out_box" @if($shops_info['is_take_out'] == 2) checked @endif id="is_take_out_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_take_out_box">
+        <input type="hidden" name="is_take_out" id="is_take_out" value="{{$shops_info['is_take_out']}}">
+      </div>
+    </div>  
+    <div class="layui-form-item" id="take_out" @if($shops_info == "" || $shops_info['is_take_out'] == 1)style="display:none;" @endif>
+      <label class="layui-form-label">配送费：</label>
+      <div class="layui-input-inline">
+        <input type="text" name="shipping_fee" id="shipping_fee" autocomplete="off" class="layui-input" value="{{$shops_info['shipping_fee']}}" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">元
+      </div>
+      <label class="layui-form-label">包装费：</label>
+      <div class="layui-input-inline">
+        <input type="text" name="package_fee" id="package_fee" autocomplete="off" class="layui-input" value="{{$shops_info['package_fee']}}" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">元
+      </div>
+      <label class="layui-form-label">配送范围：</label>
+      <div class="layui-input-inline">
+        <input type="text" name="delivery_km" id="delivery_km" autocomplete="off" class="layui-input" value="{{$shops_info['delivery_km']}}"" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">公里
+      </div>
+    </div> 
     <div class="layui-form-item">    
       <label class="layui-form-label">营业时间：</label>
       <div class="layui-input-block">
@@ -136,7 +162,24 @@
 	  ,element = layui.element
     ,upload = layui.upload;
 	  
-	  //日期
+	  //监听指定开关
+    form.on('switch(is_eat_in_box)', function(data){
+      if(this.checked){
+        $("#is_eat_in").val(2);
+      }else{
+        $("#is_eat_in").val(1);
+      }
+    });
+    
+    form.on('switch(is_take_out_box)', function(data){
+      if(this.checked){
+        $("#is_take_out").val(2);
+        $("#take_out").show();
+      }else{
+        $("#is_take_out").val(1);
+      }
+    });
+    //日期
 	  laydate.render({
 	    elem: '#begin_time'
 	    ,type: 'time'
@@ -244,10 +287,21 @@
 		var latitude   = $("#latitude").val();
 		var phone      = $("#phone").val();
     var logo       = $("#logo").val();
+    var is_eat_in  = $("#is_eat_in").val();
+    var is_take_out= $("#is_take_out").val();
+    var delivery_km= $("#delivery_km").val();
 
       if(name == "" || name == null){
       	layer.alert('餐厅名称不能为空', {icon: 2});
           return false;
+      }
+      if(is_eat_in == 0 && is_take_out == 0){
+        layer.alert('堂食和外卖请至少开启一个', {icon: 2});
+        return false;
+      }
+      if(is_take_out == 1 && delivery_km == ""){
+        layer.alert('配送范围不能为空', {icon: 2});
+        return false;
       }
       if(begin_time == "" || begin_time == null){
       	layer.alert('营业开始时间不能为空', {icon: 2});
@@ -331,5 +385,15 @@
             }
         });        
 	}
+
+  function clearNoNum(obj){ 
+      obj.value = obj.value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符  
+      obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的  
+      obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); 
+      obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');//只能输入两个小数  
+      if(obj.value.indexOf(".")< 0 && obj.value !=""){//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额 
+          obj.value= parseFloat(obj.value); 
+      } 
+  } 
 </script>
 @endsection

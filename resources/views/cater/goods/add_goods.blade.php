@@ -6,7 +6,7 @@
 <blockquote class="layui-elem-quote layui-text">
   餐厅信息
 </blockquote>
-<form class="layui-form" action="{{ route('cater.category.save_goods') }}" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
+<form class="layui-form" action="{{ route('cater.goods.save_goods') }}" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
 	<input type="hidden" name="_token" class="tag_token" value="{{ csrf_token() }}"> 
 	<input type="hidden" name="goods_id" value="{{$goods_info['id']}}">
     <div class="layui-form-item">
@@ -34,20 +34,14 @@
         <input type="checkbox" name="is_hot_box" @if($goods_info['is_hot'] == 1) checked @endif id="is_hot_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_hot_box">
         <input type="hidden" name="is_hot" id="is_hot" value="{{$goods_info['is_hot']}}">
       </div>
-    </div>
-
-    <div class="layui-form-item">
       <label class="layui-form-label">是否新品：</label>
       <div class="layui-input-inline">
-        <input type="checkbox" name="is_new_box" @if($goods_info['is_new'] == 1) checked @endif id="is_new_box" lay-skin="switch" lay-text="ON|OFF">
+        <input type="checkbox" name="is_new_box" @if($goods_info['is_new'] == 1) checked @endif id="is_new_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_new_box">
         <input type="hidden" name="is_new" id="is_new" value="{{$goods_info['is_new']}}">
       </div>
-    </div>
-
-    <div class="layui-form-item">
       <label class="layui-form-label">是否推荐：</label>
       <div class="layui-input-inline">
-        <input type="checkbox" name="is_recommend_box" @if($goods_info['is_recommend'] == 1) checked @endif id="is_recommend_box" lay-skin="switch" lay-text="ON|OFF">
+        <input type="checkbox" name="is_recommend_box" @if($goods_info['is_recommend'] == 1) checked @endif id="is_recommend_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_recommend_box">
         <input type="hidden" name="is_recommend" id="is_recommend" value="{{$goods_info['is_recommend']}}">
       </div>
     </div>
@@ -59,7 +53,7 @@
         <span>(建议：图片尺寸100px*100px,图片大小不能大于1M)</span>
         <input type="hidden" class="layui-btn" name="thumb_img" id="thumb_img" value="{{$goods_info['thumb_img']}}">
         <div class="layui-upload-list">
-          <img class="layui-upload-img" id="preview_thumb" @if($goods_info['thumb_img'] != "") src="{{$goods_info['thumb_img']}}" style="width:100px;height:100px;" @endif>
+          <img class="layui-upload-img" id="preview_thumb" @if($goods_info['thumb_img'] != "") src="{{$goods_info['show_thumb_img']}}" style="width:100px;height:100px;" @endif>
           <p id="demoText"></p>
         </div>
       </div>  
@@ -68,14 +62,14 @@
     <div class="layui-form-item">
       <label class="layui-form-label">原价：</label>
       <div class="layui-input-block">
-        <input type="number" oninput="clearNoNum(this)" name="original_price" id="original_price" autocomplete="off" class="layui-input" value="{{$goods_info['original_price']}}" style="width:20%;">
+        <input type="text" oninput="clearNoNum(this)" name="original_price" id="original_price" autocomplete="off" class="layui-input" value="{{$goods_info['original_price']}}" style="width:20%;">
       </div>
     </div>
 
     <div class="layui-form-item">
       <label class="layui-form-label">现价：</label>
       <div class="layui-input-block">
-        <input type="number" oninput="clearNoNum(this)" name="now_price" id="now_price" autocomplete="off" class="layui-input" value="{{$goods_info['now_price']}}" style="width:20%;">
+        <input type="text" oninput="clearNoNum(this)" name="now_price" id="now_price" autocomplete="off" class="layui-input" value="{{$goods_info['now_price']}}" style="width:20%;">
       </div>
     </div>
      
@@ -89,7 +83,7 @@
     <div class="layui-form-item">
       <div class="layui-input-block">
         <button type="submit" class="layui-btn" lay-filter="demo1">提交</button>
-        <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+        <button type="button" class="layui-btn layui-btn-primary" onclick="javascript:history.go(-1);">取消</button>
       </div>
     </div>
 </form>
@@ -200,7 +194,7 @@
         return false;
     }
     if(now_price == "" || now_price == null){
-        layer.alert('缩现价不能为空', {icon: 2});
+        layer.alert('现价不能为空', {icon: 2});
         return false;
     }
   }

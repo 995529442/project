@@ -17,18 +17,29 @@ class CaterGoodsController extends Controller
     	$admin_id = $admins->id;
 
     	$good_name = $request -> input("good_name","");
+        $status = $request -> input("status",0);
 
-    	$CaterGoods = CaterGoods::where(['admin_id'=>$admin_id]);
+    	$CaterGoods = DB::table("cater_goods as good")->where(['good.admin_id'=>$admin_id])
+        ->leftJoin("cater_category as cate","cate.id","good.cate_id")
+        ->select(['good.id','good.good_name','good.is_hot','good.is_new','good.is_recommend','good.thumb_img','good.original_price','good.now_price','good.introduce','cate.cate_name']);
          
         if($good_name){
-        	$CaterGoods->where("good_name","like","%$good_name%");
+        	$CaterGoods->where("good.good_name","like","%$good_name%");
         }
-
-        $goods_info = $CaterGoods->orderBy('id','desc')->paginate(2);
+        
+        if($status == 1){
+            $CaterGoods->where("good.is_hot",1);
+        }elseif($status == 2){
+            $CaterGoods->where("good.is_new",1);
+        }elseif($status == 3){
+            $CaterGoods->where("good.is_recommend",1);
+        }
+        $goods_info = $CaterGoods->orderBy('good.id','desc')->paginate(8);
 
     	return view("cater.goods.index",[
     		'goods_info' => $goods_info,
-    		'good_name'  => $good_name
+    		'good_name'  => $good_name,
+            'status'     => $status
     	]);
     }
 
@@ -41,6 +52,9 @@ class CaterGoodsController extends Controller
 
        $goods_info = CaterGoods::where(['id'=>$goods_id])->first();
 
+       if(!empty($goods_info)){
+            $goods_info['show_thumb_img'] = "http://".$_SERVER['HTTP_HOST']."/".$goods_info['thumb_img'];
+       }
        //获取分类
        $cate_info = CaterCategory::where("admin_id",$admin_id)->select(['id as cate_id','cate_name'])->get();
 
@@ -95,5 +109,57 @@ class CaterGoodsController extends Controller
             $message = "参数错误";
         }
         return json_encode(array("status"=>$status,"message"=>$message));
+    }
+
+    //微餐饮-保存商品信息
+    public function save_goods(Request $request){
+        $goods_id = (int)$request -> input("goods_id",0);
+
+        if($goods_id > 0){
+            $CaterGoods = CaterGoods::find($goods_id);
+        }else{
+            $CaterGoods = new CaterGoods;
+
+            $CaterGoods->admin_id = \Auth::guard('admins')->user()->id; 
+        }
+
+        $CaterGoods->good_name = $request -> input("good_name","");
+        $CaterGoods->cate_id = (int)$request -> input("cate_id",0);
+        $CaterGoods->is_hot = (int)$request -> input("is_hot",0);
+        $CaterGoods->is_new = (int)$request -> input("is_new",0);
+        $CaterGoods->is_recommend = (int)$request -> input("is_recommend",0);
+        $CaterGoods->thumb_img = $request -> input("thumb_img","");
+        $CaterGoods->original_price = $request -> input("original_price","");
+        $CaterGoods->now_price = $request -> input("now_price","");
+        $CaterGoods->introduce = $request -> input("introduce","");
+
+        $result = $CaterGoods->save();
+        
+        if($result){
+            return redirect("cater/goods/index");
+        }else{
+            back();
+        }
+    }
+
+    //微餐饮-删除菜品
+    public function del_goods(Request $request){
+        $goods_id = (int)$request -> input("goods_id",0);
+
+        $return = array(
+            "errcode" => -1,
+            "errmsg"  => "失败"
+        );
+
+        if($goods_id > 0){
+            $result =  CaterGoods::find($goods_id)->delete();
+
+            if($result){
+                $return['errcode'] = 1;
+                $return['errmsg']  = "删除成功";
+            }
+        }
+
+        return json_encode($return);
     }
 }
