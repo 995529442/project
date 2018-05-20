@@ -35,7 +35,7 @@ class CreateCaterShopTable extends Migration
             $table->string('phone',20)->default('')->comment("联系方式");
             $table->string('longitude',50)->default('')->comment("经度");
             $table->string('latitude',50)->default('')->comment("纬度");           
-
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");
             $table->timestamps();
         });
 

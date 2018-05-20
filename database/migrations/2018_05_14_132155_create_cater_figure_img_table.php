@@ -20,7 +20,7 @@ class CreateCaterFigureImgTable extends Migration
             $table->string('img_path',500)->default('')->comment("图片路径");
             $table->unsignedInteger('foreign_id')->comment("关联id,首页展示图关联cate_shop的id,商品展示图关联cater_goods的id");
             $table->unsignedTinyInteger('type')->default('1')->comment("类型 1为首页展示图 2为商品展示图");
-            $table->softDeletes();
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");            
             $table->timestamps();
         });
 

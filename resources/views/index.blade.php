@@ -42,7 +42,7 @@
         </div>
     </div>
     <!-- 左侧侧边导航开始 -->
-    <div class="layui-side layui-side-bg layui-larry-side" id="larry-side">
+    <div class="layui-side layui-side-bg layui-larry-side" id="larry-side"  style="margin-top:-12px;">
         <div class="layui-side-scroll" id="larry-nav-side" lay-filter="side">
         
         <!-- 左侧菜单 -->
@@ -55,23 +55,24 @@
             </li>
             <!-- 后台管理 -->
             @if($type == 1)
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="iconfont icon-caidan2" ></i>
-                    <span>后台管理</span>
-                    <em class="layui-nav-more"></em>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('manage') }}">
-                            <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
-                            <span>管理员管理</span>
-                        </a>                   
-                    </dd>
-                </dl>
-            </li> 
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <i class="iconfont icon-caidan2" ></i>
+                        <span>后台管理</span>
+                        <em class="layui-nav-more"></em>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" data-url="{{ route('manage') }}">
+                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
+                                <span>管理员管理</span>
+                            </a>                   
+                        </dd>
+                    </dl>
+                </li> 
             @endif
             <!-- 微餐饮 -->
+            <?php if((in_array("cater",$module_arr) && $type == 2) || $type == 1){ ?>
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <i class="iconfont icon-caidan2" ></i>
@@ -98,32 +99,33 @@
                         </a>
                     </dd>
                     <dd>
-                        <a href="javascript:;" data-url="myloginfo.html">
+                        <a href="javascript:;" data-url="{{ route('cater.orders.index') }}">
                             <i class="iconfont icon-caidan1" data-icon='icon-piliangicon'></i>
                             <span>订单管理</span>
                         </a>
                     </dd>
                     <dd>
-                        <a href="javascript:;" data-url="myloginfo.html">
+                        <a href="javascript:;" data-url="{{ route('cater.users.index') }}">
                             <i class="iconfont icon-yonghu1" data-icon='icon-piliangicon'></i>
                             <span>用户管理</span>
                         </a>
                     </dd>
                     <dd>
-                        <a href="javascript:;" data-url="myloginfo.html">
+                        <a href="javascript:;" data-url="{{ route('cater.system.index') }}">
                             <i class="iconfont icon-weixin" data-icon='icon-piliangicon'></i>
                             <span>小程序管理</span>
                         </a>
                     </dd>
                 </dl>
-            </li>           
+            </li> 
+            <?php } ?>          
         </ul>
         </div>
     </div>
 
     <!-- 左侧侧边导航结束 -->
     <!-- 右侧主体内容 -->
-    <div class="layui-body" id="larry-body" style="bottom: 0;border-left: solid 2px #2299ee;margin-top:-5px;">
+    <div class="layui-body" id="larry-body" style="bottom: 0;border-left: solid 2px #2299ee;margin-top:-23px;margin-left:-5px;">
         <div class="layui-tab layui-tab-card larry-tab-box" id="larry-tab" lay-filter="demo" lay-allowclose="true">
             <div class="go-left key-press pressKey" id="titleLeft" title="滚动至最右侧"><i class="larry-icon larry-weibiaoti6-copy"></i> </div>
             <ul class="layui-tab-title">

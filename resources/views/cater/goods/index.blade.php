@@ -3,9 +3,6 @@
 <style>
 	th,td,#page{text-align:center;}
 </style>     
-<blockquote class="layui-elem-quote layui-text">
-  商品信息
-</blockquote>
 <div style="padding: 15px;">
       <form method="get" action="{{ route('cater.goods.index') }}">
         {{csrf_field()}}
@@ -32,14 +29,17 @@
             <thead>
             <tr style="background-color: #f5f5f5;">
                 <td style="width:5%;">编号</td>
-                <td style="width:15%;">商品名称</td>
+                <td style="width:10%;">商品名称</td>
                 <td style="width:10%;">所属分类</td>
-                <td style="width:15%;">缩略图</td>
+                <td style="width:10%;">缩略图</td>
+                <td style="width:5%;">库存</td>
+                <td style="width:5%;">销量</td>
                 <td style="width:5%;">原价</td>
                 <td style="width:5%;">现价</td>
-                <td style="width:15%;">介绍</td>
-                <td style="width:20%;">商品状态</td>
-                <td style="width:20%;">操作</td>
+                <td style="width:10%;">介绍</td>
+                <td style="width:5%;">上架状态</td>                
+                <td style="width:10%;">商品状态</td>
+                <td style="width:10%;">操作</td>
             </tr>
             </thead>
             <tbody>
@@ -49,9 +49,18 @@
                         <td>{{$v->good_name}}</td>
                         <td>{{$v->cate_name}}</td>
                         <td><img style="width:80px;height:80px;" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/';?>{{$v->thumb_img}}" /></td>
+                        <td>{{$v->storenum}}</td>
+                        <td>{{$v->sell_count}}</td>
                         <td>{{$v->original_price}}</td>
                         <td>{{$v->now_price}}</td>
                         <td>{{$v->introduce}}</td>
+                        <td>
+                          @if($v->isout == 1)
+                            下架
+                          @elseif($v->isout == 2)
+                            上架
+                          @endif
+                        </td>
                         <td>
                             @if($v->is_hot == 1)
                                <button class="layui-btn layui-btn-normal layui-btn-sm">热卖</button>
@@ -70,8 +79,8 @@
                             @endif                            
                         </td>                        
                         <td>
-                        	<a href="{{ route('cater.goods.add_goods') }}?goods_id={{$v->id}}" class="layui-btn layui-btn-normal button">编辑</a>
-                        	<button class="layui-btn layui-btn-danger button" onclick="del({{$v->id}})">删除</button>
+                        	<a href="{{ route('cater.goods.add_goods') }}?goods_id={{$v->id}}" class="layui-btn layui-btn-normal layui-btn-sm">编辑</a>
+                        	<button class="layui-btn layui-btn-danger layui-btn-sm" onclick="del({{$v->id}})">删除</button>
                         </td>                   
                     </tr>
                 @endforeach

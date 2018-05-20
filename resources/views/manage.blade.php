@@ -3,16 +3,13 @@
 <style>
 	th,td,#page{text-align:center;}
 </style>     
-<blockquote class="layui-elem-quote layui-text">
-  分类信息
-</blockquote>
 <div>
-    <form method="get" action="{{ route('cater.category.index') }}">
+    <form method="get" action="{{ route('manage') }}">
         {{csrf_field()}}
         <div class="demoTable formn">
-            分类名称：
+            管理员名称：
             <div class="layui-inline">
-               <input type="text" name="cate_name" id="cate_name" autocomplete="off" class="layui-input" value="">
+               <input type="text" name="username" id="username" autocomplete="off" class="layui-input" value="{{$username}}">
             </div>           
             <button type="submit" class="layui-btn layui-btn-normal button">查询</button>
             <button type="button" class="layui-btn layui-btn-normal button" onclick="add_admin();">新增</button>
@@ -23,8 +20,9 @@
             <thead>
             <tr style="background-color: #f5f5f5;">
                 <td style="width:10%;">编号</td>
-                <td style="width:40%;">用户名</td>
-                <td style="width:30%;">操作</td>
+                <td style="width:35%;">用户名</td>
+                <td style="width:35%;">拥有模块</td>                
+                <td style="width:20%;">操作</td>
             </tr>
             </thead>
             <tbody>
@@ -32,8 +30,10 @@
 		            <tr>
 		                <td>{{$v->id}}</td>
 		                <td>{{$v->username}}</td>
+                    <td>{{$v->admin_module_name}}</td>
 		                <td>
-		                	<button class="layui-btn layui-btn-danger button" onclick="reset({{$v->id}})">重置密码</button>
+                      <a href="{{ route('module',['admin_id'=>$v->id]) }}" class="layui-btn layui-btn-normal layui-btn-sm">分配模块</a>
+		                	<button class="layui-btn layui-btn-danger layui-btn-sm" onclick="reset({{$v->id}})">重置密码</button>
 		                </td>
 		            </tr>
 	            @endforeach

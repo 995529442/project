@@ -19,7 +19,7 @@ class CreateCaterCategoryTable extends Migration
             $table->integer('admin_id')->comment("关联admins表");
             $table->string('cate_name',20)->default('')->comment("分类名称");
             $table->unsignedInteger('sort')->default('1')->comment("排序");
-            $table->softDeletes();
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");            
             $table->timestamps();
         });
 

@@ -19,9 +19,9 @@ class CaterGoodsController extends Controller
     	$good_name = $request -> input("good_name","");
         $status = $request -> input("status",0);
 
-    	$CaterGoods = DB::table("cater_goods as good")->where(['good.admin_id'=>$admin_id])
+    	$CaterGoods = DB::table("cater_goods as good")->where(['good.admin_id'=>$admin_id,'good.isvalid'=>true])
         ->leftJoin("cater_category as cate","cate.id","good.cate_id")
-        ->select(['good.id','good.good_name','good.is_hot','good.is_new','good.is_recommend','good.thumb_img','good.original_price','good.now_price','good.introduce','cate.cate_name']);
+        ->select(['good.id','good.good_name','good.is_hot','good.is_new','good.is_recommend','good.thumb_img','good.original_price','good.now_price','good.introduce','cate.cate_name','good.isout','good.storenum','good.sell_count']);
          
         if($good_name){
         	$CaterGoods->where("good.good_name","like","%$good_name%");
@@ -50,13 +50,13 @@ class CaterGoodsController extends Controller
 
        $goods_id = (int)$request -> input("goods_id",0);
 
-       $goods_info = CaterGoods::where(['id'=>$goods_id])->first();
+       $goods_info = CaterGoods::where(['id'=>$goods_id,'isvalid'=>true])->first();
 
        if(!empty($goods_info)){
             $goods_info['show_thumb_img'] = "http://".$_SERVER['HTTP_HOST']."/".$goods_info['thumb_img'];
        }
        //获取分类
-       $cate_info = CaterCategory::where("admin_id",$admin_id)->select(['id as cate_id','cate_name'])->get();
+       $cate_info = CaterCategory::where(["admin_id"=>$admin_id,"isvalid"=>true])->select(['id as cate_id','cate_name'])->get();
 
        return view('cater.goods.add_goods',[
         'goods_info' => $goods_info,
@@ -120,7 +120,9 @@ class CaterGoodsController extends Controller
         }else{
             $CaterGoods = new CaterGoods;
 
-            $CaterGoods->admin_id = \Auth::guard('admins')->user()->id; 
+            $CaterGoods->admin_id = \Auth::guard('admins')->user()->id;
+
+            $CaterGoods->isvalid = true;
         }
 
         $CaterGoods->good_name = $request -> input("good_name","");
@@ -132,6 +134,9 @@ class CaterGoodsController extends Controller
         $CaterGoods->original_price = $request -> input("original_price","");
         $CaterGoods->now_price = $request -> input("now_price","");
         $CaterGoods->introduce = $request -> input("introduce","");
+        $CaterGoods->isout = $request -> input("isout",1);
+        $CaterGoods->storenum = $request -> input("storenum",0);
+        $CaterGoods->virtual_sell_count = $request -> input("virtual_sell_count",0);
 
         $result = $CaterGoods->save();
         
@@ -152,7 +157,7 @@ class CaterGoodsController extends Controller
         );
 
         if($goods_id > 0){
-            $result =  CaterGoods::find($goods_id)->delete();
+            $result =  CaterGoods::find($goods_id)->update(array("isvalid"=>false));
 
             if($result){
                 $return['errcode'] = 1;

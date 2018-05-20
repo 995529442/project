@@ -3,9 +3,6 @@
 <style>
   img{margin-left:120px;}
 </style>       
-<blockquote class="layui-elem-quote layui-text">
-  餐厅信息
-</blockquote>
 <form class="layui-form" action="{{ route('cater.goods.save_goods') }}" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
 	<input type="hidden" name="_token" class="tag_token" value="{{ csrf_token() }}"> 
 	<input type="hidden" name="goods_id" value="{{$goods_info['id']}}">
@@ -49,7 +46,7 @@
     <div class="layui-form-item">    
       <label class="layui-form-label">缩略图：</label>
       <div class="layui-upload">
-        <button type="button" class="layui-btn" id="preview_thumb_id" style="display:inline-block;">上传图片</button>
+        <button type="button" class="layui-btn layui-btn-sm" id="preview_thumb_id" style="display:inline-block;">上传图片</button>
         <span>(建议：图片尺寸100px*100px,图片大小不能大于1M)</span>
         <input type="hidden" class="layui-btn" name="thumb_img" id="thumb_img" value="{{$goods_info['thumb_img']}}">
         <div class="layui-upload-list">
@@ -57,6 +54,14 @@
           <p id="demoText"></p>
         </div>
       </div>  
+    </div>
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label">是否上架：</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" name="isout_box" @if($goods_info['isout'] == 2) checked @endif id="isout_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="isout_box">
+        <input type="hidden" name="isout" id="isout" value="{{$goods_info['isout']}}">
+      </div>
     </div>
 
     <div class="layui-form-item">
@@ -72,7 +77,21 @@
         <input type="text" oninput="clearNoNum(this)" name="now_price" id="now_price" autocomplete="off" class="layui-input" value="{{$goods_info['now_price']}}" style="width:20%;">
       </div>
     </div>
-     
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label">库存：</label>
+      <div class="layui-input-block">
+        <input type="number" oninput="clearNum(this)" name="storenum" id="storenum" autocomplete="off" class="layui-input" value="{{$goods_info['storenum']}}" style="width:20%;">
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label">虚拟销量：</label>
+      <div class="layui-input-block">
+        <input type="number" oninput="clearNum(this)" name="virtual_sell_count" id="virtual_sell_count" autocomplete="off" class="layui-input" value="{{$goods_info['virtual_sell_count']}}" style="width:20%;">
+      </div>
+    </div>
+
     <div class="layui-form-item layui-form-text">
       <label class="layui-form-label">商品介绍：</label>
       <div class="layui-input-block">
@@ -120,6 +139,15 @@
         $("#is_recommend").val(0);
       }
     });
+
+    form.on('switch(isout_box)', function(data){
+      if(this.checked){
+        $("#isout").val(2);
+      }else{
+        $("#isout").val(1);
+      }
+    });
+
     //上传图片
     var tag_token = $(".tag_token").val();
 
@@ -160,6 +188,11 @@
           obj.value= parseFloat(obj.value); 
       } 
   } 
+  
+  function clearNum(obj){ 
+      obj.value = obj.value.replace(/[^\d]/g,"");  //清除“数字”和“.”以外的字符
+      obj.value = obj.value.replace(/\./g,""); //只保留第一个. 清除多余的          
+  }
 
   //提交表单
   function check_submit(){
@@ -172,6 +205,8 @@
     var original_price = $("#original_price").val();
     var now_price = $("#now_price").val();
     var introduce = $("#introduce").val();
+    var storenum  = $("#storenum").val();
+    var virtual_sell_count = $("#virtual_sell_count").val();
 
     if(good_name == "" || good_name == null){
         layer.alert('商品名称不能为空', {icon: 2});
@@ -195,6 +230,19 @@
     }
     if(now_price == "" || now_price == null){
         layer.alert('现价不能为空', {icon: 2});
+        return false;
+    }
+    if(now_price == "" || now_price == null){
+        layer.alert('现价不能为空', {icon: 2});
+        return false;
+    }
+    if(storenum == "" || storenum == null){
+        layer.alert('库存不能为空', {icon: 2});
+        return false;
+    }
+
+    if(virtual_sell_count == "" || virtual_sell_count == null){
+        layer.alert('虚拟销量不能为空', {icon: 2});
         return false;
     }
   }

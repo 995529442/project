@@ -17,7 +17,7 @@ class CaterCategoryController extends Controller
 
     	$cate_name = $request -> input("cate_name","");
 
-    	$category = CaterCategory::where(['admin_id'=>$admin_id]);
+    	$category = CaterCategory::where(['admin_id'=>$admin_id,'isvalid'=>true]);
          
         if($cate_name){
         	$category->where("cate_name","like","%$cate_name%");
@@ -35,7 +35,7 @@ class CaterCategoryController extends Controller
     public function add_cate(Request $request){
     	$cate_id = (int)$request -> input('cate_id',0);
 
-    	$cate_info = CaterCategory::where(['id'=>$cate_id])->first();
+    	$cate_info = CaterCategory::where(['id'=>$cate_id,'isvalid'=>true])->first();
 
     	return view("cater.category.add_cate",['cate_info'=>$cate_info]);
     }
@@ -53,6 +53,7 @@ class CaterCategoryController extends Controller
             $admin_id = (int)$admins->id;
 
             $cater_cate->admin_id= $admin_id;
+            $cater_cate->isvalid = true;
         }
 
         $cater_cate->cate_name  = $request -> input('cate_name','');
@@ -79,7 +80,7 @@ class CaterCategoryController extends Controller
     	);
 
     	if($id > 0){
-          $result = CaterCategory::where(['admin_id'=>$admin_id,'id'=>$id])->delete();
+          $result = CaterCategory::where(['admin_id'=>$admin_id,'id'=>$id])->update(array("isvalid"=>false));
 
 		  $return['errcode'] = 1;
        	  $return['errmsg']  = "删除成功";

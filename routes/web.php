@@ -31,6 +31,9 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     Route::get('Index/add_admin', 'IndexController@add_admin')->name('add_admin'); //新增管理员
     Route::post('Index/save_admin', 'IndexController@save_admin')->name('save_admin'); //保存管理员信息
     Route::post('Index/reset_admin', 'IndexController@reset_admin')->name('reset_admin'); //重置管理员密码
+    Route::get('Index/module', 'IndexController@module')->name('module'); //模块分配  
+    Route::post('Index/saveModule', 'IndexController@saveModule')->name('saveModule'); //模块分配保存   
+
     //微餐饮路由
     Route::group(['prefix'=>'cater'],function(){
        //餐厅信息
@@ -58,6 +61,27 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::any('save_goods', 'cater\CaterGoodsController@save_goods')->name('cater.goods.save_goods'); //保存商品
           Route::post('del_goods', 'cater\CaterGoodsController@del_goods')->name('cater.goods.del_goods'); //删除商品
        });
+
+       //用户管理
+       Route::group(['prefix'=>'users'],function(){
+          Route::get('index', 'cater\CaterUsersController@index')->name('cater.users.index'); //用户管理
+       });
+       
+       //小程序管理
+       Route::group(['prefix'=>'system'],function(){
+          Route::get('index', 'cater\CaterSystemController@index')->name('cater.system.index'); //小程序管理
+          Route::any('upload', 'cater\CaterSystemController@upload')->name('cater.system.upload'); //上传证书
+          Route::post('saveSystem', 'cater\CaterSystemController@saveSystem')->name('cater.system.saveSystem'); //保存信息
+       });
+
+       //订单管理
+       Route::group(['prefix'=>'orders'],function(){
+          Route::get('index', 'cater\CaterOrdersController@index')->name('cater.orders.index'); //订单管理
+          Route::get('orderGoods', 'cater\CaterOrdersController@orderGoods')->name('cater.orders.orderGoods'); //订单商品详情
+          Route::post('operate', 'cater\CaterOrdersController@operate')->name('cater.orders.operate'); //订单操作
+          Route::get('reject_refund', 'cater\CaterOrdersController@reject_refund')->name('cater.orders.reject_refund'); //订单拒绝退款页面
+       });
+
     });    
 });
 

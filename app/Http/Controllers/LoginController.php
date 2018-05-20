@@ -51,7 +51,7 @@ class LoginController extends Controller
             if(!Captcha::check($code)){ //验证码
               return back()->withErrors(['验证码错误'])->withInput();
             }
-            if (Auth::guard('admins')->attempt(['username' => $username, 'password' => $password],$remember)) {
+            if (Auth::guard('admins')->attempt(['username' => $username, 'password' => $password,'isvalid'=>true],$remember)) {
                 // 认证通过...
                 return redirect()->to('/');
             }else{

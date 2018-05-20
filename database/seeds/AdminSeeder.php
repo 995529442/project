@@ -14,7 +14,8 @@ class AdminSeeder extends Seeder
         DB::table("admins")->insert([
            'username' => 'admin',
            'password' => bcrypt('123456'),
-           'type'     => 1
+           'type'     => 1,
+           'isvalid'  => true
         ]);
     }
 }

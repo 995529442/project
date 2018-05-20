@@ -3,9 +3,6 @@
 <style>
   img{margin-left:120px;}
 </style>       
-<blockquote class="layui-elem-quote layui-text">
-  餐厅信息
-</blockquote>
 <form class="layui-form" action="{{ route('cater.shop.saveShop') }}" method="post" enctype="multipart/form-data" onsubmit="return check_submit();">
 	<input type="hidden" name="_token" class="tag_token" value="{{ csrf_token() }}"> 
 	<input type="hidden" name="shop_id" value="{{$shops_info['id']}}">
@@ -94,7 +91,7 @@
 	    <label class="layui-form-label">详细地址：</label>
 	    <div class="layui-input-block">
 	      <input type="text" name="address" id="address" autocomplete="off" class="layui-input" value="{{$shops_info['address']}}" style="display:inline-block;width:40%;">
-	      <button onclick="open_map()" type="button" class="layui-btn" style="display:inline-block;margin-top:-5px;">搜索</button>
+	      <button onclick="open_map()" type="button" class="layui-btn layui-btn-sm" style="display:inline-block;margin-top:-5px;">搜索</button>
 	    </div>
 	</div> 
     
@@ -110,8 +107,7 @@
     <div class="layui-form-item">    
       <label class="layui-form-label">LOGO：</label>
       <div class="layui-upload">
-        <button type="button" class="layui-btn" id="preview_logo_id">上传图片</button>
-        <span>(建议：图片尺寸100px*100px,图片大小不能大于1M)</span>
+        <button type="button" class="layui-btn layui-btn-sm" id="preview_logo_id">上传图片</button>
         <input type="hidden" class="layui-btn" name="logo" id="logo" value="{{$shops_info['logo']}}">
         <div class="layui-upload-list">
           <img class="layui-upload-img" id="preview_logo" @if($shops_info['show_logo'] != "") src="{{$shops_info['show_logo']}}" style="width:100px;height:100px;" @endif>
@@ -123,7 +119,7 @@
     <div class="layui-form-item">    
       <label class="layui-form-label">首页展示图：</label>
       <div class="layui-upload">
-        <button type="button" class="layui-btn" id="test2">多图片上传</button> 
+        <button type="button" class="layui-btn layui-btn-sm" id="figure_img">多图片上传</button> 
         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;margin-left: 120px;">
           预览图：
           <div class="layui-upload-list" id="preview_figure"></div>
@@ -134,7 +130,7 @@
     <div class="layui-form-item">
 	    <label class="layui-form-label">联系电话：</label>
 	    <div class="layui-input-block">
-	      <input type="text" name="phone" id="phone" autocomplete="off" class="layui-input" value="{{$shops_info['phone']}}" style="width:40%;">
+	      <input type="text" name="phone" id="phone" lay-verify="required|phone" autocomplete="off" class="layui-input" value="{{$shops_info['phone']}}" style="width:40%;">
 	    </div>
 	</div>  
     
@@ -147,15 +143,16 @@
 
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <button type="submit" class="layui-btn" lay-filter="demo1">提交</button>
-      <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+      <button type="submit" class="layui-btn" lay-filter="demo1">保存</button>
     </div>
   </div>
 </form>
 <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
 <script>
-	layui.use(['layer','form','laydate','upload','element'], function(){
+	var figure_img = new Array();  //定义一个全局数据
+
+  layui.use(['layer','form','laydate','upload','element'], function(){
 	  var form = layui.form
 	  ,layer = layui.layer
 	  ,laydate = layui.laydate
@@ -272,7 +269,35 @@
       ,error: function(res){
          console.log(res)
       }
-    }); 
+    });
+
+      //多图片上传
+      upload.render({
+        elem: '#figure_img'
+        ,url: '{{ route("cater.shop.upload") }}'
+        ,multiple: true
+        ,accept: 'file' //普通文件
+        ,exts: 'jpg|png|gif|bmp|jpeg' //只允许上传图片文件
+        ,size: 1024 //限制文件大小，单位 KB
+        ,data:{'_token':tag_token,type:'figure'}
+        ,before: function(obj){
+          //预读本地文件示例，不支持ie8
+          obj.preview(function(index, file, result){
+
+          });
+        }
+        ,done: function(res){
+          if(res.status == 1){
+            if(figure_img.length < 3){
+              figure_img.push(res.message)
+              //$('#preview_figure').append('<img style="width:150px;height:100px;" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+            }else{
+              layer.alert("首页展示图最多为3张",{icon:2});
+            }
+          }
+          //上传完毕
+        }
+      }); 
 	});     
 	//提交判断
 	function check_submit(){

@@ -23,7 +23,7 @@ class CreateCaterUserShippingTable extends Migration
             $table->string('country',50)->default('')->comment("县区");
             $table->string('address',50)->default('')->comment("详细地址");
             $table->tinyInteger('is_default')->default('0')->comment("是否默认地址 1为默认地址,0为否 ");
-            $table->softDeletes();
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");            
             $table->timestamps();
         });
 

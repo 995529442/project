@@ -30,7 +30,7 @@ class CreateCaterUsersTable extends Migration
             $table->unsignedInteger('order_num')->default('0')->comment("订单总数量");
             $table->unsignedInteger('order_complete_num')->default('0')->comment("完成订单总数量");
             $table->decimal('total_money', 8, 2)->default('0.00')->comment("完成订单总金额");
-            $table->softDeletes();
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");            
             $table->timestamps();
         });
 

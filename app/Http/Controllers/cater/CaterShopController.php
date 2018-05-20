@@ -18,7 +18,7 @@ class CaterShopController extends Controller
         //获取省份数据
         $provinces = DB::table("address")->select(['id','name'])->where(['type'=>1,'pid'=>1])->get();        
     	//获取餐厅信息
-        $shops_info = CaterShop::where(['admin_id'=>$admin_id])->first();
+        $shops_info = CaterShop::where(['admin_id'=>$admin_id,'isvalid'=>true])->first();
 
         $cities= "";
         $countris = "";
@@ -58,7 +58,7 @@ class CaterShopController extends Controller
 
     //微餐饮-获取地址解析
     public function map(Request $request){
-    	  $province = $request -> input('province','');
+    	$province = $request -> input('province','');
         $city = $request -> input('city','');
         $area = $request -> input('area','');
         $address = $request -> input('address','');
@@ -104,7 +104,8 @@ class CaterShopController extends Controller
             $admins   = Auth::guard('admins')->user();
             $admin_id = (int)$admins->id;
 
-            $cater_shop->admin_id= $admin_id;
+            $cater_shop->admin_id = $admin_id;
+            $cater_shop->isvalid  = true;
         }
         $cater_shop->name        = $request -> input('name','');
         $cater_shop->begin_time  = $request -> input('begin_time','');
@@ -178,5 +179,4 @@ class CaterShopController extends Controller
         }
         return json_encode(array("status"=>$status,"message"=>$message));
     }
-
 }

@@ -3,9 +3,6 @@
 <style>
 	th,td,#page{text-align:center;}
 </style>     
-<blockquote class="layui-elem-quote layui-text">
-  分类信息<span style="color:red;">(按照排序从大到小排列)</span>
-</blockquote>
 <div style="padding: 15px;">
      <form method="get" action="{{ route('cater.category.index') }}">
         {{csrf_field()}}
@@ -35,8 +32,8 @@
 	                    <td>{{$v->cate_name}}</td>
 	                    <td>{{$v->sort}}</td>
 	                    <td>
-	                    	<button class="layui-btn layui-btn-normal button" onclick="category_operate({{$v->id}},'edit')">编辑</button>
-	                    	<button class="layui-btn layui-btn-danger button" onclick="category_operate({{$v->id}},'del')">删除</button>
+	                    	<button class="layui-btn layui-btn-normal layui-btn-sm" onclick="category_operate({{$v->id}},'edit')">编辑</button>
+	                    	<button class="layui-btn layui-btn-danger layui-btn-sm" onclick="category_operate({{$v->id}},'del')">删除</button>
 	                    </td>                   
 	                </tr>
                 @endforeach
