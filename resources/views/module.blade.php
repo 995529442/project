@@ -34,7 +34,7 @@
     });
     
     if(module == "" || module == null){
-      layer.alert("请至少选取一个",{icon:2});
+      layer.msg("请至少选取一个",{icon:2},1500);
       return;
     }
     $.ajax({  
@@ -45,11 +45,11 @@
         dataType: "json",  
         success: function(data){
            if(data.errcode == 1){
-              layer.alert(data.errmsg, {icon: 1},function(){
+              layer.msg(data.errmsg, {icon: 1},function(){
                   location.href = '/Index/manage';
               }); 
            }else{
-              layer.alert(data.errmsg, {icon: 2}); 
+              layer.msg(data.errmsg, {icon: 2},1500); 
            }
         }  
       }); 

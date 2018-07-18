@@ -103,11 +103,11 @@
           dataType: "json",  
           success: function(data){
              if(data.errcode == 1){
-                layer.alert(data.errmsg, {icon: 1},function(){
+                layer.msg(data.errmsg, {icon: 1},function(){
                     location.reload();
                 }); 
              }else{
-                layer.alert(data.errmsg, {icon: 2}); 
+                layer.msg(data.errmsg, {icon: 2},1500); 
              }
           }  
         }); 

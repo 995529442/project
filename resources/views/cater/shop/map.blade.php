@@ -98,7 +98,7 @@ function init() {
         var latitude = document.getElementById("latitude").value;
 
         if(longitude == "" || latitude == ""){
-           layer.alert('请先在地图上标志地址', {icon: 2});
+           layer.msg('请先在地图上标志地址', {icon: 2},1500);
            return;
         }
 

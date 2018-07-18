@@ -209,40 +209,40 @@
     var virtual_sell_count = $("#virtual_sell_count").val();
 
     if(good_name == "" || good_name == null){
-        layer.alert('商品名称不能为空', {icon: 2});
+        layer.msg('商品名称不能为空', {icon: 2},1500);
         return false;
     }
     if(good_name.length > 50){
-        layer.alert('商品名称不能大于50个字符', {icon: 2});
+        layer.msg('商品名称不能大于50个字符', {icon: 2},1500);
         return false;
     }
     if(cate_id == "" || cate_id == null){
-        layer.alert('请先选择所属分类', {icon: 2});
+        layer.msg('请先选择所属分类', {icon: 2},1500);
         return false;
     }
     if(thumb_img == "" || thumb_img == null){
-        layer.alert('缩略图不能为空', {icon: 2});
+        layer.msg('缩略图不能为空', {icon: 2},1500);
         return false;
     }
     if(now_price == "" || now_price == null){
-        layer.alert('原价不能为空', {icon: 2});
+        layer.msg('原价不能为空', {icon: 2},1500);
         return false;
     }
     if(now_price == "" || now_price == null){
-        layer.alert('现价不能为空', {icon: 2});
+        layer.msg('现价不能为空', {icon: 2},1500);
         return false;
     }
     if(now_price == "" || now_price == null){
-        layer.alert('现价不能为空', {icon: 2});
+        layer.msg('现价不能为空', {icon: 2},1500);
         return false;
     }
     if(storenum == "" || storenum == null){
-        layer.alert('库存不能为空', {icon: 2});
+        layer.msg('库存不能为空', {icon: 2},1500);
         return false;
     }
 
     if(virtual_sell_count == "" || virtual_sell_count == null){
-        layer.alert('虚拟销量不能为空', {icon: 2});
+        layer.msg('虚拟销量不能为空', {icon: 2},1500);
         return false;
     }
   }

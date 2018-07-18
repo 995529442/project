@@ -292,7 +292,7 @@
               figure_img.push(res.message)
               //$('#preview_figure').append('<img style="width:150px;height:100px;" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
             }else{
-              layer.alert("首页展示图最多为3张",{icon:2});
+              layer.msg("首页展示图最多为3张",{icon:2},1500);
             }
           }
           //上传完毕
@@ -318,59 +318,59 @@
     var delivery_km= $("#delivery_km").val();
 
       if(name == "" || name == null){
-      	layer.alert('餐厅名称不能为空', {icon: 2});
+      	layer.msg('餐厅名称不能为空', {icon: 2},1500);
           return false;
       }
       if(is_eat_in == 0 && is_take_out == 0){
-        layer.alert('堂食和外卖请至少开启一个', {icon: 2});
+        layer.msg('堂食和外卖请至少开启一个', {icon: 2},1500);
         return false;
       }
       if(is_take_out == 1 && delivery_km == ""){
-        layer.alert('配送范围不能为空', {icon: 2});
+        layer.msg('配送范围不能为空', {icon: 2},1500);
         return false;
       }
       if(begin_time == "" || begin_time == null){
-      	layer.alert('营业开始时间不能为空', {icon: 2});
+      	layer.msg('营业开始时间不能为空', {icon: 2},1500);
           return false;
       }
       if(end_time == "" || end_time == null){
-      	layer.alert('营业结束时间不能为空', {icon: 2});
+      	layer.msg('营业结束时间不能为空', {icon: 2},1500);
           return false;
       }
       if(provid == "" || provid == null){
-      	layer.alert('请选择省', {icon: 2});
+      	layer.msg('请选择省', {icon: 2},1500);
           return false;
       }
       if(cityid == "" || cityid == null){
-      	layer.alert('请选择市', {icon: 2});
+      	layer.msg('请选择市', {icon: 2},1500);
           return false;
       }
       if(areaid == "" || areaid == null){
-      	layer.alert('请选择县/区', {icon: 2});
+      	layer.msg('请选择县/区', {icon: 2},1500);
           return false;
       }
       if(address == "" || address == null){
-      	layer.alert('详细地址不能为空', {icon: 2});
+      	layer.msg('详细地址不能为空', {icon: 2},1500);
           return false;
       }
       if(longitude == "" || longitude == null){
-      	layer.alert('经度不能为空', {icon: 2});
+      	layer.msg('经度不能为空', {icon: 2},1500);
           return false;
       }
       if(latitude == "" || latitude == null){
-      	layer.alert('纬度不能为空', {icon: 2});
+      	layer.msg('纬度不能为空', {icon: 2},1500);
           return false;
       }
       if(logo == "" || logo == null){
-        layer.alert('请先上传餐厅LOGO', {icon: 2});
+        layer.msg('请先上传餐厅LOGO', {icon: 2},1500);
           return false;
       }
       if(phone == "" || phone == null){
-      	layer.alert('联系方式不能为空', {icon: 2});
+      	layer.msg('联系方式不能为空', {icon: 2},1500);
           return false;
       }
       if(!(/^1[34578]\d{9}$/.test(phone))){ 
-        layer.alert('联系方式有误，请重填', {icon: 2}); 
+        layer.msg('联系方式有误，请重填', {icon: 2},1500); 
         return false; 
     } 
 	}
@@ -383,19 +383,19 @@
 		var address = $("#address").val();
 
 	    if(province.val() == "" || province.val() == null){
-	    	layer.alert('请选择省份', {icon: 2});
+	    	layer.msg('请选择省份', {icon: 2},1500);
             return;
 	    }
 	    if(city.val() == "" || city.val() == null){
-	    	layer.alert('请选择城市', {icon: 2});
+	    	layer.msg('请选择城市', {icon: 2},1500);
             return;
 	    }
 	    if(area.val() == "" || area.val() == null){
-	    	layer.alert('请选择县区', {icon: 2});
+	    	layer.msg('请选择县区', {icon: 2},1500);
             return;
 	    }
 	    if(address == "" || address == null){
-	    	layer.alert('详细地址不能为空', {icon: 2});
+	    	layer.msg('详细地址不能为空', {icon: 2},1500);
             return;
 	    }
 

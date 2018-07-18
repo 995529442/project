@@ -24,11 +24,11 @@
 		var username = $("#username").val();
 
 		if(username == "" || username == null){
-			layer.alert('用户名不能为空', {icon: 2}); 
+			layer.msg('用户名不能为空', {icon: 2},1500); 
 			return;
 		}
 		if(username.length > 20){
-			layer.alert('用户名长度不能大于20个字符', {icon: 2}); 
+			layer.msg('用户名长度不能大于20个字符', {icon: 2},1500); 
 			return;
 		}
 
@@ -41,12 +41,12 @@
           success: function(data){
           	console.log(data)
              if(data.errcode == 1){
-             	layer.alert(data.errmsg, {icon: 1},function(){
+             	layer.msg(data.errmsg, {icon: 1},function(){
              		window.parent.location.reload();
              		window.parent.layui.closeAll();
              	}); 
              }else{
-             	layer.alert(data.errmsg, {icon: 2}); 
+             	layer.msg(data.errmsg, {icon: 2},1500); 
              }
           }  
         }); 

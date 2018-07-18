@@ -70,17 +70,17 @@
         var code     = $("#code").val();
 
         if(username == "" || username == null){
-            layer.alert('用户名不能为空', {icon: 2});
+            layer.msg('用户名不能为空', {icon: 2},1500);
             return false; 
         }
 
         if(password == "" || password == null){
-            layer.alert('密码不能为空', {icon: 2});
+            layer.msg('密码不能为空', {icon: 2},1500);
             return false; 
         }
 
         if(code == "" || code == null){
-            layer.alert('验证码不能为空', {icon: 2});
+            layer.msg('验证码不能为空', {icon: 2},1500);
             return false; 
         }
     }

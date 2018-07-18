@@ -33,19 +33,19 @@
 		var sort = $("#sort").val();
 
 		if(cate_name == "" || cate_name == null){
-			layer.alert('分类名称不能为空', {icon: 2}); 
+			layer.msg('分类名称不能为空', {icon: 2},1500); 
 			return;
 		}
 		if(cate_name.length > 20){
-			layer.alert('分类名称长度不能大于20个字符', {icon: 2}); 
+			layer.msg('分类名称长度不能大于20个字符', {icon: 2},1500); 
 			return;
 		}
 		if(sort == "" || sort == null){
-			layer.alert('排序不能为空', {icon: 2}); 
+			layer.msg('排序不能为空', {icon: 2},1500); 
 			return;
 		}
 		if(sort < 0){
-			layer.alert('排序不能小于0', {icon: 2}); 
+			layer.msg('排序不能小于0', {icon: 2},1500); 
 			return;
 		}
 
@@ -57,12 +57,12 @@
           dataType: "json",  
           success: function(data){
              if(data.errcode == 1){
-             	layer.alert(data.errmsg, {icon: 1},function(){
+             	layer.msg(data.errmsg, {icon: 1},function(){
              		window.parent.location.reload();
              		window.parent.layui.closeAll();
              	}); 
              }else{
-             	layer.alert(data.errmsg, {icon: 2}); 
+             	layer.msg(data.errmsg, {icon: 2},1500); 
              }
           }  
         }); 

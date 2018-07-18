@@ -26,7 +26,7 @@
 		var reject_reason = $("#reject_reason").val();
 
 		if(reject_reason == "" || reject_reason == null){
-			layer.alert('拒绝退款原因不能为空', {icon: 2}); 
+			layer.msg('拒绝退款原因不能为空', {icon: 2},1500); 
 			return;
 		}
 
@@ -38,12 +38,12 @@
           dataType: "json",  
           success: function(data){
              if(data.errcode == 1){
-             	layer.alert(data.errmsg, {icon: 1},function(){
+             	layer.msg(data.errmsg, {icon: 1},function(){
              		window.parent.location.reload();
              		window.parent.layui.closeAll();
              	}); 
              }else{
-             	layer.alert(data.errmsg, {icon: 2}); 
+             	layer.msg(data.errmsg, {icon: 2},1500); 
              }
           }  
         }); 

@@ -80,7 +80,7 @@ layui.use(['layer','form','upload','element'], function(){
           $("#apiclient_cert").val(res.message)
           $('#apiclient_cert_p').html(res.message);           
         }else{
-           layer.alert("上传失败",{icon:2});
+           layer.msg("上传失败",{icon:2},1500);
         }
       }
       ,error: function(res){
@@ -100,7 +100,7 @@ layui.use(['layer','form','upload','element'], function(){
           $("#apiclient_key").val(res.message)
           $('#apiclient_key_p').html(res.message);           
         }else{
-           layer.alert("上传失败",{icon:2});
+           layer.msg("上传失败",{icon:2},1500);
         }
       }
       ,error: function(res){
@@ -119,27 +119,27 @@ layui.use(['layer','form','upload','element'], function(){
     var apiclient_key = $("#apiclient_key").val();
 
     if(appid == "" || appid == null){
-      layer.alert("appid不能为空",{icon:2});
+      layer.msg("appid不能为空",{icon:2},1500);
       return;
     }
 
     if(appsecret == "" || appsecret == null){
-      layer.alert("appsecret不能为空",{icon:2});
+      layer.msg("appsecret不能为空",{icon:2},1500);
       return;
     }
 
     if(mch_id == "" || mch_id == null){
-      layer.alert("商户号不能为空",{icon:2});
+      layer.msg("商户号不能为空",{icon:2},1500);
       return;
     }
 
     if(apiclient_cert == "" || apiclient_cert == null){
-      layer.alert("请上传apiclient_cert",{icon:2});
+      layer.msg("请上传apiclient_cert",{icon:2},1500);
       return;
     }
 
     if(apiclient_key == "" || apiclient_key == null){
-      layer.alert("请上传apiclient_key",{icon:2});
+      layer.msg("请上传apiclient_key",{icon:2},1500);
       return;
     }
 
@@ -158,11 +158,11 @@ layui.use(['layer','form','upload','element'], function(){
         dataType: "json",  
         success: function(res){
             if(res.errcode == 1){
-              layer.alert("成功",{icon:1},function(){
+              layer.msg("成功",{icon:1},function(){
                 location.reload();
               })
             }else{
-              layer.alert(res.errmsg);
+              layer.msg(res.errmsg,{icon:2},1500);
             }
         }  
     });
