@@ -76,9 +76,9 @@ layui.use(['layer','form','upload','element'], function(){
       ,size: 1024 //限制文件大小，单位 KB
       ,data:{'_token':tag_token}
       ,done: function(res){
-        if(res.status){
-          $("#apiclient_cert").val(res.message)
-          $('#apiclient_cert_p').html(res.message);           
+        if(res.errcode){
+          $("#apiclient_cert").val(res.path)
+          $('#apiclient_cert_p').html(res.path);           
         }else{
            layer.msg("上传失败",{icon:2},1500);
         }
@@ -96,9 +96,9 @@ layui.use(['layer','form','upload','element'], function(){
       ,size: 1024 //限制文件大小，单位 KB
       ,data:{'_token':tag_token}
       ,done: function(res){
-        if(res.status){
-          $("#apiclient_key").val(res.message)
-          $('#apiclient_key_p').html(res.message);           
+        if(res.errcode){
+          $("#apiclient_key").val(res.path)
+          $('#apiclient_key_p').html(res.path);           
         }else{
            layer.msg("上传失败",{icon:2},1500);
         }

@@ -167,10 +167,10 @@
         });
       }
       ,done: function(res){
-        var status = res.status;
+        var errcode = res.errcode;
 
-        if(status == 1){
-           $("#thumb_img").val(res.message);
+        if(errcode == 1){
+           $("#thumb_img").val(res.path);
         }
       }
       ,error: function(res){

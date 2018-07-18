@@ -48,7 +48,7 @@
                         <td>{{$v->id}}</td>
                         <td>{{$v->good_name}}</td>
                         <td>{{$v->cate_name}}</td>
-                        <td><img style="width:80px;height:80px;" src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/';?>{{$v->thumb_img}}" /></td>
+                        <td><img style="width:80px;height:80px;" src="{{$v->thumb_img}}" /></td>
                         <td>{{$v->storenum}}</td>
                         <td>{{$v->sell_count}}</td>
                         <td>{{$v->original_price}}</td>

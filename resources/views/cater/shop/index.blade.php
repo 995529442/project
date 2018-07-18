@@ -260,10 +260,10 @@
         });
       }
       ,done: function(res){
-        var status = res.status;
+        var errcode = res.errcode;
 
-        if(status == 1){
-           $("#logo").val(res.message);
+        if(errcode == 1){
+           $("#logo").val(res.path);
         }
       }
       ,error: function(res){
