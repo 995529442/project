@@ -371,6 +371,7 @@ class ComposerStaticInit091eebd7798a06c0945ed88dddae8c43
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Jobs\\TestJob' => __DIR__ . '/../..' . '/app/Jobs/TestJob.php',
         'App\\Librarys\\Mail' => __DIR__ . '/../..' . '/app/Librarys/Mail.php',
+        'App\\Librarys\\Sms' => __DIR__ . '/../..' . '/app/Librarys/Sms.php',
         'App\\Librarys\\uploadFile' => __DIR__ . '/../..' . '/app/Librarys/uploadFile.php',
         'App\\Model\\CaterCategory' => __DIR__ . '/../..' . '/app/Model/CaterCategory.php',
         'App\\Model\\CaterGoods' => __DIR__ . '/../..' . '/app/Model/CaterGoods.php',

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMailTable extends Migration
+class CreateSendSmsLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateMailTable extends Migration
      */
     public function up()
     {
-        Schema::create('mail', function (Blueprint $table) {
+        Schema::create('send_sms_log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('admin_id')->comment("关联admins表");
-            $table->string('name',50)->default('')->comment("用户名");
-            $table->string('password',50)->default('')->comment("授权码");
-            $table->tinyInteger('type')->default('0')->comment("类型，1为发送账号，2为接收账号");
+            $table->string('mobile',20)->default('')->comment("发送的手机号");
+            $table->string('content',255)->default('')->comment("发送内容");
+            $table->integer('create_time')->default('0')->comment("创建时间");
             $table->timestamps();
         });
 
-        DB::statement("alter table mail comment '邮件设置表'");
+        DB::statement("alter table send_sms_log comment '短信发送日志表'");
     }
 
     /**
@@ -32,6 +32,6 @@ class CreateMailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mail');
+        Schema::dropIfExists('send_sms_log');
     }
 }

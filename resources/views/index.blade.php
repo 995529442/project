@@ -72,9 +72,17 @@
                     @endif
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-url="{{ route('manage') }}">
+                            <a href="javascript:;" data-url="">
                                 <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
                                 <span>邮件设置</span>
+                            </a>                   
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" data-url="">
+                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
+                                <span>短信设置</span>
                             </a>                   
                         </dd>
                     </dl>
