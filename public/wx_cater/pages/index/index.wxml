@@ -5,7 +5,7 @@
   <!--顶部搜索栏-->
   <view class="search">
     <!--当前位置-->
-    <view bindtap="chooseLocation" class="search-site triangle">{{ userSite }}</view>
+    <view class="search-site triangle">城市</view>
     <view bindtap="goSearch" class="search-in iconfont icon-sousuo_sousuo">搜索菜系、 菜品</view>
   </view>
   <!--carousel-->
