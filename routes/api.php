@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'cater'], function () {
+    Route::any('getUserInfo/getUsers', 'cater\Api\getUserInfoController@getUsers'); //获取session_key
+});

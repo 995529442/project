@@ -14,8 +14,7 @@ class CaterShopController extends Controller
     //微餐饮-后台首页
     public function index(){
         $admins   = Auth::guard('admins')->user();
-    	$admin_id = $admins->id;
-
+        $admin_id = $admins->id; 
         //获取省份数据
         $provinces = DB::table("address")->select(['id','name'])->where(['type'=>1,'pid'=>1])->get();        
     	//获取餐厅信息

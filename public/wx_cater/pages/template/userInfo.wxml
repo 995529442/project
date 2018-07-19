@@ -1,0 +1,14 @@
+<!-- 获取用户信息授权提示窗口  -->
+<template name="userinfo">
+    <view class="userinfo_box" wx:if="{{userinfo_box}}">
+    <view class='userinfo_prompt_box'>
+      <view class='userinfo_title'>提示</view> 
+      <view class='userinfo_text'>您还没有授权登录</view>
+      <view class='userinfo_btn'>
+      <button bindtap='UserInfo_click' data-name='不允许授权' hover-class='none' style='color:#999;border-right:2rpx solid #E6E6E7;'>取消</button> 
+        <button bindgetuserinfo='UserInfo_click' open-type='getUserInfo' hover-class='none' style='color:#009D1F;'>点击授权</button>
+      </view>
+    </view>
+  </view>  
+
+</template> 
