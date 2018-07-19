@@ -36,6 +36,54 @@
 					"name": "个人中心",
 					"pathName": "pages/user/user",
 					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "点餐",
+					"pathName": "pages/ordering/ordering",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "订单",
+					"pathName": "pages/payorder/payorder",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "评价",
+					"pathName": "pages/grade/grade",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "评价服务员",
+					"pathName": "pages/gratuity/gratuity",
+					"query": ""
+				},
+				{
+					"id": 5,
+					"name": "商家信息",
+					"pathName": "pages/detail/detail",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "优惠券",
+					"pathName": "pages/useroperation/useroperation",
+					"query": ""
+				},
+				{
+					"id": 7,
+					"name": "搜索页面",
+					"pathName": "pages/search/search",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "可取号商家",
+					"pathName": "pages/showShop/showShop",
+					"query": ""
 				}
 			]
 		}

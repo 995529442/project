@@ -81,9 +81,23 @@
   height: 250rpx;
   border: 1rpx solid #eee;
   border-left: none;
-  margin-top: -1rpx;
 }
 .hot-shop-wrap .hot-shop-content .hot-shop-img {
   width: 172rpx;
   height: 129rpx;
 }
+.hot-shop .top-show{
+  line-height: 73rpx;
+  font-size: 30rpx;
+  padding-left: 46rpx;
+  display:inline-block;
+  width:27%;
+}
+.hot-shop .top-show-active{
+  line-height: 73rpx;
+  font-size: 30rpx;
+  padding-left: 46rpx;
+  display:inline-block;
+  width:27%;
+  border-bottom:2rpx solid #4cbafa;
+}  

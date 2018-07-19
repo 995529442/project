@@ -1,14 +1,14 @@
 //app.js
 App({
   globalData: {
-    appUrl: "http://www.project.com/api/cater",  //根路径
+    appUrl: "http://www.project.com",  //根路径
+    admin_id:1
   },
   onLaunch: function () {
     var that = this;
   },
   //获取用户信息加登陆
   getUserInfo: function (cb, fund, child_this) {
-    console.log(cb)
     var that = this;
     child_this.setData({ userinfo_box: false, l_kefu_lon: true, });
     wx.login({

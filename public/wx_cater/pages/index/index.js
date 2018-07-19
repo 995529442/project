@@ -8,63 +8,22 @@ Page({
    */
   data: {
     userinfo_box: false,
-    title: 'index',
-    userInfo: null,
     userSite: '定位中',
+    url: app.globalData.appUrl,
     navList: [
-    //   {
-    //   navTitle: '排队取号',
-    //   navIcon: 'iconfont icon-shalou'
-    // }, 
-    {
-      navTitle: '预约订座',
-      navIcon: 'iconfont icon-chuliyuyue'
-    }, {
-      navTitle: '扫描单号',
-      navIcon: 'iconfont icon-erweima'
-    }],
-    hotShop: [{
-      shopImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      shopName: '青花椒砂锅鱼'
-    }, {
-      shopImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      shopName: '青花椒砂锅鱼'
-    }, {
-      shopImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      shopName: '青花椒砂锅鱼'
-    }, {
-      shopImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      shopName: '青花椒砂锅鱼'
-    }, {
-      shopImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      shopName: '青花椒砂锅鱼'
-    }, {
-      shopImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      shopName: '青花椒砂锅鱼'
-    }],
-    nearShop: [{
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      name: '青花椒砂锅鱼',
-      price: '30',
-      kind: '中国菜',
-      distance: '8.6km',
-      status: '无需排队',
-      grade: 'five-star'
-    }, {
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      name: '青花椒砂锅鱼',
-      price: '30',
-      kind: '中国菜',
-      status: '无需排队',
-      grade: 'four-star'
-    }, {
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      name: '青花椒砂锅鱼',
-      price: '128',
-      kind: '中国菜',
-      status: '无需排队',
-      grade: 'one-star'
-    }],
+      // {
+      //   navTitle: '排队取号',
+      //   navIcon: 'iconfont icon-shalou'
+      // },
+      {
+        navTitle: '点餐',
+        navIcon: 'iconfont icon-chuliyuyue'
+      }, {
+        navTitle: '外卖',
+        navIcon: 'iconfont icon-erweima'
+      }],
+    goods: [],//显示菜品
+    active_index:1,
     imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg']
   },
   /**
@@ -104,12 +63,56 @@ Page({
   onLoad: function onLoad() {
     var that = this;
 
-    if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
-      that.setData({
-        userinfo_box: true,
-      })
-      return;
+    // if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
+    //   that.setData({
+    //     userinfo_box: true,
+    //   })
+    //   return;
+    // }
+    console.log(app.globalData.appUrl)
+    that.getGoods(1);
+  },
+  //选取表头,获取数据
+  selectGoods:function(e){
+    var that=this;
+    var select_type = e.currentTarget.dataset.type;
+    var active_index = that.data.active_index;
+
+    if (select_type == "hot"){
+      active_index=1;
+    } else if (select_type == "rec") {
+      active_index=2;
+    } else if (select_type == "new"){
+      active_index=3;
     }
+
+    that.setData({
+      active_index: active_index
+    })  
+    that.getGoods(select_type);
+  },
+  //获取热卖和推荐菜品
+  getGoods:function(select_type){
+    var that=this;
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getGoods/getHotRecGoods',
+      data: {
+        admin_id: app.globalData.admin_id,
+        type: select_type
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data) {
+          that.setData({
+            goods: res.data
+          })
+        }
+      }
+    })
   },
   // 授权提示
   UserInfo_click: function (e) {
@@ -125,6 +128,6 @@ Page({
       })
       return;
     }
-    app.getUserInfo(e,that.onLoad,this);
+    app.getUserInfo(e, that.onLoad, this);
   },
 });
