@@ -30,23 +30,23 @@ Page({
    * 用户选择位置
    * @returns {boolean}
    */
-  chooseLocation: function chooseLocation() {
-    // console.log(1)
-    var that = this;
-    wx.chooseLocation({
-      success: function success(res) {
-        console.log(res);
-        if (res.name.length <= 0) {
-          return that.setData({
-            userSite: res.address
-          });
-        }
-        that.setData({
-          userSite: res.name
-        });
-      }
-    });
-  },
+  // chooseLocation: function chooseLocation() {
+  //   // console.log(1)
+  //   var that = this;
+  //   wx.chooseLocation({
+  //     success: function success(res) {
+  //       console.log(res);
+  //       if (res.name.length <= 0) {
+  //         return that.setData({
+  //           userSite: res.address
+  //         });
+  //       }
+  //       that.setData({
+  //         userSite: res.name
+  //       });
+  //     }
+  //   });
+  // },
 
   /**
    * 用户搜索
@@ -63,14 +63,14 @@ Page({
   onLoad: function onLoad() {
     var that = this;
 
-    // if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
-    //   that.setData({
-    //     userinfo_box: true,
-    //   })
-    //   return;
-    // }
+    if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
+      that.setData({
+        userinfo_box: true,
+      })
+      return;
+    }
     console.log(app.globalData.appUrl)
-    that.getGoods(1);
+    that.getGoods("hot");
   },
   //选取表头,获取数据
   selectGoods:function(e){

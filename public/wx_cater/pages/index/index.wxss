@@ -63,9 +63,9 @@
 .nav .iconfont:nth-child(3)::before {
   color: #fcdb1b;
 }
-.hot-shop {
+/* .hot-shop {
   border-bottom: 11rpx solid #eee;
-}
+} */
 .hot-shop-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -92,6 +92,7 @@
   padding-left: 46rpx;
   display:inline-block;
   width:27%;
+  border-bottom:2rpx solid #EEEEEE;
 }
 .hot-shop .top-show-active{
   line-height: 73rpx;
