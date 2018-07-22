@@ -27,28 +27,6 @@ Page({
     imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg']
   },
   /**
-   * 用户选择位置
-   * @returns {boolean}
-   */
-  chooseLocation: function chooseLocation() {
-    // console.log(1)
-    var that = this;
-    wx.chooseLocation({
-      success: function success(res) {
-        console.log(res);
-        if (res.name.length <= 0) {
-          return that.setData({
-            userSite: res.address
-          });
-        }
-        that.setData({
-          userSite: res.name
-        });
-      }
-    });
-  },
-
-  /**
    * 用户搜索
    */
   goSearch: function goSearch() {
