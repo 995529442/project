@@ -27,6 +27,31 @@ Page({
     imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg']
   },
   /**
+<<<<<<< HEAD
+=======
+   * 用户选择位置
+   * @returns {boolean}
+   */
+  // chooseLocation: function chooseLocation() {
+  //   // console.log(1)
+  //   var that = this;
+  //   wx.chooseLocation({
+  //     success: function success(res) {
+  //       console.log(res);
+  //       if (res.name.length <= 0) {
+  //         return that.setData({
+  //           userSite: res.address
+  //         });
+  //       }
+  //       that.setData({
+  //         userSite: res.name
+  //       });
+  //     }
+  //   });
+  // },
+
+  /**
+>>>>>>> 98922fef851b00bd2fe3222ee5dc19f5d57d6f8d
    * 用户搜索
    */
   goSearch: function goSearch() {
@@ -41,14 +66,14 @@ Page({
   onLoad: function onLoad() {
     var that = this;
 
-    // if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
-    //   that.setData({
-    //     userinfo_box: true,
-    //   })
-    //   return;
-    // }
+    if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
+      that.setData({
+        userinfo_box: true,
+      })
+      return;
+    }
     console.log(app.globalData.appUrl)
-    that.getGoods(1);
+    that.getGoods("hot");
   },
   //选取表头,获取数据
   selectGoods:function(e){

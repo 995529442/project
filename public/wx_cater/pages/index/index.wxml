@@ -5,7 +5,7 @@
   <!--顶部搜索栏-->
   <view class="search">
     <!--当前位置-->
-    <view class="search-site triangle">城市</view>
+    <!-- <view class="search-site triangle">城市</view> -->
     <view bindtap="goSearch" class="search-in iconfont icon-sousuo_sousuo">搜索菜系、 菜品</view>
   </view>
   <!--carousel-->
@@ -13,7 +13,7 @@
   <!--nav-->
   <view class="nav">
     <navigator url="../showShop/showShop?type={{ index }}" hover-class="none" class="{{ item.navIcon }}" wx:for="{{ navList }}" wx:key="unique">
-      {{ item.navTitle }}
+      <view style="displat:inline-block;padding-left:20rpx;">{{ item.navTitle }}</view>
     </navigator>
   </view>
   <!--热门菜品-->
@@ -30,6 +30,6 @@
       </block>
     </view>
          <view wx:if="{{goods.length == 6}}" style="float:right;margin-right:60rpx;line-height: 73rpx;font-size: 30rpx;">更多>></view>
-         <view style="margin-top:70rpx;border-bottom:2rpx solid #eee;"></view>
+         <!-- <view style="margin-top:70rpx;border-bottom:2rpx solid #eee;"></view> -->
   </view>
 </view>

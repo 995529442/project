@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'cater'], function () {
     Route::any('getUserInfo/getUsers', 'cater\Api\getUserInfoController@getUsers'); //获取用户信息
-    Route::any('getGoods/getHotRecGoods', 'cater\Api\getGoodsController@getHotRecGoods'); //获取获取推荐，热卖菜品
+    Route::any('getGoods/getHotRecGoods', 'cater\Api\getGoodsController@getHotRecGoods'); //获取首页菜品
+    Route::any('getShop/getShopInfo', 'cater\Api\getShopController@getShopInfo'); //获取店铺信息
 });

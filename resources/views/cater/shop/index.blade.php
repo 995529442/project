@@ -287,9 +287,10 @@
           });
         }
         ,done: function(res){
-          if(res.status == 1){
+          console.log(res)
+          if(res.errcode == 1){
             if(figure_img.length < 3){
-              figure_img.push(res.message)
+              figure_img.push(res.path)
               //$('#preview_figure').append('<img style="width:150px;height:100px;" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
             }else{
               layer.msg("首页展示图最多为3张",{icon:2},1500);
