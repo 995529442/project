@@ -117,7 +117,7 @@
     </div>
     
     <div class="layui-form-item">    
-      <label class="layui-form-label">首页展示图：</label>
+      <label class="layui-form-label">商家展示图：</label>
       <div class="layui-upload">
         <button type="button" class="layui-btn layui-btn-sm" id="figure_img">多图片上传</button> 
         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;margin-left: 120px;">

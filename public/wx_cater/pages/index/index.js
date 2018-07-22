@@ -8,50 +8,24 @@ Page({
    */
   data: {
     userinfo_box: false,
-    userSite: '定位中',
     url: app.globalData.appUrl,
     navList: [
-      // {
-      //   navTitle: '排队取号',
-      //   navIcon: 'iconfont icon-shalou'
-      // },
+      {
+        navTitle: '商家',
+        navIcon: 'iconfont icon-552cc4077f2ed:before'
+      },
       {
         navTitle: '点餐',
-        navIcon: 'iconfont icon-chuliyuyue'
+        navIcon: 'iconfont icon-canshi:before'
       }, {
         navTitle: '外卖',
-        navIcon: 'iconfont icon-erweima'
+        navIcon: 'iconfont icon-mifen2:before'
       }],
     goods: [],//显示菜品
     active_index:1,
     imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg']
   },
   /**
-<<<<<<< HEAD
-=======
-   * 用户选择位置
-   * @returns {boolean}
-   */
-  // chooseLocation: function chooseLocation() {
-  //   // console.log(1)
-  //   var that = this;
-  //   wx.chooseLocation({
-  //     success: function success(res) {
-  //       console.log(res);
-  //       if (res.name.length <= 0) {
-  //         return that.setData({
-  //           userSite: res.address
-  //         });
-  //       }
-  //       that.setData({
-  //         userSite: res.name
-  //       });
-  //     }
-  //   });
-  // },
-
-  /**
->>>>>>> 98922fef851b00bd2fe3222ee5dc19f5d57d6f8d
    * 用户搜索
    */
   goSearch: function goSearch() {
@@ -72,8 +46,18 @@ Page({
       })
       return;
     }
-    console.log(app.globalData.appUrl)
     that.getGoods("hot");
+
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        
+        wx.setStorageSync('latitude', latitude);
+        wx.setStorageSync('longitude', longitude);
+      }
+    })
   },
   //选取表头,获取数据
   selectGoods:function(e){
@@ -94,7 +78,7 @@ Page({
     })  
     that.getGoods(select_type);
   },
-  //获取热卖和推荐菜品
+  //获取首页菜品
   getGoods:function(select_type){
     var that=this;
 
@@ -108,7 +92,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         if (res.data) {
           that.setData({
             goods: res.data

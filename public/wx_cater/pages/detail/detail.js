@@ -9,8 +9,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: 'detail',
-    detailRules: '听到叫号请到迎宾台，过号不作废，延三桌安排',
     imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'],
     // waitInfo: [{
     //   kind: '餐桌类型',
@@ -32,6 +30,8 @@ Page({
     //   time: '--分钟'
     // }],
     url: app.globalData.appUrl,
+    latitude:'',
+    longitude:'', 
     restaurant: {}
   },
   /**
@@ -50,6 +50,27 @@ Page({
   onLoad: function onLoad() {
     var that=this;
 
+    if (wx.getStorageSync('latitude') == '' || wx.getStorageSync('longitude') == '') {
+      wx.getLocation({
+        type: 'wgs84',
+        success: function (res) {
+          var latitude = res.latitude
+          var longitude = res.longitude
+
+          that.setData({
+            latitude: latitude,
+            longitude: longitude
+          })
+          wx.setStorageSync('latitude', latitude);
+          wx.setStorageSync('longitude', longitude);
+        }
+      })
+    }else{
+      that.setData|({
+        latitude: wx.getStorageSync('latitude'),
+        longitude: wx.getStorageSync('longitude')
+      })
+    }
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
       data: {

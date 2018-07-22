@@ -37,23 +37,23 @@
     </view>
     <view bindtap="callPhone" class="r-i-tel iconfont icon-dianhua triangle">{{ restaurant.phone }}</view>
     <view class="r-i-time iconfont icon-shijian">营业时间：{{ restaurant.begin_time }}-{{ restaurant.end_time }}</view>
-    <view class="r-i-time iconfont icon-shijian">类型：
+    <view class="r-i-time iconfont icon-lingdang:before">类型：
       <view style="display:inline-block;padding-left:20rpx;" wx:if="{{restaurant.is_eat_in == 2}}">堂食</view>
       <view style="display:inline-block;padding-left:20rpx;" wx:if="{{restaurant.is_take_out == 2}}">外卖</view>
     </view>
-    <view class="r-i-time iconfont icon-shijian">
+    <view class="r-i-time iconfont icon-552cc4077f2ed:before">
       营业状态：{{restaurant.status == 1?"营业中":"已打烊"}}
     </view>
-    <view class="r-i-time iconfont icon-shijian" wx:if="{{restaurant.is_take_out == 2}}">
+    <view class="r-i-time iconfont icon-fapiao:before" wx:if="{{restaurant.is_take_out == 2}}">
       配送费：{{ restaurant.shipping_fee }}元
     </view>
-    <view class="r-i-time iconfont icon-shijian" wx:if="{{restaurant.is_take_out == 2}}">
+    <view class="r-i-time iconfont icon-fapiao:before" wx:if="{{restaurant.is_take_out == 2}}">
       包装费：{{ restaurant.package_fee }}元
     </view>
-    <view class="r-i-time iconfont icon-shijian">
+    <view class="r-i-time iconfont icon-dingdan:before">
       营业状态：{{restaurant.status == 1?"营业中":"已打烊"}}
     </view>
-    <view class="r-i-time iconfont icon-touxiangmorenicon:before">
+    <view class="r-i-time iconfont icon-xiaoxi:before">
       餐厅介绍：{{restaurant.introduce}}
     </view>
   </view>

@@ -30,7 +30,7 @@ App({
             success: function (res) {
               console.log(res)
               if (res.data) {
-                //赋值给全局
+                //保存在本地
                 wx.setStorageSync('openId', res.data.openId);
                 wx.setStorageSync('avatarurl', res.data.avatarUrl);
                 wx.setStorageSync('nickname', res.data.nickName);
