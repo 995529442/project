@@ -56,4 +56,18 @@ class getShopController extends Controller
       return json_encode($shop_info);
       
     }
+
+    /**
+     * 获取首页展示图
+     * @param Request $request
+     * @return string
+     */
+    public function getHomeImg(Request $request) {
+      $admin_id = (int)$request -> input("admin_id",0);
+   
+      $shop_info = DB::table("cater_figure_img")->where(["admin_id"=>$admin_id,"isvalid"=>true,"type"=>3])->get();
+
+      return json_encode($shop_info);
+      
+    }
 }

@@ -92,7 +92,7 @@
   padding-left: 46rpx;
   display:inline-block;
   width:27%;
-  border-bottom:2rpx solid #EEEEEE;
+  border-bottom:6rpx solid #EEEEEE;
 }
 .hot-shop .top-show-active{
   line-height: 73rpx;
@@ -100,5 +100,5 @@
   padding-left: 46rpx;
   display:inline-block;
   width:27%;
-  border-bottom:2rpx solid #4cbafa;
+  border-bottom:6rpx solid #f00;
 }  

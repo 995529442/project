@@ -23,7 +23,7 @@ Page({
       }],
     goods: [],//显示菜品
     active_index:1,
-    imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg']
+    imgUrls: []
   },
   /**
    * 用户搜索
@@ -51,7 +51,8 @@ Page({
       }
     })
 
-    that.getGoods("hot");
+    that.getHomeImg();//首页轮播图
+    that.getGoods("hot");//首页菜品
   },
   //选取表头,获取数据
   selectGoods:function(e){
@@ -70,7 +71,33 @@ Page({
     that.setData({
       active_index: active_index
     })  
+
     that.getGoods(select_type);
+  },
+  getHomeImg:function(){
+    var that = this;
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getShop/getHomeImg',
+      data: {
+        admin_id: app.globalData.admin_id,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if(res.data){
+          var home_img = res.data;
+          var imgUrls = new Array();
+          for (var k = 0; k < home_img.length;k++){
+            imgUrls.push(that.data.url + home_img[k]['img_path']);
+          }
+          that.setData({
+            imgUrls: imgUrls
+          })
+        }
+      }
+    })
   },
   //获取首页菜品
   getGoods:function(select_type){
@@ -86,6 +113,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         if (res.data) {
           that.setData({
             goods: res.data

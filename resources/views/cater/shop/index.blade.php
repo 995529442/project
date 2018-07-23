@@ -304,7 +304,7 @@
             if(lis < 3){
               $('#preview_figure ul').append('<li style="display:inline-block;"><input type="hidden" name="figure_img_id[]" value="0"><input type="hidden" name="figure_img[]" value="'+res.path+'"><img style="width:150px;height:100px;" src="'+ res.path +'" alt="'+ res.path +'" class="layui-upload-img"><div style="display:inline-block;position:relative;top:-40px;width:20px;border:1px solid #F73455;border-radius: 50%;cursor: pointer;"><p style="padding-left:4px;color:#F73455;" onclick="del_figure_img(this,0)">X</p></div></li>')
             }else{
-              layer.msg("首页展示图最多为3张",{icon:2},1500);
+              layer.msg("商家展示图最多为3张",{icon:2},1500);
             }
           }
           //上传完毕

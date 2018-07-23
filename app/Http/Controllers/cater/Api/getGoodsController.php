@@ -37,7 +37,7 @@ class getGoodsController extends Controller
       //热卖
       $goods =  DB::table("cater_goods")
             ->where($where)
-            ->select(['id as goods_id','good_name','thumb_img'])->orderBy("id","desc")->take(6)->get();                  
+            ->select(['id as goods_id','good_name','thumb_img','sell_count','virtual_sell_count','now_price'])->orderBy("id","desc")->take(6)->get();                  
       return json_encode($goods);
     }
 }

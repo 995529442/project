@@ -1,7 +1,7 @@
 <!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
 <import src="../template/template" />
 <view class="detail">
-  <template is="carousel" data="{{ imgUrls }}"></template>
+  <template is="carousel" data="{{ imgUrls }}" wx:if="{{imgUrls != ''}}"></template>
   <!-- <view class="d-wait">
     <view wx:for="{{ waitInfo }}" wx:key="unique">
       <view class="kind">

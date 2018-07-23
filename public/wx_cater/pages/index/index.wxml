@@ -23,9 +23,11 @@
     <view class="top-show{{active_index==3?'-active':''}}" bindtap='selectGoods' data-type="new">上新菜品</view>
     <view class="hot-shop-wrap">
       <block wx:for="{{ goods }}" wx:key="unique">
-        <navigator url="../detail/detail?goods_id={{ item.goods_id }}" hover-class="none" class="hot-shop-content">
+        <navigator url="../ordering/ordering?goods_id={{ item.goods_id }}" hover-class="none" class="hot-shop-content">
           <image class="hot-shop-img" src="{{url}}{{ item.thumb_img }}"></image>
-          {{ item.good_name }}
+          <view>{{ item.good_name }}</view>
+          <view>销量：{{ item.sell_count+item.virtual_sell_count }}</view>
+          <view>价格：<text style="color:red;">￥{{ item.now_price }}</text></view>
         </navigator>
       </block>
     </view>

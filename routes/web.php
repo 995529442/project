@@ -46,6 +46,14 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::post('delFigureImg', 'cater\CaterShopController@delFigureImg')->name('cater.shop.delFigureImg'); //上传logo图片         
        });
 
+       //首页管理
+       Route::group(['prefix'=>'home'],function(){
+          Route::any('index', 'cater\CaterHomeController@index')->name('cater.home.index'); //首页管理
+          Route::any('save', 'cater\CaterHomeController@save')->name('cater.home.save'); //保存首页管理
+          Route::any('upload', 'cater\CaterHomeController@upload')->name('cater.home.upload'); //上传
+          Route::any('delFigureImg', 'cater\CaterHomeController@delFigureImg')->name('cater.home.delFigureImg'); //删除
+       });
+
        //分类管理
        Route::group(['prefix'=>'category'],function(){
           Route::get('index', 'cater\CaterCategoryController@index')->name('cater.category.index'); //分类管理

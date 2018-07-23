@@ -103,6 +103,12 @@
                         </a>
                     </dd>
                     <dd>
+                        <a href="javascript:;" data-url="{{ route('cater.home.index') }}">
+                            <i class="iconfont icon-zhandianguanli" data-icon='icon-geren1'></i>
+                            <span>首页管理</span>
+                        </a>
+                    </dd>
+                    <dd>
                         <a href="javascript:;" data-url="{{ route('cater.category.index') }}">
                             <i class="iconfont icon-caidan" data-icon='icon-iconfuzhi01'></i>
                             <span>分类管理</span>

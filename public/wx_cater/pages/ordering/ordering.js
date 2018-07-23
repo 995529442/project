@@ -233,7 +233,7 @@ Page({
       }
     },
     // 当前的tab
-    currentmenu: 0,
+    currentmenu: 1,
     // 当前的left栏
     currentleftmenu: 0,
     // 侧边栏联动当前值
