@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'],
+    imgUrls: [],
+    url: app.globalData.appUrl,
     // waitInfo: [{
     //   kind: '餐桌类型',
     //   desk: '等待桌数',
@@ -43,7 +44,18 @@ Page({
       phoneNumber: that.data.restaurant.phone
     });
   },
+  /**
+   * 打开位置
+   */
+  openLocation: function openLocation() {
+    var that = this;
 
+    wx.openLocation({
+      latitude: that.data.latitude,
+      longitude: that.data.longitude,
+      scale: 28
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -66,7 +78,7 @@ Page({
         }
       })
     }else{
-      that.setData|({
+      that.setData({
         latitude: wx.getStorageSync('latitude'),
         longitude: wx.getStorageSync('longitude')
       })
@@ -74,16 +86,27 @@ Page({
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
       data: {
-        admin_id: app.globalData.admin_id
+        admin_id: app.globalData.admin_id,
+        latitude: that.data.latitude,
+        longitude: that.data.longitude
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
         console.log(res)
+        var imgUrls = that.data.imgUrls;
         if(res.data){
+          var figure_img = res.data.figure_img;
+
+          if (figure_img != ""){
+            for (var k = 0; k < figure_img.length;k++){
+              imgUrls.push(that.data.url + figure_img[k]['img_path']);
+            }
+          }
           that.setData({
-            restaurant:res.data
+            restaurant:res.data,
+            imgUrls: imgUrls
           })
         }
       }

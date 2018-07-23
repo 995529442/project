@@ -40,24 +40,18 @@ Page({
   onLoad: function onLoad() {
     var that = this;
 
-    if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
-      that.setData({
-        userinfo_box: true,
-      })
-      return;
-    }
-    that.getGoods("hot");
-
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
         var latitude = res.latitude
         var longitude = res.longitude
-        
+
         wx.setStorageSync('latitude', latitude);
         wx.setStorageSync('longitude', longitude);
       }
     })
+
+    that.getGoods("hot");
   },
   //选取表头,获取数据
   selectGoods:function(e){

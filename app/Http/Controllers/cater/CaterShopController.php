@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\CaterShop;
 use Illuminate\Support\Facades\Auth;
 use App\Librarys\uploadFile;
+use App\Librarys\Location;
 use DB;
 
 class CaterShopController extends Controller
@@ -22,6 +23,7 @@ class CaterShopController extends Controller
 
         $cities= "";
         $countris = "";
+        $figure_img = [];
 
         if(!empty($shops_info)){
             $shops_info['show_logo'] = $shops_info['logo'];
@@ -32,13 +34,17 @@ class CaterShopController extends Controller
             $cities = DB::table("address")->select(['id','name'])->where(['type'=>2,'pid'=>$province_id])->get();
             //获取县区数据
             $countris = DB::table("address")->select(['id','name'])->where(['type'=>3,'pid'=>$city_id])->get();
+
+            //获取预览图
+            $figure_img = DB::table("cater_figure_img")->where(['admin_id'=>$admin_id,'foreign_id'=>$shops_info['id'],'type'=>1,'isvalid'=>true])->get();
         }
 
     	return view('cater.shop.index',[
            'provinces'  => $provinces,
            'cities'     => $cities,
            'countris'   => $countris,
-           'shops_info' => $shops_info
+           'shops_info' => $shops_info,
+           'figure_img' => $figure_img
     	]);
     }
     
@@ -68,21 +74,11 @@ class CaterShopController extends Controller
         $detail_address = $province.$city.$area.$address;
         
         //腾讯地图解析地址坐标
-        $url = "http://apis.map.qq.com/ws/geocoder/v1/?address=".$detail_address."&key=".env('MAP_KEY', '');
+        $result = Location::declareAddress($detail_address);
 
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($ch,CURLOPT_HEADER,0);
-        $output = curl_exec($ch);
-        curl_close($ch);
-        
-        $map_obj = json_decode($output);        
-
-        if($map_obj->status == 0){ //解析地址成功
-           $longitude = $map_obj->result->location->lng;
-           $latitude  = $map_obj->result->location->lat;
-
+        if($result['errcode'] == 1){
+            $longitude = $result['data']['longitude'];
+            $latitude = $result['data']['latitude'];
         }
 
         return view("cater.shop.map",[
@@ -96,41 +92,61 @@ class CaterShopController extends Controller
     public function saveShop(Request $request){
         $shop_id    = (int)$request -> input('shop_id',0);
 
-        if($shop_id > 0){
-            $cater_shop = CaterShop::findOrFail($shop_id);
-        }else{
-            $cater_shop = new CaterShop;
+        $data = array();
+        
+        $data['name'] = $request -> input('name','');
+        $data['begin_time'] = $request -> input('begin_time','');
+        $data['end_time'] = $request -> input('end_time','');
+        $data['status'] = (int)$request -> input('status',0);
+        $data['province_id'] = (int)$request -> input('provid',0);
+        $data['city_id'] = (int)$request -> input('cityid',0);
+        $data['area_id'] = (int)$request -> input('areaid',0);
+        $data['address'] = $request -> input('address','');
+        $data['longitude'] = $request -> input('longitude','');
+        $data['latitude'] = $request -> input('latitude','');
+        $data['introduce'] = $request -> input('introduce','');
+        $data['phone'] = $request -> input('phone','');
+        $data['logo'] = $request -> input('logo','');
+        $data['is_eat_in'] = (int)$request -> input('is_eat_in',0);
+        $data['is_take_out'] = (int)$request -> input('is_take_out',0);
+        $data['shipping_fee'] = $request -> input('shipping_fee','');
+        $data['package_fee'] = $request -> input('package_fee','');
+        $data['delivery_km'] = $request -> input('delivery_km','');
 
+        if($shop_id > 0){
+            $cater_shop = DB::table("cater_shop")->whereId($shop_id)->update($data);
+        }else{
             $admins   = Auth::guard('admins')->user();
             $admin_id = (int)$admins->id;
 
-            $cater_shop->admin_id = $admin_id;
-            $cater_shop->isvalid  = true;
-        }
-        $cater_shop->name        = $request -> input('name','');
-        $cater_shop->begin_time  = $request -> input('begin_time','');
-        $cater_shop->end_time    = $request -> input('end_time','');
-        $cater_shop->status      = (int)$request -> input('status',0);
-        $cater_shop->province_id = (int)$request -> input('provid',0);
-        $cater_shop->city_id     = (int)$request -> input('cityid',0);
-        $cater_shop->area_id     = (int)$request -> input('areaid',0);
-        $cater_shop->address     = $request -> input('address','');
-        $cater_shop->longitude   = $request -> input('longitude','');
-        $cater_shop->latitude    = $request -> input('latitude','');
-        $cater_shop->introduce   = $request -> input('introduce','');
-        $cater_shop->phone       = $request -> input('phone','');
-        $cater_shop->logo        = $request -> input('logo','');
-        $cater_shop->is_eat_in   = (int)$request -> input('is_eat_in',0);
-        $cater_shop->is_take_out = (int)$request -> input('is_take_out',0);
-        $cater_shop->shipping_fee= $request -> input('shipping_fee','');
-        $cater_shop->package_fee = $request -> input('package_fee','');
-        $cater_shop->delivery_km = $request -> input('delivery_km','');
+            $data['admin_id'] = $admin_id;
+            $data['isvalid']  = true;
 
-        $result = $cater_shop->save();
-
-        if($result){
-            return redirect('cater/shop/index');
+            $shop_id = DB::table("cater_shop")->insertGetId($data);
         }
+        $figure_img_id = $request -> input('figure_img_id','');
+        $figure_img = $request -> input('figure_img','');
+
+        //商家展示图
+        if($figure_img){
+            for($k=0;$k<count($figure_img_id);$k++){
+                $insert_data = array(
+                   "admin_id" => Auth::guard('admins')->user()->id,
+                   "img_path" =>$figure_img[$k],
+                   "foreign_id" => $shop_id,
+                   "type" => 1,
+                   "isvalid" => true
+                );
+                
+                if((int)$figure_img_id[$k] > 0){  //修改
+                  DB::table("cater_figure_img")->whereId((int)$figure_img_id[$k])->update(['img_path'=>$figure_img[$k],]);
+                }else{
+                  DB::table("cater_figure_img")->insert($insert_data);
+                }
+            }
+        }
+
+        return redirect('cater/shop/index');
     }
 
      //微餐饮-上传图片接口
@@ -144,5 +160,18 @@ class CaterShopController extends Controller
             $result = ['errcode'=>-1,'errmsg'=>'参数错误'];
         }
         return json_encode($result);
+    }
+
+    //微餐饮-删除首页展示图片
+    public function delFigureImg(Request $request){
+       $img_id = (int)$request -> input('img_id',0);
+
+       $result = DB::table("cater_figure_img")->whereId($img_id)->update(['isvalid'=>false]);
+
+       if($result){
+          return json_encode(['errcode'=>1,'errmsg'=>'成功']);
+       }else{
+          return json_encode(['errcode'=>-1,'errmsg'=>'失败']);
+       }
     }
 }

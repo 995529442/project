@@ -122,7 +122,20 @@
         <button type="button" class="layui-btn layui-btn-sm" id="figure_img">多图片上传</button> 
         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;margin-left: 120px;">
           预览图：
-          <div class="layui-upload-list" id="preview_figure"></div>
+          <div class="layui-upload-list" id="preview_figure">    
+            <ul>       
+              @if($figure_img != "")
+                 @foreach($figure_img as $v)
+                 <li style="display:inline-block;">
+                    <input type="hidden" name="figure_img_id[]" value="{{$v->id}}">
+                    <input type="hidden" name="figure_img[]" value="{{$v->img_path}}">
+                    <img style="width:150px;height:100px;" src="{{$v->img_path}}" alt="" class="layui-upload-img">
+                    <div style="display:inline-block;position:relative;top:-40px;width:20px;border:1px solid #F73455;border-radius: 50%;cursor: pointer;"><p style="padding-left:4px;color:#F73455;" onclick="del_figure_img(this,{{$v->id}})">X</p></div>
+                  </li>
+                 @endforeach
+              @endif
+            </ul>
+          </div>
        </blockquote>
       </div> 
     </div>
@@ -150,8 +163,6 @@
 <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
 <script>
-	var figure_img = new Array();  //定义一个全局数据
-
   layui.use(['layer','form','laydate','upload','element'], function(){
 	  var form = layui.form
 	  ,layer = layui.layer
@@ -287,11 +298,11 @@
           });
         }
         ,done: function(res){
-          console.log(res)
           if(res.errcode == 1){
-            if(figure_img.length < 3){
-              figure_img.push(res.path)
-              //$('#preview_figure').append('<img style="width:150px;height:100px;" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+            lis = $("#preview_figure ul li").length;
+
+            if(lis < 3){
+              $('#preview_figure ul').append('<li style="display:inline-block;"><input type="hidden" name="figure_img_id[]" value="0"><input type="hidden" name="figure_img[]" value="'+res.path+'"><img style="width:150px;height:100px;" src="'+ res.path +'" alt="'+ res.path +'" class="layui-upload-img"><div style="display:inline-block;position:relative;top:-40px;width:20px;border:1px solid #F73455;border-radius: 50%;cursor: pointer;"><p style="padding-left:4px;color:#F73455;" onclick="del_figure_img(this,0)">X</p></div></li>')
             }else{
               layer.msg("首页展示图最多为3张",{icon:2},1500);
             }
@@ -422,5 +433,39 @@
           obj.value= parseFloat(obj.value); 
       } 
   } 
+
+  function del_figure_img(obj,img_id){
+    if(img_id > 0){
+      layer.confirm('确定要删除此图片？', {
+        btn: ['确定','取消'] //按钮
+      }, function(){
+        $.ajax({  
+          type: "POST",
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+          url: "{{ route('cater.shop.delFigureImg') }}",  
+          data: {img_id:img_id},  
+          dataType: "json",  
+          success: function(res){
+            if(res.errcode == 1){ //成功
+              $(obj).parent().parent().remove();
+            }
+
+            layer.closeAll();
+          }  
+        }); 
+      }, function(){
+
+      });
+    }else{
+      layer.confirm('确定要删除此图片？', {
+        btn: ['确定','取消'] //按钮
+      }, function(){
+          $(obj).parent().parent().remove();
+          layer.closeAll();
+      }, function(){
+
+      });
+    }
+  }
 </script>
 @endsection

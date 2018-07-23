@@ -43,6 +43,7 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::any('map', 'cater\CaterShopController@map')->name('cater.shop.map'); //定位地图
           Route::post('getAddress', 'cater\CaterShopController@getAddress')->name('cater.shop.getAddress'); //获取省市区等信息
           Route::post('upload', 'cater\CaterShopController@upload')->name('cater.shop.upload'); //上传logo图片
+          Route::post('delFigureImg', 'cater\CaterShopController@delFigureImg')->name('cater.shop.delFigureImg'); //上传logo图片         
        });
 
        //分类管理

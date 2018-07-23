@@ -95,22 +95,22 @@
 <script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
 <script>
     function del(id){
-        $.ajax({  
-          type: "POST",
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
-          url: "{{ route('cater.goods.del_goods') }}",  
-          data: {goods_id:id},  
-          dataType: "json",  
-          success: function(data){
-             if(data.errcode == 1){
-                layer.msg(data.errmsg, {icon: 1},function(){
-                    location.reload();
-                }); 
-             }else{
-                layer.msg(data.errmsg, {icon: 2},1500); 
-             }
-          }  
-        }); 
+      $.ajax({  
+        type: "POST",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+        url: "{{ route('cater.goods.del_goods') }}",  
+        data: {goods_id:id},  
+        dataType: "json",  
+        success: function(data){
+           if(data.errcode == 1){
+              layer.msg(data.errmsg, {icon: 1},function(){
+                  location.reload();
+              }); 
+           }else{
+              layer.msg(data.errmsg, {icon: 2},1500); 
+           }
+        }  
+      }); 
     }
 </script>
 @endsection

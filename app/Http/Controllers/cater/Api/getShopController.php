@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Cater\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Librarys\Location;
 use DB;
 
 class getShopController extends Controller
@@ -20,7 +21,9 @@ class getShopController extends Controller
      */
     public function getShopInfo(Request $request) {
       $admin_id = (int)$request -> input("admin_id",0);
-      
+      $latitude = $request -> input("latitude","");
+      $longitude = $request -> input("longitude",""); 
+   
       //获取店铺信息
       $shop_info = DB::table("cater_shop")->where(["admin_id"=>$admin_id,"isvalid"=>true])->first();
 
@@ -31,6 +34,23 @@ class getShopController extends Controller
 
         //获取店铺展示图片
         $shop_info->figure_img = DB::table("cater_figure_img")->where(["admin_id"=>$admin_id,"isvalid"=>true,'foreign_id'=>$shop_info->id,'type'=>1])->get();
+
+        //计算距离
+        $location_info = Location::getLocation($admin_id,$latitude,$longitude);
+
+        if($location_info['errcode'] == 1){ //成功
+          $distance = (int)$location_info['data'][0]['distance'];
+
+          if($distance > 10000){
+            $shop_info->distance = ">10km";
+          }elseif($distance <= 10000 && $distance > 1000){
+            $shop_info->distance = round($distance/1000,2)."km";
+          }else{
+            $shop_info->distance = $distance."m";
+          }
+        }else{
+          $shop_info->distance = 0;
+        }
       }
 
       return json_encode($shop_info);

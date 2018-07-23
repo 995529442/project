@@ -2,7 +2,7 @@
 /**
  * Date: 2018/7/18
  * Time: 14:52
- * 发送邮件
+ * 发送短信
  */
 
 namespace App\Librarys;
