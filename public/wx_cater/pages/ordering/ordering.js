@@ -1,5 +1,5 @@
 'use strict';
-
+var app = getApp();
 // 获取全局应用程序实例对象
 // const app = getApp()
 
@@ -9,288 +9,67 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: 'ordering',
-    restaurant: {
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      name: '人马科技大饭堂',
-      id: 'remaid',
-      address: '汇德商业大厦501',
-      tel: '123412341234',
-      status: '满桌',
-      grade: 'four-star',
-      gradeNumber: '4.8',
-      comment: [{
-        content: '服务态度好',
-        number: '932'
-      }, {
-        content: '食材新鲜',
-        number: '932'
-      }, {
-        content: '味道赞',
-        number: '932'
-      }, {
-        content: '一',
-        number: '9132'
-      }, {
-        content: '两个',
-        number: '9132'
-      }, {
-        content: '四个个字',
-        number: '9132'
-      }, {
-        content: '三个字',
-        number: '9132'
-      }],
-      menuList: [{
-        title: '热销1',
-        id: 'list1',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list1_1'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list1_2'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list1_3'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list1_4'
-        }]
-      }, {
-        title: '热销2',
-        id: 'list2',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list2_1'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list2_2'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list2_3'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5',
-          id: 'list2_4'
-        }]
-      }, {
-        title: '热销3',
-        id: 'list3',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }]
-      }, {
-        title: '热销4',
-        id: 'list4',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }]
-      }, {
-        title: '热销5',
-        id: 'list5',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }]
-      }, {
-        title: '热销6',
-        id: 'list6',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }]
-      }, {
-        title: '热销7',
-        id: 'list7',
-        list: [{
-          img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          name: '红烧牛肉1',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉2',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉3',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }, {
-          name: '红烧牛肉4',
-          count: '1805',
-          good: '173',
-          price: '23.5'
-        }]
-      }],
-      coupon: {
-        id: 'code123123',
-        delmoney: 10,
-        condition: 100,
-        time: '2017-12-12'
-      }
-    },
+    //title: 'ordering',
+    menuList:[],
     // 当前的tab
-    currentmenu: 1,
+    //currentmenu: 1,
     // 当前的left栏
     currentleftmenu: 0,
     // 侧边栏联动当前值
     currentmenuid: 'list1',
     // 设置scroll-view的高度
-    scrollHeight: 880,
-    needDistance: 0,
-    scrollHeight2: 815,
+    //scrollHeight: 880,
+    //needDistance: 0,
+    //scrollHeight2: 815,
     showShopCarContent: false,
     showMask: false,
-    menu1content: [{
-      icon: 'iconfont icon-canshi',
-      title: '催促上菜'
-    }, {
-      icon: 'iconfont icon-lingdang-copy',
-      title: '呼叫服务员'
-    }, {
-      icon: 'iconfont icon-mifen2',
-      title: '加米饭'
-    }, {
-      icon: 'iconfont icon-jiubei',
-      title: '加酒水'
-    }],
-    comment: [{
-      username: '186****1234',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      grade: 'five-star',
-      time: '2016-5-5',
-      userComment: ['一二三四', '一', '一二三四', '一二', '一二三', '一二三四']
-    }, {
-      username: '186****1234',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      grade: 'one-star',
-      time: '2016-5-5',
-      userComment: ['一', '一二', '一二三', '一二三四']
-    }, {
-      username: '186****1234',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      grade: 'two-star',
-      time: '2016-5-5',
-      userComment: ['一', '一二', '一二三', '一二三四']
-    }, {
-      username: '186****1234',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      grade: 'four-star',
-      time: '2016-5-5',
-      userComment: ['一二三四', '一', '一二三四', '一二', '一二三', '一二三四']
-    }, {
-      username: '186****1234',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      grade: 'three-star',
-      time: '2016-5-5',
-      userComment: ['一二三四', '一', '一二三四', '一二', '一二三', '一二三四']
-    }],
+    // menu1content: [{
+    //   icon: 'iconfont icon-canshi',
+    //   title: '催促上菜'
+    // }, {
+    //   icon: 'iconfont icon-lingdang-copy',
+    //   title: '呼叫服务员'
+    // }, {
+    //   icon: 'iconfont icon-mifen2',
+    //   title: '加米饭'
+    // }, {
+    //   icon: 'iconfont icon-jiubei',
+    //   title: '加酒水'
+    // }],
+    // comment: [{
+    //   username: '186****1234',
+    //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //   grade: 'five-star',
+    //   time: '2016-5-5',
+    //   userComment: ['一二三四', '一', '一二三四', '一二', '一二三', '一二三四']
+    // }, {
+    //   username: '186****1234',
+    //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //   grade: 'one-star',
+    //   time: '2016-5-5',
+    //   userComment: ['一', '一二', '一二三', '一二三四']
+    // }, {
+    //   username: '186****1234',
+    //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //   grade: 'two-star',
+    //   time: '2016-5-5',
+    //   userComment: ['一', '一二', '一二三', '一二三四']
+    // }, {
+    //   username: '186****1234',
+    //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //   grade: 'four-star',
+    //   time: '2016-5-5',
+    //   userComment: ['一二三四', '一', '一二三四', '一二', '一二三', '一二三四']
+    // }, {
+    //   username: '186****1234',
+    //   img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //   grade: 'three-star',
+    //   time: '2016-5-5',
+    //   userComment: ['一二三四', '一', '一二三四', '一二', '一二三', '一二三四']
+    // }],
     chooseGoods: {
       // 饭店id
-      restaurant_id: 'renmaid',
+      //restaurant_id: 'renmaid',
       // 选择的商品数量
       goods: {},
       // 总金额
@@ -310,10 +89,12 @@ Page({
         mask: true
       });
     }
+    console.log(this.data.chooseGoods)
+    var chooseGoods = this.data.chooseGoods;
     // todo 提交订单信息，然后去到确认页面
-    wx.navigateTo({
-      url: '../payorder/payorder?operation=checkOrder'
-    });
+    // wx.navigateTo({
+    //   url: '../payorder/payorder?chooseGoods=' + chooseGoods
+    // });
   },
 
   /**
@@ -321,7 +102,7 @@ Page({
    */
   calculateMoney: function calculateMoney() {
     var goods = this.data.chooseGoods.goods;
-    var menuList = this.data.restaurant.menuList;
+    var menuList = this.data.menuList;
     var money = 0;
     var singleMoney = 0;
     for (var goodsId in goods) {
@@ -417,12 +198,12 @@ Page({
   /**
    * 设置右侧滚动栏的位置
    */
-  setNeedDistance: function setNeedDistance() {
-    if (!this.data.restaurant.coupon.id) return;
-    this.setData({
-      needDistance: 142
-    });
-  },
+  // setNeedDistance: function setNeedDistance() {
+  //   if (!this.data.restaurant.coupon.id) return;
+  //   this.setData({
+  //     needDistance: 142
+  //   });
+  // },
 
   /**
    * 改变menu选择
@@ -449,22 +230,22 @@ Page({
   /**
    * 选择桌子取号
    */
-  getdesk: function getdesk(e) {
-    var index = e.currentTarget.dataset.desk;
-    var title = null;
-    if (index === '0') {
-      title = '小桌取号成功';
-    } else if (index === '1') {
-      title = '中桌取号成功';
-    } else {
-      title = '大桌取号成功';
-    }
-    wx.showToast({
-      title: title,
-      icon: 'success',
-      duration: 2000
-    });
-  },
+  // getdesk: function getdesk(e) {
+  //   var index = e.currentTarget.dataset.desk;
+  //   var title = null;
+  //   if (index === '0') {
+  //     title = '小桌取号成功';
+  //   } else if (index === '1') {
+  //     title = '中桌取号成功';
+  //   } else {
+  //     title = '大桌取号成功';
+  //   }
+  //   wx.showToast({
+  //     title: title,
+  //     icon: 'success',
+  //     duration: 2000
+  //   });
+  // },
 
   /**
    * 户呼叫服务
@@ -477,21 +258,21 @@ Page({
   /**
    * 拨打电话
    */
-  callPhone: function callPhone() {
-    wx.makePhoneCall({
-      phoneNumber: this.data.restaurant.tel
-    });
-  },
+  // callPhone: function callPhone() {
+  //   wx.makePhoneCall({
+  //     phoneNumber: this.data.restaurant.tel
+  //   });
+  // },
 
   /**
    * 修改标题栏文字
    */
-  setNavigatorText: function setNavigatorText() {
-    var that = this;
-    wx.setNavigationBarTitle({
-      title: that.data.restaurant.name
-    });
-  },
+  // setNavigatorText: function setNavigatorText() {
+  //   var that = this;
+  //   wx.setNavigationBarTitle({
+  //     title: that.data.restaurant.name
+  //   });
+  // },
 
   /**
    * 添加商品
@@ -527,6 +308,7 @@ Page({
     this.setData({
       chooseGoods: chooseGoods
     });
+    console.log(this.data.chooseGoods)
     wx.setStorageSync('chooseGoods', this.data.chooseGoods);
   },
 
@@ -563,10 +345,34 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function onLoad() {
-    // TODO: onLoad
-    // 改变标题栏文字
-    this.setNavigatorText();
+  onLoad: function onLoad(option) { 
+      var that =this;
+        
+      //获取分类菜品
+      wx.request({
+        url: app.globalData.appUrl + '/api/cater/getGoods/getCatGoods',
+        data: {
+          admin_id: app.globalData.admin_id,
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          if(res){
+            that.setData({
+              menuList:res.data
+            })
+
+            if (wx.getStorageSync('chooseGoods')) {
+              that.setData({
+                chooseGoods: wx.getStorageSync('chooseGoods')
+              })
+              console.log(that.data.chooseGoods)
+            }
+          }
+          console.log(that.data.menuList)
+        }
+      }) 
   },
 
 
@@ -575,7 +381,7 @@ Page({
    */
   onReady: function onReady() {
     // TODO: onReady
-    this.setNeedDistance();
+    //this.setNeedDistance();
   },
 
 

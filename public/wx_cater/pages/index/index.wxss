@@ -100,5 +100,5 @@
   padding-left: 46rpx;
   display:inline-block;
   width:27%;
-  border-bottom:6rpx solid #f00;
+  border-bottom:6rpx solid #4CBAFA;
 }  

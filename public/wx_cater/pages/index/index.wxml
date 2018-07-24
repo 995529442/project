@@ -27,11 +27,15 @@
           <image class="hot-shop-img" src="{{url}}{{ item.thumb_img }}"></image>
           <view>{{ item.good_name }}</view>
           <view>销量：{{ item.sell_count+item.virtual_sell_count }}</view>
-          <view>价格：<text style="color:red;">￥{{ item.now_price }}</text></view>
+          <view>价格：
+            <text style="color:red;">￥{{ item.now_price }}</text>
+          </view>
         </navigator>
       </block>
     </view>
-         <view wx:if="{{goods.length == 6}}" style="float:right;margin-right:60rpx;line-height: 73rpx;font-size: 30rpx;">更多>></view>
-         <!-- <view style="margin-top:70rpx;border-bottom:2rpx solid #eee;"></view> -->
+    <navigator open-type="switchTab" wx:if="{{goods.length == 6}}" url="../ordering/ordering">
+      <view style="float:right;margin-right:60rpx;line-height: 73rpx;font-size: 30rpx;">更多>></view>
+    </navigator>
+    <!-- <view style="margin-top:70rpx;border-bottom:2rpx solid #eee;"></view> -->
   </view>
 </view>

@@ -40,4 +40,114 @@ class getGoodsController extends Controller
             ->select(['id as goods_id','good_name','thumb_img','sell_count','virtual_sell_count','now_price'])->orderBy("id","desc")->take(6)->get();                  
       return json_encode($goods);
     }
+
+    /**
+     * 获取点餐菜品列表
+     * @param Request $request
+     * @return string
+     */
+    public function getCatGoods(Request $request) {
+      $admin_id = (int)$request -> input("admin_id",0);
+      
+      $data = array();
+
+      $cat_list = DB::table("cater_category")->select(['id as cat_id','cate_name'])->where(['admin_id'=>$admin_id,'isvalid'=>true])->orderBy("sort","desc")->orderBy("id","desc")->get();
+
+      //上新，推荐，热门菜品
+      $data[0]['title'] = "热门";
+      $data[0]['id'] = "list1";
+
+      $hot_goods = $this->getCateGoods($admin_id,'hot');
+      $data[0]['list'] = $hot_goods;
+
+      $data[1]['title'] = "推荐";
+      $data[1]['id'] = "list2";
+
+      $rec_goods = $this->getCateGoods($admin_id,'rec');
+      $data[1]['list'] = $rec_goods;
+
+      $data[2]['title'] = "上新";
+      $data[2]['id'] = "list3";
+
+      $new_goods = $this->getCateGoods($admin_id,'new');
+      $data[2]['list'] = $new_goods;
+
+      if($cat_list){
+         foreach($cat_list as $k=>$v){
+            $k = $k+3;
+            $data[$k]['title'] = $v->cate_name;
+            $data[$k]['id'] = "list".($k+1);
+
+            //获取该分类下的菜品
+            $good_list = DB::table("cater_goods")->select(['id as goods_id','good_name','sell_count','virtual_sell_count','thumb_img','original_price','now_price'])->where(['admin_id'=>$admin_id,'cate_id'=>$v->cat_id,'isout'=>2,'isvalid'=>true])->where("storenum",">",0)->get();
+
+            $list = array();
+
+            if($good_list){
+              foreach($good_list as $kk=>$vv){
+                $list[$kk]['img'] = "http://www.project.com".$vv->thumb_img;
+                $list[$kk]['name'] = $vv->good_name;
+                $list[$kk]['count'] = $vv->sell_count+$vv->virtual_sell_count;
+                $list[$kk]['original_price'] = $vv->original_price;
+                $list[$kk]['price'] = $vv->now_price;
+                $list[$kk]['id'] = $data[$k]['id']."_".$vv->goods_id;
+              }
+            }
+
+            $data[$k]['list'] = $list;
+
+            unset($list);
+         }
+
+        return json_encode($data);
+      }else{
+        return false;
+      }
+
+    }
+
+    /**
+     * 获取分类菜品
+     * @param Request $request
+     * @return string
+     */
+    public function getCateGoods($admin_id,$type) {  
+      $num = 0;   
+      $where = array(
+         "admin_id" => $admin_id,
+         "isout" => 2,
+         "isvalid" => true
+      );
+      if($type == "hot"){
+        $num = 1;
+        $where['is_hot'] = 1;
+      }elseif($type == "rec"){
+        $num = 2;
+        $where['is_recommend'] = 1;
+      }elseif($type == "new"){
+        $num = 3;
+        $where['is_new'] = 1;
+      }
+      //热卖
+      $goods =  DB::table("cater_goods")
+            ->where($where)
+            ->select(['id as goods_id','good_name','thumb_img','sell_count','virtual_sell_count','now_price','original_price'])->orderBy("id","desc")->get(); 
+      
+      $list = array();
+      if($goods){
+         foreach($goods as $k=>$v){
+            $temp = (object)array();
+            $temp->img = "http://www.project.com".$v->thumb_img;
+            $temp->name = $v->good_name;
+            $temp->count = $v->sell_count+$v->virtual_sell_count;
+            $temp->original_price = $v->original_price;
+            $temp->price = $v->now_price;
+            $temp->id = "list".$num."_".$v->goods_id;
+
+            array_push($list, $temp);
+         }       
+       }
+
+      return $list;
+    }
 }
