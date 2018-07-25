@@ -2,7 +2,7 @@
 
 // 获取全局应用程序实例对象
 // const app = getApp()
-
+var app = getApp();
 // 创建页面实例对象
 Page({
   /**
@@ -10,6 +10,10 @@ Page({
    */
   data: {
     title: 'useroperation',
+    userinfo_box: false,
+    user_id: 0,
+    address_page: 1,  //地址页数
+    address: [],
     operation: null,
     numberList: {
       img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -228,12 +232,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(params) {
+    var that = this;
     // 由跳转链接设置标题
     var operation = params.operation;
     // 设置operation
-    this.setData({
+    that.setData({
       operation: params.operation
     });
+
+    //用户id
+    if (wx.getStorageSync('user_id')) {
+      that.setData({
+        user_id: wx.getStorageSync('user_id')
+      })
+    }
+    if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
+      that.setData({
+        userinfo_box: true,
+      })
+      return;
+    }
+
     // 判断传入类型
     if (operation === 'number') {
       operation = '我的排单号';
@@ -245,6 +264,10 @@ Page({
       operation = '我的订单';
     } else if (operation === 'merchant') {
       operation = '商家入驻';
+    } else if (operation === 'address') {
+      operation = '我的地址';
+
+      that.get_my_address();
     } else {
       operation = '优惠券';
     }
@@ -253,45 +276,157 @@ Page({
       title: operation
     });
   },
-
-
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 查看更多
    */
-  onReady: function onReady() {
-    // TODO: onReady
+  scroll: function (e) {
+    var that = this;
+
+    var address_page = that.data.address_page + 1;
+
+    that.setData({
+      address_page: address_page
+    });
+    that.get_my_address();
+  },
+  /**
+   * 获取我的地址
+   */
+  get_my_address: function () {
+    var that = this;
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getUserInfo/getAddress',
+      data: {
+        admin_id: app.globalData.admin_id,
+        user_id: that.data.user_id,
+        page: that.data.address_page
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.errcode > 0) {
+          var address = that.data.address;
+          address = address.concat(res.data.data)
+          that.setData({
+            address: address
+          });
+        }
+      }
+    })
+  },
+  /**
+ * 新增地址
+ */
+  add_address: function () {
+     wx.navigateTo({
+       url: '../address/index',
+     })
+  },
+  /**
+   * 新增我的地址(微信)
+   */
+  add_wx_address: function () {
+    var that = this;
+
+    wx.authorize({
+      scope: 'scope.address',
+      success(res) {
+        wx.chooseAddress({
+          success: function (res) {
+            wx.request({
+              url: app.globalData.appUrl + '/api/cater/getUserInfo/addAddress',
+              data: {
+                admin_id: app.globalData.admin_id,
+                user_id: that.data.user_id,
+                province: res.provinceName,
+                city: res.cityName,
+                country: res.countyName,
+                address: res.detailInfo,
+                user_name: res.userName,
+                phone: res.telNumber
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                if (res.data.errcode == 1) { //成功
+                  //重置数据
+                  that.setData({
+                    address_page: 1,
+                    address: []
+                  })
+                  that.get_my_address();
+                }
+              }
+            })
+          },
+          fail: function (err) {
+            wx.showToast({
+              title: "请尽快填写收货地址",
+              icon: "none"
+            })
+          }
+        })
+      },
+      fail(res) {
+        //用户拒绝授权后执行
+        wx.openSetting({})
+      }
+    })
+  },
+  /**
+ * 删除我的地址
+ */
+  del_address: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+
+    if (id > 0) {
+      wx.request({
+        url: app.globalData.appUrl + '/api/cater/getUserInfo/delAddress',
+        data: {
+          address_id: id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          if (res.data.errcode > 0) {
+            wx.showToast({
+              title: '删除成功',
+              icon: 'success',
+              duration: 2000,
+              success: function () {
+                //重载数据
+                that.setData({
+                  address_page: 1,
+                  address: []
+                })
+                that.get_my_address();
+              }
+            })
+          }
+        }
+      })
+    }
   },
 
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function onShow() {
-    // TODO: onShow
+  // 授权提示
+  UserInfo_click: function (e) {
+    var that = this;
+    if (e.currentTarget.dataset.name == '不允许授权') {
+      wx.showToast({
+        title: '授权失败',
+        icon: 'loading',
+        duration: 1200,
+        success: () => {
+          that.setData({ userinfo_box: false });
+        },
+      })
+      return;
+    }
+    app.getUserInfo(e, that.onLoad, this);
   },
-
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function onHide() {
-    // TODO: onHide
-  },
-
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function onUnload() {
-    // TODO: onUnload
-  },
-
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function onPullDownRefresh() {
-    // TODO: onPullDownRefresh
-  }
 });
-//# sourceMappingURL=useroperation.js.map

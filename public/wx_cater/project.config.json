@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -83,6 +83,12 @@
 					"id": 8,
 					"name": "可取号商家",
 					"pathName": "pages/showShop/showShop",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "编辑地址",
+					"pathName": "pages/address/index",
 					"query": ""
 				}
 			]

@@ -34,6 +34,7 @@ App({
                 wx.setStorageSync('openId', res.data.openId);
                 wx.setStorageSync('avatarurl', res.data.avatarUrl);
                 wx.setStorageSync('nickname', res.data.nickName);
+                wx.setStorageSync('user_id', res.data.user_id);
               }
               wx.showToast({
                 title: '登录中...',

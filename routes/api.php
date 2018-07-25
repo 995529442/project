@@ -19,7 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'cater'], function () {
     Route::any('getUserInfo/getUsers', 'cater\Api\getUserInfoController@getUsers'); //获取用户信息
-    
+    Route::any('getUserInfo/getAddress', 'cater\Api\getUserInfoController@getAddress'); //获取用户地址
+    Route::any('getUserInfo/addAddress', 'cater\Api\getUserInfoController@addAddress'); //新增用户地址
+    Route::any('getUserInfo/delAddress', 'cater\Api\getUserInfoController@delAddress'); //删除用户地址
+
     Route::any('getGoods/getHotRecGoods', 'cater\Api\getGoodsController@getHotRecGoods'); //获取首页菜品
     Route::any('getGoods/getCatGoods', 'cater\Api\getGoodsController@getCatGoods'); //分类和菜品
 

@@ -10,7 +10,8 @@
     "pages/user/user",
     "pages/useroperation/useroperation",
     "pages/search/search",
-    "pages/showShop/showShop"
+    "pages/showShop/showShop",
+    "pages/address/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#67C6F0",

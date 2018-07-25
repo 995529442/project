@@ -1,5 +1,7 @@
 <!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
-<view class="user-opertaion">
+<import src="../template/userInfo.wxml" />
+<template is="userinfo" data="{{userinfo_box:userinfo_box}}" />
+<view class="user-opertaion" style="height:100vh;background-color:#FFFFFF;">
   <!--我的排单-->
   <view wx:if="{{ operation == 'number' }}" class="number">
     <view class="number-top">
@@ -43,28 +45,28 @@
   <view wx:if="{{ operation == 'coupon' }}" class="coupon">
     <!--顶部tab-->
     <view class="coupon-top">
-        <view bindtap="chooseCouponTab" data-tabid="{{ index }}" class="coupon-top-item {{ currentCouponTab == index ? 'active' : '' }}" wx:for="{{ couponNumber }}">
-          {{ item.title }}({{ item.count }})
-        </view>
+      <view bindtap="chooseCouponTab" data-tabid="{{ index }}" class="coupon-top-item {{ currentCouponTab == index ? 'active' : '' }}" wx:for="{{ couponNumber }}">
+        {{ item.title }}({{ item.count }})
+      </view>
     </view>
     <view class="coupon-no-use" hidden="{{ currentCouponTab != 0 }}">
       <block wx:for="{{ couponNoUseList }}">
         <navigator class="coupon-list" url="../detail/detail?kind={{ item.id }}">
-            <view class="coupon-list-top">
-              <view class="c-l-t-left">
-                <text class="c-l-t-left-one" hidden="{{ !item.delMoney  }}"><text>￥</text>{{ item.delMoney }}</text>
-                <text class="c-l-t-left-one" hidden="{{ !item.discount  }}">{{ item.discount }} <text>折</text></text>
-              </view>
-              <view class="c-l-t-center">{{ item.useCondition }}</view>
-              <view class="c-l-t-right iconfont icon-youhuiquan">{{ item.name }}</view>
+          <view class="coupon-list-top">
+            <view class="c-l-t-left">
+              <text class="c-l-t-left-one" hidden="{{ !item.delMoney  }}"><text>￥</text>{{ item.delMoney }}</text>
+              <text class="c-l-t-left-one" hidden="{{ !item.discount  }}">{{ item.discount }} <text>折</text></text>
             </view>
-            <!--圆圈-->
-            <view class="circle">
-              <view class="circle-item" wx:for="123456789qwertyuiopasdfghjklzxcvbnmqweqweq"></view>
-            </view>
-            <view class="time">
-              有效期　　{{ item.starTime }}-{{ item.endTime }}
-            </view>
+            <view class="c-l-t-center">{{ item.useCondition }}</view>
+            <view class="c-l-t-right iconfont icon-youhuiquan">{{ item.name }}</view>
+          </view>
+          <!--圆圈-->
+          <view class="circle">
+            <view class="circle-item" wx:for="123456789qwertyuiopasdfghjklzxcvbnmqweqweq"></view>
+          </view>
+          <view class="time">
+            有效期　　{{ item.starTime }}-{{ item.endTime }}
+          </view>
         </navigator>
       </block>
     </view>
@@ -192,7 +194,7 @@
     </view>
     <view class="merchant-introduce">先简单介绍你的店铺吧</view>
     <view class="merchant-input">
-      <input bindinput="shopNameInput" placeholder="请输入您的店铺名称"/>
+      <input bindinput="shopNameInput" placeholder="请输入您的店铺名称" />
       <!--<view bindtap="chooseShopKind" class="triangle">{{ shopKind }}</view>-->
       <picker class="triangle" bindchange="chooseShopKind" value="{{ index }}" range="{{ shopArray }}">
         <view class="picker">
@@ -201,5 +203,24 @@
       </picker>
     </view>
     <button bindtap="startShop" class="start-shop">去开店</button>
+  </view>
+  <!--我的地址-->
+  <view wx:if="{{ operation == 'address' }}" class="number" style="height:85vh;">
+        <scroll-view scroll-y style="height: 88vh;" bindscrolltolower="scroll">
+    <block wx:for="{{address}}" wx:for-item="item" wx:for-index="idx">
+      <view class="number-top">
+        <view class="n-t-center">
+          <text>{{item.user_name}} {{item.phone}}</text>
+          <text>{{item.province}}{{item.city}}{{item.country}}{{item.address}}</text>
+          <view style="position:absolute;right:40rpx;">
+            <!-- <text bindtap="edit_address" data-id="{{item.id}}" class="iconfont icon-canshi before" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;"></text> -->
+            <text bindtap="del_address" data-id="{{item.id}}" class="iconfont icon-chuliyuyue:before" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;"></text>
+          </view>
+        </view>
+      </view>
+    </block>
+    </scroll-view>
+    <button type="primary" bindtap="add_address" style="position:absolute;bottom:20rpx;width:45%;">添加地址</button>
+    <button type="warn" bindtap="add_wx_address" style="position:absolute;left:50%;bottom:20rpx;width:45%;">获取微信地址</button>
   </view>
 </view>

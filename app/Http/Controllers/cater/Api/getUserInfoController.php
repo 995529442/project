@@ -74,11 +74,13 @@ class getUserInfoController extends Controller
                    $insert_data['admin_id'] = $admin_id;
                    $insert_data['isvalid'] = true;
 
-                   DB::table("cater_users")->insert($insert_data);
+                   $user_id = DB::table("cater_users")->insertGetId($insert_data);
                 }else{  //更新用户数据
-                   DB::table("cater_users")->whereId($user->id)->update($insert_data);
+                   $user_id = $user->id;
+                   DB::table("cater_users")->whereId($user->id)->update($insert_data);                   
                 }
-
+                
+                $user_info['user_id'] = $user_id;
                 return $user_info;
             }
 
@@ -90,6 +92,114 @@ class getUserInfoController extends Controller
 
     }
 
+    /**
+     * 获取用户地址
+     * @param Request $request
+     * @return string
+     */
+    public function getAddress(Request $request) {
+       $admin_id = (int)$request -> input("admin_id",0);
+       $user_id = (int)$request -> input("user_id",0);
+       $page = (int)$request -> input("page",0);
+
+       $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败",
+          "data" => []
+       );  
+
+       if($admin_id && $user_id){
+           $address_list = DB::table("cater_user_shipping")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true])
+                    ->orderByDesc("is_default")
+                    ->orderByDesc("id")
+                    ->offset(($page - 1) * 12)->limit(12)->get();
+
+            $return['errcode'] = 1;
+            $return['errmsg'] = "成功";
+            $return['data'] = $address_list;
+       }else{
+          $return['errmsg'] = "系统错误";
+       }
+
+       return json_encode($return);
+    }
+
+    /**
+     * 新增用户地址
+     * @param Request $request
+     * @return string
+     */
+    public function addAddress(Request $request) {
+       $admin_id = (int)$request -> input("admin_id",0);
+       $user_id = (int)$request -> input("user_id",0);
+       $user_name = $request -> input("user_name","");
+       $phone = $request -> input("phone","");
+       $province = $request -> input("province","");
+       $city = $request -> input("city","");
+       $country = $request -> input("country","");
+       $address = $request -> input("address","");
+
+       $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败"
+       );       
+       if($admin_id && $user_id){
+          $data = array(
+            "admin_id" => $admin_id,
+            "user_id" => $user_id,
+            "province" => $province,
+            "city" => $city,
+            "country" => $country,
+            "address" => $address,
+            "user_name" => $user_name,
+            "phone" =>$phone,
+            "isvalid" => true
+          );
+
+          $result = DB::table("cater_user_shipping")->insert($data);
+
+          if($result){
+            $return['errcode'] = 1;
+            $return['errmsg'] = "成功";
+          }else{
+            $return['errmsg'] = "失败";
+          }
+
+       }else{
+          $return['errmsg'] = "系统错误";
+       }
+
+       return json_encode($return);
+    }  
+
+    /**
+     * 删除用户地址
+     * @param Request $request
+     * @return string
+     */
+    public function delAddress(Request $request) {
+       $address_id = (int)$request -> input("address_id",0);
+
+       $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败"
+       );     
+
+       if($address_id){
+          $result = DB::table("cater_user_shipping")->whereId($address_id)->update(['isvalid'=>false]);
+
+          if($result){
+            $return['errcode'] = 1;
+            $return['errmsg'] = "成功";
+          }else{
+            $return['errmsg'] = "失败";
+          }
+       }else{
+          $return['errmsg'] = "系统错误";
+       }
+
+       return json_encode($return);
+    }     
     /**
      * curl
      */
