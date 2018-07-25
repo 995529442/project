@@ -38,7 +38,11 @@ page {
   color: #666;
   padding-top: 10rpx;
 }
-
+.number .number-top .n-t-center text:nth-child(3) {
+  font-size: 20rpx;
+  color: #666;
+  padding-top: 10rpx;
+}
 .number .number-bottom {
   display: flex;
   line-height: 76rpx;

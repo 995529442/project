@@ -363,10 +363,7 @@ Page({
             })
           },
           fail: function (err) {
-            wx.showToast({
-              title: "请尽快填写收货地址",
-              icon: "none"
-            })
+
           }
         })
       },
