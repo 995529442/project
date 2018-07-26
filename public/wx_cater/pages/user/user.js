@@ -32,10 +32,6 @@ Page({
         icon: 'iconfont icon-lingdang:before',
       title: '我的地址',
       id: 'address'
-    }, {
-      icon: 'iconfont icon-iconfontruzhu-copy',
-      title: '商家入驻',
-      id: 'merchant'
     }]
   },
 

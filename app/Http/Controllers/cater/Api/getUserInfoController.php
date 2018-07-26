@@ -144,7 +144,8 @@ class getUserInfoController extends Controller
  
        $return = array(
           "errcode" => -1,
-          "errmsg" => "失败"
+          "errmsg" => "失败",
+          "data" => ""
        );       
        if($admin_id && $user_id){
           $data = array(
@@ -171,7 +172,7 @@ class getUserInfoController extends Controller
                $data['user_id'] = $user_id;
                $data['isvalid'] = true;
 
-               $result = DB::table("cater_user_shipping")->insert($data);
+               $result = DB::table("cater_user_shipping")->insertGetId($data);
             }
 
              DB::commit();
@@ -183,6 +184,7 @@ class getUserInfoController extends Controller
           if($result){
             $return['errcode'] = 1;
             $return['errmsg'] = "成功";
+            $return['data'] = $result;
           }else{
             $return['errmsg'] = "失败";
           }

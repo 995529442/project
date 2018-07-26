@@ -15,7 +15,7 @@ Page({
     cater_type: app.globalData.cater_type,
     shop_info: {},
     user_id: 0,
-    default_address:{}
+    default_address: {}
   },
   /**
    * 支付货款
@@ -39,9 +39,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(option) {
+    console.log(option)
     var that = this;
-    var goods_id_arr = option.goods_id_arr;
+    var goods_id_arr = typeof (option.goods_id_arr) == 'undefined' ? '' : option.goods_id_arr;
     var cater_type = that.data.cater_type
+
+    if (goods_id_arr != "") {
+      wx.setStorageSync('goods_id_arr', goods_id_arr)
+      that.setData({
+        goods_id_arr: goods_id_arr
+      })
+    } else if (wx.getStorageSync('goods_id_arr')) {
+      goods_id_arr = wx.getStorageSync('goods_id_arr');
+      that.setData({
+        goods_id_arr: goods_id_arr
+      })
+    }
 
     if (wx.getStorageSync('user_id')) {
       that.setData({
@@ -80,6 +93,41 @@ Page({
       that.get_default_address();
     }
 
+  },
+
+  /**
+ * 生命周期函数--监听页面加载
+ */
+  onShow: function onShow() {
+    var that = this;
+    var address_id = wx.getStorageSync('address_id');
+
+    if (address_id > 0) { //获取选取的地址
+      wx.request({
+        url: app.globalData.appUrl + '/api/cater/getUserInfo/getOneAddress',
+        data: {
+          address_id: address_id,
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.data) {
+            that.setData({
+              default_address: res.data
+            })
+          }
+        }
+      })
+    }
+  },
+  /**
+   * 卸载页面
+   * 清除缓存
+   */
+  onUnload: function onUnload() {
+    wx.removeStorageSync('address_id')
   },
   /**
  * 获取店铺信息
@@ -120,10 +168,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        if (res.data.errcode > 0){
-           that.setData({
-             default_address:res.data.data
-           })
+        if (res.data.errcode > 0) {
+          that.setData({
+            default_address: res.data.data
+          })
         }
       }
     })

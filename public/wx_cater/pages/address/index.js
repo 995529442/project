@@ -26,7 +26,8 @@ Page({
     allHidden: false,
     hiddenMain: false,
     user_shipping: {},
-    is_checked: 0  //是否默认
+    is_checked: 0,  //是否默认
+    pay_type: 0     //是否从订单列表过来
   },
   /**
    * 信息录入
@@ -123,7 +124,10 @@ Page({
   onLoad: function onLoad(e) {
     // TODO: onLoad
     var that = this;
-
+    var pay_type = typeof (e.pay_type) == 'undefined' ? '' : e.pay_type;
+    that.setData({
+      pay_type: pay_type
+    })
     //用户昵称
     if (wx.getStorageSync('user_id')) {
       that.setData({
@@ -293,15 +297,25 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         if (res.data.errcode > 0) {
           wx.showToast({
             title: '成功',
             icon: 'success',
             duration: 5000,
             success: function () {
-              wx.redirectTo({
-                url: '../useroperation/useroperation?operation=address',
-              })
+              console.log(that.data.pay_type)
+              if (that.data.pay_type == 1){
+                wx.setStorageSync('address_id', res.data.data);
+
+                wx.navigateBack({
+                  delta: 2
+                })
+              }else{
+                wx.redirectTo({
+                  url: '../useroperation/useroperation?operation=address',
+                })
+              }
             }
           })
         }else{

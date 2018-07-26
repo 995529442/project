@@ -15,6 +15,7 @@ Page({
     address_page: 1,  //地址页数
     address: [],
     operation: null,
+    pay_type:0,
     numberList: {
       img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
       name: '人马大饭堂',
@@ -239,7 +240,8 @@ Page({
     var pay_type = typeof (params.pay_type) == 'undefined' ? '' : params.pay_type
     // 设置operation
     that.setData({
-      operation: params.operation
+      operation: params.operation,
+      pay_type: pay_type
     });
 
     //用户id
@@ -327,7 +329,7 @@ Page({
     if (address_id != "") {
       var url = '../address/index?address_id=' + address_id;
     } else {
-      var url = '../address/index';
+      var url = '../address/index?pay_type=1';
     }
     wx.navigateTo({
       url: url,
@@ -427,7 +429,21 @@ Page({
       })
     }
   },
+  /**
+   * 选取地址
+   */
+  select_address:function(e){
+    var that =this;
+    var address_id = e.currentTarget.dataset.address_id;
 
+    if(that.data.pay_type == 1){ //订单过来
+      wx.setStorageSync('address_id', address_id);
+
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+  },
   // 授权提示
   UserInfo_click: function (e) {
     var that = this;
