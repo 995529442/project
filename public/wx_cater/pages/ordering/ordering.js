@@ -82,19 +82,58 @@ Page({
    * 确认订单
    */
   goCheckOrder: function goCheckOrder() {
-    if (this.data.chooseGoods.allCount <= 0) {
+    var that=this;
+    if (that.data.chooseGoods.allCount <= 0) {
       return wx.showToast({
         title: '您还没有点餐',
         icon: 'success',
         mask: true
       });
     }
-    console.log(this.data.chooseGoods)
-    var chooseGoods = this.data.chooseGoods;
-    // todo 提交订单信息，然后去到确认页面
-    // wx.navigateTo({
-    //   url: '../payorder/payorder?chooseGoods=' + chooseGoods
-    // });
+
+    var goods = that.data.chooseGoods.goods;
+    var goods_id_arr = new Array();
+
+    //获取购物车数据
+    for(var key in goods){
+      if(goods[key] > 0){
+        var good_obj = new Object();
+        good_obj.goods_id = key.split("_")[1];     
+        good_obj.number = goods[key];
+        
+        goods_id_arr.push(good_obj);
+
+      }
+    }
+
+    //提交购物车
+    console.log(JSON.stringify(goods_id_arr))
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/order/checkSubmit',
+      data: {
+        admin_id: app.globalData.admin_id,
+        goods_id_arr: JSON.stringify(goods_id_arr),
+        cater_type: app.globalData.cater_type
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.errcode > 0){
+            wx.navigateTo({
+              url: '../payorder/payorder?goods_id_arr=' + JSON.stringify(goods_id_arr)
+            });
+        }else{
+          wx.showToast({
+            title: res.data.errmsg,
+            icon: 'none',
+            duration: 2000
+          })
+          return;          
+        }
+      }
+    })
   },
 
   /**
@@ -373,47 +412,5 @@ Page({
           console.log(that.data.menuList)
         }
       }) 
-  },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function onReady() {
-    // TODO: onReady
-    //this.setNeedDistance();
-  },
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function onShow() {
-    // TODO: onShow
-  },
-
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function onHide() {
-    // TODO: onHide
-  },
-
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function onUnload() {
-    // TODO: onUnload
-  },
-
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function onPullDownRefresh() {
-    // TODO: onPullDownRefresh
   }
 });
-//# sourceMappingURL=ordering.js.map

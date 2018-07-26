@@ -356,6 +356,7 @@ class ComposerStaticInit091eebd7798a06c0945ed88dddae8c43
         'App\\Http\\Controllers\\Cater\\Api\\getGoodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/cater/Api/getGoodsController.php',
         'App\\Http\\Controllers\\Cater\\Api\\getShopController' => __DIR__ . '/../..' . '/app/Http/Controllers/cater/Api/getShopController.php',
         'App\\Http\\Controllers\\Cater\\Api\\getUserInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/cater/Api/getUserInfoController.php',
+        'App\\Http\\Controllers\\Cater\\Api\\orderController' => __DIR__ . '/../..' . '/app/Http/Controllers/cater/Api/orderController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndexController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',

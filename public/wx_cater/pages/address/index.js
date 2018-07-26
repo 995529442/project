@@ -10,7 +10,7 @@ Page({
   data: {
     // 地区选择相关
     userinfo_box: false,
-    user_id:0,
+    user_id: 0,
     provinces: [],
     province: '',
     citys: [],
@@ -25,6 +25,8 @@ Page({
     showMain: true,
     allHidden: false,
     hiddenMain: false,
+    user_shipping: {},
+    is_checked: 0  //是否默认
   },
   /**
    * 信息录入
@@ -156,15 +158,57 @@ Page({
       'citys': citys,
       'countys': countys
     });
-    // console.log('初始化完成')
-    console.log(e);
+
+    var address_id = typeof (e.address_id) == 'undefined' ? '' : e.address_id;
+
+    if (address_id != '') {
+      wx.request({
+        url: app.globalData.appUrl + '/api/cater/getUserInfo/getOneAddress',
+        data: {
+          address_id: address_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          if (res.data) {
+            that.setData({
+              user_shipping: res.data,
+              province: res.data.province,
+              city: res.data.city,
+              county: res.data.country,
+              shopAddress: res.data.address,
+              shopAddress: res.data.address
+            })
+          }
+        }
+      })
+    }
+  },
+  /**
+   * 默认地址
+   */
+  default_address: function (e) {
+    var that = this;
+    var is_checked = e.detail.value
+
+    if (is_checked) {
+      is_checked = 1;
+    } else {
+      is_checked = 0;
+    }
+    that.setData({
+      is_checked: is_checked
+    })
   },
   /**
    * 提交表单
    */
-  formSubmit:function(e){
-    var that=this;
+  formSubmit: function (e) {
+    var that = this;
 
+    var address_id = e.detail.value.address_id;
     var user_name = e.detail.value.user_name;
     var phone = e.detail.value.phone;
     var addressDetail = e.detail.value.addressDetail;
@@ -173,7 +217,7 @@ Page({
     var county = that.data.county;
     var shopAddress = that.data.shopAddress;
 
-    if (user_name == "" || user_name == null){
+    if (user_name == "" || user_name == null) {
       wx.showToast({
         title: '联系人不能为空',
         icon: 'none',
@@ -189,7 +233,7 @@ Page({
       })
       return;
     }
-    if (!(/(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/.test(phone))) {
+    if (!(/(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/.test(phone)) && !(/^0\d{2,3}-?\d{7,8}$/.test(phone))) {
       wx.showToast({
         title: '请输入正确的手机号码',
         icon: 'none',
@@ -235,28 +279,39 @@ Page({
       data: {
         admin_id: app.globalData.admin_id,
         user_id: that.data.user_id,
+        address_id: address_id,
         province: province,
         city: city,
         country: county,
-        address: shopAddress + addressDetail,
+        address: shopAddress,
+        house_number: addressDetail,
         user_name: user_name,
-        phone: phone
+        phone: phone,
+        is_default: that.data.is_checked
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-        if (res.data.errcode>0){
+        if (res.data.errcode > 0) {
           wx.showToast({
-            title: '添加成功',
+            title: '成功',
             icon: 'success',
             duration: 5000,
-            success:function(){
+            success: function () {
               wx.redirectTo({
                 url: '../useroperation/useroperation?operation=address',
               })
             }
           })
+        }else{
+          wx.showToast({
+            title: '您还没修改任何数据',
+            icon: 'none',
+            duration: 3000,
+            success: function () {
+            }
+          })          
         }
       }
     })

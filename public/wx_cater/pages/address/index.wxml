@@ -3,13 +3,14 @@
 <view hidden="{{ allHidden }}">
   <view hidden="{{ hiddenMain }}" wx:if="{{ showMain }}" class="businessCooperation">
     <form bindsubmit="formSubmit">
+      <input value="{{user_shipping.id}}" name="address_id" hidden='true' />
       <view class="lxr">
         <text>联系人</text>
-        <input value="" name="user_name" placeholder="请填写收货人的姓名" />
+        <input value="{{user_shipping.user_name}}" name="user_name" placeholder="请填写收货人的姓名" />
       </view>
       <view class="lxr">
         <text>联系电话</text>
-        <input value="" name="phone" placeholder="请填写收货手机号码" type="number" />
+        <input value="{{user_shipping.phone}}" name="phone" placeholder="请填写收货手机号码" type="number" />
       </view>
       <view class="lxr">
         <text>省市区</text>
@@ -26,7 +27,12 @@
       </view>
       <view class="lxr">
         <text>门牌号</text>
-        <input value="" name="addressDetail" placeholder="例：16号楼5层301室" />
+        <input value="{{user_shipping.house_number}}" name="addressDetail" placeholder="例：16号楼5层301室" />
+      </view>
+      <view class="lxr">
+        <text>是否默认</text>
+        <switch bindchange="default_address" wx:if="{{user_shipping.is_default}}" checked style="margin-left:430rpx;width"/>
+        <switch bindchange="default_address" wx:else style="margin-left:430rpx;width"/>
       </view>
       <button formType="submit" class="start-shop">保存</button>
     </form>

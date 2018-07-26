@@ -14,8 +14,8 @@ use DB;
 class getGoodsController extends Controller
 {
     /**
-     * 获取推荐,热卖,上新菜品
-     * @param Request $request
+     * 
+     * @param Request $request获取推荐,热卖,上新菜品
      * @return string
      */
     public function getHotRecGoods(Request $request) {
@@ -149,5 +149,34 @@ class getGoodsController extends Controller
        }
 
       return $list;
+    }
+
+    /**
+     * 获取结算菜品详情
+     * @param Request $request
+     * @return string
+     */
+    public function getSubmitGoods(Request $request) {  
+        $goods_id_arr = $request -> input("goods_id_arr","");
+
+        $goods_id_arr = json_decode($goods_id_arr,true);
+        
+        $total_money = 0;
+        if($goods_id_arr){
+            foreach($goods_id_arr as $k=>$v){
+              $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
+
+              $goods_id_arr[$k]['good_name'] = $goods_info->good_name;
+
+              $money = $goods_info->now_price * $v['number'];
+
+              $goods_id_arr[$k]['money'] = $money;
+
+              $total_money += $money;
+          }
+        }
+        
+        $total_money = round($total_money,2);
+        return json_encode(['goods_id_arr'=>$goods_id_arr,'total_money'=>$total_money]);
     }
 }

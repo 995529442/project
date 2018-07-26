@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\Cater\\Api\\getGoodsController' => $baseDir . '/app/Http/Controllers/cater/Api/getGoodsController.php',
     'App\\Http\\Controllers\\Cater\\Api\\getShopController' => $baseDir . '/app/Http/Controllers/cater/Api/getShopController.php',
     'App\\Http\\Controllers\\Cater\\Api\\getUserInfoController' => $baseDir . '/app/Http/Controllers/cater/Api/getUserInfoController.php',
+    'App\\Http\\Controllers\\Cater\\Api\\orderController' => $baseDir . '/app/Http/Controllers/cater/Api/orderController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\IndexController' => $baseDir . '/app/Http/Controllers/IndexController.php',
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',

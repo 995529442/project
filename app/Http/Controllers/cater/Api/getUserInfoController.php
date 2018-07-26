@@ -132,31 +132,53 @@ class getUserInfoController extends Controller
     public function addAddress(Request $request) {
        $admin_id = (int)$request -> input("admin_id",0);
        $user_id = (int)$request -> input("user_id",0);
+       $address_id = (int)$request -> input("address_id",0);
        $user_name = $request -> input("user_name","");
        $phone = $request -> input("phone","");
        $province = $request -> input("province","");
        $city = $request -> input("city","");
        $country = $request -> input("country","");
        $address = $request -> input("address","");
-
+       $house_number = $request -> input("house_number","");
+       $is_default = $request -> input("is_default",0);
+ 
        $return = array(
           "errcode" => -1,
           "errmsg" => "失败"
        );       
        if($admin_id && $user_id){
           $data = array(
-            "admin_id" => $admin_id,
-            "user_id" => $user_id,
             "province" => $province,
             "city" => $city,
             "country" => $country,
             "address" => $address,
+            "house_number" => $house_number,
             "user_name" => $user_name,
-            "phone" =>$phone,
-            "isvalid" => true
+            "phone" => $phone,
+            "is_default"=> $is_default
           );
 
-          $result = DB::table("cater_user_shipping")->insert($data);
+          try {
+             DB::beginTransaction();
+
+            if($is_default){ //设置默认地址先把其他重置
+               DB::table("cater_user_shipping")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true])->update(['is_default'=>0]);
+            }
+            if($address_id > 0){ //修改
+               $result = DB::table("cater_user_shipping")->whereId($address_id)->update($data);
+            }else{  //新增
+               $data['admin_id'] = $admin_id;
+               $data['user_id'] = $user_id;
+               $data['isvalid'] = true;
+
+               $result = DB::table("cater_user_shipping")->insert($data);
+            }
+
+             DB::commit();
+          }catch (\Exception $exception) {
+             DB::rollback();//事务回滚
+             throw $exception;
+          }
 
           if($result){
             $return['errcode'] = 1;
@@ -199,7 +221,45 @@ class getUserInfoController extends Controller
        }
 
        return json_encode($return);
-    }     
+    } 
+    /**
+     * 获取用户单条地址
+     * @param Request $request
+     * @return string
+     */
+    public function getOneAddress(Request $request) {
+       $address_id = (int)$request -> input("address_id",0);   
+
+       $shipping = DB::table("cater_user_shipping")->whereId($address_id)->first();
+
+       return json_encode($shipping);
+    } 
+
+    /**
+     * 获取用户默认地址
+     * @param Request $request
+     * @return string
+     */
+    public function getDefaultAddress(Request $request) {
+       $admin_id = (int)$request -> input("admin_id",0);   
+       $user_id = (int)$request -> input("user_id",0);
+
+       $return = array(
+          "errcode" => 1,
+          "errmsg" => "失败",
+          "data" =>[]
+       );
+       $shipping = DB::table("cater_user_shipping")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true,'is_default'=>1])->first();
+
+       if($shipping){
+          $return['errcode'] = 1;
+          $return['errmsg'] = '成功';
+          $return['data'] = $shipping;
+       }
+
+       return $return;
+
+    }       
     /**
      * curl
      */

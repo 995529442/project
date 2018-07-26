@@ -214,8 +214,8 @@
           <text>{{item.province}}{{item.city}}{{item.country}}</text>
           <text>{{item.address}}</text>
           <view style="position:absolute;right:40rpx;">
-            <!-- <text bindtap="edit_address" data-id="{{item.id}}" class="iconfont icon-canshi before" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;"></text> -->
-            <text bindtap="del_address" data-id="{{item.id}}" class="iconfont icon-chuliyuyue:before" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;"></text>
+             <text bindtap="add_address" data-id="{{item.id}}" class="iconfont icon-canshi before" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;padding-left:10rpx;"></text> 
+            <text bindtap="del_address" data-id="{{item.id}}" class="iconfont icon-chuliyuyue:before" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;padding-left:10rpx;"></text>
           </view>
         </view>
       </view>

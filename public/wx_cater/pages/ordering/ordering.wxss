@@ -219,7 +219,7 @@
   bottom: 0;
   width: 100%;
   z-index: 9999;
-  background-color: #fff;
+  background-color: #F5F5F5;
 }
 .shop-car-wrap .shop-car-content {
   box-sizing: border-box;

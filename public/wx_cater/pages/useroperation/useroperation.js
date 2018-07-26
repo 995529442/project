@@ -232,9 +232,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(params) {
+    console.log(params)
     var that = this;
     // 由跳转链接设置标题
     var operation = params.operation;
+    var pay_type = typeof (params.pay_type) == 'undefined' ? '' : params.pay_type
     // 设置operation
     that.setData({
       operation: params.operation
@@ -319,11 +321,19 @@ Page({
   /**
  * 新增地址
  */
-  add_address: function () {
-     wx.navigateTo({
-       url: '../address/index',
-     })
+  add_address: function (e) {
+    var address_id = typeof (e.currentTarget.dataset.id) == 'undefined' ? '' : e.currentTarget.dataset.id;
+
+    if (address_id != "") {
+      var url = '../address/index?address_id=' + address_id;
+    } else {
+      var url = '../address/index';
+    }
+    wx.navigateTo({
+      url: url,
+    })
   },
+
   /**
    * 新增我的地址(微信)
    */
@@ -381,27 +391,35 @@ Page({
     var id = e.currentTarget.dataset.id;
 
     if (id > 0) {
-      wx.request({
-        url: app.globalData.appUrl + '/api/cater/getUserInfo/delAddress',
-        data: {
-          address_id: id
-        },
-        header: {
-          'content-type': 'application/json'
-        },
+      wx.showModal({
+        title: '提示',
+        content: '确定要删除此地址吗',
         success: function (res) {
-          if (res.data.errcode > 0) {
-            wx.showToast({
-              title: '删除成功',
-              icon: 'success',
-              duration: 2000,
-              success: function () {
-                //重载数据
-                that.setData({
-                  address_page: 1,
-                  address: []
-                })
-                that.get_my_address();
+          if (res.confirm) {
+            wx.request({
+              url: app.globalData.appUrl + '/api/cater/getUserInfo/delAddress',
+              data: {
+                address_id: id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                if (res.data.errcode > 0) {
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000,
+                    success: function () {
+                      //重载数据
+                      that.setData({
+                        address_page: 1,
+                        address: []
+                      })
+                      that.get_my_address();
+                    }
+                  })
+                }
               }
             })
           }

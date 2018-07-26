@@ -2,7 +2,8 @@
 App({
   globalData: {
     appUrl: "http://www.project.com",  //根路径
-    admin_id:1
+    admin_id:1,
+    cater_type :2  //类型，1堂食 2外卖 3排队
   },
   onLaunch: function () {
     var that = this;
