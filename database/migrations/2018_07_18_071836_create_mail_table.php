@@ -19,6 +19,7 @@ class CreateMailTable extends Migration
             $table->string('name',50)->default('')->comment("用户名");
             $table->string('password',50)->default('')->comment("授权码");
             $table->tinyInteger('type')->default('0')->comment("类型，1为发送账号，2为接收账号");
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");
             $table->timestamps();
         });
 

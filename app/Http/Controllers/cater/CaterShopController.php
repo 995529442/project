@@ -112,6 +112,7 @@ class CaterShopController extends Controller
         $data['shipping_fee'] = $request -> input('shipping_fee','');
         $data['package_fee'] = $request -> input('package_fee','');
         $data['delivery_km'] = $request -> input('delivery_km','');
+        $data['delivery_fee'] = $request -> input('delivery_fee','');
 
         if($shop_id > 0){
             $cater_shop = DB::table("cater_shop")->whereId($shop_id)->update($data);

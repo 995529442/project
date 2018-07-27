@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Cater\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Librarys\Location;
 use DB;
 
 class getUserInfoController extends Controller
@@ -100,7 +101,8 @@ class getUserInfoController extends Controller
     public function getAddress(Request $request) {
        $admin_id = (int)$request -> input("admin_id",0);
        $user_id = (int)$request -> input("user_id",0);
-       $page = (int)$request -> input("page",0);
+       $pay_type = (int)$request -> input("pay_type",0);  //为1则为下单过来，需要计算距离是否在配送范围内
+       $page = (int)$request -> input("page",1);
 
        $return = array(
           "errcode" => -1,
@@ -108,11 +110,44 @@ class getUserInfoController extends Controller
           "data" => []
        );  
 
+       if($pay_type == 1 ){ //外卖，店铺配送距离
+         $delivery_km = DB::table("cater_shop")->where(['admin_id'=>$admin_id,'isvalid'=>true])->value("delivery_km");
+       }
        if($admin_id && $user_id){
            $address_list = DB::table("cater_user_shipping")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true])
                     ->orderByDesc("is_default")
                     ->orderByDesc("id")
                     ->offset(($page - 1) * 12)->limit(12)->get();
+
+            if($address_list && $pay_type == 1){
+              foreach ($address_list as $k=> $v) {
+                  //腾讯地图解析地址坐标
+                  $detail_address = $v->province.$v->city.$v->country.$v->address;
+                  $result = Location::declareAddress($detail_address);
+
+                  if($result['errcode'] == 1){
+                      $longitude = $result['data']['longitude'];
+                      $latitude = $result['data']['latitude'];
+
+                      //计算距离
+                      $location_info = Location::getLocation($admin_id,$latitude,$longitude);
+
+                      if($location_info['errcode'] == 1){ //成功
+                        $distance = (int)$location_info['data'][0]['distance'];
+
+                        if($delivery_km*1000 < $distance){
+                           $address_list[$k]->is_out = 1;
+                        }else{
+                           $address_list[$k]->is_out = 0;
+                        }
+                      }else{
+                        $address_list[$k]->is_out = 1;
+                      }
+                  }else{
+                     $address_list[$k]->is_out = 1;
+                  }
+              }
+            }
 
             $return['errcode'] = 1;
             $return['errmsg'] = "成功";

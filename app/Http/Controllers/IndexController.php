@@ -180,4 +180,137 @@ class IndexController extends Controller
         }
     }
     
+     /**
+     * 邮件页面
+     * @return view
+     */
+    public function mail(Request $request)
+    {
+       //查找邮箱设置
+       $mail_list = DB::table("mail")->where(['admin_id'=>Auth::guard("admins")->user()->id,'type'=>1,'isvalid'=>true])->get();
+
+       return view('mail',['mail_list'=>$mail_list]);
+    }
+
+     /**
+     * 保存邮件设置
+     * @return view
+     */
+    public function saveMail(Request $request)
+    {
+       $password = $request -> input("password",'');
+       $mail_id = $request -> input("mail_id",'');       
+       $name = $request -> input("name",'');
+
+       if(is_array($mail_id)){
+          $data_count = 0;
+
+          if(is_array($name)){
+            $name_count = count($name);
+          }else{
+            $name_count = 0;
+          }
+          if(count($mail_id) >= $name_count){
+            $data_count = count($mail_id);
+          }else{
+            $data_count = $name_count;
+          }
+
+         for($k=0;$k<$data_count;$k++){
+            if(isset($mail_id[$k]) && (int)$mail_id[$k] > 0 && isset($name[$k])){ //修改
+              $update_data = array(
+                 "password" => $password,
+                 "name" => $name[$k]
+              );
+
+              $result = DB::table("mail")->whereId((int)$mail_id[$k])->update($update_data);
+
+            }elseif(isset($mail_id[$k]) && (int)$mail_id[$k] > 0 && !isset($name[$k])){ //删除
+              $result =  DB::table("mail")->whereId((int)$mail_id[$k])->update(['isvalid'=>false]);            
+            }else{
+              $insert_data = array(
+                 "admin_id" => Auth::guard("admins")->user()->id,
+                 "type" => 1,
+                 "password" => $password,
+                 "name" => $name[$k],
+                 "isvalid" => true
+              );   
+              $result = DB::table("mail")->insert($insert_data); 
+            }
+         }
+       }else{
+          $insert_data = array();
+
+          for($k=0;$k<count($name);$k++){
+            $data = array();
+
+            $data['admin_id'] = Auth::guard("admins")->user()->id;
+            $data['type'] = 1;
+            $data['password'] = $password;
+            $data['name'] = $name[$k];
+            $data['isvalid'] = true;
+
+            array_push($insert_data, $data);
+
+            unset($data);
+          }
+
+          $reuslt = DB::table("mail")->insert($insert_data);
+       }
+
+       if($result){
+           return redirect('Index/mail');
+       }
+    }
+    
+    /**
+     * 短信页面
+     * @return view
+     */
+    public function sms(Request $request)
+    {
+       //查找邮箱设置
+       $sms_list = DB::table("sms")->where(['admin_id'=>Auth::guard("admins")->user()->id,'isvalid'=>true])->first();
+
+       return view('sms',['sms_list'=>$sms_list]);
+    }
+    /**
+     * 保存短信设置
+     * @return view
+     */
+    public function saveSms(Request $request)
+    {
+        $sms_id = (int)$request -> input("sms_id",0);
+        $accountsid = $request -> input("accountsid",'');
+        $appid = $request -> input("appid",'');
+        $token = $request -> input("token",'');   
+
+        $data = array(
+           "accountsid" => $accountsid,
+           "appid" => $appid,
+           "token" => $token
+        );
+
+        if($sms_id > 0){ //更新
+           $result =DB::table("sms")->whereId($sms_id)->update($data);
+        }else{
+           $data['admin_id'] =  Auth::guard("admins")->user()->id;
+           $data['isvalid'] = true;
+
+           $result =DB::table("sms")->insert($data);
+        }
+
+        return redirect('Index/sms');
+    }
+    
+    /**
+     * 短信模板
+     * @return view
+     */
+    public function smsTemplate(Request $request)
+    {
+        $sms_tem_list = DB::table('sms_template')->where(['admin_id'=>Auth::guard("admins")->user()->id,'isvalid'=>true])->get();
+
+        return view('sms_template',['sms_tem_list'=>$sms_tem_list]);
+    }   
 }

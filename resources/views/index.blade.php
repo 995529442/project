@@ -72,7 +72,7 @@
                     @endif
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-url="">
+                            <a href="javascript:;" data-url="{{ route('mail') }}">
                                 <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
                                 <span>邮件设置</span>
                             </a>                   
@@ -80,9 +80,17 @@
                     </dl>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" data-url="">
+                            <a href="javascript:;" data-url="{{ route('sms') }}">
                                 <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
                                 <span>短信设置</span>
+                            </a>                   
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" data-url="{{ route('smsTemplate') }}">
+                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
+                                <span>短信模板</span>
                             </a>                   
                         </dd>
                     </dl>

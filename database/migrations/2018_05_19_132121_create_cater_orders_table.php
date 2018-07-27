@@ -18,6 +18,7 @@ class CreateCaterOrdersTable extends Migration
             $table->increments('id'); 
             $table->integer('admin_id')->index()->comment("关联admins表");
             $table->integer('user_id')->index()->comment("关联cater_users表");
+            $table->string('user_name',20)->default('')->comment("用户名称");  
             $table->string('phone',20)->default('')->comment("联系方式");            
             $table->string('batchcode',20)->default('')->index()->comment("订单号");
             $table->tinyInteger('pay_type')->defalut('0')->comment("是否支付 0未支付 1已支付");

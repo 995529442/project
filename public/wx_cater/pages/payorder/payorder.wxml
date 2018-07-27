@@ -3,10 +3,17 @@
 <template is="userinfo" data="{{userinfo_box:userinfo_box}}" />
 <view class="payorder">
   <navigator url="../useroperation/useroperation?operation=address&pay_type=1">
-    <view class="lxr" wx:if="{{cater_type == 2}}">
-      <text>收货地址</text>
-      <view wx:if="{{default_address != ''}}">{{default_address.province}}{{default_address.city}}{{default_address.country}}{{default_address.address}}{{default_address.house_number}}</view>
-      <view wx:else>请选择地址</view>
+    <view class="lxr" style="margin:0rpx;" wx:if="{{cater_type == 2 && default_address !=''}}">
+      <text>收货信息</text>
+      <view style="font-size:20rpx;" wx:if="{{default_address != ''}}">{{default_address.user_name}} {{default_address.phone}}</view>
+    </view>
+    <view class="lxr" style="margin:0rpx;" wx:if="{{cater_type == 2 && default_address !=''}}">
+      <text style="font-size:20rpx;">{{default_address.province}}{{default_address.city}}{{default_address.country}}</text>
+      <view style="font-size:20rpx;">{{default_address.address}}{{default_address.house_number}}</view>
+    </view>
+    <view class="lxr" style="margin:0rpx;" wx:if="{{cater_type == 2 && default_address ==''}}">
+      <text>收货信息</text>
+      <view>请选择收货信息</view>
     </view>
   </navigator>
   <view class="orderList">
@@ -30,17 +37,19 @@
       <text style="color:red">￥{{allMoney }}</text>
     </view>
   </view>
-  <view class="lxr" wx:if="{{cater_type == 2}}">
-    <text>配送费</text>
-    <view style="color:red">￥{{shop_info.shipping_fee}}</view>
-  </view>
-  <view class="lxr" wx:if="{{cater_type == 2}}">
-    <text>包装费</text>
-    <view style="color:red">￥{{shop_info.package_fee}}</view>
-  </view>
-  <view class="lxr">
-    <text>备注</text>
-    <input value="" placeholder="口味偏好等要求" />
-  </view>
-  <button type="primary" style="position:fixed;bottom:20rpx;width:90%;">付款</button>
+  <form bindsubmit="formSubmit">
+    <view class="lxr" wx:if="{{cater_type == 2}}">
+      <text>配送费</text>
+      <view style="color:red">￥{{shop_info.shipping_fee}}</view>
+    </view>
+    <view class="lxr" wx:if="{{cater_type == 2}}">
+      <text>包装费</text>
+      <view style="color:red">￥{{shop_info.package_fee}}</view>
+    </view>
+    <view class="lxr">
+      <text>备注</text>
+      <input value="" name="remark" placeholder="口味偏好等要求" />
+    </view>
+    <button type="primary" formType="submit" style="position:fixed;bottom:20rpx;width:90%;">付款</button>
+  </form>
 </view>

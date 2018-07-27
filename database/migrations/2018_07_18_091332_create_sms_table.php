@@ -19,6 +19,7 @@ class CreateSmsTable extends Migration
             $table->string('accountsid',50)->default('')->comment("accountsid");
             $table->string('token',50)->default('')->comment("token");
             $table->string('appid',50)->default('')->comment("appid");
+            $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");
             $table->timestamps();
         });
 

@@ -52,7 +52,7 @@ class CaterOrdersController extends Controller
        	  $order -> where("or.status","=",$status);
        }
 
-       $order_info = $order ->orderBy('or.id','desc')-> paginate(8);
+       $order_info = $order ->orderBy('or.id','desc')-> paginate(12);
 
        return view('cater.orders.index',[
        	'order_info'=>$order_info,

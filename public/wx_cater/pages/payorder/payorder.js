@@ -15,7 +15,8 @@ Page({
     cater_type: app.globalData.cater_type,
     shop_info: {},
     user_id: 0,
-    default_address: {}
+    default_address: {},
+    goods_id_arr:''
   },
   /**
    * 支付货款
@@ -172,6 +173,47 @@ Page({
           that.setData({
             default_address: res.data.data
           })
+        }
+      }
+    })
+  },
+  /**
+   * 付款
+   */
+  formSubmit:function(e){
+    var that=this;
+    var remark = e.detail.value.remark;
+    var goods_id_arr = that.data.goods_id_arr;
+    var default_address = that.data.default_address;
+
+    if (default_address == ''){
+      wx.showToast({
+        title: '请选择收货信息',
+        icon: 'none',
+        duration: 3000
+      })
+      return;
+    }
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/order/pay',
+      data: {
+        admin_id: app.globalData.admin_id,
+        user_id: that.data.user_id,
+        goods_id_arr: goods_id_arr,
+        user_name: default_address.user_name,
+        phone: default_address.phone,
+        cater_type: app.globalData.cater_type,
+        remark: remark
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.errocde > 0){
+          //删除购物车缓存
+          wx.removeStorageSync('goods_id_arr');
+          wx.removeStorageSync('chooseGoods');          
         }
       }
     })

@@ -26,6 +26,10 @@
       </div>
     </div>  
     <div class="layui-form-item" id="take_out" @if($shops_info == "" || $shops_info['is_take_out'] == 1)style="display:none;" @endif>
+      <label class="layui-form-label">起送费：</label>
+      <div class="layui-input-inline">
+        <input type="text" name="delivery_fee" id="delivery_fee" autocomplete="off" class="layui-input" value="{{$shops_info['delivery_fee']}}" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">元
+      </div>
       <label class="layui-form-label">配送费：</label>
       <div class="layui-input-inline">
         <input type="text" name="shipping_fee" id="shipping_fee" autocomplete="off" class="layui-input" value="{{$shops_info['shipping_fee']}}" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">元

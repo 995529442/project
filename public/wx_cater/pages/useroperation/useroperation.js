@@ -299,17 +299,22 @@ Page({
   get_my_address: function () {
     var that = this;
 
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getUserInfo/getAddress',
       data: {
         admin_id: app.globalData.admin_id,
         user_id: that.data.user_id,
+        pay_type: that.data.pay_type,
         page: that.data.address_page
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
+        wx.hideLoading()
         if (res.data.errcode > 0) {
           var address = that.data.address;
           address = address.concat(res.data.data)
@@ -435,8 +440,9 @@ Page({
   select_address:function(e){
     var that =this;
     var address_id = e.currentTarget.dataset.address_id;
+    var is_out = e.currentTarget.dataset.is_out;
 
-    if(that.data.pay_type == 1){ //订单过来
+    if (that.data.pay_type == 1 && is_out == 0){ //订单过来,并且在配送范围内
       wx.setStorageSync('address_id', address_id);
 
       wx.navigateBack({

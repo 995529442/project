@@ -34,7 +34,14 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     Route::get('Index/module', 'IndexController@module')->name('module'); //模块分配  
     Route::post('Index/saveModule', 'IndexController@saveModule')->name('saveModule'); //模块分配保存   
 
-    //微餐饮路由
+    Route::any('Index/mail', 'IndexController@mail')->name('mail'); //邮件设置 
+    Route::any('Index/saveMail', 'IndexController@saveMail')->name('saveMail'); //保存邮件设置 
+
+    Route::any('Index/sms', 'IndexController@sms')->name('sms'); //短信设置 
+    Route::any('Index/saveSms', 'IndexController@saveSms')->name('saveSms'); //保存短信设置
+
+    Route::any('Index/sms_template', 'IndexController@smsTemplate')->name('smsTemplate'); //短信模板页面 
+   //微餐饮路由
     Route::group(['prefix'=>'cater'],function(){
        //餐厅信息
        Route::group(['prefix'=>'shop'],function(){
