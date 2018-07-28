@@ -9,19 +9,19 @@
     <div class="layui-form-item">
       <label class="layui-form-label">accountsid：</label>
       <div class="layui-input-block">
-        <input type="text" name="accountsid" id="accountsid" autocomplete="off" class="layui-input" value="@if($sms_list){{$sms_list->accountsid}}@endif" style="display:inline-block;width:20%;">
+        <input type="text" name="accountsid" id="accountsid" autocomplete="off" class="layui-input" value="@if($sms_list){{$sms_list->accountsid}}@endif" style="display:inline-block;width:30%;">
       </div>
     </div>
     <div class="layui-form-item">
       <label class="layui-form-label">appid：</label>
       <div class="layui-input-block">
-        <input type="text" name="appid" id="appid" autocomplete="off" class="layui-input" value="@if($sms_list){{$sms_list->appid}}@endif" style="display:inline-block;width:20%;">
+        <input type="text" name="appid" id="appid" autocomplete="off" class="layui-input" value="@if($sms_list){{$sms_list->appid}}@endif" style="display:inline-block;width:30%;">
       </div>
     </div>  
    <div class="layui-form-item">
       <label class="layui-form-label">token：</label>
       <div class="layui-input-block">
-        <input type="text" name="token" id="token" autocomplete="off" class="layui-input" value="@if($sms_list){{$sms_list->token}}@endif" style="display:inline-block;width:20%;">
+        <input type="text" name="token" id="token" autocomplete="off" class="layui-input" value="@if($sms_list){{$sms_list->token}}@endif" style="display:inline-block;width:30%;">
       </div>
     </div>      
     <div class="layui-form-item">

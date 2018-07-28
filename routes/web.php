@@ -41,6 +41,15 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     Route::any('Index/saveSms', 'IndexController@saveSms')->name('saveSms'); //保存短信设置
 
     Route::any('Index/sms_template', 'IndexController@smsTemplate')->name('smsTemplate'); //短信模板页面 
+    Route::any('Index/add_sms_template', 'IndexController@addSmsTemplate')->name('addSmsTemplate'); //新增短信模板页面
+    Route::any('Index/save_sms_template', 'IndexController@saveSmsTemplate')->name('saveSmsTemplate'); //保存短信模板页面  
+    Route::any('Index/del_sms_template', 'IndexController@delSmsTemplate')->name('delSmsTemplate'); //删除短信模板页面
+
+    Route::any('Index/send_log', 'IndexController@sendLog')->name('sendLog'); //发送记录
+    
+    //测试短信、邮件
+    Route::any('Index/test_sms', 'IndexController@testSms')->name('testSms'); //测试短信
+
    //微餐饮路由
     Route::group(['prefix'=>'cater'],function(){
        //餐厅信息

@@ -49,7 +49,7 @@
                   <option value="5" @if($status ==5 ) selected @endif>已完成</option>
                   <option value="6" @if($status ==6 ) selected @endif>申请退款</option>
                   <option value="7" @if($status ==7 ) selected @endif>已退款</option>
-                  <option value="8" @if($status ==8 ) selected @endif>8拒绝退款</option>
+                  <option value="8" @if($status ==8 ) selected @endif>拒绝退款</option>
               </select>
             </div>    
             <button type="submit" class="layui-btn layui-btn-normal button">查询</button>

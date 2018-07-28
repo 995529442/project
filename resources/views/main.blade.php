@@ -24,7 +24,7 @@
         </div>
         <div class="value">
           <a href="#">
-            <h1 id="count1">10</h1>
+            <h1 id="count1">{{$user_total}}</h1>
           </a>
           <p>用户总量</p>
         </div>
@@ -49,9 +49,9 @@
         </div>
         <div class="value">
           <a href="#">
-            <h1 id="count3">50</h1>
+            <h1 id="count3">{{$order_num}}</h1>
           </a>
-          <p>文章总数</p>
+          <p>订单总数</p>
         </div>
       </section>
     </div>
@@ -62,9 +62,9 @@
         </div>
         <div class="value">
           <a href="#">
-            <h1 id="count4">0</h1>
+            <h1 id="count4">{{$order_done_num}}</h1>
           </a>
-          <p>待审文章总数</p>
+          <p>已完成订单</p>
         </div>
       </section>
     </div>

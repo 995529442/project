@@ -38,6 +38,8 @@
       <div class="layui-input-inline">
         <input type="text" name="package_fee" id="package_fee" autocomplete="off" class="layui-input" value="{{$shops_info['package_fee']}}" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">元
       </div>
+    </div>
+    <div class="layui-form-item" id="take_out_delivery" @if($shops_info == "" || $shops_info['is_take_out'] == 1)style="display:none;" @endif>
       <label class="layui-form-label">配送范围：</label>
       <div class="layui-input-inline">
         <input type="text" name="delivery_km" id="delivery_km" autocomplete="off" class="layui-input" value="{{$shops_info['delivery_km']}}"" oninput="clearNoNum(this)" style="width:80%;display:inline-block;margin-right:5px;">公里
@@ -187,9 +189,11 @@
       if(this.checked){
         $("#is_take_out").val(2);
         $("#take_out").show();
+        $("#take_out_delivery").show();        
       }else{
         $("#is_take_out").val(1);
         $("#take_out").hide();
+        $("#take_out_delivery").hide(); 
       }
     });
     //日期

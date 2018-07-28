@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Librarys\Sms;
 use DB;
 
 class IndexController extends Controller
@@ -39,7 +40,20 @@ class IndexController extends Controller
      */
     public function main()
     {
-        return view("main");
+        //获取用户总数
+        $user_total = DB::table("cater_users")->where(['admin_id'=>Auth::guard('admins')->user()->id,'isvalid'=>true])->count();
+
+        //订单总数
+        $order_num = DB::table("cater_orders")->where(['admin_id'=>Auth::guard('admins')->user()->id,'isvalid'=>true])->count();
+        
+        //已完成订单
+        $order_done_num = DB::table("cater_orders")->where(['admin_id'=>Auth::guard('admins')->user()->id,'isvalid'=>true,'pay_type'=>1,'status'=>5])->count();
+
+        return view("main",[
+          'user_total'=>$user_total,
+          'order_num' => $order_num,
+          'order_done_num' => $order_done_num
+        ]);
     }
 
     /**
@@ -258,9 +272,7 @@ class IndexController extends Controller
           $reuslt = DB::table("mail")->insert($insert_data);
        }
 
-       if($result){
-           return redirect('Index/mail');
-       }
+      return redirect('Index/mail');
     }
     
     /**
@@ -309,8 +321,110 @@ class IndexController extends Controller
      */
     public function smsTemplate(Request $request)
     {
-        $sms_tem_list = DB::table('sms_template')->where(['admin_id'=>Auth::guard("admins")->user()->id,'isvalid'=>true])->get();
+        $sms_tem_list = DB::table('sms_template')->where(['admin_id'=>Auth::guard("admins")->user()->id,'isvalid'=>true])->orderBy('id','desc')->paginate(12);
 
         return view('sms_template',['sms_tem_list'=>$sms_tem_list]);
-    }   
+    } 
+
+    /**
+     * 新增编辑短信模板
+     * @return view
+     */
+    public function addSmsTemplate(Request $request)
+    {
+       $sms_template_id = (int)$request -> input("sms_template_id",0);
+       
+       $temp_info = "";
+
+       if($sms_template_id){
+           $temp_info = DB::table("sms_template")->whereId($sms_template_id)->first();
+       }
+
+       return view('add_sms_template',['temp_info'=>$temp_info]);
+    }
+
+    /**
+     * 保存短信模板
+     * @return view
+     */
+    public function saveSmsTemplate(Request $request)
+    {
+       $sms_template_id = (int)$request -> input("sms_template_id",0);
+       $template_id = $request -> input("template_id",'');
+       $type = (int)$request -> input("type",0);
+       $is_on = (int)$request -> input("is_on",0);
+
+       $data = array(
+          'template_id' => $template_id,
+          'type' => $type,
+          'is_on' => $is_on
+       );
+       if($sms_template_id > 0){ //修改
+         $result = DB::table("sms_template")->whereId($sms_template_id)->update($data);
+       }else{
+          $data['admin_id'] = Auth::guard("admins")->user()->id;
+          $data['isvalid'] = true;
+
+          $result = DB::table("sms_template")->insert($data);
+       }
+
+       return redirect('Index/sms_template');
+    }  
+
+    /**
+     * 删除短信模板
+     * @return view
+     */
+    public function delSmsTemplate(Request $request)
+    {
+       $sms_template_id = (int)$request -> input("sms_template_id",0); 
+
+       $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败"
+       );
+
+       if($sms_template_id > 0){
+         $result = DB::table("sms_template")->whereId($sms_template_id)->update(['isvalid'=>false]);
+
+         if($result){
+           $return['errcode'] = 1;
+           $return['errmsg'] = '成功';
+         }
+       }else{
+          $return['errmsg'] = '系统错误';
+       }
+
+       return json_encode($return);      
+    } 
+
+    /**
+     * 发送日志
+     * @return view
+     */
+    public function sendLog(Request $request)
+    {
+        $send_log_list = DB::table('send_log')->where("admin_id",Auth::guard("admins")->user()->id)->orderBy("id","desc")->paginate(12);
+
+        return view('send_log',['send_log_list'=>$send_log_list]);
+    }  
+
+    /**
+     * 测试短信
+     * @return view
+     */
+    public function testSms(Request $request)
+    {
+        $type = (int)$request -> input("type",0); 
+        $phone = $request -> input("phone",''); 
+
+        if($phone){
+           $result = Sms::sendSms(Auth::guard("admins")->user()->id,$type,'123456',$phone);
+
+           return json_encode($result);
+        }
+        return view('test_sms',['type'=>$type]);
+    }
+
+
 }

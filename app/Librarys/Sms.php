@@ -12,7 +12,7 @@ class Sms
 {   
     /**
      * 发送短信
-     * @param $admin_id 发件邮箱
+     * @param $admin_id 商家ID
      * @param $type 类型
      * @param $param 发件内容
      * @param $mobile 手机号码

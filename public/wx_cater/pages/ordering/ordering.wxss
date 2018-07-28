@@ -214,6 +214,24 @@
   border-radius: 50%;
   margin-left: 5rpx;
 }
+.order-btn2 {
+  display: flex;
+  transform: translate(10rpx, 70rpx);
+  margin-left:90rpx;
+  margin-top:-40rpx;
+}
+.order-btn2 view {
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0094ff;
+  border-radius: 50%;
+  margin-left: 5rpx;
+}
 .shop-car-wrap {
   position: fixed;
   bottom: 0;

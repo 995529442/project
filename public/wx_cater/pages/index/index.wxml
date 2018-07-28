@@ -3,11 +3,10 @@
 <template is="userinfo" data="{{userinfo_box:userinfo_box}}" /> -->
 <view class="container">
   <!--顶部搜索栏-->
-  <view class="search">
-    <!--当前位置-->
-    <!-- <view class="search-site triangle">城市</view> -->
+  <!-- <view class="search">
+     <view class="search-site triangle">城市</view> 
     <view bindtap="goSearch" class="search-in iconfont icon-sousuo_sousuo">搜索菜系、 菜品</view>
-  </view>
+  </view> -->
   <!--carousel-->
   <template is="carousel" data="{{ imgUrls }}"></template>
   <!--nav-->
