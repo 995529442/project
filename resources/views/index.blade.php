@@ -1,209 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>后台管理系统</title>
-    <meta name="renderer" content="webkit"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">   
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
-    <meta name="apple-mobile-web-app-capable" content="yes">    
-    <meta name="format-detection" content="telephone=no">   
-    <!-- load css -->
-    <link rel="stylesheet" type="text/css" href="/assets/common/layui/css/layui.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/assets/common/global.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/assets/css/adminstyle.css" media="all">
-    
-    
+    <link rel="stylesheet" href="/assets/common/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" href="/js/build/css/app.css" media="all">
 </head>
+
 <body>
-<div class="layui-layout layui-layout-admin" id="layui_layout">
-    <!-- 顶部区域 -->
-    <div class="layui-header header header-demo">
-        <div class="layui-main">
-            <!-- logo区域 -->
-            <div class="admin-logo-box">
-                <a class="logo" href="{{ route('index') }}" title="logo">后台管理系统</a>
-                <div class="larry-side-menu">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </div>
-            </div>
-            <!-- 右侧导航 -->
-            <ul class="layui-nav larry-header-item">
-                    <li class="layui-nav-item">
-                        管理员：{{$username}}
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="{{ route('login.logout') }}">
-                        <i class="iconfont icon-exit"></i>
-                        退出</a>
-                    </li>
-            </ul>
-        </div>
-    </div>
-    <!-- 左侧侧边导航开始 -->
-    <div class="layui-side layui-side-bg layui-larry-side" id="larry-side"  style="margin-top:-12px;">
-        <div class="layui-side-scroll" id="larry-nav-side" lay-filter="side">
-        
-        <!-- 左侧菜单 -->
-        <ul class="layui-nav layui-nav-tree">
-            <li class="layui-nav-item layui-this">
-                <a href="javascript:;" data-url="{{ route('main') }}">
-                    <i class="iconfont icon-home1" data-icon='icon-home1'></i>
-                    <span>后台首页</span>
-                </a>
-            </li>
-            <!-- 后台管理 -->
+    <div class="layui-layout layui-layout-admin kit-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">后台管理系统</div>
+<!--             <div class="layui-logo kit-logo-mobile">K</div>
+            <ul class="layui-nav layui-layout-left kit-nav">
+                <li class="layui-nav-item"><a href="javascript:;">控制台3</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
+                <li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i> 捐赠我</a></li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <i class="iconfont icon-caidan2" ></i>
-                        <span>后台管理</span>
-                        <em class="layui-nav-more"></em>
-                    </a>
-                    @if($type == 1)
+                    <a href="javascript:;">其它系统</a>
                     <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" data-url="{{ route('manage') }}">
-                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
-                                <span>管理员管理</span>
-                            </a>                   
-                        </dd>
+                        <dd><a href="javascript:;">邮件管理</a></dd>
+                        <dd><a href="javascript:;">消息管理</a></dd>
+                        <dd><a href="javascript:;">授权管理</a></dd>
                     </dl>
-                    @endif
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" data-url="{{ route('mail') }}">
-                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
-                                <span>邮件设置</span>
-                            </a>                   
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" data-url="{{ route('sms') }}">
-                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
-                                <span>短信设置</span>
-                            </a>                   
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" data-url="{{ route('smsTemplate') }}">
-                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
-                                <span>短信模板</span>
-                            </a>                   
-                        </dd>
-                    </dl>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" data-url="{{ route('sendLog') }}">
-                                <i class="iconfont icon-yonghu1" data-icon='icon-geren1'></i>
-                                <span>发送记录</span>
-                            </a>                   
-                        </dd>
-                    </dl>
-                </li> 
-            <!-- 微餐饮 -->
-            <?php if((in_array("cater",$module_arr) && $type == 2) || $type == 1){ ?>
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="iconfont icon-caidan2" ></i>
-                    <span>微餐饮</span>
-                    <em class="layui-nav-more"></em>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.shop.index') }}">
-                            <i class="iconfont icon-zhandianguanli" data-icon='icon-geren1'></i>
-                            <span>餐厅管理</span>
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.home.index') }}">
-                            <i class="iconfont icon-zhandianguanli" data-icon='icon-geren1'></i>
-                            <span>首页管理</span>
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.category.index') }}">
-                            <i class="iconfont icon-caidan" data-icon='icon-iconfuzhi01'></i>
-                            <span>分类管理</span>
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.goods.index') }}">
-                            <i class="iconfont icon-caidan1" data-icon='icon-piliangicon'></i>
-                            <span>商品管理</span>
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.orders.index') }}">
-                            <i class="iconfont icon-caidan1" data-icon='icon-piliangicon'></i>
-                            <span>订单管理</span>
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.users.index') }}">
-                            <i class="iconfont icon-yonghu1" data-icon='icon-piliangicon'></i>
-                            <span>用户管理</span>
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;" data-url="{{ route('cater.system.index') }}">
-                            <i class="iconfont icon-weixin" data-icon='icon-piliangicon'></i>
-                            <span>小程序管理</span>
-                        </a>
-                    </dd>
-                </dl>
-            </li> 
-            <?php } ?>          
-        </ul>
-        </div>
-    </div>
-
-    <!-- 左侧侧边导航结束 -->
-    <!-- 右侧主体内容 -->
-    <div class="layui-body" id="larry-body" style="bottom: 0;border-left: solid 2px #2299ee;margin-top:-23px;margin-left:-5px;">
-        <div class="layui-tab layui-tab-card larry-tab-box" id="larry-tab" lay-filter="demo" lay-allowclose="true">
-            <div class="go-left key-press pressKey" id="titleLeft" title="滚动至最右侧"><i class="larry-icon larry-weibiaoti6-copy"></i> </div>
-            <ul class="layui-tab-title">
-                <li class="layui-this" id="admin-home"><i class="iconfont icon-diannao1"></i><em>后台首页</em></li>
+                </li>
+            </ul> -->
+            <ul class="layui-nav layui-layout-right kit-nav">
+                <li class="layui-nav-item">
+                    管理员：{{$username}}
+                </li>
+                <li class="layui-nav-item">
+                    <a href="{{ route('login.logout') }}">
+                    <i class="iconfont icon-exit"></i>
+                    退出</a>
+                </li>
             </ul>
-            <div class="go-right key-press pressKey" id="titleRight" title="滚动至最左侧"><i class="larry-icon larry-right"></i></div> 
-            <div class="layui-tab-content" style="min-height: 150px; ">
-                <div class="layui-tab-item layui-show" style="height:850px;">
-                    <iframe class="larry-iframe" data-id='0' src="{{ route('main') }}"></iframe>
-                </div>
+        </div>
+
+        <div class="layui-side layui-bg-black kit-side">
+            <div class="layui-side-scroll">
+                <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;"><span> 后台管理</span></a>
+                        <dl class="layui-nav-child">
+                            @if($type == 1)
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('manage') }}',icon:'',title:'管理员管理',id:'1'}">
+                                       <span> 管理员管理</span></a>
+                                </dd>
+                            @endif
+                            <dd>
+                                <a href="javascript:;" data-url="{{ route('mail') }}" data-icon="" data-title="邮件设置" kit-target data-id='2'><span> 邮件设置</span></a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" data-url="{{ route('sms') }}" data-icon="" data-title="短信设置" kit-target data-id='3'><span> 短信设置</span></a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" data-url="{{ route('smsTemplate') }}" data-icon="" data-title="短信模板" kit-target data-id='4'><span> 短信模板</span></a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'{{ route('sendLog') }}',icon:'',title:'发送记录',id:'5'}"><span> 发送记录</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <!-- 微餐饮 -->
+                    <?php if((in_array("cater",$module_arr) && $type == 2) || $type == 1){ ?>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;"><span> 微餐饮</span></a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.shop.index') }}',icon:'',title:'餐厅管理',id:'6'}"><span> 餐厅管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.home.index') }}',icon:'',title:'首页管理',id:'7'}"><span> 首页管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.category.index') }}',icon:'',title:'分类管理',id:'8'}"><span> 分类管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.goods.index') }}',icon:'',title:'商品管理',id:'9'}"><span> 商品管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.orders.index') }}',icon:'',title:'订单管理',id:'10'}"><span> 订单管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.users.index') }}',icon:'',title:'用户管理',id:'11'}"><span> 用户管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.system.index') }}',icon:'',title:'小程序管理',id:'12'}"><span> 小程序管理</span></a>
+                                </dd>
+                            </dl>
+                        </li>
+                    <?php } ?> 
+                </ul>
             </div>
         </div>
-    </div>
-    <!-- 底部区域 -->
-    <div class="layui-footer layui-larry-foot" id="larry-footer">
-        <div class="layui-mian">  
-            <p class="p-admin">
-                <span>2018 &copy;</span>
-                 牛叔叔科技股份有限公司,版权所有
-            </p>
+        <div class="layui-body" id="container">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">主体内容加载中,请稍等...</div>
         </div>
-    </div>
-</div>
-<!-- 加载js文件-->                                                                                                                                                                                           
-    <script type="text/javascript" src="/assets/common/layui/layui.js"></script> 
-    <script type="text/javascript" src="/assets/js/larry.js"></script>
-    <script type="text/javascript" src="/assets/js/index.js"></script>
-<!-- 锁屏 -->
-<div class="lock-screen" style="display: none;">
-    <div id="locker" class="lock-wrapper">
-        <div id="time"></div>
-        <div class="lock-box center">
-            <h1>admin</h1>
-            <duv class="form-group col-lg-12">
-                <input type="password" placeholder='锁屏状态，请输入密码解锁' id="lock_password" class="form-control lock-input" autofocus name="lock_password">
-                <button id="unlock" class="btn btn-lock">解锁</button>
-            </duv>
-        </div>
-    </div>
-</div>
 
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            2018 &copy;
+            <a href="javascript::void(0);">牛叔叔科技股份有限公司,版权所有</a>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script src="/assets/common/layui/layui.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: 'js/build/js/'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+            $('#pay').on('click', function() {
+                layer.open({
+                    title: false,
+                    type: 1,
+                    content: '<img src="/build/images/pay.png" />',
+                    area: ['500px', '250px'],
+                    shadeClose: true
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>

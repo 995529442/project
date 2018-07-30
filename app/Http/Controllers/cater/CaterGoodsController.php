@@ -124,7 +124,7 @@ class CaterGoodsController extends Controller
         );
 
         if($goods_id > 0){
-            $result =  CaterGoods::find($goods_id)->update(array("isvalid"=>false));
+            $result = DB::table("cater_goods")->whereId($goods_id)->update(array("isvalid"=>false));
 
             if($result){
                 $return['errcode'] = 1;

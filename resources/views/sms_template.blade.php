@@ -86,7 +86,7 @@
         title: false,
         shadeClose: false,
         shade: 0.1,
-        area: ['500px', '220px'],
+        area: ['500px', '25%'],
         content: '{{ route("testSms")}}?type='+type,
         end: function(){
 

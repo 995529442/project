@@ -54,7 +54,7 @@
           title: false,
           shadeClose: false,
           shade: 0.1,
-          area: ['500px', '265px'],
+          area: ['500px', '32%'],
           content: '{{ route("cater.category.add_cate")}}',
           end: function(){
 

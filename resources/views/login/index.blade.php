@@ -29,10 +29,8 @@
              <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="密码" class="login_txtbx"/>
         </div>
         <div class="layui-val-icon larry-login">
-            <div class="layui-code-box">
-                <input type="text" id="code" value="{{ old('code') }}" name="code" placeholder="验证码" maxlength="4" class="login_txtbx">
+                <input type="text" id="code" value="{{ old('code') }}" name="code" placeholder="验证码" maxlength="4" class="login_txtbx" style="width:52%;">
                 <img src="{{ route('login.captcha') }}" alt="" class="verifyImg" id="verifyImg" onClick="javascript:this.src='{{ route('login.captcha') }}?r='+Math.random();">
-            </div>
         </div> 
         @if (count($errors) > 0)
             <div class="alert alert-danger">

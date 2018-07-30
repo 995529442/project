@@ -419,7 +419,13 @@ class IndexController extends Controller
         $phone = $request -> input("phone",''); 
 
         if($phone){
-           $result = Sms::sendSms(Auth::guard("admins")->user()->id,$type,'123456',$phone);
+			
+		   if($type == 1){
+		     $param = "123456";
+		   }else{
+		      $param = "123456,0.01,佚名,135XXXXXXXX"; 
+		   }
+           $result = Sms::sendSms(Auth::guard("admins")->user()->id,$type,$param,$phone);
 
            return json_encode($result);
         }

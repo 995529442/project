@@ -13,7 +13,7 @@
     <div class="layui-form-item">
 	    <div class="layui-input-block">
 	      <button class="layui-btn layui-btn-normal" onclick="put_submit();">提交</button>
-	      <button class="layui-btn layui-btn-primary">取消</button>
+	      <button class="layui-btn layui-btn-primary" onclick="javascript:window.parent.layer.closeAll();">取消</button>
 	    </div>
     </div>
 </form>

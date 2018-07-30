@@ -27,7 +27,7 @@
     <div class="layui-form-item">
 	    <label class="layui-form-label">详细地址：</label>
 	    <div class="layui-input-block">
-	      <input type="text" name="address" id="address" autocomplete="off" class="layui-input" value="{{$detail_address}}" style="display:inline-block;width:40%;">
+	      <input type="text" name="address" id="address" autocomplete="off" class="layui-input" value="{{$detail_address}}" style="display:inline-block;width:80%;">
 	      <button style="display:inline-block;margin-left:20px;margin-top:-5px;" onclick="codeAddress();" class="layui-btn">搜索</button>
 	    </div>
     </div>     
