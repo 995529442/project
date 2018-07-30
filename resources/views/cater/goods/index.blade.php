@@ -4,25 +4,33 @@
 	th,td,#page{text-align:center;}
 </style>     
 <div style="padding: 15px;">
-      <form method="get" action="{{ route('cater.goods.index') }}">
-        {{csrf_field()}}
-        <div class="demoTable formn">
-            商品名称：
-            <div class="layui-inline">
-               <input type="text" name="good_name" id="good_name" autocomplete="off" class="layui-input" value="{{$good_name}}">
-            </div>
-            商品状态：
-            <div class="layui-inline">
-              <select name="status" id="status" class="layui-input" style="width:150px;">
+    <form class="layui-form" action="{{ route('cater.goods.index') }}" method="get">
+         {{csrf_field()}}
+        <div class="layui-form-item" style="display:inline-block;">
+          <label class="layui-form-label">商品名称：</label>
+          <div class="layui-input-block">
+            <input type="text" name="good_name" id="good_name" autocomplete="off" class="layui-input" value="{{$good_name}}">
+          </div>
+        </div>
+
+        <div class="layui-form-item" style="display:inline-block;">
+          <label class="layui-form-label">商品状态：</label>
+          <div class="layui-input-block">
+            <select name="status" id="status" lay-filter="status">
                   <option value="0">全部</option>
                   <option value="1" @if($status ==1 ) selected @endif>热卖</option>
                   <option value="2" @if($status ==2 ) selected @endif>新品</option>
                   <option value="3" @if($status ==3 ) selected @endif>推荐</option>
               </select>
-            </div>           
-            <button type="submit" class="layui-btn layui-btn-normal button">查询</button>
+          </div>
+        </div>   
+
+        <div class="layui-form-item" style="display:inline-block;">
+          <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-filter="demo1">提交</button>
             <a href="{{ route('cater.goods.add_goods') }}" class="layui-btn layui-btn-normal button">新增</a>
-        </div>          
+          </div>
+        </div>
     </form>
     <div class="layui-form">
         <table class="layui-table" lay-size="sm">
