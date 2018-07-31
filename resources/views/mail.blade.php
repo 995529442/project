@@ -8,7 +8,7 @@
     <div class="layui-form-item">
       <label class="layui-form-label">授权码：</label>
       <div class="layui-input-block">
-        <input type="text" name="password" id="password" autocomplete="off" class="layui-input" value="@if(count($mail_list) > 0) {{$mail_list[0]->password}} @endif" style="display:inline-block;width:20%;">
+        <input type="text" name="password" id="password" autocomplete="off" class="layui-input" value="@if(count($mail_list) > 0){{$mail_list[0]->password}}@endif" style="display:inline-block;width:20%;">
       </div>
     </div>
     @if(count($mail_list) > 0) 

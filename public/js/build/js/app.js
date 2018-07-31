@@ -8,6 +8,7 @@
  */
 var tab;
 layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel'], function(exports) {
+    console.log(exports)
     var $ = layui.jquery,
         element = layui.element,
         layer = layui.layer,

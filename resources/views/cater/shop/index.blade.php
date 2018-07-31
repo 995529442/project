@@ -136,7 +136,7 @@
                     <input type="hidden" name="figure_img_id[]" value="{{$v->id}}">
                     <input type="hidden" name="figure_img[]" value="{{$v->img_path}}">
                     <img style="width:150px;height:100px;" src="{{$v->img_path}}" alt="" class="layui-upload-img">
-                    <div style="display:inline-block;position:relative;top:-40px;width:20px;border:1px solid #F73455;border-radius: 50%;cursor: pointer;"><p style="padding-left:4px;color:#F73455;" onclick="del_figure_img(this,{{$v->id}})">X</p></div>
+                    <div style="display:inline-block;position:relative;top:-40px;width:20px;border:1px solid #F73455;border-radius: 70%;cursor: pointer;"><p style="padding-left:4px;color:#F73455;" onclick="del_figure_img(this,{{$v->id}})">X</p></div>
                   </li>
                  @endforeach
               @endif

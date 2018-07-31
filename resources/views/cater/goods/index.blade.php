@@ -25,9 +25,9 @@
           </div>
         </div>   
 
-        <div class="layui-form-item" style="display:inline-block;">
+        <div class="layui-form-item" style="display:inline-block;margin-left:-100px;">
           <div class="layui-input-block">
-            <button type="submit" class="layui-btn" lay-filter="demo1">提交</button>
+            <button type="submit" class="layui-btn" lay-filter="demo1">查询</button>
             <a href="{{ route('cater.goods.add_goods') }}" class="layui-btn layui-btn-normal button">新增</a>
           </div>
         </div>

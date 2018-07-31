@@ -4,27 +4,38 @@
 	th,td,#page{text-align:center;}
 </style>     
 <div style="padding: 15px;">
-    <form method="get" action="{{ route('cater.users.index') }}">
-        {{csrf_field()}}
-        <div class="demoTable formn">
-            微信名称：
-            <div class="layui-inline">
-               <input type="text" name="weixin_name" id="weixin_name" autocomplete="off" class="layui-input" value="{{$weixin_name}}">
-            </div>
-            联系方式：
-            <div class="layui-inline">
-               <input type="text" name="mobile" id="mobile" autocomplete="off" class="layui-input" value="{{$mobile}}">
-            </div>
-            性别：
-            <div class="layui-inline">
-              <select name="sex" id="sex" class="layui-input" style="width:150px;">
+    <form class="layui-form" action="{{ route('cater.users.index') }}" method="get">
+         {{csrf_field()}}
+        <div class="layui-form-item" style="display:inline-block;margin-left:-40px;">
+          <label class="layui-form-label">微信名称：</label>
+          <div class="layui-input-block">
+            <input type="text" name="weixin_name" id="weixin_name" autocomplete="off" class="layui-input" value="{{$weixin_name}}">
+          </div>
+        </div>
+
+        <div class="layui-form-item" style="display:inline-block;margin-left:-30px;">
+          <label class="layui-form-label">联系方式：</label>
+          <div class="layui-input-block">
+              <input type="text" name="mobile" id="mobile" autocomplete="off" class="layui-input" value="{{$mobile}}">
+          </div>
+        </div>   
+
+        <div class="layui-form-item" style="display:inline-block;margin-left:-40px;">
+          <label class="layui-form-label">性别：</label>
+          <div class="layui-input-block">
+            <select name="sex" id="sex" lay-filter="sex">
                   <option value="0">全部</option>
                   <option value="1" @if($sex ==1 ) selected @endif>男</option>
                   <option value="2" @if($sex ==2 ) selected @endif>女</option>
               </select>
-            </div>           
-            <button type="submit" class="layui-btn layui-btn-normal button">查询</button>
-        </div>        
+          </div>
+        </div> 
+
+        <div class="layui-form-item" style="display:inline-block;margin-left:-100px;">
+          <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-filter="demo1">查询</button>
+          </div>
+        </div>
     </form>
     <div class="layui-form">
         <table class="layui-table" lay-size="sm">

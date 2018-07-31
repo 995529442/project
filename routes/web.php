@@ -27,6 +27,7 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     Route::get('Index/index', 'IndexController@index')->name('index');
     Route::get('Index', 'IndexController@index')->name('index');
     Route::get('Index/main', 'IndexController@main')->name('main');
+    Route::get('main.html', 'IndexController@main')->name('main');
     Route::get('Index/manage', 'IndexController@manage')->name('manage');
     Route::get('Index/add_admin', 'IndexController@add_admin')->name('add_admin'); //新增管理员
     Route::post('Index/save_admin', 'IndexController@save_admin')->name('save_admin'); //保存管理员信息

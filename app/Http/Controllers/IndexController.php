@@ -114,6 +114,12 @@ class IndexController extends Controller
           "type"     => 2,
           "isvalid"  => true
         );
+
+        $admin_info = DB::table("admins")->where("username",$username)->first();
+
+        if($admin_info){
+          return json_encode(array("errcode"=>-1,"errmsg"=>"已存在系统管理员"));
+        }
         $result = DB::table('admins')->insert($data);
 
         if($result){

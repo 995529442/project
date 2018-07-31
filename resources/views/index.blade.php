@@ -131,15 +131,7 @@
             app.set({
                 type: 'iframe'
             }).init();
-            $('#pay').on('click', function() {
-                layer.open({
-                    title: false,
-                    type: 1,
-                    content: '<img src="/build/images/pay.png" />',
-                    area: ['500px', '250px'],
-                    shadeClose: true
-                });
-            });
+
         });
     </script>
 </body>

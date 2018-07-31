@@ -30,7 +30,7 @@
         </div>
       </section>
     </div>
-    <div class="col-lg-3 col-sm-6 layui-anim layui-anim-up">
+<!--     <div class="col-lg-3 col-sm-6 layui-anim layui-anim-up">
       <section class="panel">
         <div class="symbol commred layui-anim layui-anim-rotate"> <i class="iconpx-user-add"></i>
         </div>
@@ -41,7 +41,7 @@
           <p>今日注册用户</p>
         </div>
       </section>
-    </div>
+    </div> -->
     <div class="col-lg-3 col-sm-6 layui-anim layui-anim-up">
       <section class="panel">
         <div class="symbol articlegreen layui-anim layui-anim-rotate">
