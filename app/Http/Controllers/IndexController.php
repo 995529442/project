@@ -40,8 +40,6 @@ class IndexController extends Controller
      */
     public function main()
     {
-        var_dump("333");
-        exit;
         //获取用户总数
         $user_total = DB::table("cater_users")->where(['admin_id'=>Auth::guard('admins')->user()->id,'isvalid'=>true])->count();
 
