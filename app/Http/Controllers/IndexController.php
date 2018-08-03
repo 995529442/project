@@ -16,7 +16,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $admins = Auth::guard("admins")->user();
+    	$admins = Auth::guard("admins")->user();
 
         $username = $admins->username;  //用户名
         $type = $admins->type;  //类型：1为超级管理员 2为普通管理员

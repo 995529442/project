@@ -35,11 +35,7 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     Route::get('Index/module', 'IndexController@module')->name('module'); //模块分配  
     Route::post('Index/saveModule', 'IndexController@saveModule')->name('saveModule'); //模块分配保存   
 
-    //Route::any('Index/mail', 'IndexController@mail')->name('mail'); //邮件设置 
-    Route::any('Index/mail',function(){
-       var_dump("expression");
-    });
-
+    Route::any('Index/mail', 'IndexController@mail')->name('mail'); //邮件设置 
     Route::any('Index/saveMail', 'IndexController@saveMail')->name('saveMail'); //保存邮件设置 
 
     Route::any('Index/sms', 'IndexController@sms')->name('sms'); //短信设置 
