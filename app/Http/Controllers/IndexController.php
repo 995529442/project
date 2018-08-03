@@ -16,6 +16,9 @@ class IndexController extends Controller
      */
     public function index()
     {
+        $a = DB::table("admins")->first();
+        var_dump($a);
+        exit;
         $admins = Auth::guard("admins")->user();
 
         $username = $admins->username;  //用户名
