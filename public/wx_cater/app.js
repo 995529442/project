@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    appUrl: "http://www.project.com",  //根路径
+    appUrl: "http://139.199.8.120",  //根路径
     admin_id:1,
     cater_type :2  //类型，1堂食 2外卖 3排队
   },
