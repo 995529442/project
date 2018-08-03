@@ -18,7 +18,7 @@ class AdminLogin
         $check = \Auth::guard('admins')->check();  
         if(!$check){
             if(in_array($request->getRequestUri(),array('/','/Index','/Index/index','/Index/main'))){
-               return redirect('login/index2');
+               return redirect('login/index');
             }else{
                return redirect('/html/error.blade.php');
             }              

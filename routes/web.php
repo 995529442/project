@@ -16,7 +16,7 @@
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //定义登录注册路由
-Route::get('login/index2', 'LoginController@index')->name('login.index');                    //登录页
+Route::get('login/index', 'LoginController@index')->name('login.index');                    //登录页
 Route::post('login/checkLogin', 'LoginController@checkLogin')->name('login.checkLogin');    //登录验证
 Route::get('login/logout', 'LoginController@logout')->name('login.logout');                 //退出登录
 Route::get('login/captcha', 'LoginController@captcha')->name('login.captcha');              //验证码
