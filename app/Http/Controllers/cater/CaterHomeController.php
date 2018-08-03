@@ -71,6 +71,6 @@ class CaterHomeController extends Controller
             }
         }
 
-        return redirect('cater/home/index');
+        return redirect('cater/home/home');
     }
 }

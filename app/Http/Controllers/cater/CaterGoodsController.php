@@ -108,7 +108,7 @@ class CaterGoodsController extends Controller
         $result = $CaterGoods->save();
         
         if($result){
-            return redirect("cater/goods/index");
+            return redirect("cater/goods/home");
         }else{
             back();
         }

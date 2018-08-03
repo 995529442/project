@@ -147,7 +147,7 @@ class CaterShopController extends Controller
             }
         }
 
-        return redirect('cater/shop/index');
+        return redirect('cater/shop/home');
     }
 
      //微餐饮-上传图片接口

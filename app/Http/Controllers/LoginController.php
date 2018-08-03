@@ -58,7 +58,7 @@ class LoginController extends Controller
                 return back()->withErrors(['用户名或密码错误'])->withInput();
             }
         }else{
-            return redirect()->to('login/index');
+            return redirect()->to('login/home');
         }
     }
 
@@ -70,7 +70,7 @@ class LoginController extends Controller
     {
         Auth::guard('admins')->logout();
         
-        return redirect()->to('login/index');
+        return redirect()->to('login/home');
     }
     
      /**
