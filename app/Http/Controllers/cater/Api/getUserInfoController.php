@@ -288,27 +288,29 @@ class getUserInfoController extends Controller
        );
        $shipping = DB::table("cater_user_shipping")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true,'is_default'=>1])->first();
 
-       //判断是否在配送范围
-        $delivery_km = DB::table("cater_shop")->where(['admin_id'=>$admin_id,'isvalid'=>true])->value("delivery_km");
-        $detail_address = $shipping->province.$shipping->city.$shipping->country.$shipping->address;
-        $result = Location::declareAddress($detail_address);
+        //判断是否在配送范围
+        if($shipping){
+          $delivery_km = DB::table("cater_shop")->where(['admin_id'=>$admin_id,'isvalid'=>true])->value("delivery_km");
+          $detail_address = $shipping->province.$shipping->city.$shipping->country.$shipping->address;
+          $result = Location::declareAddress($detail_address);
 
-        if($result['errcode'] == 1){
-            $longitude = $result['data']['longitude'];
-            $latitude = $result['data']['latitude'];
+          if($result['errcode'] == 1){
+              $longitude = $result['data']['longitude'];
+              $latitude = $result['data']['latitude'];
 
-            //计算距离
-            $location_info = Location::getLocation($admin_id,$latitude,$longitude);
+              //计算距离
+              $location_info = Location::getLocation($admin_id,$latitude,$longitude);
 
-            if($location_info['errcode'] == 1){ //成功
-              $distance = (int)$location_info['data'][0]['distance'];
+              if($location_info['errcode'] == 1){ //成功
+                $distance = (int)$location_info['data'][0]['distance'];
 
-              if($delivery_km*1000 > $distance){
-                $return['errcode'] = 1;
-                $return['errmsg'] = '成功';
-                $return['data'] = $shipping;
+                if($delivery_km*1000 > $distance){
+                  $return['errcode'] = 1;
+                  $return['errmsg'] = '成功';
+                  $return['data'] = $shipping;
+                }
               }
-            }
+          }          
         }
 
        return $return;
