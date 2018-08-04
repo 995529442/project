@@ -14,6 +14,9 @@ class CaterShopController extends Controller
 {
     //微餐饮-后台首页
     public function index(){
+      var_dump(time());
+      var_dump(date("Y-m-d H:i:s",time()));
+      exit;
         $admins   = Auth::guard('admins')->user();
         $admin_id = $admins->id; 
         //获取省份数据
