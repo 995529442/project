@@ -85,7 +85,7 @@ class getGoodsController extends Controller
 
             if($good_list){
               foreach($good_list as $kk=>$vv){
-                $list[$kk]['img'] = $_SERVER['HTTP_HOST'].$vv->thumb_img;
+                $list[$kk]['img'] = "http://".$_SERVER['HTTP_HOST'].$vv->thumb_img;
                 $list[$kk]['name'] = $vv->good_name;
                 $list[$kk]['count'] = $vv->sell_count+$vv->virtual_sell_count;
                 $list[$kk]['original_price'] = $vv->original_price;
@@ -137,7 +137,7 @@ class getGoodsController extends Controller
       if($goods){
          foreach($goods as $k=>$v){
             $temp = (object)array();
-            $temp->img = $_SERVER['HTTP_HOST'].$v->thumb_img;
+            $temp->img = "http://".$_SERVER['HTTP_HOST'].$v->thumb_img;
             $temp->name = $v->good_name;
             $temp->count = $v->sell_count+$v->virtual_sell_count;
             $temp->original_price = $v->original_price;
