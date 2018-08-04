@@ -14,7 +14,6 @@ class CaterShopController extends Controller
 {
     //微餐饮-后台首页
     public function index(){
-      date_default_timezone_set('PRC');
       var_dump(time());
       var_dump(date("Y-m-d H:i:s",time()));
       exit;
