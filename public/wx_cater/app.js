@@ -14,6 +14,7 @@ App({
     child_this.setData({ userinfo_box: false, l_kefu_lon: true, });
     wx.login({
       success: res => {
+        console.log(res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           //发起网络请求

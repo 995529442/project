@@ -48,8 +48,7 @@ class getUserInfoController extends Controller
         $output = $this -> curl_https($url,"",0);  
         
         $result = json_decode($output,true);
- var_dump($result);
- exit;
+
         if(isset($result['session_key'])){
             $pc = new \WXBizDataCrypt($system_info->appid, $result['session_key']);
             $errCode = $pc->decryptData($encrypted_data, $iv, $data );
