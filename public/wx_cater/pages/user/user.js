@@ -46,8 +46,6 @@ Page({
       that.setData({
         nickname: wx.getStorageSync('nickname')
       })
-
-      console.log("66" + that.data.nickname)
     }
     //用户头像
     if (wx.getStorageSync('avatarurl')) {

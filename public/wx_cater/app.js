@@ -18,7 +18,7 @@ App({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'http://www.project.com/api/cater/getUserInfo/getUsers',
+            url: 'http://139.199.8.120/api/cater/getUserInfo/getUsers',
             data: {
               code: res.code,
               iv: cb.detail.iv,

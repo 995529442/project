@@ -39,11 +39,10 @@
           data: {username:username},  
           dataType: "json",  
           success: function(data){
-          	console.log(data)
              if(data.errcode == 1){
              	layer.msg(data.errmsg, {icon: 1},function(){
+             		window.parent.layer.closeAll();             		
              		window.parent.location.reload();
-             		window.parent.layui.closeAll();
              	}); 
              }else{
              	layer.msg(data.errmsg, {icon: 2},1500); 
