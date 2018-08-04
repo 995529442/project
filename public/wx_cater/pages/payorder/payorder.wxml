@@ -4,7 +4,7 @@
 <view class="payorder">
   <navigator url="../useroperation/useroperation?operation=address&pay_type=1">
     <view class="lxr" style="margin:0rpx;" wx:if="{{cater_type == 2 && default_address !=''}}">
-      <text>{{default_address}}收货信息</text>
+      <text>收货信息</text>
       <view style="font-size:20rpx;" wx:if="{{default_address != ''}}">{{default_address.user_name}} {{default_address.phone}}</view>
     </view>
     <view class="lxr" style="margin:0rpx;" wx:if="{{cater_type == 2 && default_address !=''}}">
