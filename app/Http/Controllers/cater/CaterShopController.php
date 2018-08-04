@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Librarys\uploadFile;
 use App\Librarys\Location;
 use DB;
-
+date_default_timezone_set('PRC');
 class CaterShopController extends Controller
 {
     //微餐饮-后台首页
