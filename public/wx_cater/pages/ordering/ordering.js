@@ -76,7 +76,9 @@ Page({
       money: 0,
       // 总数
       allCount: 0
-    }
+    },
+    shop_info:{},
+    url: app.globalData.appUrl
   },
   /**
    * 确认订单
@@ -387,6 +389,7 @@ Page({
   onLoad: function onLoad(option) { 
       var that =this;
         
+      that.getShop();  //商家信息
       //获取分类菜品
       wx.request({
         url: app.globalData.appUrl + '/api/cater/getGoods/getCatGoods',
@@ -412,5 +415,37 @@ Page({
           console.log(that.data.menuList)
         }
       }) 
+  },
+  /**
+   * 获取商家信息
+   */
+  getShop:function getShop(){
+    var that=this;
+    //获取分类菜品
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
+      data: {
+        admin_id: app.globalData.admin_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+        if(res.data){
+          that.setData({
+            shop_info:res.data
+          })
+        }
+      }
+    })   
+  },
+  /**
+   * 跳转到商家详情
+   */
+  toShop: function toShop(){
+    wx.navigateTo({
+      url: '../detail/detail',
+    })
   }
 });

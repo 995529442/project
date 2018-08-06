@@ -1,14 +1,14 @@
 <!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
 <view class="ordering">
   <!--餐馆顶部-->
-  <!-- <view class="o-top">
-    <image class="o-top-img" src="{{ restaurant.img }}"></image>
+  <view class="o-top" bindtap="toShop">
+    <image class="o-top-img" src="{{url}}{{ shop_info.logo }}"></image>
     <view class="o-top-name">
-      {{ restaurant.name }}
-      <text>{{ restaurant.status }}</text>
+      {{ shop_info.name }}
+      <text>起送价:￥{{ shop_info.delivery_fee }}</text>
+      <text>配送费:￥{{ shop_info.shipping_fee }} 包装费:￥{{ shop_info.package_fee }}</text>
     </view>
-    <view class="o-top-number">立即排号</view>
-  </view> -->
+  </view>
   <!--中间导航-->
   <!-- <view class="o-center">
     <view bindtap="choose" data-tab="0" class="o-c-menu {{ currentmenu == 0 ? 'active' : ''}}">取号</view>
@@ -27,7 +27,7 @@
     <view class="menu1">
       <!--左侧导航选项-->
       <view class="menu0-left">
-        <scroll-view scroll-y="true" style="height: 100vh;">
+        <scroll-view scroll-y="true" style="height: 75vh;">
           <view bindtap="leftChoose" data-menulistid="{{ item.id }}" class="{{ index == 0 ? 'iconfont icon-huo' : '' }} menu0-l-item {{ currentleftmenu == index ? 'active' : '' }}" data-menu="{{ index }}" wx:for="{{ menuList }}" wx:key="unique">
             {{ item.title }}
           </view>
@@ -53,7 +53,7 @@
           </view>
         </view> -->
         <!--菜单内容-->
-        <scroll-view scroll-y="true" scroll-with-animation="true" scroll-into-view="{{ currentmenuid }}" style="height: 100vh;">
+        <scroll-view scroll-y="true" scroll-with-animation="true" scroll-into-view="{{ currentmenuid }}" style="height: 80vh;">
           <block wx:for="{{ menuList }}" wx:for-item="menu0List">
             <!--商品分类标题-->
             <view class="menu0-r-title" id="{{ menu0List.id }}">{{ menu0List.title }}</view>
@@ -81,7 +81,7 @@
     <!--购物车-->
     <view class="shop-car-wrap {{ chooseGoods.allCount > 0 ? 'show' : '' }}">
       <view wx:if="{{ showShopCarContent && chooseGoods.money > 0 }}" class="shop-car-content">
-         <!-- <view class="shop-car-content-title">
+        <!-- <view class="shop-car-content-title">
           <text style="color: #000;">我的购物车</text>
         </view>  -->
         <!--已选商品信息-->

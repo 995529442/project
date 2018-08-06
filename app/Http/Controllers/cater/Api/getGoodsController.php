@@ -54,27 +54,27 @@ class getGoodsController extends Controller
       $cat_list = DB::table("cater_category")->select(['id as cat_id','cate_name'])->where(['admin_id'=>$admin_id,'isvalid'=>true])->orderBy("sort","desc")->orderBy("id","desc")->get();
 
       //上新，推荐，热门菜品
-      $data[0]['title'] = "热门";
-      $data[0]['id'] = "list1";
+      // $data[0]['title'] = "热门";
+      // $data[0]['id'] = "list1";
 
-      $hot_goods = $this->getCateGoods($admin_id,'hot');
-      $data[0]['list'] = $hot_goods;
+      // $hot_goods = $this->getCateGoods($admin_id,'hot');
+      // $data[0]['list'] = $hot_goods;
 
-      $data[1]['title'] = "推荐";
-      $data[1]['id'] = "list2";
+      // $data[1]['title'] = "推荐";
+      // $data[1]['id'] = "list2";
 
-      $rec_goods = $this->getCateGoods($admin_id,'rec');
-      $data[1]['list'] = $rec_goods;
+      // $rec_goods = $this->getCateGoods($admin_id,'rec');
+      // $data[1]['list'] = $rec_goods;
 
-      $data[2]['title'] = "上新";
-      $data[2]['id'] = "list3";
+      // $data[2]['title'] = "上新";
+      // $data[2]['id'] = "list3";
 
-      $new_goods = $this->getCateGoods($admin_id,'new');
-      $data[2]['list'] = $new_goods;
+      // $new_goods = $this->getCateGoods($admin_id,'new');
+      // $data[2]['list'] = $new_goods;
 
       if($cat_list){
          foreach($cat_list as $k=>$v){
-            $k = $k+3;
+            //$k = $k+3;
             $data[$k]['title'] = $v->cate_name;
             $data[$k]['id'] = "list".($k+1);
 
