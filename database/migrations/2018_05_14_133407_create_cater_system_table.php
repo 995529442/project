@@ -16,7 +16,7 @@ class CreateCaterSystemTable extends Migration
         Schema::create('cater_system', function (Blueprint $table) {
             $table->engine = "InnoDb";
             $table->increments('id');
-            $table->integer('admin_id')->comment("关联admins表");
+            $table->integer('admin_id')->index()->comment("关联admins表");
             $table->string('appid',50)->default('')->comment("appid");
             $table->string('appsecret',50)->default('')->comment("appsecret");
             $table->string('mch_id',50)->default('')->comment("商户号");

@@ -16,9 +16,9 @@ class CreateCaterUsersTable extends Migration
         Schema::create('cater_users', function (Blueprint $table) {
             $table->engine = "InnoDb";
             $table->increments('id');
-            $table->integer('admin_id')->comment("关联admins表");
-            $table->string('weixin_name',50)->default('')->comment("微信名称");
-            $table->string('mobile',20)->default('')->comment("手机号");
+            $table->integer('admin_id')->index()->comment("关联admins表");
+            $table->string('weixin_name',50)->index()->default('')->comment("微信名称");
+            $table->string('mobile',20)->index()->default('')->comment("手机号");
             $table->string('province',50)->default('')->comment("省份");
             $table->string('city',50)->default('')->comment("城市");
             $table->string('country',50)->default('')->comment("县区");

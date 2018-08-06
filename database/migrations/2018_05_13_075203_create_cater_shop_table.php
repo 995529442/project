@@ -16,7 +16,7 @@ class CreateCaterShopTable extends Migration
         Schema::create('cater_shop', function (Blueprint $table) {
             $table->engine = 'InnoDb';
             $table->increments('id');
-            $table->integer('admin_id')->comment("关联admins表");
+            $table->integer('admin_id')->index()->comment("关联admins表");
             $table->string('name',20)->default('')->comment("名称");
             $table->time('begin_time')->comment('营业开始时间');
             $table->time('end_time')->comment('营业结束时间');

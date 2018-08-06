@@ -16,7 +16,7 @@ class CreateCaterUserShippingTable extends Migration
         Schema::create('cater_user_shipping', function (Blueprint $table) {
             $table->engine = "InnoDb";
             $table->increments('id');
-            $table->integer('admin_id')->comment("关联admins表");
+            $table->integer('admin_id')->index()->comment("关联admins表");
             $table->unsignedInteger('user_id')->comment("关联cater_users的id,用户id");
             $table->string('user_name',50)->default('')->comment("用户名称");
             $table->string('phone',20)->default('')->comment("联系方式");
