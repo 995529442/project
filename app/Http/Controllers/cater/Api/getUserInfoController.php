@@ -67,7 +67,7 @@ class getUserInfoController extends Controller
                     "province" => $user_info['province'],
                     "city" => $user_info['city'],
                     "openid" => $user_info['openId'],
-                    "unionid" => $user_info['unionId'],
+                    "unionid" => isset($user_info['unionId'])?$user_info['unionId']:"",
                     "headimgurl" => $user_info['avatarUrl'],
                     "sex" => $user_info['gender']
                 );
