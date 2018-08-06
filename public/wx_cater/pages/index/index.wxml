@@ -32,9 +32,9 @@
         </navigator>
       </block>
     </view>
-    <navigator open-type="switchTab" wx:if="{{goods.length == 6}}" url="../ordering/ordering">
+    <!-- <navigator open-type="switchTab" wx:if="{{goods.length == 6}}" url="../ordering/ordering">
       <view style="float:right;margin-right:60rpx;line-height: 73rpx;font-size: 30rpx;">更多>></view>
-    </navigator>
+    </navigator> -->
     <!-- <view style="margin-top:70rpx;border-bottom:2rpx solid #eee;"></view> -->
   </view>
 </view>
