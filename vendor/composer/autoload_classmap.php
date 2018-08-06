@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\IndexController' => $baseDir . '/app/Http/Controllers/IndexController.php',
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\cater\\CaterCategoryController' => $baseDir . '/app/Http/Controllers/cater/CaterCategoryController.php',
+    'App\\Http\\Controllers\\cater\\CaterDeskController' => $baseDir . '/app/Http/Controllers/cater/CaterDeskController.php',
     'App\\Http\\Controllers\\cater\\CaterGoodsController' => $baseDir . '/app/Http/Controllers/cater/CaterGoodsController.php',
     'App\\Http\\Controllers\\cater\\CaterHomeController' => $baseDir . '/app/Http/Controllers/cater/CaterHomeController.php',
     'App\\Http\\Controllers\\cater\\CaterOrdersController' => $baseDir . '/app/Http/Controllers/cater/CaterOrdersController.php',

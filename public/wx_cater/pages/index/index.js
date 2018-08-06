@@ -11,10 +11,6 @@ Page({
     url: app.globalData.appUrl,
     navList: [
       {
-        navTitle: '商家',
-        navIcon: 'iconfont icon-552cc4077f2ed:before'
-      },
-      {
         navTitle: '点餐',
         navIcon: 'iconfont icon-canshi:before'
       }, {

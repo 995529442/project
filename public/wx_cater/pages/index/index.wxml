@@ -11,9 +11,9 @@
   <template is="carousel" data="{{ imgUrls }}"></template>
   <!--nav-->
   <view class="nav">
-    <navigator url="../detail/detail" hover-class="none" class="{{ item.navIcon }}" wx:for="{{ navList }}" wx:key="unique">
+    <view class="{{ item.navIcon }}" wx:for="{{ navList }}" wx:key="unique">
       <view style="displat:inline-block;padding-left:20rpx;">{{ item.navTitle }}</view>
-    </navigator>
+    </view>
   </view>
   <!--热门菜品-->
   <view class="hot-shop">

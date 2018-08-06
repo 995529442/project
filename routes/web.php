@@ -108,6 +108,14 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::get('reject_refund', 'cater\CaterOrdersController@reject_refund')->name('cater.orders.reject_refund'); //订单拒绝退款页面
        });
 
+       //餐桌管理
+       Route::group(['prefix'=>'desk'],function(){
+          Route::get('home', 'cater\CaterDeskController@index')->name('cater.desk.index'); //餐桌管理
+          Route::get('addDesk', 'cater\CaterDeskController@addDesk')->name('cater.desk.addDesk'); //添加餐桌
+          Route::any('saveDesk', 'cater\CaterDeskController@saveDesk')->name('cater.desk.saveDesk'); //保存餐桌
+          Route::any('operate', 'cater\CaterDeskController@operate')->name('cater.desk.operate'); //删除餐桌，生成二维码
+       });
+
     });    
 });
 

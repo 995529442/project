@@ -86,13 +86,16 @@
                                     <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.goods.index') }}',icon:'',title:'商品管理',id:'9'}"><span> 商品管理</span></a>
                                 </dd>
                                 <dd>
-                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.orders.index') }}',icon:'',title:'订单管理',id:'10'}"><span> 订单管理</span></a>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.desk.index') }}',icon:'',title:'餐桌管理',id:'10'}"><span>餐桌管理</span></a>
                                 </dd>
                                 <dd>
-                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.users.index') }}',icon:'',title:'用户管理',id:'11'}"><span> 用户管理</span></a>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.orders.index') }}',icon:'',title:'订单管理',id:'11'}"><span> 订单管理</span></a>
                                 </dd>
                                 <dd>
-                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.system.index') }}',icon:'',title:'小程序管理',id:'12'}"><span> 小程序管理</span></a>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.users.index') }}',icon:'',title:'用户管理',id:'12'}"><span> 用户管理</span></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;" kit-target data-options="{url:'{{ route('cater.system.index') }}',icon:'',title:'小程序管理',id:'13'}"><span> 小程序管理</span></a>
                                 </dd>
                             </dl>
                         </li>
