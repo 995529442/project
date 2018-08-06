@@ -51,8 +51,22 @@ class getGoodsController extends Controller
       
       $data = array();
 
-      $cat_list = DB::table("cater_category")->select(['id as cat_id','cate_name'])->where(['admin_id'=>$admin_id,'isvalid'=>true])->orderBy("sort","desc")->orderBy("id","desc")->get();
+      $cat_list = DB::table("cater_category")
+                  ->select(['id as cat_id','cate_name'])
+                  ->where(['admin_id'=>$admin_id,'isvalid'=>true])
+                  ->orderBy("sort","desc")
+                  ->orderBy("id","desc")
+                  ->get();
 
+      //查询分类下是否与商品
+      $new_cat_list = array();
+      foreach($cat_list as $k=>$v){
+          $good_list = DB::table("cater_goods")->where(['admin_id'=>$admin_id,'cate_id'=>$v->cat_id,'isout'=>2,'isvalid'=>true])->where("storenum",">",0)->get();
+
+          if(count($good_list) > 0){
+            array_push($new_cat_list, $v);
+          }
+      }
       //上新，推荐，热门菜品
       // $data[0]['title'] = "热门";
       // $data[0]['id'] = "list1";
@@ -72,8 +86,8 @@ class getGoodsController extends Controller
       // $new_goods = $this->getCateGoods($admin_id,'new');
       // $data[2]['list'] = $new_goods;
 
-      if($cat_list){
-         foreach($cat_list as $k=>$v){
+      if($new_cat_list){
+         foreach($new_cat_list as $k=>$v){
             //$k = $k+3;
             $data[$k]['title'] = $v->cate_name;
             $data[$k]['id'] = "list".($k+1);

@@ -27,8 +27,8 @@
     <view class="menu1">
       <!--左侧导航选项-->
       <view class="menu0-left">
-        <scroll-view scroll-y="true" style="height: 75vh;">
-          <view bindtap="leftChoose" data-menulistid="{{ item.id }}" class="{{ index == 0 ? 'iconfont icon-huo' : '' }} menu0-l-item {{ currentleftmenu == index ? 'active' : '' }}" data-menu="{{ index }}" wx:for="{{ menuList }}" wx:key="unique">
+        <scroll-view scroll-y="true" style="height: 77vh;">
+          <view bindtap="leftChoose" data-menulistid="{{ item.id }}" class="menu0-l-item {{ currentleftmenu == index ? 'active' : '' }}" data-menu="{{ index }}" wx:for="{{ menuList }}" wx:key="unique">
             {{ item.title }}
           </view>
         </scroll-view>
