@@ -27,7 +27,7 @@ class MiniappApi
       if(!$system_info){
         $return['errmsg'] = "请先配置小程序信息";
 
-        return json_encode($return);
+        return $return;
       }
 
       $acc_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$system_info->appid."&secret=".$system_info->appsecret;
@@ -43,7 +43,7 @@ class MiniappApi
 
           $data = array(
             "path" => "pages/ordering/ordering?admin_id=".$admin_id."&cater_type=1",
-            "width" => 430,
+            "width" => 200,
 
           );
 
@@ -53,13 +53,22 @@ class MiniappApi
             $return['errcode'] = 1;
             $return['errmsg'] = "成功";
             
-            $path = public_path("upload/".$admin_id.$upload_path);
+            $uplaod_path = "/upload/".$admin_id.$upload_path;
+            $path = public_path($uplaod_path);
+
+            $file_name = date("Ymd").mt_rand(1,99999).".png";
 
             if (!is_dir($path)){
               mkdir($path,0755,true);
             }
+
+            file_put_contents($path."/".$file_name,$output);
+
+            $return['path'] = $uplaod_path."/".$file_name;
           }
       }
+
+      return $return;
     }
 
     /**

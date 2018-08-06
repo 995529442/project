@@ -22,7 +22,7 @@
                  <tr>
                    <td>{{$v->id}}</td>
                    <td>{{$v->name}}</td>
-                   <td>{{$v->img_path}}</td>
+                   <td><img src='{{$v->img_path}}' /></td>
                    <td>
                       <button class="layui-btn layui-btn-normal layui-btn-sm" onclick="operate({{$v->id}},'qr_code')">生成二维码</button>
                       <a class="layui-btn layui-btn-normal layui-btn-sm" href="{{ route('cater.desk.addDesk') }}?desk_id={{$v->id}}">编辑</a>

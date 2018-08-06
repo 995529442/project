@@ -12,9 +12,6 @@ class CaterDeskController extends Controller
 {
     //微餐饮-餐桌首页
     public function index(Request $request){
-        $aa = MiniappApi::createQrCode(1,'/cater/desk');
-        var_dump($aa);
-        exit;
         $admins   = Auth::guard('admins')->user();
     	$admin_id = $admins->id;
 
@@ -107,7 +104,18 @@ class CaterDeskController extends Controller
                  $return['errmsg'] = '删除成功';
                }
             }else{  //生成二维码
+                $result = MiniappApi::createQrCode(1,'/cater/desk');
 
+                if($result['errcode'] == 1){ //成功
+                   $return['errcode'] = 1;
+                   $return['errmsg'] = '生成成功';
+
+                   $path = $result['path'];
+                   
+                   DB::table("cater_desk")->whereId($desk_id)->update(['img_path'=>$path]);
+                }else{
+                   $return['errmsg'] = '生成失败';
+                }
             }
         }else{
             $return['errmsg'] = '系统错误';
