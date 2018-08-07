@@ -9,17 +9,19 @@ Page({
   data: {
     userinfo_box: false,
     url: app.globalData.appUrl,
-    navList: [
-      {
-        navTitle: '点餐',
-        navIcon: 'iconfont icon-canshi:before'
-      }, {
-        navTitle: '外卖',
-        navIcon: 'iconfont icon-mifen2:before'
-      }],
+    // navList: [
+    //   {
+    //     navTitle: '点餐',
+    //     navIcon: 'iconfont icon-canshi:before'
+    //   }, {
+    //     navTitle: '外卖',
+    //     navIcon: 'iconfont icon-mifen2:before'
+    //   }],
     goods: [],//显示菜品
-    active_index:1,
-    imgUrls: []
+    active_index: 1,
+    imgUrls: [],
+    url: app.globalData.appUrl,
+    shop_info:{}
   },
   /**
    * 用户搜索
@@ -46,31 +48,32 @@ Page({
         wx.setStorageSync('longitude', longitude);
       }
     })
-
+    
     that.getHomeImg();//首页轮播图
+    that.getShop();//商家信息
     that.getGoods("hot");//首页菜品
   },
   //选取表头,获取数据
-  selectGoods:function(e){
-    var that=this;
+  selectGoods: function (e) {
+    var that = this;
     var select_type = e.currentTarget.dataset.type;
     var active_index = that.data.active_index;
 
-    if (select_type == "hot"){
-      active_index=1;
+    if (select_type == "hot") {
+      active_index = 1;
     } else if (select_type == "rec") {
-      active_index=2;
-    } else if (select_type == "new"){
-      active_index=3;
+      active_index = 2;
+    } else if (select_type == "new") {
+      active_index = 3;
     }
 
     that.setData({
       active_index: active_index
-    })  
+    })
 
     that.getGoods(select_type);
   },
-  getHomeImg:function(){
+  getHomeImg: function () {
     var that = this;
 
     wx.request({
@@ -82,10 +85,10 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        if(res.data){
+        if (res.data) {
           var home_img = res.data;
           var imgUrls = new Array();
-          for (var k = 0; k < home_img.length;k++){
+          for (var k = 0; k < home_img.length; k++) {
             imgUrls.push(that.data.url + home_img[k]['img_path']);
           }
           that.setData({
@@ -96,8 +99,8 @@ Page({
     })
   },
   //获取首页菜品
-  getGoods:function(select_type){
-    var that=this;
+  getGoods: function (select_type) {
+    var that = this;
 
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getGoods/getHotRecGoods',
@@ -113,6 +116,28 @@ Page({
         if (res.data) {
           that.setData({
             goods: res.data
+          })
+        }
+      }
+    })
+  },
+  /**
+ * 获取商家信息
+ */
+  getShop: function getShop() {
+    var that = this;
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
+      data: {
+        admin_id: app.globalData.admin_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            shop_info: res.data
           })
         }
       }

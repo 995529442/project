@@ -10,9 +10,17 @@
   <!--carousel-->
   <template is="carousel" data="{{ imgUrls }}"></template>
   <!--nav-->
-  <view class="nav">
+  <!-- <view class="nav">
     <view class="{{ item.navIcon }}" wx:for="{{ navList }}" wx:key="unique">
       <view style="displat:inline-block;padding-left:20rpx;">{{ item.navTitle }}</view>
+    </view>
+  </view> -->
+  <view class="o-top" bindtap="toShop">
+    <image class="o-top-img" src="{{url}}{{shop_info.logo}}"></image>
+    <view class="o-top-name">
+      <view>{{shop_info.name}}</view>
+      <view>{{shop_info.introduce}}</view>
+      <view style="visibility:hidden;">占位符</view>
     </view>
   </view>
   <!--热门菜品-->
