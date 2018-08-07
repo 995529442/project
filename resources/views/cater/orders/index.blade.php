@@ -32,8 +32,8 @@
           <div class="layui-input-block">
             <select name="type" id="type" lay-filter="type">
                   <option value="0">全部</option>
-                  <option value="1" @if($type ==1 ) selected @endif>外卖</option>
-                  <option value="2" @if($type ==2 ) selected @endif>点餐</option>
+                  <option value="1" @if($type ==1 ) selected @endif>点餐</option>
+                  <option value="2" @if($type ==2 ) selected @endif>外卖</option>
               </select>
           </div>
         </div>   
@@ -87,6 +87,7 @@
                 <td style="width:5%;">订单状态</td>
                 <td style="width:5%;">支付金额</td>
                 <td style="width:5%;">数量</td>
+                <td style="width:10%;">下单时间</td>
                 <td style="width:10%;">留言</td>
                 <td style="width:10%;">操作</td>                                 
             </tr>
@@ -100,9 +101,9 @@
                     <td>{{$v->weixin_name}}</td>
                     <td>
                         @if($v->type == 1)
-                          外卖
-                        @elseif($v->type == 2)
                           点餐
+                        @elseif($v->type == 2)
+                          外卖
                         @endif
                     </td>                  
                     <td>
@@ -137,6 +138,7 @@
                     </td>
                     <td>{{$v->real_pay}}</td>
                     <td>{{$v->total_num}}</td> 
+                    <td>{{date("Y-m-d H:i:s",$v->create_time)}}</td>
                     <td>{{$v->remark}}</td>
                     <td>
                         @if($v->status == 0 && $v->pay_type == 0)

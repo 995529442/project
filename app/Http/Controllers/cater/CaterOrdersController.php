@@ -26,7 +26,7 @@ class CaterOrdersController extends Controller
        $order = DB::table("cater_orders as or")
        ->leftJoin("cater_users as us",'or.user_id','us.id')
        ->where(["or.admin_id"=>$admin_id,"or.isvalid"=>true])
-       ->select(['or.id as order_id','or.batchcode','or.phone','or.pay_type','or.status','or.type','or.real_pay','or.total_num','or.remark','us.weixin_name']);
+       ->select(['or.id as order_id','or.batchcode','or.phone','or.pay_type','or.status','or.type','or.real_pay','or.total_num','or.remark','or.create_time','us.weixin_name']);
 
        if($batchcode){
        	  $order -> where("or.batchcode","like","%$batchcode%");

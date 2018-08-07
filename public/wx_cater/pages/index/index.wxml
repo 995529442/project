@@ -15,12 +15,19 @@
       <view style="displat:inline-block;padding-left:20rpx;">{{ item.navTitle }}</view>
     </view>
   </view> -->
-  <view class="o-top" bindtap="toShop">
+  <view class="o-top">
     <image class="o-top-img" src="{{url}}{{shop_info.logo}}"></image>
     <view class="o-top-name">
       <view>{{shop_info.name}}</view>
       <view>{{shop_info.introduce}}</view>
       <view style="visibility:hidden;">占位符</view>
+    </view>
+    <view class="restaurant-info">
+      <view bindtap="openLocation" data-latitude="{{ shop_info.latitude }}" data-longitude="{{ shop_info.longitude }}" class="r-i-address iconfont icon-icglobaltitlebar48iconfontmap" style="padding:10rpx;font-size: 28rpx;color: #333;width:70%;float:left;color:#7d7d7b;">
+        {{ shop_info.provinve }}{{ shop_info.city }}{{ shop_info.area }}{{ shop_info.address }}
+      </view>
+      <view bindtap="callPhone" data-phone="{{ shop_info.phone }}" class="r-i-tel iconfont icon-dianhua" style="display:inline-block;width:10%;float:right;font-size:40rpx;color:#f09f25;"></view>
+      <!-- <view bindtap="callPhone" class="r-i-tel iconfont icon-dianhua triangle" style="padding:10rpx;font-size: 28rpx;color: #333;"> {{ shop_info.phone }} </view> -->
     </view>
   </view>
   <!--热门菜品-->

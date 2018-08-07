@@ -31,15 +31,15 @@ Page({
     //   time: '--分钟'
     // }],
     url: app.globalData.appUrl,
-    latitude:'',
-    longitude:'', 
+    latitude: '',
+    longitude: '',
     restaurant: {}
   },
   /**
    * 拨打电话
    */
   callPhone: function callPhone() {
-    var that=this;
+    var that = this;
     wx.makePhoneCall({
       phoneNumber: that.data.restaurant.phone
     });
@@ -60,7 +60,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad() {
-    var that=this;
+    var that = this;
 
     if (wx.getStorageSync('latitude') == '' || wx.getStorageSync('longitude') == '') {
       wx.getLocation({
@@ -77,12 +77,17 @@ Page({
           wx.setStorageSync('longitude', longitude);
         }
       })
-    }else{
+    } else {
       that.setData({
         latitude: wx.getStorageSync('latitude'),
         longitude: wx.getStorageSync('longitude')
       })
     }
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
       data: {
@@ -94,23 +99,23 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
+        wx.hideLoading()
         var imgUrls = that.data.imgUrls;
-        if(res.data){
+        if (res.data) {
           var figure_img = res.data.figure_img;
 
-          if (figure_img != ""){
-            for (var k = 0; k < figure_img.length;k++){
+          if (figure_img != "") {
+            for (var k = 0; k < figure_img.length; k++) {
               imgUrls.push(that.data.url + figure_img[k]['img_path']);
             }
           }
           that.setData({
-            restaurant:res.data,
+            restaurant: res.data,
             imgUrls: imgUrls
           })
         }
       }
-    })   
+    })
   },
 });
 

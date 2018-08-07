@@ -13,7 +13,9 @@ Page({
     userinfo_box: false,
     user_id: 0,
     address_page: 1,  //地址页数
+    order_page: 1,   //订单页数
     address: [],
+    orders: [],
     operation: null,
     pay_type:0,
     numberList: {
@@ -113,7 +115,7 @@ Page({
       starTime: '2015.12.01',
       endTime: '2016.12.03'
     }],
-    orderNumber: ['待支付', '全部'],
+    orderNumber: ['点餐', '外卖'],
     orderList: {
       pay: [{
         img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -169,8 +171,9 @@ Page({
    * @param e
    */
   chooseCouponTab: function chooseCouponTab(e) {
+    var tabid = e.currentTarget.dataset.tabid;
     this.setData({
-      currentCouponTab: e.currentTarget.dataset.tabid
+      currentCouponTab: tabid
     });
   },
 
@@ -266,6 +269,8 @@ Page({
       operation = '积分兑换';
     } else if (operation === 'order') {
       operation = '我的订单';
+
+      that.get_my_orders();
     } else if (operation === 'merchant') {
       operation = '商家入驻';
     } else if (operation === 'address') {
@@ -449,6 +454,40 @@ Page({
         delta: 1
       })
     }
+  },
+  /**
+   * 获取我的订单
+   */
+  get_my_orders: function get_my_orders(){
+    var that = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/order/getOrders',
+      data: {
+        admin_id: app.globalData.admin_id,
+        user_id: that.data.user_id,
+        page: that.data.order_page,
+        type: that.data.currentCouponTab
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+        return
+        wx.hideLoading()
+        if (res.data.errcode > 0) {
+          var address = that.data.address;
+          address = address.concat(res.data.data)
+          that.setData({
+            address: address
+          });
+        }
+      }
+    })
   },
   // 授权提示
   UserInfo_click: function (e) {

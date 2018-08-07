@@ -163,4 +163,26 @@ Page({
     }
     app.getUserInfo(e, that.onLoad, this);
   },
+  /**
+ * 打开位置
+ */
+  openLocation: function openLocation(e) {
+    var latitude = parseInt(e.currentTarget.dataset.latitude);
+    var longitude = parseInt(e.currentTarget.dataset.longitude);
+    wx.openLocation({
+      latitude: latitude,
+      longitude: longitude,
+      scale: 28
+    })
+  },
+  /**
+ * 拨打电话
+ */
+  callPhone: function callPhone(e) {
+    var phone = e.currentTarget.dataset.phone;
+
+    wx.makePhoneCall({
+      phoneNumber: phone
+    });
+  },
 });

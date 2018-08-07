@@ -160,6 +160,7 @@ class orderController extends Controller
               "shipping_fee" => (float)$shipping_fee,
               "package_fee" => (float)$package_fee,
               "remark" => $remark,
+              "create_time" => time(),
               "isvalid" => true
            );
 

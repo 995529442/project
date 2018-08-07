@@ -123,7 +123,7 @@
   height: 181rpx;
   box-sizing: border-box;
   border-bottom: 1rpx solid #e5e5e5;
-  padding: 33rpx 20rpx 20rpx;
+  padding: 33rpx 20rpx 200rpx;
 }
 
 .o-top .o-top-img {
@@ -134,7 +134,7 @@
 }
 
 .o-top .o-top-name {
-  font-size: 28rpx;
+  font-size: 32rpx;
   color: #333;
   display: inline-block;
 }
