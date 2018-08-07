@@ -104,7 +104,7 @@ class getGoodsController extends Controller
                 $list[$kk]['count'] = $vv->sell_count+$vv->virtual_sell_count;
                 $list[$kk]['original_price'] = $vv->original_price;
                 $list[$kk]['price'] = $vv->now_price;
-                $list[$kk]['introduce'] = strlen($vv->introduce)>200?substr($vv->introduce,0,200)."...":$vv->introduce;
+                $list[$kk]['introduce'] = $vv->introduce;
                 $list[$kk]['id'] = $data[$k]['id']."_".$vv->goods_id;
               }
             }
@@ -113,7 +113,6 @@ class getGoodsController extends Controller
 
             unset($list);
          }
-
         return json_encode($data);
       }else{
         return false;
