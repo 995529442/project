@@ -50,6 +50,7 @@
       <text>备注</text>
       <input value="" name="remark" placeholder="口味偏好等要求" />
     </view>
-    <button type="primary" formType="submit" style="position:fixed;bottom:20rpx;width:90%;">付款</button>
+    <button type="primary" wx:if="{{!is_locked_pay}}" formType="submit" style="position:fixed;bottom:20rpx;width:90%;">付款</button>
+    <button type="primary" wx:if="{{is_locked_pay}}" disabled='disabled' formType="submit" style="position:fixed;bottom:20rpx;width:90%;">付款</button>
   </form>
 </view>

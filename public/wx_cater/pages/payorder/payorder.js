@@ -16,7 +16,8 @@ Page({
     shop_info: {},
     user_id: 0,
     default_address: {},
-    goods_id_arr:''
+    goods_id_arr:'',
+    is_locked_pay:0,
   },
   /**
    * 支付货款
@@ -194,7 +195,9 @@ Page({
       })
       return;
     }
-
+    that.setData({
+      is_locked_pay:1
+    })
     wx.request({
       url: app.globalData.appUrl + '/api/cater/order/pay',
       data: {

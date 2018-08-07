@@ -214,8 +214,8 @@
             <text>{{item.province}}{{item.city}}{{item.country}}</text>
             <text>{{item.address}}</text>
             <view style="position:absolute;right:40rpx;" wx:if="{{pay_type == 0}}">
-              <text bindtap="add_address" data-id="{{item.id}}" class="iconfont" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;padding-left:10rpx;"></text>
-              <text bindtap="del_address" data-id="{{item.id}}" class="iconfont" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;padding-left:10rpx;">4</text>
+              <text bindtap="add_address" data-id="{{item.id}}" class="iconfont icon-canshi before" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;padding-left:10rpx;"></text>
+              <text bindtap="del_address" data-id="{{item.id}}" class="iconfont icon-chuliyuyue:before" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;padding-left:10rpx;"></text>
             </view>
             <view style="position:absolute;right:40rpx;" wx:if="{{pay_type == 1 && item.is_out ==1 }}">
               <text style="font-size: 30rpx;padding-top:10rpx;padding-left:10rpx;">不在配送范围</text>
@@ -224,7 +224,6 @@
         </view>
       </block>
     </scroll-view>
-                <img src='../../images/delete.png' />
     <button type="primary" bindtap="add_address" style="position:absolute;bottom:20rpx;width:45%;">添加地址</button>
     <button type="warn" bindtap="add_wx_address" style="position:absolute;left:50%;bottom:20rpx;width:45%;">获取微信地址</button>
   </view>
