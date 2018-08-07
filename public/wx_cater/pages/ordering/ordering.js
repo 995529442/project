@@ -78,7 +78,10 @@ Page({
       allCount: 0
     },
     shop_info:{},
-    url: app.globalData.appUrl
+    url: app.globalData.appUrl,
+    show_good_name:"",
+    introduce:'',    //菜品介绍
+    goodsinfo_box: false //是否显示介绍
   },
   /**
    * 确认订单
@@ -454,6 +457,19 @@ Page({
    */
   show_intro: function show_intro(e){
     var that=this;
-    console.log(e)
+    var show_good_name = e.currentTarget.dataset.good_name;
+    var introduce = e.currentTarget.dataset.intro;
+
+    that.setData({
+      goodsinfo_box: !that.data.goodsinfo_box,
+      show_good_name: show_good_name,
+      introduce: introduce
+    }); 
+  },
+
+  showInstro: function showInstro(){
+    this.setData({
+      goodsinfo_box: !this.data.goodsinfo_box
+    });  
   }
 });

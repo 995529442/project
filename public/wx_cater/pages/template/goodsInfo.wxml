@@ -1,0 +1,9 @@
+<!-- 获取用户信息授权提示窗口  -->
+<template name="goodsinfo">
+  <view class="userinfo_box" wx:if="{{goodsinfo_box}}" bindtap="showInstro">
+    <view class='userinfo_prompt_box' style="height:40vh;">
+      {{show_good_name}}{{introduce.length}}
+      <view style="font-size:30rpx;">{{introduce}}</view>
+    </view>
+  </view>
+</template>
