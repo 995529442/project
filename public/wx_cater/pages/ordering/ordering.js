@@ -392,6 +392,9 @@ Page({
   onLoad: function onLoad(option) { 
       var that =this;
         
+      wx.showLoading({
+        title: '加载中',
+      })
       that.getShop();  //商家信息
       //获取分类菜品
       wx.request({
@@ -403,6 +406,7 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
+          wx.hideLoading();
           if(res){
             that.setData({
               menuList:res.data
@@ -415,7 +419,6 @@ Page({
               console.log(that.data.chooseGoods)
             }
           }
-          console.log(that.data.menuList)
         }
       }) 
   },

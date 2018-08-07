@@ -1,1 +1,4 @@
-{"navigationBarTitleText":"打赏"}
+{
+  "navigationBarTitleText": "打赏",
+  "disableScroll": true
+}

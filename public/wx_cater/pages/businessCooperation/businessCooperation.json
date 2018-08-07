@@ -1,1 +1,4 @@
-{"navigationBarTitleText":"资质信息"}
+{
+  "navigationBarTitleText": "资质信息",
+  "disableScroll": true
+}

@@ -48,7 +48,11 @@ Page({
         wx.setStorageSync('longitude', longitude);
       }
     })
-    
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
     that.getHomeImg();//首页轮播图
     that.getShop();//商家信息
     that.getGoods("hot");//首页菜品
@@ -112,7 +116,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
+        wx.hideLoading();
         if (res.data) {
           that.setData({
             goods: res.data
