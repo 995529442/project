@@ -447,5 +447,13 @@ Page({
     wx.navigateTo({
       url: '../detail/detail',
     })
+  },
+
+  /**
+   * 展示商品介绍
+   */
+  show_intro: function show_intro(e){
+    var that=this;
+    console.log(e)
   }
 });

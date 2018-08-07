@@ -93,7 +93,7 @@ class getGoodsController extends Controller
             $data[$k]['id'] = "list".($k+1);
 
             //获取该分类下的菜品
-            $good_list = DB::table("cater_goods")->select(['id as goods_id','good_name','sell_count','virtual_sell_count','thumb_img','original_price','now_price'])->where(['admin_id'=>$admin_id,'cate_id'=>$v->cat_id,'isout'=>2,'isvalid'=>true])->where("storenum",">",0)->get();
+            $good_list = DB::table("cater_goods")->select(['id as goods_id','good_name','sell_count','virtual_sell_count','thumb_img','original_price','now_price','introduce'])->where(['admin_id'=>$admin_id,'cate_id'=>$v->cat_id,'isout'=>2,'isvalid'=>true])->where("storenum",">",0)->get();
 
             $list = array();
 
@@ -104,6 +104,7 @@ class getGoodsController extends Controller
                 $list[$kk]['count'] = $vv->sell_count+$vv->virtual_sell_count;
                 $list[$kk]['original_price'] = $vv->original_price;
                 $list[$kk]['price'] = $vv->now_price;
+                $list[$kk]['introduce'] = $vv->introduce;
                 $list[$kk]['id'] = $data[$k]['id']."_".$vv->goods_id;
               }
             }
