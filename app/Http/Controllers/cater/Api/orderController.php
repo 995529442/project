@@ -38,7 +38,7 @@ class orderController extends Controller
        ); 
 
       $order_list = DB::table("cater_orders")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true,'type'=>$type])
-          ->select(['id as order_id','batchcode','pay_type','status','total_money','total_num'])
+          ->selectRaw('id as order_id,batchcode,pay_type,status,total_money,total_num,FROM_UNIXTIME(create_time) as create_time')
           ->orderByDesc("id")
           ->offset(($page - 1) * 4)->limit(4)->get();
       
