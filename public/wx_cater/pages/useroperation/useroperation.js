@@ -1,7 +1,3 @@
-'use strict';
-
-// 获取全局应用程序实例对象
-// const app = getApp()
 var app = getApp();
 // 创建页面实例对象
 Page({
@@ -11,159 +7,15 @@ Page({
   data: {
     title: 'useroperation',
     userinfo_box: false,
+    url: app.globalData.appUrl,
     user_id: 0,
-    address_page: 1,  //地址页数
-    order_page: 1,   //订单页数
+    page: 1,          //页数
     address: [],
     orders: [],
     operation: null,
-    pay_type:0,
-    numberList: {
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      name: '人马大饭堂',
-      kind: '湘菜',
-      average: 88,
-      distance: 453,
-      desk: 'C2',
-      wait: 5
-    },
-    message: [{
-      title: '三太子三汁',
-      id: 'message1',
-      content: '阿斯顿飞那是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就卡死的李开复',
-      time: '2012-12-12'
-    }, {
-      title: '三太子三汁2',
-      id: 'message2',
-      content: '阿斯顿飞那是的疯狂就拉上的了风景阿萨德是的疯狂就拉上的了风景阿萨德是的疯狂就拉上的了风景阿萨德是的疯狂就拉上的了风景阿萨德是的疯狂就拉上的了风景阿萨德是的疯狂就拉上的了风景阿萨德来房间爱绿色饭店就卡死的李开复',
-      time: '2012-12-12'
-    }],
-    integral: [{
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      integralid: 'renma1',
-      name: '人马大饭堂',
-      delMoney: 20,
-      useMoney: 100,
-      needIntegral: 200
-    }, {
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      integralid: 'renma2',
-      name: '人马大饭堂',
-      delMoney: 20,
-      useMoney: 100,
-      needIntegral: 200
-    }, {
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      name: '人马大饭堂',
-      integralid: 'renma3',
-      delMoney: 20,
-      useMoney: 100,
-      needIntegral: 200
-    }],
+    pay_type: 0,
     currentCouponTab: 0,
-    couponNumber: [{
-      title: '未使用',
-      count: 6
-    }, {
-      title: '使用记录',
-      count: 0
-    }, {
-      title: '已过期',
-      count: 0
-    }],
-    couponNoUseList: [{
-      name: '人马科技大饭堂',
-      id: 'shopId',
-      delMoney: 100,
-      useCondition: '消费即用',
-      starTime: '2015.12.01',
-      endTime: '2016.12.03'
-    }, {
-      name: '人马科技大饭堂',
-      id: 'shopId',
-      delMoney: 100,
-      useCondition: '满1000可用',
-      starTime: '2015.12.01',
-      endTime: '2016.12.03'
-    }, {
-      name: '人马科技大饭堂',
-      id: 'shopId',
-      discount: 5,
-      useCondition: '满100可用',
-      starTime: '2015.12.01',
-      endTime: '2016.12.03'
-    }],
-    couponUseList: [{
-      name: '喜鹊楼',
-      id: 'shopId',
-      delMoney: 190,
-      useCondition: '消费即用',
-      starTime: '2015.12.01',
-      endTime: '2016.12.03'
-    }, {
-      name: '哈哈',
-      id: 'shopId',
-      delMoney: 100,
-      useCondition: '满1000可用',
-      starTime: '2015.12.01',
-      endTime: '2016.12.03'
-    }, {
-      name: '人马科技大饭堂',
-      id: 'shopId',
-      discount: 5,
-      useCondition: '满100可用',
-      starTime: '2015.12.01',
-      endTime: '2016.12.03'
-    }],
-    orderNumber: ['点餐', '外卖'],
-    orderList: {
-      pay: [{
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '人马大饭堂',
-        code: 'No12312312',
-        time: '2017-03-26 17:26',
-        money: '238'
-      }],
-      finish: [{
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '人马大饭堂',
-        code: 'No12312312',
-        time: '2017-03-26 17:26',
-        money: '238',
-        delMoney: '23',
-        actMoney: '215',
-        restaurantId: 'No123123',
-        waiterId: 'waiter123123'
-      }],
-      cancel: [{
-        img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        name: '人马大饭堂',
-        code: 'No12312312',
-        time: '2017-03-26 17:26',
-        money: '238'
-      }]
-    },
-    shopArray: ['请选择经营品类', '湘菜', '川菜', '粤菜', '沙县小吃', '徽菜', '茶点'],
-    index: 0,
-    showMessage: null
-  },
-  /**
-   * 输入店名保存
-   * @param e
-   */
-  shopNameInput: function shopNameInput(e) {
-    this.setData({
-      shopName: e.detail.value
-    });
-  },
-
-  /**
-   * 选择消息显示
-   */
-  chooseMessage: function chooseMessage(e) {
-    this.setData({
-      showMessage: e.currentTarget.dataset.message
-    });
+    orderNumber: ['点餐', '外卖']
   },
 
   /**
@@ -171,10 +23,15 @@ Page({
    * @param e
    */
   chooseCouponTab: function chooseCouponTab(e) {
+    var that=this;
     var tabid = e.currentTarget.dataset.tabid;
-    this.setData({
-      currentCouponTab: tabid
+    that.setData({
+      currentCouponTab: tabid,
+      orders:[],
+      page:1 
     });
+
+    that.get_my_orders();
   },
 
   /**
@@ -186,52 +43,7 @@ Page({
       url: '../payorder/payorder?id=' + e.currentTarget.dataset.id
     });
   },
-
-  /**
-   * 去打分或者打赏
-   * @param e
-   */
-  goGratuity: function goGratuity(e) {
-    var restaurantId = e.currentTarget.dataset.restaurantid;
-    var waiterId = e.currentTarget.dataset.waiterid;
-    var kind = e.currentTarget.dataset.kind;
-    var url = '';
-    if (kind === 'shop') {
-      url = '../grade/grade?restaurantId=' + restaurantId;
-    } else {
-      url = '../gratuity/gratuity?waiterId=' + waiterId;
-    }
-    wx.navigateTo({
-      url: url
-    });
-  },
-
-  /**
-   * 选择经营品类
-   */
-  chooseShopKind: function chooseShopKind(e) {
-    this.setData({
-      index: e.detail.value
-    });
-  },
-
-  /**
-   * 开始上传商家入驻相关信息
-   */
-  startShop: function startShop() {
-    // todo 入驻信息添加到缓存中
-    if (!this.data.shopName || this.data.index === 0) {
-      return wx.showModal({
-        title: '信息不完整',
-        content: '请补充信息完整',
-        showCancel: false
-      });
-    }
-    wx.redirectTo({
-      url: '../businessCooperation/businessCooperation?shopName=' + this.data.shopName + '&shopKind=' + this.data.shopArray[this.data.index]
-    });
-  },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -290,13 +102,19 @@ Page({
    */
   scroll: function (e) {
     var that = this;
+    var operation = that.data.operation;
 
-    var address_page = that.data.address_page + 1;
+    var page = that.data.page + 1;
 
     that.setData({
-      address_page: address_page
+      page: page
     });
-    that.get_my_address();
+
+    if (operation == "order") {
+      that.get_my_orders();
+    } else if (operation == "address") {
+      that.get_my_address();
+    }
   },
   /**
    * 获取我的地址
@@ -313,7 +131,7 @@ Page({
         admin_id: app.globalData.admin_id,
         user_id: that.data.user_id,
         pay_type: that.data.pay_type,
-        page: that.data.address_page
+        page: that.data.page
       },
       header: {
         'content-type': 'application/json'
@@ -376,7 +194,7 @@ Page({
                 if (res.data.errcode == 1) { //成功
                   //重置数据
                   that.setData({
-                    address_page: 1,
+                    page: 1,
                     address: []
                   })
                   that.get_my_address();
@@ -425,7 +243,7 @@ Page({
                     success: function () {
                       //重载数据
                       that.setData({
-                        address_page: 1,
+                        page: 1,
                         address: []
                       })
                       that.get_my_address();
@@ -442,12 +260,12 @@ Page({
   /**
    * 选取地址
    */
-  select_address:function(e){
-    var that =this;
+  select_address: function (e) {
+    var that = this;
     var address_id = e.currentTarget.dataset.address_id;
     var is_out = e.currentTarget.dataset.is_out;
 
-    if (that.data.pay_type == 1 && is_out == 0){ //订单过来,并且在配送范围内
+    if (that.data.pay_type == 1 && is_out == 0) { //订单过来,并且在配送范围内
       wx.setStorageSync('address_id', address_id);
 
       wx.navigateBack({
@@ -458,7 +276,7 @@ Page({
   /**
    * 获取我的订单
    */
-  get_my_orders: function get_my_orders(){
+  get_my_orders: function get_my_orders() {
     var that = this;
 
     wx.showLoading({
@@ -469,7 +287,7 @@ Page({
       data: {
         admin_id: app.globalData.admin_id,
         user_id: that.data.user_id,
-        page: that.data.order_page,
+        page: that.data.page,
         type: that.data.currentCouponTab
       },
       header: {
@@ -477,13 +295,12 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        return
         wx.hideLoading()
         if (res.data.errcode > 0) {
-          var address = that.data.address;
-          address = address.concat(res.data.data)
+          var orders = that.data.orders;
+          orders = orders.concat(res.data.data)
           that.setData({
-            address: address
+            orders: orders
           });
         }
       }

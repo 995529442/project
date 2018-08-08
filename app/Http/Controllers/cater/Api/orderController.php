@@ -15,6 +15,53 @@ use DB;
 class orderController extends Controller
 {
     /**
+     * 获取我的订单
+     * @param Request $request
+     * @return string
+     */
+    public function getOrders(Request $request) {
+      $admin_id = (int)$request -> input("admin_id",0);
+      $user_id = (int)$request -> input("user_id",0);
+      $page = (int)$request -> input("page",0);
+      $type = (int)$request -> input("type",0);
+
+      if($type == 0){
+        $type = 1;
+      }elseif($type == 1){
+        $type = 2;
+      }
+
+      $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败",
+          "data" => []
+       ); 
+
+      $order_list = DB::table("cater_orders")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true,'type'=>$type])
+          ->select(['id as order_id','batchcode','pay_type','status','total_money','total_num'])
+          ->orderByDesc("id")
+          ->offset(($page - 1) * 4)->limit(4)->get();
+      
+      if($order_list){
+        foreach($order_list as $k=>$v){
+            $goods_list = DB::table("cater_orders_goods as og")
+                              ->leftJoin("cater_goods as cg","cg.id","=","og.goods_id")
+                              ->select(['og.good_name','og.price','og.number','og.total_price','cg.thumb_img'])
+                              ->where(['og.order_id'=>(int)$v->order_id])
+                              ->get();
+
+            $order_list[$k]->goods_list = $goods_list;
+        }
+        $return['errcode'] = 1;
+        $return['errmsg'] = "成功";
+        $return['data'] = $order_list;
+      }else{
+        $return['errmsg'] = "数据为空";
+      }
+
+      return json_encode($return);
+    }   
+    /**
      * 结算
      * @param Request $request
      * @return string

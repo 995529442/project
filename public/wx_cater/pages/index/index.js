@@ -8,7 +8,6 @@ Page({
    */
   data: {
     userinfo_box: false,
-    url: app.globalData.appUrl,
     // navList: [
     //   {
     //     navTitle: '点餐',
