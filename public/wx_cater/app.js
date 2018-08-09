@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    appUrl: "http://www.project.com",  //根路径
+    appUrl: "http://www.samproject.cn",  //根路径
     admin_id:1,
     cater_type :2  //类型，1堂食 2外卖 3排队
   },
@@ -19,7 +19,7 @@ App({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'http://139.199.8.120/api/cater/getUserInfo/getUsers',
+            url: 'http://www.samproject.cn/api/cater/getUserInfo/getUsers',
             data: {
               code: res.code,
               iv: cb.detail.iv,
