@@ -61,13 +61,15 @@
             <view class="menu0-r-title" id="{{ menu0List.id }}">{{ menu0List.title }}</view>
             <!--循环商品信息-->
             <view class="menu0-r-goods" data-menus="{{ index }}" wx:for="{{ menu0List.list }}" wx:key="unique">
-              <view bindtap="show_intro" data-good_name="{{item.name}}" data-intro="{{item.introduce}}"><image src="{{ item.img }}"></image></view>
-              <view class="menu0-r-g">
-                <view>{{ item.name }}</view>
-                <view>月售 {{ item.count }}</view>
-                <view class="menu0-r-price">
-                  ￥ {{ item.price }} 元
-                </view>
+              <view class='left' bindtap="show_intro" data-good_name="{{item.name}}" data-intro="{{item.introduce}}">
+                <image src="{{ item.img }}"></image>
+                <view class="menu0-r-g">
+                  <view>{{ item.name }}</view>
+                  <view>月售 {{ item.count }}</view>
+                  <view class="menu0-r-price">
+                    ￥ {{ item.price }} 元
+                  </view>
+                  </view>
               </view>
               <!--购买商品按钮-->
               <view class="order-btn">

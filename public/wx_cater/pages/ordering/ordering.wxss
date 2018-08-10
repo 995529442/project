@@ -205,8 +205,20 @@
   padding: 25rpx 20rpx 22rpx 14rpx;
   border-bottom: 1rpx solid #e5e5e5;
   display: flex;
+  display:-webkit-flex;
+-webkit-justify-content:space-between;
+	justify-content:space-between;
+  -webkit-align-items:center;
+	align-items:center;
 }
-
+.menu0-r-goods .left{
+  display: flex;
+  display:-webkit-flex;
+-webkit-justify-content:space-between;
+	justify-content:space-between;
+  -webkit-align-items:center;
+	align-items:center;
+}
 .menu0-r-goods image {
   width: 103rpx;
   height: 103rpx;
@@ -234,12 +246,7 @@
   color: #f00;
 }
 
-.order-btn {
-  display: flex;
-  transform: translate(10rpx, 70rpx);
-  margin-left: 90rpx;
-  margin-top: -40rpx;
-}
+.order-btn {display: flex;}
 
 .order-btn view {
   width: 60rpx;

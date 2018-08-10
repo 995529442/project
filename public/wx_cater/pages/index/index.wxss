@@ -120,10 +120,10 @@
 }
 
 .o-top {
-  height: 181rpx;
+  /* height: 181rpx; */
   box-sizing: border-box;
   border-bottom: 1rpx solid #e5e5e5;
-  padding: 33rpx 20rpx 200rpx;
+  padding: 33rpx 20rpx 20rpx;
 }
 
 .o-top .o-top-img {
@@ -136,5 +136,23 @@
 .o-top .o-top-name {
   font-size: 32rpx;
   color: #333;
-  display: inline-block;
+}
+.o-top .o-top-name text{
+ display: block;
+}
+.restaurant-info{
+ display:-webkit-flex;
+	display:flex;
+ -webkit-align-items:center;
+	align-items:center;
+  -webkit-justify-content:space-between;
+	justify-content:space-between;
+}
+.restaurant-info view{
+  font-size: 32rpx;
+  color:#7d7d7b;
+}
+.restaurant-info icon{
+  font-size:40rpx;
+  color:#f09f25;
 }
