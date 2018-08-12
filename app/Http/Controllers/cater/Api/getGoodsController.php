@@ -215,6 +215,7 @@ class getGoodsController extends Controller
            if($good_info){
              $return['errcode'] = 1;
              $return['errmsg'] = "成功";
+             $return['data'] = $good_info;
            }
         }else{
           $return['errmsg'] = '系统错误';

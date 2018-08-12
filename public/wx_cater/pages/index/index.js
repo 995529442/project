@@ -194,19 +194,16 @@ Page({
     var goods_id = e.currentTarget.dataset.goods_id;
 
     wx.request({
-      url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
+      url: app.globalData.appUrl + '/api/cater/getGoods/getOneGoods',
       data: {
-        admin_id: app.globalData.admin_id
+        admin_id: app.globalData.admin_id,
+        goods_id: goods_id
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-        if (res.data) {
-          that.setData({
-            shop_info: res.data
-          })
-        }
+          console.log(res)
       }
     })
 
