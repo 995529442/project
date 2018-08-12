@@ -193,4 +193,34 @@ class getGoodsController extends Controller
         $total_money = round($total_money,2);
         return json_encode(['goods_id_arr'=>$goods_id_arr,'total_money'=>$total_money]);
     }
+
+    /**
+     * 获取单个菜品详情
+     * @param Request $request
+     * @return string
+     */
+    public function getOneGoods(Request $request) {  
+        $admin_id = (int)$request -> input("admin_id",0);
+        $goods_id = (int)$request -> input("goods_id",0);
+
+        $return = array(
+           'errcode' => -1,
+           'errmsg' => '失败',
+           'data' =>[]
+        );
+
+        if($admin_id){
+           $good_info = DB::table("cater_goods")->whereId($goods_id)->first();
+
+           if($good_info){
+             $return['errcode'] = 1;
+             $return['errmsg'] = "成功";
+           }
+        }else{
+          $return['errmsg'] = '系统错误';
+        }
+
+        return json_encode($return);
+
+    }
 }

@@ -20,7 +20,9 @@ Page({
     active_index: 1,
     imgUrls: [],
     url: app.globalData.appUrl,
-    shop_info:{}
+    shop_info: {},
+    goods_info :{},
+    goodsinfo_box: false //是否显示介绍
   },
   /**
    * 用户搜索
@@ -184,4 +186,39 @@ Page({
       phoneNumber: phone
     });
   },
+  /**
+ * 展示商品介绍
+ */
+  show_intro: function show_intro(e) {
+    var that = this;
+    var goods_id = e.currentTarget.dataset.goods_id;
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
+      data: {
+        admin_id: app.globalData.admin_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            shop_info: res.data
+          })
+        }
+      }
+    })
+
+    // that.setData({
+    //   goodsinfo_box: !that.data.goodsinfo_box,
+    //   goods_info: goods_info
+    // });
+  },
+  //关闭显示
+  showInstro: function showInstro() {
+    this.setData({
+      goodsinfo_box: !this.data.goodsinfo_box
+    });
+  }
 });
