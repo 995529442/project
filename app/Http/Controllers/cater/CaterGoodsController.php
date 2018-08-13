@@ -53,15 +53,19 @@ class CaterGoodsController extends Controller
 
        $goods_info = CaterGoods::where(['id'=>$goods_id,'isvalid'=>true])->first();
 
+       $figure_img = [];
        if(!empty($goods_info)){
             $goods_info['show_thumb_img'] = $goods_info['thumb_img'];
+                        //获取预览图
+            $figure_img = DB::table("cater_figure_img")->where(['admin_id'=>$admin_id,'foreign_id'=>$goods_info['id'],'type'=>2,'isvalid'=>true])->get();
        }
        //获取分类
        $cate_info = CaterCategory::where(["admin_id"=>$admin_id,"isvalid"=>true])->select(['id as cate_id','cate_name'])->get();
-
+      
        return view('cater.goods.add_goods',[
         'goods_info' => $goods_info,
-        'cate_info'  => $cate_info
+        'cate_info'  => $cate_info,
+        'figure_img' => $figure_img
        ]);
     }
 
@@ -82,36 +86,58 @@ class CaterGoodsController extends Controller
     public function save_goods(Request $request){
         $goods_id = (int)$request -> input("goods_id",0);
 
+        $data = array();
+
+        $data['good_name'] = $request -> input("good_name","");
+        $data['cate_id'] = (int)$request -> input("cate_id",0);
+        $data['is_hot'] = (int)$request -> input("is_hot",0);
+        $data['is_new'] = (int)$request -> input("is_new",0);
+        $data['is_recommend'] = (int)$request -> input("is_recommend",0);
+        $data['thumb_img'] = $request -> input("thumb_img","");
+        $data['original_price'] = $request -> input("original_price","");
+        $data['now_price'] = $request -> input("now_price","");
+        $data['introduce'] = $request -> input("introduce","");
+        $data['isout'] = $request -> input("isout",1);
+        $data['storenum'] = $request -> input("storenum",0);
+        $data['virtual_sell_count'] = $request -> input("virtual_sell_count",0);
+
         if($goods_id > 0){
-            $CaterGoods = CaterGoods::find($goods_id);
+            $cater_goods = DB::table("cater_goods")->whereId($goods_id)->update($data);
         }else{
-            $CaterGoods = new CaterGoods;
+            $admins   = Auth::guard('admins')->user();
+            $admin_id = (int)$admins->id;
 
-            $CaterGoods->admin_id = \Auth::guard('admins')->user()->id;
+            $data['admin_id'] = $admin_id;
+            $data['isvalid']  = true;
 
-            $CaterGoods->isvalid = true;
+            $goods_id = DB::table("cater_goods")->insertGetId($data);
         }
 
-        $CaterGoods->good_name = $request -> input("good_name","");
-        $CaterGoods->cate_id = (int)$request -> input("cate_id",0);
-        $CaterGoods->is_hot = (int)$request -> input("is_hot",0);
-        $CaterGoods->is_new = (int)$request -> input("is_new",0);
-        $CaterGoods->is_recommend = (int)$request -> input("is_recommend",0);
-        $CaterGoods->thumb_img = $request -> input("thumb_img","");
-        $CaterGoods->original_price = $request -> input("original_price","");
-        $CaterGoods->now_price = $request -> input("now_price","");
-        $CaterGoods->introduce = $request -> input("introduce","");
-        $CaterGoods->isout = $request -> input("isout",1);
-        $CaterGoods->storenum = $request -> input("storenum",0);
-        $CaterGoods->virtual_sell_count = $request -> input("virtual_sell_count",0);
+        $figure_img_id = $request -> input('figure_img_id','');
+        $figure_img = $request -> input('figure_img','');
 
-        $result = $CaterGoods->save();
-        
-        if($result){
-            return redirect("cater/goods/home");
-        }else{
-            back();
+        //商家展示图
+        if($figure_img){
+            for($k=0;$k<count($figure_img_id);$k++){
+                $insert_data = array(
+                   "admin_id" => Auth::guard('admins')->user()->id,
+                   "img_path" =>$figure_img[$k],
+                   "foreign_id" => $goods_id,
+                   "type" => 2,
+                   "isvalid" => true
+                );
+                
+                if((int)$figure_img_id[$k] > 0){  //修改
+                  DB::table("cater_figure_img")->whereId((int)$figure_img_id[$k])->update(['img_path'=>$figure_img[$k]]);
+                }else{
+                  DB::table("cater_figure_img")->insert($insert_data);
+                }
+            }
         }
+
+
+       return redirect("cater/goods/home");
+
     }
 
     //微餐饮-删除菜品
@@ -133,5 +159,18 @@ class CaterGoodsController extends Controller
         }
 
         return json_encode($return);
+    }
+
+    //微餐饮-删除首页展示图片
+    public function delFigureImg(Request $request){
+       $img_id = (int)$request -> input('img_id',0);
+
+       $result = DB::table("cater_figure_img")->whereId($img_id)->update(['isvalid'=>false]);
+
+       if($result){
+          return json_encode(['errcode'=>1,'errmsg'=>'成功']);
+       }else{
+          return json_encode(['errcode'=>-1,'errmsg'=>'失败']);
+       }
     }
 }

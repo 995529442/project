@@ -140,7 +140,7 @@ class CaterShopController extends Controller
                 );
                 
                 if((int)$figure_img_id[$k] > 0){  //修改
-                  DB::table("cater_figure_img")->whereId((int)$figure_img_id[$k])->update(['img_path'=>$figure_img[$k],]);
+                  DB::table("cater_figure_img")->whereId((int)$figure_img_id[$k])->update(['img_path'=>$figure_img[$k]]);
                 }else{
                   DB::table("cater_figure_img")->insert($insert_data);
                 }

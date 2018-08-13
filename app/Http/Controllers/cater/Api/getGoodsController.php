@@ -67,24 +67,6 @@ class getGoodsController extends Controller
             array_push($new_cat_list, $v);
           }
       }
-      //上新，推荐，热门菜品
-      // $data[0]['title'] = "热门";
-      // $data[0]['id'] = "list1";
-
-      // $hot_goods = $this->getCateGoods($admin_id,'hot');
-      // $data[0]['list'] = $hot_goods;
-
-      // $data[1]['title'] = "推荐";
-      // $data[1]['id'] = "list2";
-
-      // $rec_goods = $this->getCateGoods($admin_id,'rec');
-      // $data[1]['list'] = $rec_goods;
-
-      // $data[2]['title'] = "上新";
-      // $data[2]['id'] = "list3";
-
-      // $new_goods = $this->getCateGoods($admin_id,'new');
-      // $data[2]['list'] = $new_goods;
 
       if($new_cat_list){
          foreach($new_cat_list as $k=>$v){
@@ -213,9 +195,20 @@ class getGoodsController extends Controller
            $good_info = DB::table("cater_goods")->whereId($goods_id)->first();
 
            if($good_info){
+             //获取菜品展示图
+             $figure_img = DB::table("cater_figure_img")->where(['admin_id'=>$admin_id,"isvalid"=>true,"foreign_id"=>$good_info->id,"type"=>2])->get();
+
+             if($figure_img){
+                foreach($figure_img as $k=>$v){
+                  $figure_img[$k]->img_path = "http://".$_SERVER['HTTP_HOST'].$v->img_path;
+                }
+             }
+             $good_info->figure_img = $figure_img;
+
              $return['errcode'] = 1;
              $return['errmsg'] = "成功";
              $return['data'] = $good_info;
+
            }
         }else{
           $return['errmsg'] = '系统错误';

@@ -1,6 +1,6 @@
 <!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
 <import src="../template/goodsInfo.wxml" />
-<template is="goodsinfo" data="{{goodsinfo_box:goodsinfo_box,show_good_name:show_good_name,introduce:introduce}}" />
+<template is="goodsinfo" data="{{goodsinfo_box:goodsinfo_box,shop_info:shop_info}}" />
 <view class="ordering">
   <!--餐馆顶部-->
   <view class="o-top" bindtap="toShop">
@@ -61,7 +61,7 @@
             <view class="menu0-r-title" id="{{ menu0List.id }}">{{ menu0List.title }}</view>
             <!--循环商品信息-->
             <view class="menu0-r-goods" data-menus="{{ index }}" wx:for="{{ menu0List.list }}" wx:key="unique">
-              <view class='left' bindtap="show_intro" data-good_name="{{item.name}}" data-intro="{{item.introduce}}">
+              <view class='left' bindtap="show_intro" data-id="{{item.id}}">
                 <image src="{{ item.img }}"></image>
                 <view class="menu0-r-g">
                   <view>{{ item.name }}</view>

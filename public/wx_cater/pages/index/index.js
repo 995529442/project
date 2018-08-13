@@ -20,9 +20,7 @@ Page({
     active_index: 1,
     imgUrls: [],
     url: app.globalData.appUrl,
-    shop_info: {},
-    goods_info :{},
-    goodsinfo_box: false //是否显示介绍
+    shop_info: {}
   },
   /**
    * 用户搜索
@@ -141,8 +139,13 @@ Page({
       },
       success: function (res) {
         if (res.data) {
+          var shop_info=res.data;
+
+          if (shop_info.introduce.length > 20) {
+            shop_info.introduce = shop_info.introduce.substring(0, 20) + "...";
+          }
           that.setData({
-            shop_info: res.data
+            shop_info: shop_info
           })
         }
       }
@@ -184,38 +187,6 @@ Page({
 
     wx.makePhoneCall({
       phoneNumber: phone
-    });
-  },
-  /**
- * 展示商品介绍
- */
-  show_intro: function show_intro(e) {
-    var that = this;
-    var goods_id = e.currentTarget.dataset.goods_id;
-
-    wx.request({
-      url: app.globalData.appUrl + '/api/cater/getGoods/getOneGoods',
-      data: {
-        admin_id: app.globalData.admin_id,
-        goods_id: goods_id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-          console.log(res)
-      }
-    })
-
-    // that.setData({
-    //   goodsinfo_box: !that.data.goodsinfo_box,
-    //   goods_info: goods_info
-    // });
-  },
-  //关闭显示
-  showInstro: function showInstro() {
-    this.setData({
-      goodsinfo_box: !this.data.goodsinfo_box
     });
   }
 });

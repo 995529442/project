@@ -127,32 +127,43 @@
 }
 
 .o-top .o-top-img {
-  width: 110rpx;
-  height: 110rpx;
+  width: 140rpx;
+  height: 140rpx;
   border-radius: 50%;
   margin-right: 70rpx;
+  float: left;
 }
 
 .o-top .o-top-name {
   font-size: 32rpx;
   color: #333;
+  margin-top:10rpx;
 }
-.o-top .o-top-name text{
- display: block;
+
+.o-top .o-top-name text {
+  display: block;
+  width:80%;
+  height:80rpx;
+  margin-left:160rpx;
+  margin-top:-10rpx;
 }
-.restaurant-info{
- display:-webkit-flex;
-	display:flex;
- -webkit-align-items:center;
-	align-items:center;
-  -webkit-justify-content:space-between;
-	justify-content:space-between;
+
+.restaurant-info {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-top: 10rpx;
 }
-.restaurant-info view{
+
+.restaurant-info view {
   font-size: 32rpx;
-  color:#7d7d7b;
+  color: #7d7d7b;
 }
-.restaurant-info icon{
-  font-size:40rpx;
-  color:#f09f25;
+
+.restaurant-info icon {
+  font-size: 40rpx;
+  color: #f09f25;
 }

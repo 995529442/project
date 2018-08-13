@@ -86,6 +86,7 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::post('upload', 'cater\CaterGoodsController@upload')->name('cater.goods.upload'); //上传logo图片
           Route::any('save_goods', 'cater\CaterGoodsController@save_goods')->name('cater.goods.save_goods'); //保存商品
           Route::post('del_goods', 'cater\CaterGoodsController@del_goods')->name('cater.goods.del_goods'); //删除商品
+          Route::any('delFigureImg', 'cater\CaterGoodsController@delFigureImg')->name('cater.goods.delFigureImg'); //删除展示图片
        });
 
        //用户管理

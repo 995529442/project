@@ -1,6 +1,4 @@
 <import src="../template/template" />
-<import src="../template/goods_index.wxml" />
-<template is="goodsinfo" data="{{goodsinfo_box:goodsinfo_box,goods_info:goods_info}}" />
 <view class="container">
   <!--顶部搜索栏-->
   <!-- <view class="search">
@@ -25,8 +23,8 @@
     <view class="restaurant-info">
       <view bindtap="openLocation" data-latitude="{{ shop_info.latitude }}" data-longitude="{{ shop_info.longitude }}" class="r-i-address iconfont icon-icglobaltitlebar48iconfontmap" style="">
         {{ shop_info.provinve }}{{ shop_info.city }}{{ shop_info.area }}{{ shop_info.address }}
-      </view> 
-      <icon bindtap="callPhone" data-phone="{{ shop_info.phone }}" class="r-i-tel iconfont icon-dianhua" style=""/>
+      </view>
+      <icon bindtap="callPhone" data-phone="{{ shop_info.phone }}" class="r-i-tel iconfont icon-dianhua" style="" />
       <!-- <view bindtap="callPhone" data-phone="{{ shop_info.phone }}" class="r-i-tel iconfont icon-dianhua" style="display:inline-block;width:10%;float:right;font-size:40rpx;color:#f09f25;"></view> -->
       <!-- <view bindtap="callPhone" class="r-i-tel iconfont icon-dianhua triangle" style="padding:10rpx;font-size: 28rpx;color: #333;"> {{ shop_info.phone }} </view> -->
     </view>
@@ -38,14 +36,16 @@
     <view class="top-show{{active_index==3?'-active':''}}" bindtap='selectGoods' data-type="new">上新菜品</view>
     <view class="hot-shop-wrap">
       <block wx:for="{{ goods }}" wx:key="unique">
-        <view class="hot-shop-content" bindtap="show_intro" data-goods_id="{{item.goods_id}}">
-          <image class="hot-shop-img" src="{{url}}{{ item.thumb_img }}"></image>
-          <view>{{ item.good_name }}</view>
-          <view>销量：{{ item.sell_count+item.virtual_sell_count }}</view>
-          <view>价格：
-            <text style="color:red;">￥{{ item.now_price }}</text>
+        <navigator open-type="switchTab" wx:if="{{goods.length == 6}}" url="../ordering/ordering">
+          <view class="hot-shop-content">
+            <image class="hot-shop-img" src="{{url}}{{ item.thumb_img }}"></image>
+            <view>{{ item.good_name }}</view>
+            <view>销量：{{ item.sell_count+item.virtual_sell_count }}</view>
+            <view>价格：
+              <text style="color:red;">￥{{ item.now_price }}</text>
+            </view>
           </view>
-        </view>
+        </navigator>
       </block>
     </view>
     <!-- <navigator open-type="switchTab" wx:if="{{goods.length == 6}}" url="../ordering/ordering">

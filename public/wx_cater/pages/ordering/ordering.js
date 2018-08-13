@@ -10,7 +10,7 @@ Page({
    */
   data: {
     //title: 'ordering',
-    menuList:[],
+    menuList: [],
     // 当前的tab
     //currentmenu: 1,
     // 当前的left栏
@@ -77,17 +77,16 @@ Page({
       // 总数
       allCount: 0
     },
-    shop_info:{},
+    shop_info: {},
     url: app.globalData.appUrl,
-    show_good_name:"",
-    introduce:'',    //菜品介绍
+    shop_info: {},
     goodsinfo_box: false //是否显示介绍
   },
   /**
    * 确认订单
    */
   goCheckOrder: function goCheckOrder() {
-    var that=this;
+    var that = this;
     if (that.data.chooseGoods.allCount <= 0) {
       return wx.showToast({
         title: '您还没有点餐',
@@ -100,12 +99,12 @@ Page({
     var goods_id_arr = new Array();
 
     //获取购物车数据
-    for(var key in goods){
-      if(goods[key] > 0){
+    for (var key in goods) {
+      if (goods[key] > 0) {
         var good_obj = new Object();
-        good_obj.goods_id = key.split("_")[1];     
+        good_obj.goods_id = key.split("_")[1];
         good_obj.number = goods[key];
-        
+
         goods_id_arr.push(good_obj);
 
       }
@@ -125,17 +124,17 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        if (res.data.errcode > 0){
-            wx.navigateTo({
-              url: '../payorder/payorder?goods_id_arr=' + JSON.stringify(goods_id_arr)
-            });
-        }else{
+        if (res.data.errcode > 0) {
+          wx.navigateTo({
+            url: '../payorder/payorder?goods_id_arr=' + JSON.stringify(goods_id_arr)
+          });
+        } else {
           wx.showToast({
             title: res.data.errmsg,
             icon: 'none',
             duration: 2000
           })
-          return;          
+          return;
         }
       }
     })
@@ -389,44 +388,45 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function onLoad(option) { 
-      var that =this;
-        
-      wx.showLoading({
-        title: '加载中',
-      })
-      that.getShop();  //商家信息
-      //获取分类菜品
-      wx.request({
-        url: app.globalData.appUrl + '/api/cater/getGoods/getCatGoods',
-        data: {
-          admin_id: app.globalData.admin_id,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          wx.hideLoading();
-          if(res){
-            that.setData({
-              menuList:res.data
-            })
+  onLoad: function onLoad(option) {
+    var that = this;
 
-            if (wx.getStorageSync('chooseGoods')) {
-              that.setData({
-                chooseGoods: wx.getStorageSync('chooseGoods')
-              })
-              console.log(that.data.chooseGoods)
-            }
+    wx.showLoading({
+      title: '加载中',
+    })
+    that.getShop();  //商家信息
+    //获取分类菜品
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getGoods/getCatGoods',
+      data: {
+        admin_id: app.globalData.admin_id,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+        wx.hideLoading();
+        if (res) {
+          that.setData({
+            menuList: res.data
+          })
+
+          if (wx.getStorageSync('chooseGoods')) {
+            that.setData({
+              chooseGoods: wx.getStorageSync('chooseGoods')
+            })
+            console.log(that.data.chooseGoods)
           }
         }
-      }) 
+      }
+    })
   },
   /**
    * 获取商家信息
    */
-  getShop:function getShop(){
-    var that=this;
+  getShop: function getShop() {
+    var that = this;
     //获取分类菜品
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getShop/getShopInfo',
@@ -438,18 +438,18 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if(res.data){
+        if (res.data) {
           that.setData({
-            shop_info:res.data
+            shop_info: res.data
           })
         }
       }
-    })   
+    })
   },
   /**
    * 跳转到商家详情
    */
-  toShop: function toShop(){
+  toShop: function toShop() {
     wx.navigateTo({
       url: '../detail/detail',
     })
@@ -458,21 +458,34 @@ Page({
   /**
    * 展示商品介绍
    */
-  show_intro: function show_intro(e){
-    var that=this;
-    var show_good_name = e.currentTarget.dataset.good_name;
-    var introduce = e.currentTarget.dataset.intro;
+  show_intro: function show_intro(e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    var goods_id = id.split("_")[1];
 
-    that.setData({
-      goodsinfo_box: !that.data.goodsinfo_box,
-      show_good_name: show_good_name,
-      introduce: introduce
-    }); 
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getGoods/getOneGoods',
+      data: {
+        admin_id: app.globalData.admin_id,
+        goods_id: goods_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data) {
+          that.setData({
+            goodsinfo_box: !that.data.goodsinfo_box,
+            shop_info:res.data.data
+          });
+        }
+      }
+    })
   },
 
-  showInstro: function showInstro(){
+  showInstro: function showInstro() {
     this.setData({
       goodsinfo_box: !this.data.goodsinfo_box
-    });  
+    });
   }
 });

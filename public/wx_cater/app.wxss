@@ -244,7 +244,7 @@ page {
 }
 .userinfo_prompt_box{
   width:80%;
-  margin:32vh auto 0;
+  margin:12vh auto 0;
   background: #fff;
   border-radius:10rpx;
   font-size:36rpx;
