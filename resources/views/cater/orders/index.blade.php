@@ -97,8 +97,8 @@
                 <tr>
                     <td>{{$v->order_id}}</td>
                     <td><a href="{{ route('cater.orders.orderGoods',['order_id'=>$v->order_id]) }}" style="color:#1E9FFF;">{{$v->batchcode}}</a></td>
-                    <td>{{$v->phone}}</td>  
-                    <td>{{$v->weixin_name}}</td>
+                    <td>{{$v->weixin_name}}</td>  
+                    <td>{{$v->phone}}</td>
                     <td>
                         @if($v->type == 1)
                           点餐
