@@ -86,7 +86,7 @@ class getUserInfoController extends Controller
             }
 
         }else{
-          $return['errmsg'] = "code参数失效".$output;
+          $return['errmsg'] = "code参数失效";
           return json_encode($return);             
         }
       }
