@@ -135,7 +135,7 @@
 }
 
 .o-top .o-top-name {
-  font-size: 32rpx;
+  font-size: 30rpx;
   color: #333;
   margin-top:10rpx;
 }

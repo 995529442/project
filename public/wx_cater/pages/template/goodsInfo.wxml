@@ -1,18 +1,18 @@
 <!-- 点餐菜品显示  -->
 <template name="goodsinfo">
   <view class="userinfo_box" wx:if="{{goodsinfo_box}}" bindtap="showInstro">
-    <view class='userinfo_prompt_box' style="height:60vh;text-align:left;">
-      <view class="swiper" style="width:100%;" wx:if="{{shop_info.figure_img != ''}}">
+    <view class='userinfo_prompt_box' style="height:60vh;text-align:left;margin:12vh auto 0">
+      <view class="swiper" style="width:100%;" wx:if="{{goods_info.figure_img != ''}}">
         <swiper indicator-dots="true" indicator-active-color="#fff" indicator-color="#ed4d30" autoplay="true" interval="5000" duration="500" circular="true">
-          <block wx:for="{{ shop_info.figure_img }}" wx:key="unique">
+          <block wx:for="{{ goods_info.figure_img }}" wx:key="unique">
             <swiper-item>
               <image src="{{ item.img_path }}" class="slide-image" />
             </swiper-item>
           </block>
         </swiper>
       </view>
-      <view style="font-size:30rpx;padding:20rpx;">{{shop_info.good_name}}</view>
-      <view style="font-size:25rpx;padding:20rpx;">{{shop_info.introduce}}</view>
+      <view style="font-size:30rpx;padding:20rpx;">{{goods_info.good_name}}</view>
+      <view style="font-size:25rpx;padding:20rpx;">{{goods_info.introduce}}</view>
     </view>
   </view>
 </template>

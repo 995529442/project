@@ -141,8 +141,8 @@ Page({
         if (res.data) {
           var shop_info=res.data;
 
-          if (shop_info.introduce.length > 20) {
-            shop_info.introduce = shop_info.introduce.substring(0, 20) + "...";
+          if (shop_info.introduce.length > 30) {
+            shop_info.introduce = shop_info.introduce.substring(0, 30) + "...";
           }
           that.setData({
             shop_info: shop_info

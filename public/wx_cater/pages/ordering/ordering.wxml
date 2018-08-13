@@ -1,6 +1,6 @@
 <!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
 <import src="../template/goodsInfo.wxml" />
-<template is="goodsinfo" data="{{goodsinfo_box:goodsinfo_box,shop_info:shop_info}}" />
+<template is="goodsinfo" data="{{goodsinfo_box:goodsinfo_box,goods_info:goods_info}}" />
 <view class="ordering">
   <!--餐馆顶部-->
   <view class="o-top" bindtap="toShop">

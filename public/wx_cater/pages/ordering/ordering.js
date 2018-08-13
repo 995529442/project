@@ -79,7 +79,7 @@ Page({
     },
     shop_info: {},
     url: app.globalData.appUrl,
-    shop_info: {},
+    goods_info: {},
     goodsinfo_box: false //是否显示介绍
   },
   /**
@@ -476,7 +476,7 @@ Page({
         if (res.data) {
           that.setData({
             goodsinfo_box: !that.data.goodsinfo_box,
-            shop_info:res.data.data
+            goods_info:res.data.data
           });
         }
       }
