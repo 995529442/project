@@ -250,7 +250,7 @@ class orderController extends Controller
                     );
                     array_push($order_goods_arr, $goods_data);
 
-                    $goods_name_str .= $goods_info->good_name.$v['number']."份<span style='color:red;''>".$money."元</span>\\n";
+                    $goods_name_str .= $goods_info->good_name.$v['number']."份<span style='color:red;'>".$money."元</span>\\n";
                 }
 
                 $goods_name_str = trim($goods_name_str,"\\n");
