@@ -250,7 +250,7 @@ class orderController extends Controller
                     );
                     array_push($order_goods_arr, $goods_data);
 
-                    $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元";
+                    $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元\r\n";
                 }
              }
               //真实支付金额，菜品总额+配送+包装
