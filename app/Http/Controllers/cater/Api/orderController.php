@@ -295,7 +295,7 @@ class orderController extends Controller
                             "value": "'.$cater_type_name.'"
                         } ,
                         "keyword4": {
-                            "value": "'.$goods_name_str.'"
+                            "value": "'.rtrim($goods_name_str,"\\n").'"
                         },
                         "keyword5": {
                             "value": "微信支付"
