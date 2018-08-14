@@ -314,6 +314,10 @@ class orderController extends Controller
                   }';
 
                   $result = MiniappApi::sendTemplate($admin_id,$data);
+
+                  if($result['errcode'] > 0){  //发送成功
+                    
+                  }
               }
             
              DB::commit();
