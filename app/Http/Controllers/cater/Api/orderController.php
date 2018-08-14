@@ -250,8 +250,10 @@ class orderController extends Controller
                     );
                     array_push($order_goods_arr, $goods_data);
 
-                    $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元\\n";
+                    $goods_name_str .= $goods_info->good_name.$v['number']."份<span style='color:red;''>".$money."元</span>\\n";
                 }
+
+                $goods_name_str = trim($goods_name_str,"\\n");
              }
               //真实支付金额，菜品总额+配送+包装
              $real_pay = $total_money + $shipping_fee + $package_fee;
@@ -295,13 +297,13 @@ class orderController extends Controller
                             "value": "'.$cater_type_name.'"
                         } ,
                         "keyword4": {
-                            "value": "'.rtrim($goods_name_str,"\\n").'"
+                            "value": "'.$goods_name_str.'"
                         },
                         "keyword5": {
                             "value": "微信支付"
                         },
                         "keyword6": {
-                            "value": "'.$real_pay.'元"
+                            "value": "<span style="color:red;">￥'.$real_pay.'元</span>"
                         },
                         "keyword7": {
                             "value": "'.date("Y-m-d H:i:s",time()).'"
