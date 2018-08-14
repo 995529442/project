@@ -283,7 +283,6 @@ class orderController extends Controller
                   $data = '{
                     "touser": "'.$openid.'",
                     "template_id": "'.$template_id.'",
-                    "page": "",
                     "form_id": "'.$formId.'",
                     "data": {
                         "keyword1": {
@@ -312,9 +311,9 @@ class orderController extends Controller
                         }
                     }
                   }';
-var_dump($data);
+
                   $result = MiniappApi::sendTemplate($admin_id,$data);
-var_dump($result);
+
                   if($result['errcode'] > 0){  //发送成功
                     
                   }
