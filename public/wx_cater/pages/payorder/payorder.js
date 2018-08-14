@@ -186,6 +186,7 @@ Page({
     var remark = e.detail.value.remark;
     var goods_id_arr = that.data.goods_id_arr;
     var default_address = that.data.default_address;
+    var formId = e.detail.formId;
 
     if (default_address == ''){
       wx.showToast({
@@ -207,6 +208,7 @@ Page({
         user_name: default_address.user_name,
         phone: default_address.phone,
         cater_type: app.globalData.cater_type,
+        formId: formId,
         remark: remark
       },
       header: {

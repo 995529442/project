@@ -169,6 +169,7 @@ class orderController extends Controller
       $phone = $request -> input("phone",'');     
       $cater_type = (int)$request -> input("cater_type",0); //类型，1堂食 2外卖 3排队
       $remark = $request -> input("remark",'') == null?'':$request -> input("remark",'');   //留言
+      $formId = $request -> input("formId",'') == null?'':$request -> input("formId",'');   
 
       $return = array(
          "errcode" => -1,
@@ -252,6 +253,16 @@ class orderController extends Controller
              DB::table("cater_orders")->whereId($order_id)->update(['real_pay'=>round($real_pay,2),'total_money'=>round($total_money,2),'total_num'=>$total_num]);
 
              DB::table("cater_orders_goods")->insert($order_goods_arr);
+
+             //记录form_id
+             if($formId){
+                DB::table("cater_form")->insert(array([
+                    "admin_id" => $admin_id,
+                    "user_id" => $user_id,
+                    "form_id" => $form_id,
+                    "isvalid" => true
+                ]));
+             }
 
              DB::commit();
 

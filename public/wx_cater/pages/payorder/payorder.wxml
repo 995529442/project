@@ -37,7 +37,7 @@
       <text style="color:red">￥{{allMoney }}</text>
     </view>
   </view>
-  <form class="formSubmit" bindsubmit="formSubmit">
+  <form class="formSubmit" bindsubmit="formSubmit" report-submit="true">
     <view class="lxr" wx:if="{{cater_type == 2}}">
       <text>配送费</text>
       <view style="color:red">￥{{shop_info.shipping_fee}}</view>

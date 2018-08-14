@@ -117,6 +117,13 @@ Route::group(['middleware'=>'AdminLogin'],function(){
           Route::any('operate', 'cater\CaterDeskController@operate')->name('cater.desk.operate'); //删除餐桌，生成二维码
        });
 
+       //模板管理
+       Route::group(['prefix'=>'template'],function(){
+          Route::get('home', 'cater\CaterTemplateController@index')->name('cater.template.index'); //模板管理
+          Route::get('addTemplate', 'cater\CaterTemplateController@addTemplate')->name('cater.template.addTemplate'); //新增
+          Route::post('saveTemplate', 'cater\CaterTemplateController@saveTemplate')->name('cater.template.saveTemplate'); //保存
+          Route::post('delTemplate', 'cater\CaterTemplateController@delTemplate')->name('cater.template.delTemplate'); //保存
+       });
     });    
 });
 

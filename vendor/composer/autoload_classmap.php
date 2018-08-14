@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Controllers\\cater\\CaterOrdersController' => $baseDir . '/app/Http/Controllers/cater/CaterOrdersController.php',
     'App\\Http\\Controllers\\cater\\CaterShopController' => $baseDir . '/app/Http/Controllers/cater/CaterShopController.php',
     'App\\Http\\Controllers\\cater\\CaterSystemController' => $baseDir . '/app/Http/Controllers/cater/CaterSystemController.php',
+    'App\\Http\\Controllers\\cater\\CaterTemplateController' => $baseDir . '/app/Http/Controllers/cater/CaterTemplateController.php',
     'App\\Http\\Controllers\\cater\\CaterUsersController' => $baseDir . '/app/Http/Controllers/cater/CaterUsersController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\AdminLogin' => $baseDir . '/app/Http/Middleware/AdminLogin.php',
