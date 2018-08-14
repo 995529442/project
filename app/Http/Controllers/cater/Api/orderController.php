@@ -278,7 +278,7 @@ class orderController extends Controller
              }else{
                 $cater_type_name = "外卖";
              }
-             $cater_type_name = $cater_type==1?
+
               if($template_id && $formId){
                   $data = '{
                     "touser": "'.$openid.'",
