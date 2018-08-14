@@ -314,7 +314,7 @@ class orderController extends Controller
                   }';
 
                   $result = MiniappApi::sendTemplate($admin_id,$data);
-
+var_dump($result);
                   if($result['errcode'] > 0){  //发送成功
                     
                   }
