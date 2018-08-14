@@ -105,7 +105,7 @@ class MiniappApi
           $output = self::curl_https($url,$data); 
           
           $output = json_decode($output,true);
-var_dump($output);
+file_put_contents("111.txt", $output);
           if($output['errcode'] == 0){
             $return['errcode'] = 1;
             $return['errmsg'] = "成功";            
