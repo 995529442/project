@@ -281,34 +281,35 @@ class orderController extends Controller
 
               if($template_id && $formId){
                   $data = '{
-                    "touser": "'.$openid.'",
-                    "template_id": "'.$template_id.'",
-                    "form_id": "'.$formId.'",
+                    "touser": "o7WsQ5QzDq-NkaYDJ_an_KCX8x9Q",
+                    "template_id": "2drVS0iclFXOinR8LYOAZbkFJiWZdj8jywLI7sNxpEw",
+                    "page": "",
+                    "form_id": "d6a6805fc0e3ef61a137ecf5e29f4c39",
                     "data": {
-                        "keyword1": {
-                            "value": "'.$shop_name.'"
-                        },
-                        "keyword2": {
-                            "value": "'.$batchcode.'"
-                        },
-                        "keyword3": {
-                            "value": "'.$cater_type_name.'"
-                        } ,
-                        "keyword4": {
-                            "value": "'.$goods_name_str.'"
-                        },
-                        "keyword5": {
-                            "value": "微信支付"
-                        },
-                        "keyword6": {
-                            "value": "'.$real_pay.'"
-                        },
-                        "keyword7": {
-                            "value": "'.date("Y-m-d H:i:s",time()).'"
-                        },
-                        "keyword8": {
-                            "value": "如有疑问请致电'.$shop_phone.'"
-                        }
+                      "keyword1": {
+                        "value": "牛叔叔餐厅"
+                      },
+                      "keyword2": {
+                        "value": "201808143593029225"
+                      },
+                      "keyword3": {
+                        "value": "外卖"
+                      },
+                      "keyword4": {
+                        "value": "烧鸡1份60元 拼盘凉菜1份14元 辣子鸡1份35元 "
+                      },
+                      "keyword5": {
+                        "value": "微信支付"
+                      },
+                      "keyword6": {
+                        "value": "112"
+                      },
+                      "keyword7": {
+                        "value": "2018-08-14 16:38:50"
+                      },
+                      "keyword8": {
+                        "value": "如有疑问请致电13580730392"
+                      }
                     }
                   }';
 
