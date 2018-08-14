@@ -250,7 +250,7 @@ class orderController extends Controller
                     );
                     array_push($order_goods_arr, $goods_data);
 
-                    $goods_name_str .= $goods_info->good_name.$v['number']."份<span style='color:red;'>".$money."元</span>\\n";
+                    $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元\\n";
                 }
 
                 $goods_name_str = trim($goods_name_str,"\\n");
@@ -303,7 +303,8 @@ class orderController extends Controller
                             "value": "微信支付"
                         },
                         "keyword6": {
-                            "value": "<span style="color:red;">￥'.$real_pay.'元</span>"
+                            "value": "￥'.$real_pay.'元",
+                            "color":"#FF0000"
                         },
                         "keyword7": {
                             "value": "'.date("Y-m-d H:i:s",time()).'"
