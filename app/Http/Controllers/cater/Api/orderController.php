@@ -301,7 +301,7 @@ class orderController extends Controller
                             "value": "微信支付"
                         },
                         "keyword6": {
-                            "value": "'.$real_pay.'"
+                            "value": "'.$real_pay.'元"
                         },
                         "keyword7": {
                             "value": "'.date("Y-m-d H:i:s",time()).'"
