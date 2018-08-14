@@ -72,6 +72,52 @@ class MiniappApi
     }
 
     /**
+     * 发送模板消息
+     * @return array
+     */
+    public static function sendTemplate($admin_id,$data)
+    {
+       //获取小程序配置
+      $return = array(
+        "errcode" => -1,
+        "errmsg" => "失败",
+        "path" => ""
+      );
+      $system_info = DB::table("cater_system")->where(['admin_id'=>$admin_id,'isvalid'=>true])->first();
+
+      if(!$system_info){
+        $return['errmsg'] = "请先配置小程序信息";
+
+        return $return;
+      }
+
+      $acc_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$system_info->appid."&secret=".$system_info->appsecret;
+      
+      $acc_output = self::curl_https($acc_url,''); 
+      
+      $acc_output = json_decode($acc_output,true);
+
+      $access_token = $acc_output['access_token'];
+
+      if($access_token){ //生成二维码
+          $url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=$access_token";
+
+          $output = self::curl_https($url,$data); 
+          
+          $output = json_decode($output,true);
+
+          if($output['errcode'] == 0){
+            $return['errcode'] = 1;
+            $return['errmsg'] = "成功";            
+          }else{
+            $return['errmsg'] = $output['errmsg'];
+          }
+      }
+      
+      return $return;
+    }
+
+    /**
      * curl
      */
     public static function curl_https($url, $data, $second = 30)

@@ -11,7 +11,7 @@ use DB;
 class CaterDeskController extends Controller
 {
     //微餐饮-餐桌首页
-    public function index(Request $request){
+    public function index(Request $request){       
         $admins   = Auth::guard('admins')->user();
     	$admin_id = $admins->id;
 

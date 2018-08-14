@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Cater\Api;
 date_default_timezone_set('PRC');
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Librarys\MiniappApi;
 use DB;
 
 class orderController extends Controller
@@ -194,6 +195,9 @@ class orderController extends Controller
 
            $shipping_fee = $cater_type==2?$shop_info->value("shipping_fee"):0;
            $package_fee = $cater_type==2?$shop_info->value("package_fee"):0;
+           $shop_name = $shop_info->value("name");
+           $shop_phone = $shop_info->value("phone");
+           $goods_name_str = "";  //商品名称列表，用于发送模板
 
            //插入订单数据
            $order_data = array(
@@ -213,7 +217,7 @@ class orderController extends Controller
            );
 
            $order_id = DB::table("cater_orders")->insertGetId($order_data);
-
+        
            if($order_id){
              $total_money = 0;  //总金额
              $total_num = 0;    //总数量        
@@ -245,6 +249,8 @@ class orderController extends Controller
                        "isvalid" => true
                     );
                     array_push($order_goods_arr, $goods_data);
+
+                    $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元\n";
                 }
              }
               //真实支付金额，菜品总额+配送+包装
@@ -255,15 +261,61 @@ class orderController extends Controller
              DB::table("cater_orders_goods")->insert($order_goods_arr);
 
              //记录form_id
-             if($formId){
-                DB::table("cater_form")->insert(array([
-                    "admin_id" => $admin_id,
-                    "user_id" => $user_id,
-                    "form_id" => $formId,
-                    "isvalid" => true
-                ]));
-             }
+             // if($formId){
+             //    DB::table("cater_form")->insert(array([
+             //        "admin_id" => $admin_id,
+             //        "user_id" => $user_id,
+             //        "form_id" => $formId,
+             //        "isvalid" => true
+             //    ]));
+             // }
+             
+             //發送模板消息
+             $template_id = DB::table("cater_template")->where(['admin_id'=>$admin_id,'isvalid'=>true,'type'=>1,'is_on'=>1])->value("template_id");
 
+             if($cater_type == 1){
+                $cater_type_name = "堂食";
+             }else{
+                $cater_type_name = "外卖";
+             }
+             $cater_type_name = $cater_type==1?
+              if($template_id && $formId){
+                  $data = '{
+                    "touser": "'.$openid.'",
+                    "template_id": "'.$template_id.'",
+                    "page": "",
+                    "form_id": "'.$formId.'",
+                    "data": {
+                        "keyword1": {
+                            "value": "'.$shop_name.'"
+                        },
+                        "keyword2": {
+                            "value": "'.$batchcode.'"
+                        },
+                        "keyword3": {
+                            "value": "'.$cater_type_name.'"
+                        } ,
+                        "keyword4": {
+                            "value": "'.$goods_name_str.'"
+                        },
+                        "keyword5": {
+                            "value": "微信支付"
+                        },
+                        "keyword6": {
+                            "value": "'.$real_pay.'"
+                        },
+                        "keyword7": {
+                            "value": "'.date("Y-m-d H:i:s",time()).'"
+                        },
+                        "keyword8": {
+                            "value": "如有疑问请致电'.$shop_phone.'"
+                        }
+                    }
+                  }';
+
+                  $result = MiniappApi::sendTemplate($admin_id,$data);
+              }
+            
              DB::commit();
 
              $return['errocde'] = 1;
