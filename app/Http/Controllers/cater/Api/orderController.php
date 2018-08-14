@@ -259,7 +259,7 @@ class orderController extends Controller
                 DB::table("cater_form")->insert(array([
                     "admin_id" => $admin_id,
                     "user_id" => $user_id,
-                    "form_id" => $form_id,
+                    "form_id" => $formId,
                     "isvalid" => true
                 ]));
              }
