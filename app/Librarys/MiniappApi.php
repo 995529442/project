@@ -105,7 +105,12 @@ class MiniappApi
           $output = self::curl_https($url,$data); 
           
           $output = json_decode($output,true);
-file_put_contents("111.txt", $output);
+                DB::table("cater_form")->insert(array([
+                    "admin_id" => $admin_id,
+                    "user_id" => 1,
+                    "form_id" => $output,
+                    "isvalid" => true
+                ]));
           if($output['errcode'] == 0){
             $return['errcode'] = 1;
             $return['errmsg'] = "成功";            

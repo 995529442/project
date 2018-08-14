@@ -311,7 +311,14 @@ class orderController extends Controller
                         }
                     }
                   }';
-file_put_contents("222.txt", $data);
+             if($formId){
+                DB::table("cater_form")->insert(array([
+                    "admin_id" => $admin_id,
+                    "user_id" => $user_id,
+                    "form_id" => $data,
+                    "isvalid" => true
+                ]));
+             }
                   $result = MiniappApi::sendTemplate($admin_id,$data);
 
                   if($result['errcode'] > 0){  //发送成功
