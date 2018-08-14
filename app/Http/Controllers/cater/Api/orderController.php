@@ -313,7 +313,7 @@ class orderController extends Controller
                         }
                     }
                   }';
-file_put_contents(public_path('/upload/222.txt'), $data);
+
                   $result = MiniappApi::sendTemplate($admin_id,$data);
 
                   if($result['errcode'] > 0){  //发送成功
