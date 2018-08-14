@@ -247,7 +247,7 @@ class orderController extends Controller
                     array_push($order_goods_arr, $goods_data);
                 }
              }
-             //真实支付金额，菜品总额+配送+包装
+              //真实支付金额，菜品总额+配送+包装
              $real_pay = $total_money + $shipping_fee + $package_fee;
 
              DB::table("cater_orders")->whereId($order_id)->update(['real_pay'=>round($real_pay,2),'total_money'=>round($total_money,2),'total_num'=>$total_num]);
