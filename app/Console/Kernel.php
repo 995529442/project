@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('orderTask')
-                  ->everyMinute()->withoutOverlapping();     //未支付订单过期取消订单
+                  ->everyMinute();     //未支付订单过期取消订单
     }
 
     /**
