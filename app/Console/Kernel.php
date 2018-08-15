@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('orderTask')
-                  ->dailyAt('02:00');;     //未支付订单过期取消订单
+                  ->dailyAt('02:00');;      //未支付订单过期取消订单,每天凌晨2点执行
     }
 
     /**
