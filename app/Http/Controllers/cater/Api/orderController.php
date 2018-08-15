@@ -257,11 +257,11 @@ class orderController extends Controller
                     array_push($order_goods_arr, $goods_data);
 
                     $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元\\n";
-                    $goods_name_mail_str .= "商品名称：</span>".$goods_info->good_name.$v['number']."份  ".$money."元<br /><span style='visibility:hidden;'>";
+                    $goods_name_mail_str .= $goods_info->good_name.$v['number']."份  ".$money."元<br /><span style='visibility:hidden;'>商品名称：</span>";
                 }
 
                 $goods_name_str = trim($goods_name_str,"\\n");
-                $goods_name_mail_str = trim($goods_name_mail_str,"<br /><span style='visibility:hidden;'>");
+                $goods_name_mail_str = trim($goods_name_mail_str,"<br /><span style='visibility:hidden;'>商品名称：</span>");
              }
               //真实支付金额，菜品总额+配送+包装
              $real_pay = $total_money + $shipping_fee + $package_fee;
