@@ -33,7 +33,7 @@ class CaterUsersController extends Controller
        if($sex){
        	  $CaterUsers->where("sex",'=',$sex);
        }
-       $user_info = $CaterUsers->orderBy('id','desc')->paginate(8);
+       $user_info = $CaterUsers->orderBy('id','desc')->paginate(12);
 
        return view('cater.users.index',[
           'user_info' => $user_info,

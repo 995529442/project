@@ -35,7 +35,7 @@ class CaterGoodsController extends Controller
         }elseif($status == 3){
             $CaterGoods->where("good.is_recommend",1);
         }
-        $goods_info = $CaterGoods->orderBy('good.id','desc')->paginate(8);
+        $goods_info = $CaterGoods->orderBy('good.id','desc')->paginate(12);
 
     	return view("cater.goods.index",[
     		'goods_info' => $goods_info,

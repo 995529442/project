@@ -23,7 +23,7 @@ class CaterCategoryController extends Controller
         	$category->where("cate_name","like","%$cate_name%");
         }
 
-        $category_info = $category->orderBy('sort','desc')->paginate(8);
+        $category_info = $category->orderBy('sort','desc')->paginate(12);
 
     	return view("cater.category.index",[
     		'category_info'=> $category_info,
