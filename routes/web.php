@@ -92,6 +92,7 @@ Route::group(['middleware'=>'AdminLogin'],function(){
        //用户管理
        Route::group(['prefix'=>'users'],function(){
           Route::get('home', 'cater\CaterUsersController@index')->name('cater.users.index'); //用户管理
+          Route::get('add_currency', 'cater\CaterUsersController@add_currency')->name('cater.users.add_currency'); //购物币充值
        });
        
        //小程序管理

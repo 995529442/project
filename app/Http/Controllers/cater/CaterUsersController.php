@@ -42,4 +42,14 @@ class CaterUsersController extends Controller
           'sex' => $sex
        ]);
     }
+
+    //微餐饮-购物币充值
+    public function add_currency(Request $request){
+       $user_id = (int)$request -> input('user_id',0);
+       
+       return view('cater.users.add_currency',[
+          'user_id' => $user_id
+       ]);
+    }
+    
 }

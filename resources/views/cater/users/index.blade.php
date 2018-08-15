@@ -44,13 +44,15 @@
                 <td style="width:5%;">编号</td>
                 <td style="width:9%;">微信名称</td>
                 <td style="width:6%;">头像</td> 
-                <td style="width:12%;">微信openid</td>                               
+                <td style="width:12%;">微信openid</td>    
+                <td style="width:6%;">购物币金额</td>                            
                 <td style="width:6%;">联系方式</td>
                 <td style="width:4%;">性别</td>
                 <td style="width:13%;">用户地址</td>
                 <td style="width:8%;">完成订单总数量</td>                
                 <td style="width:8%;">订单总数量</td>
-                <td style="width:8%;">完成订单总金额</td>                 
+                <td style="width:8%;">完成订单总金额</td> 
+                <td style="width:8%;">操作</td>                
             </tr>
             </thead>
             <tbody>
@@ -59,7 +61,8 @@
                     <td>{{$v->id}}</td>
                     <td>{{$v->weixin_name}}</td>
                     <td><img src='{{$v->headimgurl}}' style="width:50px;height:50px;" /></td> 
-                    <td>{{$v->openid}}</td>                               
+                    <td>{{$v->openid}}</td> 
+                    <td>{{$v->currency_money}}</td>                               
                     <td>{{$v->mobile}}</td>
                     <td>
                       @if($v->sex == 1)
@@ -73,7 +76,8 @@
                     <td>{{$v->province}}{{$v->city}}{{$v->country}}{{$v->address}}</td>
                     <td>{{$v->order_complete_num}}</td>                
                     <td>{{$v->order_num}}</td>
-                    <td>{{$v->total_money}}</td>                    
+                    <td>{{$v->total_money}}</td>  
+                    <td><button class="layui-btn layui-btn-normal layui-btn-sm" onclick="add_currency({{$v->id}})">购物币充值</button></td>                   
                 </tr>
               @endforeach
             </tbody>
@@ -86,5 +90,18 @@
 <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/assets/common/layui/layui.all.js"></script>
 <script>
+  function add_currency(user_id){
+      layer.open({
+        type: 2,
+        title: false,
+        shadeClose: false,
+        shade: 0.1,
+        area: ['500px', '25%'],
+        content: '{{ route("cater.users.add_currency")}}?user_id='+user_id,
+        end: function(){
+
+          }
+      }); 
+  }
 </script>
 @endsection

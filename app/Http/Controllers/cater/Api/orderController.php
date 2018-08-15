@@ -296,7 +296,7 @@ class orderController extends Controller
                 $content .= "订单类型：".$cater_type_name."<br />";
                 $content .= $goods_name_mail_str."<br />";
                 $content .= "支付方式：微信支付<br />";
-                $content .= "支付金额：".$real_pay."<br />";
+                $content .= "支付金额：".$real_pay."元<br />";
                 $content .= "支付时间：".date("Y-m-d H:i:s",time())."<br />";
                 $content .= "备注：".$remark."<br />";
                 Mail::sendMail($admin_id,$shop_mail,"新订单通知",$content);

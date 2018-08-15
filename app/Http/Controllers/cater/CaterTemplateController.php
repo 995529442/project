@@ -12,7 +12,7 @@ class CaterTemplateController extends Controller
     //微餐饮-模板首页
     public function index(Request $request){
         $admins   = Auth::guard('admins')->user();
-    	$admin_id = $admins->id;
+    	  $admin_id = $admins->id;
 
         $temp_list = DB::table("cater_template")->where(['admin_id'=>$admin_id,'isvalid'=>true])->orderBy('id','desc')->paginate(12);
     	
