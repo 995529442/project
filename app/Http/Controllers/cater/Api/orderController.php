@@ -203,6 +203,7 @@ class orderController extends Controller
            $is_open_mail = $shop_info->value("is_open_mail");
            $shop_mail = $shop_info->value("shop_mail");
            $goods_name_str = "";  //商品名称列表，用于发送模板
+           $goods_name_mail_str = "";  //商品名称列表，用于发送邮件
 
            //插入订单数据
            $order_data = array(
@@ -256,6 +257,7 @@ class orderController extends Controller
                     array_push($order_goods_arr, $goods_data);
 
                     $goods_name_str .= $goods_info->good_name.$v['number']."份".$money."元\\n";
+                    $goods_name_mail_str .= "<span style='visibility:hidden;'>商品名称：</span>".$goods_info->good_name.$v['number']."份".$money."元<br />";
                 }
 
                 $goods_name_str = trim($goods_name_str,"\\n");
@@ -291,7 +293,7 @@ class orderController extends Controller
                 $content = "您有一笔新的订单，请及时处理！！！<br />";
                 $content .= "订单编号：".$batchcode."<br />";
                 $content .= "订单类型：".$cater_type_name."<br />";
-                $content .= "商品名称：".str_replace("\\n", "<span style='visibility:hidden;'>商品名称</span>", $goods_name_str)."<br />";
+                $content .= "商品名称：".$goods_name_mail_str."<br />";
                 $content .= "支付方式：微信支付<br />";
                 $content .= "支付金额：".$real_pay."<br />";
                 $content .= "支付时间：".date("Y-m-d H:i:s",time())."<br />";
