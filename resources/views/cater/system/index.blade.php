@@ -52,7 +52,6 @@
     <div class="layui-form-item">
       <div class="layui-input-block">
         <button type="button" class="layui-btn" onclick="on_submit();">保存</button>
-        <button type="button" class="layui-btn layui-btn">下载代码包</button>
       </div>
     </div>
 </form>
