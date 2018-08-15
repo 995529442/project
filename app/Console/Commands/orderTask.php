@@ -38,7 +38,7 @@ class orderTask extends Command
      */
     public function handle()
     {
-        $this->cancel_order();
+        $this->cancel_order();   //未支付订单过期取消订单
     }
 
     /**
