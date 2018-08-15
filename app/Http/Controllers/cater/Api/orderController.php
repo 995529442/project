@@ -291,7 +291,7 @@ class orderController extends Controller
                 $content = "您有一笔新的订单，请及时处理！！！<br />";
                 $content .= "订单编号：".$batchcode."<br />";
                 $content .= "订单类型：".$cater_type_name."<br />";
-                $content .= "商品名称：".$goods_name_str."<br />";
+                $content .= "商品名称：".str_replace("\\n", "<span style='visibility:hidden;'>商品名称</span>", $goods_name_str)."<br />";
                 $content .= "支付方式：微信支付<br />";
                 $content .= "支付金额：".$real_pay."<br />";
                 $content .= "支付时间：".date("Y-m-d H:i:s",time())."<br />";
