@@ -405,22 +405,36 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         wx.hideLoading();
         if (res) {
           that.setData({
             menuList: res.data
           })
-
-          if (wx.getStorageSync('chooseGoods')) {
-            that.setData({
-              chooseGoods: wx.getStorageSync('chooseGoods')
-            })
-            console.log(that.data.chooseGoods)
-          }
         }
       }
     })
+  },
+  /**
+ * 生命周期函数--监听页面加载
+ */
+  onShow: function onLoad(option) {
+    var that=this;
+    if (wx.getStorageSync('chooseGoods')) {
+      that.setData({
+        chooseGoods: wx.getStorageSync('chooseGoods')
+      })      
+    }else{
+      var chooseGoods = new Object();
+
+      chooseGoods.goods = new Object();
+      chooseGoods.money = 0;
+      chooseGoods.allCount = 0;
+
+      that.setData({
+        chooseGoods: chooseGoods
+      }) 
+    }
+    
   },
   /**
    * 获取商家信息
@@ -476,7 +490,7 @@ Page({
         if (res.data) {
           that.setData({
             goodsinfo_box: !that.data.goodsinfo_box,
-            goods_info:res.data.data
+            goods_info: res.data.data
           });
         }
       }

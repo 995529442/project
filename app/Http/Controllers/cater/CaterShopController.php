@@ -113,6 +113,10 @@ class CaterShopController extends Controller
         $data['package_fee'] = $request -> input('package_fee','');
         $data['delivery_km'] = $request -> input('delivery_km','');
         $data['delivery_fee'] = $request -> input('delivery_fee','');
+        $data['is_open_currency'] = $request -> input('is_open_currency',0);
+        $data['is_open_sms'] = $request -> input('is_open_sms',0);
+        $data['is_open_mail'] = $request -> input('is_open_mail',0);
+        $data['shop_mail'] = ($request -> input('shop_mail',"") == null)?"":$request -> input('shop_mail',"");
 
         if($shop_id > 0){
             $cater_shop = DB::table("cater_shop")->whereId($shop_id)->update($data);

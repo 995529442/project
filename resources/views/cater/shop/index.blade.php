@@ -151,8 +151,40 @@
 	    <div class="layui-input-block">
 	      <input type="text" name="phone" id="phone" lay-verify="required|phone" autocomplete="off" class="layui-input" value="{{$shops_info['phone']}}" style="width:40%;">
 	    </div>
-	</div>  
-    
+	  </div>  
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">是否开启购物币支付：</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" name="is_open_currency_box" @if($shops_info['is_open_currency'] == 1) checked @endif id="is_open_currency_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_open_currency_box">
+        <input type="hidden" name="is_open_currency" id="is_open_currency" value="{{$shops_info['is_open_currency']}}">
+      </div>
+    </div> 
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">是否开启短信通知：</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" name="is_open_sms_box" @if($shops_info['is_open_sms'] == 1) checked @endif id="is_open_sms_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_open_sms_box">
+        <input type="hidden" name="is_open_sms" id="is_open_sms" value="{{$shops_info['is_open_sms']}}">
+      </div>
+    </div> 
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">是否开启邮件通知：</label>
+      <div class="layui-input-inline">
+        <input type="checkbox" name="is_open_mail_box" @if($shops_info['is_open_mail'] == 1) checked @endif id="is_open_mail_box" lay-skin="switch" lay-text="ON|OFF" lay-filter="is_open_mail_box">
+        <input type="hidden" name="is_open_mail" id="is_open_mail" value="{{$shops_info['is_open_mail']}}">
+      </div>
+    </div> 
+
+    <div class="layui-form-item" id="open_mail" @if($shops_info == "" || $shops_info['is_open_mail'] == 0)style="display:none;" @endif>
+        <div class="layui-form-item">
+          <label class="layui-form-label">通知邮箱：</label>
+          <div class="layui-input-block">
+            <input type="text" name="shop_mail" id="shop_mail" autocomplete="off" class="layui-input" value="{{$shops_info['shop_mail']}}" style="width:40%;">
+          </div>
+        </div> 
+    </div>
     <div class="layui-form-item layui-form-text">
 	    <label class="layui-form-label">餐厅介绍：</label>
 	    <div class="layui-input-block">
@@ -194,6 +226,32 @@
         $("#is_take_out").val(1);
         $("#take_out").hide();
         $("#take_out_delivery").hide(); 
+      }
+    });
+
+    form.on('switch(is_open_currency_box)', function(data){
+      if(this.checked){
+        $("#is_open_currency").val(1);
+      }else{
+        $("#is_open_currency").val(0);
+      }
+    });
+
+    form.on('switch(is_open_sms_box)', function(data){
+      if(this.checked){
+        $("#is_open_sms").val(1);
+      }else{
+        $("#is_open_sms").val(0);
+      }
+    });
+
+    form.on('switch(is_open_mail_box)', function(data){
+      if(this.checked){
+        $("#is_open_mail").val(1);
+        $("#open_mail").show();
+      }else{
+        $("#is_open_mail").val(0);
+        $("#open_mail").hide();
       }
     });
     //日期
@@ -336,6 +394,8 @@
     var is_eat_in  = $("#is_eat_in").val();
     var is_take_out= $("#is_take_out").val();
     var delivery_km= $("#delivery_km").val();
+    var is_open_mail = $("#is_open_mail").val();
+    var shop_mail  = $("#shop_mail").val();
 
       if(name == "" || name == null){
       	layer.msg('餐厅名称不能为空', {icon: 2},1500);
@@ -392,7 +452,18 @@
       if(!(/^1[34578]\d{9}$/.test(phone))){ 
         layer.msg('联系方式有误，请重填', {icon: 2},1500); 
         return false; 
-    } 
+      } 
+
+     if(is_open_mail == 1 && shop_mail == ""){
+        layer.msg('通知邮箱不能为空', {icon: 2},1500); 
+        return false;       
+     }
+     if(shop_mail != ""){
+        if(!(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(shop_mail))){ 
+          layer.msg('通知邮箱格式有误，请重填', {icon: 2},1500); 
+          return false; 
+        } 
+      }
 	}
 
 	//地址解析

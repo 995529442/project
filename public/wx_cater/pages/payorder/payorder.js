@@ -16,8 +16,8 @@ Page({
     shop_info: {},
     user_id: 0,
     default_address: {},
-    goods_id_arr:'',
-    is_locked_pay:0,
+    goods_id_arr: '',
+    is_locked_pay: 0,
   },
   /**
    * 支付货款
@@ -181,14 +181,14 @@ Page({
   /**
    * 付款
    */
-  formSubmit:function(e){
-    var that=this;
+  formSubmit: function (e) {
+    var that = this;
     var remark = e.detail.value.remark;
     var goods_id_arr = that.data.goods_id_arr;
     var default_address = that.data.default_address;
     var formId = e.detail.formId;
 
-    if (default_address == ''){
+    if (default_address == '') {
       wx.showToast({
         title: '请选择收货信息',
         icon: 'none',
@@ -197,7 +197,10 @@ Page({
       return;
     }
     that.setData({
-      is_locked_pay:1
+      is_locked_pay: 1
+    })
+    wx.showLoading({
+      title: '支付中',
     })
     wx.request({
       url: app.globalData.appUrl + '/api/cater/order/pay',
@@ -215,10 +218,26 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        if (res.data.errocde > 0){
+        wx.hideLoading();
+        if (res.data.errocde > 0) {
           //删除购物车缓存
-          wx.removeStorageSync('goods_id_arr');
-          wx.removeStorageSync('chooseGoods');          
+          wx.showModal({
+            title: '提示',
+            content: '支付成功',
+            success: function (res) {
+              wx.removeStorageSync('goods_id_arr');
+              wx.removeStorageSync('chooseGoods');
+              if (res.confirm) {
+                wx.redirectTo({
+                  url: '../useroperation/useroperation?operation=order&currentCouponTab=' + app.globalData.cater_type,
+                })
+              } else if (res.cancel) {
+                wx.redirectTo({
+                  url: '../useroperation/useroperation?operation=order&currentCouponTab=' + app.globalData.cater_type,
+                })
+              }
+            }
+          })
         }
       }
     })

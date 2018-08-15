@@ -23,12 +23,12 @@ Page({
    * @param e
    */
   chooseCouponTab: function chooseCouponTab(e) {
-    var that=this;
+    var that = this;
     var tabid = e.currentTarget.dataset.tabid;
     that.setData({
       currentCouponTab: tabid,
-      orders:[],
-      page:1 
+      orders: [],
+      page: 1
     });
 
     that.get_my_orders();
@@ -43,7 +43,7 @@ Page({
       url: '../payorder/payorder?id=' + e.currentTarget.dataset.id
     });
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -53,6 +53,13 @@ Page({
     // 由跳转链接设置标题
     var operation = params.operation;
     var pay_type = typeof (params.pay_type) == 'undefined' ? '' : params.pay_type
+    var currentCouponTab = typeof (params.currentCouponTab) == 'undefined' ? '' : params.currentCouponTab
+
+    if (currentCouponTab != "") {
+      that.setData({
+        currentCouponTab: currentCouponTab - 1
+      })
+    }
     // 设置operation
     that.setData({
       operation: params.operation,

@@ -11,6 +11,8 @@ date_default_timezone_set('PRC');
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Librarys\MiniappApi;
+use App\Librarys\Sms;
+use App\Librarys\Mail;
 use DB;
 
 class orderController extends Controller
@@ -197,6 +199,9 @@ class orderController extends Controller
            $package_fee = $cater_type==2?$shop_info->value("package_fee"):0;
            $shop_name = $shop_info->value("name");
            $shop_phone = $shop_info->value("phone");
+           $is_open_sms = $shop_info->value("is_open_sms");
+           $is_open_mail = $shop_info->value("is_open_mail");
+           $shop_mail = $shop_info->value("shop_mail");
            $goods_name_str = "";  //商品名称列表，用于发送模板
 
            //插入订单数据
@@ -271,7 +276,13 @@ class orderController extends Controller
              //        "isvalid" => true
              //    ]));
              // }
-             
+             if($is_open_sms == 1){  //商家开启了短信通知
+                Sms::sendSms($admin_id,2,$batchcode,$shop_phone);
+             }
+             if($is_open_mail == 1 && !empty($shop_mail)){  //商家开启了短信通知
+                $content = "您有一笔新的订单，请及时处理！！！";
+                Mail::sendMail($admin_id,$shop_mail,"新订单通知",$content);
+             }
              //發送模板消息
              $template_id = DB::table("cater_template")->where(['admin_id'=>$admin_id,'isvalid'=>true,'type'=>1,'is_on'=>1])->value("template_id");
 
@@ -316,11 +327,8 @@ class orderController extends Controller
 
                   $result = MiniappApi::sendTemplate($admin_id,$data);
 
-                  if($result['errcode'] > 0){  //发送成功
-                    
-                  }
               }
-            
+
              DB::commit();
 
              $return['errocde'] = 1;
