@@ -276,21 +276,30 @@ class orderController extends Controller
              //        "isvalid" => true
              //    ]));
              // }
-             if($is_open_sms == 1){  //商家开启了短信通知
-                Sms::sendSms($admin_id,2,$batchcode,$shop_phone);
-             }
-             if($is_open_mail == 1 && !empty($shop_mail)){  //商家开启了短信通知
-                $content = "您有一笔新的订单，请及时处理！！！";
-                Mail::sendMail($admin_id,$shop_mail,"新订单通知",$content);
-             }
-             //發送模板消息
-             $template_id = DB::table("cater_template")->where(['admin_id'=>$admin_id,'isvalid'=>true,'type'=>1,'is_on'=>1])->value("template_id");
 
              if($cater_type == 1){
                 $cater_type_name = "堂食";
              }else{
                 $cater_type_name = "外卖";
              }
+
+             if($is_open_sms == 1){  //商家开启了短信通知
+                $param = "$batchcode,$real_pay,$user_name,$phone";
+                Sms::sendSms($admin_id,2,$param,$shop_phone);
+             }
+             if($is_open_mail == 1 && !empty($shop_mail)){  //商家开启了短信通知
+                $content = "您有一笔新的订单，请及时处理！！！<br />";
+                $content .= "订单编号：".$batchcode."<br />";
+                $content .= "订单类型：".$cater_type_name."<br />";
+                $content .= "商品名称：".$goods_name_str."<br />";
+                $content .= "支付方式：微信支付<br />";
+                $content .= "支付金额：".$real_pay."<br />";
+                $content .= "支付时间：".date("Y-m-d H:i:s",time())."<br />";
+                $content .= "备注：".$remark."<br />";
+                Mail::sendMail($admin_id,$shop_mail,"新订单通知",$content);
+             }
+             //發送模板消息
+             $template_id = DB::table("cater_template")->where(['admin_id'=>$admin_id,'isvalid'=>true,'type'=>1,'is_on'=>1])->value("template_id");
 
               if($template_id && $formId){
                   $data = '{
