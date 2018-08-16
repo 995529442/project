@@ -93,6 +93,8 @@ Route::group(['middleware'=>'AdminLogin'],function(){
        Route::group(['prefix'=>'users'],function(){
           Route::get('home', 'cater\CaterUsersController@index')->name('cater.users.index'); //用户管理
           Route::get('add_currency', 'cater\CaterUsersController@add_currency')->name('cater.users.add_currency'); //购物币充值
+          Route::post('save_currency', 'cater\CaterUsersController@save_currency')->name('cater.users.save_currency'); //购物币保存
+          Route::get('currency_log', 'cater\CaterUsersController@currency_log')->name('cater.users.currency_log'); //购物币日志
        });
        
        //小程序管理

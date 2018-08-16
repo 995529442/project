@@ -32,6 +32,9 @@ class getShopController extends Controller
         $shop_info->city = DB::table("address")->whereId($shop_info->city_id)->value("name");
         $shop_info->area = DB::table("address")->whereId($shop_info->area_id)->value("name");
 
+        $shop_info->package_fee = round((float)$shop_info->package_fee,2);
+        $shop_info->shipping_fee = round((float)$shop_info->shipping_fee,2);
+        $shop_info->delivery_fee = round((float)$shop_info->delivery_fee,2);
         //获取店铺展示图片
         $shop_info->figure_img = DB::table("cater_figure_img")->where(["admin_id"=>$admin_id,"isvalid"=>true,'foreign_id'=>$shop_info->id,'type'=>1])->get();
 

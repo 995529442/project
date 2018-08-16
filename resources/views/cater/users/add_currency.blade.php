@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')       
 <blockquote class="layui-elem-quote layui-text">
-  新增分类
+  购物币充值
 </blockquote>
 <form class="layui-form" action="" method="post" onsubmit="return false;">
     <input type="hidden" name="user_id" id="user_id" value="{{$user_id}}">
@@ -31,23 +31,28 @@
 			return;
 		}
 
-		// $.ajax({  
-  //         type: "POST",
-  //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
-  //         url: "{{ route('cater.category.save_cate') }}",  
-  //         data: {cate_id:cate_id,cate_name:cate_name,sort:sort},  
-  //         dataType: "json",  
-  //         success: function(data){
-  //            if(data.errcode == 1){
-  //            	layer.msg(data.errmsg, {icon: 1},function(){
-  //            		window.parent.layer.closeAll();
-  //            		window.parent.location.reload();
-  //            	}); 
-  //            }else{
-  //            	layer.msg(data.errmsg, {icon: 2},1500); 
-  //            }
-  //         }  
-  //       }); 
+		if(money <= 0){
+			layer.msg('充值金额必须大于0', {icon: 2},1500); 
+			return;
+		}
+
+		$.ajax({  
+          type: "POST",
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+          url: "{{ route('cater.users.save_currency') }}",  
+          data: {user_id:user_id,money:money},  
+          dataType: "json",  
+          success: function(data){
+             if(data.errcode == 1){
+             	layer.msg(data.errmsg, {icon: 1},function(){
+             		window.parent.layer.closeAll();
+             		window.parent.location.reload();
+             	}); 
+             }else{
+             	layer.msg(data.errmsg, {icon: 2},1500); 
+             }
+          }  
+        }); 
 	}
 
 	function clearNoNum(obj){ 

@@ -62,7 +62,7 @@
                     <td>{{$v->weixin_name}}</td>
                     <td><img src='{{$v->headimgurl}}' style="width:50px;height:50px;" /></td> 
                     <td>{{$v->openid}}</td> 
-                    <td>{{$v->currency_money}}</td>                               
+                    <td><a href="{{ route('cater.users.currency_log') }}?user_id={{$v->id}}" style="color:#1E9FFF;">{{$v->currency_money}}</a></td>                               
                     <td>{{$v->mobile}}</td>
                     <td>
                       @if($v->sex == 1)

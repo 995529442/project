@@ -46,6 +46,10 @@
       <text>包装费</text>
       <view style="color:red">￥{{shop_info.package_fee}}</view>
     </view>
+    <view class="lxr" wx:if="{{cater_type == 2}}">
+      <text>总计</text>
+      <view style="color:red">￥{{allMoney+shop_info.shipping_fee+shop_info.package_fee}}</view>
+    </view>
     <view class="lxr">
       <text>备注</text>
       <input value="" name="remark" placeholder="口味偏好等要求" />

@@ -84,7 +84,7 @@ Page({
         if (res.data) {
           that.setData({
             goods: res.data.goods_id_arr,
-            allMoney: res.data.total_money
+            allMoney: parseFloat(res.data.total_money).toFixed(2)
           })
         }
       }
@@ -146,10 +146,18 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        
         if (res.data) {
+          var shop_info = res.data;
+          
+          shop_info.shipping_fee = parseFloat(shop_info.shipping_fee).toFixed(2);
+          shop_info.package_fee = parseFloat(shop_info.package_fee).toFixed(2);
+
           that.setData({
-            shop_info: res.data
+            shop_info: shop_info
           })
+
+          console.log(that.data.shop_info)
         }
       }
     })
