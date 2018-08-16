@@ -347,10 +347,15 @@ class getUserInfoController extends Controller
        );  
 
        if($admin_id && $user_id){
-           $currency_list = DB::table("cater_currency_log")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true])
+            $currency_list = DB::table("cater_currency_log")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true])
                     ->orderByDesc("id")
                     ->offset(($page - 1) * 12)->limit(12)->get();
 
+            if($currency_list){
+              foreach($currency_list as $k=>$v){
+                  $currency_list[$k]->create_time = date("Y-m-d H:i:s",$v->create_time);
+              }
+            }
             $return['errcode'] = 1;
             $return['errmsg'] = "成功";
             $return['data'] = $currency_list;

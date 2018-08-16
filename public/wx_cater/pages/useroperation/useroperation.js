@@ -84,7 +84,7 @@ Page({
     if (operation === 'number') {
       operation = '我的排单号';
     } else if (operation === 'currency') {
-      operation = '我的购物币';
+      operation = '购物币消费记录';
 
       that.get_my_currency();
     } else if (operation === 'integral') {
@@ -124,6 +124,8 @@ Page({
       that.get_my_orders();
     } else if (operation == "address") {
       that.get_my_address();
+    } else if (operation == "currency") {
+      that.get_my_currency();
     }
   },
   /**
@@ -304,7 +306,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         wx.hideLoading()
         if (res.data.errcode > 0) {
           var orders = that.data.orders;
@@ -337,7 +338,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         wx.hideLoading()
         if (res.data.errcode > 0) {
           var currency = that.data.currency;
