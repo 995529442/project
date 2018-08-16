@@ -197,10 +197,17 @@ class orderController extends Controller
                   //判断密码是否或者正确
                   $user_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
 
-                  if(bcrypt($currency_password) != $user_currency_password){
-                    $return['errmsg'] = '支付密码错误';
+                  if(!empty($user_currency_password)){
+                    if(bcrypt($currency_password) != $user_currency_password){
+                      $return['errmsg'] = '支付密码错误';
 
-                    return json_encode($return);                      
+                      return json_encode($return);                      
+                    }
+                  }else{
+                      $return['errcode'] = -2;
+                      $return['errmsg'] = '您还没有设置密码';
+
+                      return json_encode($return);                     
                   }
               }else{
                   $return['errmsg'] = '支付密码不能为空';
