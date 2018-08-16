@@ -6,12 +6,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Librarys\MiniappApi;
+use Illuminate\Support\Facades\Crypt;
 use DB;
 
 class CaterDeskController extends Controller
 {
     //微餐饮-餐桌首页
-    public function index(Request $request){       
+    public function index(Request $request){     
+        $pswd = '123456';
+         $pswd_lock = Crypt::encrypt($pswd);//加密$pswd
+         echo $pswd_lock.'<br/>';
+        $pswd_open = Crypt::decrypt($pswd_lock);
+        echo $pswd_open;
+exit;  
         $admins   = Auth::guard('admins')->user();
     	$admin_id = $admins->id;
 

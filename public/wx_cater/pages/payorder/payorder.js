@@ -10,7 +10,7 @@ Page({
    */
   data: {
     userinfo_box: false,
-    currency_pay_box:false,  //购物币支付框
+    currency_pay_box: false,  //购物币支付框
     goods: [],
     allMoney: 0,
     cater_type: app.globalData.cater_type,
@@ -19,7 +19,7 @@ Page({
     default_address: {},
     goods_id_arr: '',
     is_locked_pay: 0,
-    pay_type:-1      //支付方式 0微信支付 ，1购物币支付
+    pay_type: -1      //支付方式 0微信支付 ，1购物币支付
   },
   /**
    * 支付货款
@@ -150,7 +150,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        
+
         if (res.data) {
           that.setData({
             shop_info: res.data
@@ -188,8 +188,8 @@ Page({
   /**
    * 选择支付方式
    */
-  select_pay_type:function(e){
-    var that=this;
+  select_pay_type: function (e) {
+    var that = this;
     wx.showActionSheet({
       itemList: ['微信支付', '购物币支付'],
       success: function (res) {
@@ -202,14 +202,15 @@ Page({
       }
     })
   },
-    /**
-   * 关闭购物币支付
-   */
-  cancel_currency:function(e){
-      var that =this;
-      that.setData({
-        currency_pay_box:false
-      })
+  /**
+ * 关闭购物币支付
+ */
+  cancel_currency: function (e) {
+    var that = this;
+    that.setData({
+      currency_pay_box: false,
+      is_locked_pay:0
+    })
   },
   /**
    * 付款
@@ -224,19 +225,19 @@ Page({
     var currency_pay_box = that.data.currency_pay_box;
     var currency_password = typeof (e.detail.value.currency_password) == 'undefined' ? '' : e.detail.value.currency_password;
 
-    if (pay_type == 1 && !currency_pay_box){  //购物币支付
-       that.setData({
-         currency_pay_box:true
-       });
-       return;
+    if (pay_type == 1 && !currency_pay_box) {  //购物币支付
+      that.setData({
+        currency_pay_box: true
+      });
+      return;
     }
-    if (pay_type == 1 && currency_pay_box && currency_password == ""){
+    if (pay_type == 1 && currency_pay_box && currency_password == "") {
       wx.showToast({
         title: '请输入支付密码',
         icon: 'none',
         duration: 3000
       })
-      return;      
+      return;
     }
     if (default_address == '') {
       wx.showToast({
@@ -299,7 +300,30 @@ Page({
               }
             }
           })
+        } else if (res.data.errcode == -2) {
+          wx.showModal({
+            title: '提示',
+            content: res.data.errmsg,
+            confirmText: '前往设置',
+            success: function (res) {
+              if (res.confirm) {
+
+              } else if (res.cancel) {
+
+              }
+            }
+          })
+        } else {
+          wx.showToast({
+            title: res.data.errmsg,
+            icon: 'none',
+            duration: 2000
+          })
         }
+
+        that.setData({
+          is_locked_pay:0
+        })
       }
     })
   },
