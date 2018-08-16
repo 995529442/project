@@ -200,7 +200,7 @@ class orderController extends Controller
 
                   if(!empty($user_currency_password)){
 
-                    if(Crypt::encrypt($currency_password) != $user_currency_password){
+                    if($currency_password != Crypt::decrypt($user_currency_password)){
                       $return['errmsg'] = '支付密码错误';
 
                       return json_encode($return);                      
