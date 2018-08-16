@@ -337,6 +337,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         wx.hideLoading()
         if (res.data.errcode > 0) {
           var currency = that.data.currency;
