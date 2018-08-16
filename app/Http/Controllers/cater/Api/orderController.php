@@ -317,7 +317,8 @@ class orderController extends Controller
                           "operate_from" => DB::table("admins")->value("username"),
                           "user_id" => $user_id,
                           "operate_to" => $user_name,
-                          "remark" => "订单支付，扣减".$real_pay."元，订单号:".$batchcode
+                          "remark" => "订单支付，扣减".$real_pay."元，订单号:".$batchcode,
+                          "isvalid" => true
                       ]);
                    }
                 }              
