@@ -238,7 +238,7 @@ class orderController extends Controller
               "package_fee" => (float)$package_fee,
               "remark" => $remark,
               "create_time" => time(),
-              "payment_type" => $payment_type
+              "payment_type" => $payment_type,
               "isvalid" => true
            );
 
