@@ -10,26 +10,27 @@ Page({
    */
   data: {
     userinfo_box: false,
+    user_id:0,
     motto: 'Hello World',
     avatarurl: '',
     nickname: '',
     title: 'user',
     userDetail: [{
-      title: '正在排队',
-      number: 1
+      title: '购物币',
+      number: 0
     }, {
       title: '优惠券',
-      number: 4
+      number: '暂无'
     }, {
       title: '积分',
-      number: 20
+      number: '暂无'
     }],
     userList: [{
       icon: 'iconfont icon-dingdan',
       title: '我的订单',
       id: 'order'
     }, {
-        icon: 'iconfont icon-lingdang:before',
+      icon: 'iconfont icon-lingdang:before',
       title: '我的地址',
       id: 'address'
     }]
@@ -53,12 +54,45 @@ Page({
         avatarurl: wx.getStorageSync('avatarurl')
       })
     }
+
+    if (wx.getStorageSync('user_id')) {
+      that.setData({
+        user_id: wx.getStorageSync('user_id')
+      })
+    }
+
     if (wx.getStorageSync('openId') == undefined || wx.getStorageSync('openId') == '') {
       that.setData({
         userinfo_box: true,
       })
       return;
     }
+
+    that.get_my_currency(); // 获取我的购物币
+  },
+  // 我的购物币
+  get_my_currency: function () {
+    var that = this;
+
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getUserInfo/getMyCurrency',
+      data: {
+        user_id: that.data.user_id,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var userDetail = that.data.userDetail;
+
+        userDetail[0].number = res.data.currency_money;
+        if (res.data) {
+          that.setData({
+            userDetail: userDetail
+          })
+        }
+      }
+    })
   },
   // 授权提示
   UserInfo_click: function (e) {

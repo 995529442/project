@@ -314,7 +314,7 @@ class orderController extends Controller
                    if($pay_result){
                       DB::table("cater_currency_log")->insert([
                           "admin_id" => $admin_id,
-                          "operate_from" => DB::table("admins")->value("username"),
+                          "operate_from" => $user_name,
                           "user_id" => $user_id,
                           "operate_to" => $user_name,
                           "remark" => "订单支付，扣减".$real_pay."元，订单号:".$batchcode,

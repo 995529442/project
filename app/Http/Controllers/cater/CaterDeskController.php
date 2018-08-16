@@ -33,8 +33,7 @@ class CaterDeskController extends Controller
         if($desk_id){
            $desk_info = DB::table("cater_desk")->whereId($desk_id)->first();          
         }
-
-        
+       
         return view("cater.desk.add_desk",[
             'desk_id' => $desk_id,
             'desk_info'=>$desk_info

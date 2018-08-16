@@ -315,6 +315,19 @@ class getUserInfoController extends Controller
 
        return $return;
 
+    } 
+
+    /**
+     * 获取用户购物币
+     * @param Request $request
+     * @return string
+     */
+    public function getMyCurrency(Request $request) { 
+       $user_id = (int)$request -> input("user_id",0);   
+
+       $user_list = DB::table("cater_users")->whereId($user_id)->select(['currency_money'])->first();
+
+       return json_encode($user_list);
     }       
     /**
      * curl

@@ -26,7 +26,7 @@ page {
   padding: 30rpx;
   height: 143rpx;
   box-sizing: border-box;
-  background-color: #ed4d30;
+  background-color: #F0A0A0;
   justify-content: space-around;
 }
 .user-score .u-s-content {
@@ -42,8 +42,8 @@ page {
   font-size: 24rpx;
 }
 .user-score .u-s-content text:nth-child(2) {
-  color: #fff;
-  font-size: 36rpx;
+  color: #FFFFFF;
+  font-size: 26rpx;
 }
 .user-score .u-s-content:nth-child(3) {
   border-right: none;
