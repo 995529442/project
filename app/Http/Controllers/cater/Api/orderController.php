@@ -192,7 +192,7 @@ class orderController extends Controller
               return json_encode($return);
            }
 
-           if($payment_type == 1){ //购物币支付
+           if($payment_type == 1){  //购物币支付
               if(!empty($currency_password)){
                   //判断密码是否或者正确
                   $user_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
