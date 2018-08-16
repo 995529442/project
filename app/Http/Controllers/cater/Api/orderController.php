@@ -298,6 +298,8 @@ class orderController extends Controller
              $order_model = DB::table("cater_orders")->whereId($order_id);
              $order_model->update(['real_pay'=>round($real_pay,2),'total_money'=>round($total_money,2),'total_num'=>$total_num]);
 
+             DB::table("cater_orders_goods")->insert($order_goods_arr);
+
              if($payment_type == 1){
                 $user_model = DB::table("cater_users")->whereId($user_id);
                 $currency_money = $user_model->value("currency_money");
@@ -321,11 +323,20 @@ class orderController extends Controller
                           "create_time" => time(),
                           "isvalid" => true
                       ]);
+
+                      //减库存
+                      foreach($goods_id_arr as $k=>$v){
+                          $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
+
+                          DB::table("cater_goods")->whereId($goods_info->id)->decrement((int)$v['number']);
+
+                      }  
+
+                      //用户总订单加一
+                      DB::table("cater_users")->whereId($user_id)->increment($order_num);                   
                    }
                 }              
              }
-
-             DB::table("cater_orders_goods")->insert($order_goods_arr);
 
              //记录form_id
              // if($formId){

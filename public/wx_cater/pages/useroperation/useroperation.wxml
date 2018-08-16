@@ -75,8 +75,8 @@
     <button type="warn" bindtap="add_wx_address" style="position:absolute;left:50%;bottom:20rpx;width:45%;">获取微信地址</button>
   </view>
     <!--购物币消费记录-->
-  <view wx:if="{{ operation == 'currency' }}" class="number" style="height:85vh;">
-    <scroll-view scroll-y style="height: 88vh;" bindscrolltolower="scroll">
+  <view wx:if="{{ operation == 'currency' }}" class="number" style="height:100vh;">
+    <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll">
       <block wx:for="{{currency}}" wx:for-item="item" wx:for-index="idx">
         <view class="number-top" bindtap="select_address" data-address_id="{{item.id}}" data-is_out="{{item.is_out}}">
           <view class="n-t-center">

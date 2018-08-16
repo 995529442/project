@@ -217,13 +217,13 @@ Page({
    */
   formSubmit: function (e) {
     var that = this;
-    var remark = e.detail.value.remark;
     var goods_id_arr = that.data.goods_id_arr;
     var default_address = that.data.default_address;
     var formId = e.detail.formId;
     var pay_type = that.data.pay_type;
     var currency_pay_box = that.data.currency_pay_box;
     var currency_password = typeof (e.detail.value.currency_password) == 'undefined' ? '' : e.detail.value.currency_password;
+    var remark = typeof (e.detail.value.remark) == 'undefined' ? '' : e.detail.value.remark;
 
     if (pay_type == 1 && !currency_pay_box) {  //购物币支付
       that.setData({
@@ -250,6 +250,14 @@ Page({
     if (pay_type == -1) {
       wx.showToast({
         title: '请选择支付方式',
+        icon: 'none',
+        duration: 3000
+      })
+      return;
+    }
+    if (pay_type == 0) {
+      wx.showToast({
+        title: '微信支付暂时未开通，请选择购物币支付',
         icon: 'none',
         duration: 3000
       })
