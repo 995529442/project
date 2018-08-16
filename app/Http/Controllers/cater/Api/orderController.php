@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Cater\Api;
 date_default_timezone_set('PRC');
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use App\Librarys\MiniappApi;
 use App\Librarys\Sms;
 use App\Librarys\Mail;
@@ -198,7 +199,8 @@ class orderController extends Controller
                   $user_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
 
                   if(!empty($user_currency_password)){
-                    if(bcrypt($currency_password) != $user_currency_password){
+
+                    if(Crypt::encrypt($currency_password) != $user_currency_password){
                       $return['errmsg'] = '支付密码错误';
 
                       return json_encode($return);                      
@@ -292,7 +294,12 @@ class orderController extends Controller
              }
               //真实支付金额，菜品总额+配送+包装
              $real_pay = $total_money + $shipping_fee + $package_fee;
+             
+             if($payment_type == 1 && $currency_password < $real_pay){
+                $return['errmsg'] = '购物币余额不足以支付';
 
+                return json_encode($return);                
+             }
              DB::table("cater_orders")->whereId($order_id)->update(['real_pay'=>round($real_pay,2),'total_money'=>round($total_money,2),'total_num'=>$total_num]);
 
              DB::table("cater_orders_goods")->insert($order_goods_arr);
