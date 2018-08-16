@@ -294,13 +294,34 @@ class orderController extends Controller
              }
               //真实支付金额，菜品总额+配送+包装
              $real_pay = $total_money + $shipping_fee + $package_fee;
-             
-             if($payment_type == 1 && $currency_password < $real_pay){
-                $return['errmsg'] = '购物币余额不足以支付';
 
-                return json_encode($return);                
+             $order_model = DB::table("cater_orders")->whereId($order_id);
+             $order_model->update(['real_pay'=>round($real_pay,2),'total_money'=>round($total_money,2),'total_num'=>$total_num]);
+
+             if($payment_type == 1){
+                $user_model = DB::table("cater_users")->whereId($user_id);
+                $currency_money = $user_model->value("currency_money");
+
+                if($currency_money < $real_pay){
+                  $return['errmsg'] = '购物币余额不足以支付';
+
+                  return json_encode($return);  
+                }else{  //购物币支付
+                   $pay_result = $user_model->decrement("currency_money",$real_pay);
+                   
+                   $order_model->update(['pay_type'=>1,'status'=>1,'pay_time'=>time()]);
+
+                   if($pay_result){
+                      DB::table("cater_currency_log")->insert([
+                          "admin_id" => $admin_id,
+                          "operate_from" => DB::table("admins")->value("username"),
+                          "user_id" => $user_id,
+                          "operate_to" => $user_name,
+                          "remark" => "订单支付，扣减".$real_pay."元，订单号:".$batchcode
+                      ]);
+                   }
+                }              
              }
-             DB::table("cater_orders")->whereId($order_id)->update(['real_pay'=>round($real_pay,2),'total_money'=>round($total_money,2),'total_num'=>$total_num]);
 
              DB::table("cater_orders_goods")->insert($order_goods_arr);
 
