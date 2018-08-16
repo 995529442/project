@@ -263,6 +263,15 @@ class orderController extends Controller
                 foreach($goods_id_arr as $k=>$v){
                     $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
 
+                    //判断库存是否足够
+                    if($goods_info->storenum < (int)$v['number']){
+                      $return['errmsg'] = $goods_info->good_name.'库存不足，最多能选'.$goods_info->storenum."件";
+
+                      return json_encode($return); 
+
+                      break;                     
+                    }
+
                     $goods_id_arr[$k]['good_name'] = $goods_info->good_name;
 
                     $money = $goods_info->now_price * $v['number'];
