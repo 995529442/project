@@ -6,7 +6,7 @@
         <view class='userinfo_title'>提示</view>
         <view class='userinfo_text'>请输入支付密码</view>
         <view class="section">
-          <input name="currency_password" password maxlength="20" value=""  style="height:50rpx;" />
+          <input name="currency_password" password maxlength="20" value=""  style="height:6vh;" />
         </view>
         <view class='userinfo_btn' style="border-top:2rpx solid #E6E6E7;">
           <button bindtap='cancel_currency' hover-class='none' style='color:#999;border-right:2rpx solid #E6E6E7;'>取消</button>
