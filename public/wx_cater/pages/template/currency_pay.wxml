@@ -1,0 +1,19 @@
+<!-- 获取用户信息授权提示窗口  -->
+<template name="currency_pay">
+  <view class="userinfo_box" wx:if="{{currency_pay_box}}">
+    <form class="formSubmit" bindsubmit="formSubmit" report-submit="true">
+      <view class='userinfo_prompt_box'>
+        <view class='userinfo_title'>提示</view>
+        <view class='userinfo_text'>请输入支付密码</view>
+        <view class="section">
+          <input name="currency_password" password maxlength="20" value=""  style="height:50rpx;" />
+        </view>
+        <view class='userinfo_btn' style="border-top:2rpx solid #E6E6E7;">
+          <button bindtap='cancel_currency' hover-class='none' style='color:#999;border-right:2rpx solid #E6E6E7;'>取消</button>
+          <button formType="submit" wx:if="{{!is_locked_pay}}" hover-class='none' style='color:#009D1F;'>确定</button>
+          <button formType="submit" wx:if="{{is_locked_pay}}" disabled='disabled' hover-class='none' style='color:#009D1F;'>确定</button>
+        </view>
+      </view>
+    </form>
+  </view>
+</template>

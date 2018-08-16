@@ -1,6 +1,8 @@
 <!-- 可用组件：https://mp.weixin.qq.com/debug/wxadoc/dev/component/ -->
 <import src="../template/userInfo.wxml" />
 <template is="userinfo" data="{{userinfo_box:userinfo_box}}" />
+<import src="../template/currency_pay.wxml" />
+<template is="currency_pay" data="{{currency_pay_box:currency_pay_box,is_locked_pay:is_locked_pay}}" />
 <view class="payorder">
   <navigator url="../useroperation/useroperation?operation=address&pay_type=1">
     <view class="lxr" style="margin:0rpx;" wx:if="{{cater_type == 2 && default_address !=''}}">
@@ -49,6 +51,14 @@
     <view class="lxr" wx:if="{{cater_type == 2}}">
       <text>总计</text>
       <view style="color:red">￥{{allMoney+shop_info.shipping_fee+shop_info.package_fee}}</view>
+    </view>
+    <view class="lxr" wx:if="{{cater_type == 2}}">
+      <text>支付方式</text>
+      <view bindtap="select_pay_type">
+      <block wx:if="{{pay_type == -1}}">请选择</block> 
+      <block wx:if="{{pay_type == 0}}">微信支付</block>     
+      <block wx:if="{{pay_type == 1}}">购物币支付</block> 
+      </view>
     </view>
     <view class="lxr">
       <text>备注</text>

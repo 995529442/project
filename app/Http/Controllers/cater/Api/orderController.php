@@ -173,7 +173,9 @@ class orderController extends Controller
       $cater_type = (int)$request -> input("cater_type",0); //类型，1堂食 2外卖 3排队
       $remark = $request -> input("remark",'') == null?'':$request -> input("remark",'');   //留言
       $formId = $request -> input("formId",'') == null?'':$request -> input("formId",'');   
-
+      $currency_password = $request -> input("currency_password",'') == null?'':$request -> input("currency_password",'');
+      $payment_type = (int)$request -> input("pay_type",0); //支付方式 0微信支付1购物币支付
+         
       $return = array(
          "errcode" => -1,
          "errmsg" => '失败'
@@ -188,6 +190,23 @@ class orderController extends Controller
               $return['errmsg'] = '用户不存在';
 
               return json_encode($return);
+           }
+
+           if($payment_type == 1){ //购物币支付
+              if(!empty($currency_password)){
+                  //判断密码是否或者正确
+                  $user_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
+
+                  if(bcrypt($currency_password) != $user_currency_password){
+                    $return['errmsg'] = '支付密码错误';
+
+                    return json_encode($return);                      
+                  }
+              }else{
+                  $return['errmsg'] = '支付密码不能为空';
+
+                  return json_encode($return);                
+              }
            }
            //生成订单号
            $batchcode = date('Ymd') .substr(time(),5). str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
@@ -219,6 +238,7 @@ class orderController extends Controller
               "package_fee" => (float)$package_fee,
               "remark" => $remark,
               "create_time" => time(),
+              "payment_type" => $payment_type
               "isvalid" => true
            );
 
