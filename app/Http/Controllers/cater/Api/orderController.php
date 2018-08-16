@@ -333,7 +333,7 @@ class orderController extends Controller
                       }  
 
                       //用户总订单加一
-                      DB::table("cater_users")->whereId($user_id)->increment($order_num);                   
+                      DB::table("cater_users")->whereId($user_id)->increment('order_num');                   
                    }
                 }              
              }
