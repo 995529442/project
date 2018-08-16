@@ -265,7 +265,7 @@ class orderController extends Controller
 
                     //判断库存是否足够
                     if($goods_info->storenum < (int)$v['number']){
-                      $return['errmsg'] = $goods_info->good_name.'库存不足，最多能选'.$goods_info->storenum."件";
+                      $return['errmsg'] = $goods_info->good_name.'库存不足，最多能选'.$goods_info->storenum."件，请重新选择再下单";
 
                       return json_encode($return); 
 
@@ -332,13 +332,13 @@ class orderController extends Controller
                           "create_time" => time(),
                           "isvalid" => true
                       ]);
-
-                      //减库存
+                      
                       foreach($goods_id_arr as $k=>$v){
                           $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
 
-                          DB::table("cater_goods")->whereId($goods_info->id)->decrement('storenum',(int)$v['number']);
-
+                          $order_goods_model = DB::table("cater_goods")->whereId($goods_info->id);
+                          $order_goods_model->decrement('storenum',(int)$v['number']);    //减库存
+                          $order_goods_model->increment('sell_count',(int)$v['number']);  //增加销量
                       }  
 
                       //用户总订单加一
