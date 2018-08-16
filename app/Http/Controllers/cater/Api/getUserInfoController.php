@@ -328,7 +328,38 @@ class getUserInfoController extends Controller
        $user_list = DB::table("cater_users")->whereId($user_id)->select(['currency_money'])->first();
 
        return json_encode($user_list);
-    }       
+    }   
+
+    /**
+     * 获取购物币消费记录
+     * @param Request $request
+     * @return string
+     */
+    public function getCurrency(Request $request) {
+       $admin_id = (int)$request -> input("admin_id",0);
+       $user_id = (int)$request -> input("user_id",0);
+       $page = (int)$request -> input("page",1);
+
+       $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败",
+          "data" => []
+       );  
+
+       if($admin_id && $user_id){
+           $currency_list = DB::table("cater_currency_log")->where(['admin_id'=>$admin_id,'user_id'=>$user_id,'isvalid'=>true])
+                    ->orderByDesc("id")
+                    ->offset(($page - 1) * 12)->limit(12)->get();
+
+            $return['errcode'] = 1;
+            $return['errmsg'] = "成功";
+            $return['data'] = $currency_list;
+       }else{
+          $return['errmsg'] = "系统错误";
+       }
+
+       return json_encode($return);
+    }    
     /**
      * curl
      */

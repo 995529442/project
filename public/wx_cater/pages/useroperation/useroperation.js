@@ -12,6 +12,7 @@ Page({
     page: 1,          //页数
     address: [],
     orders: [],
+    currency: [],
     operation: null,
     pay_type: 0,
     currentCouponTab: 0,
@@ -82,8 +83,10 @@ Page({
     // 判断传入类型
     if (operation === 'number') {
       operation = '我的排单号';
-    } else if (operation === 'message') {
-      operation = '消息';
+    } else if (operation === 'currency') {
+      operation = '我的购物币';
+
+      that.get_my_currency();
     } else if (operation === 'integral') {
       operation = '积分兑换';
     } else if (operation === 'order') {
@@ -308,6 +311,38 @@ Page({
           orders = orders.concat(res.data.data)
           that.setData({
             orders: orders
+          });
+        }
+      }
+    })
+  },
+
+  /**
+ * 获取我的购物币
+ */
+  get_my_currency: function () {
+    var that = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getUserInfo/getCurrency',
+      data: {
+        admin_id: app.globalData.admin_id,
+        user_id: that.data.user_id,
+        page: that.data.page
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()
+        if (res.data.errcode > 0) {
+          var currency = that.data.currency;
+          currency = currency.concat(res.data.data)
+          that.setData({
+            currency: currency
           });
         }
       }

@@ -25,7 +25,8 @@ Route::group(['prefix' => 'cater'], function () {
     Route::any('getUserInfo/delAddress', 'cater\Api\getUserInfoController@delAddress'); //删除用户地址
     Route::any('getUserInfo/getDefaultAddress', 'cater\Api\getUserInfoController@getDefaultAddress'); //获取用户默认地址
     Route::any('getUserInfo/getMyCurrency', 'cater\Api\getUserInfoController@getMyCurrency'); //获取用户购物币
-
+    Route::any('getUserInfo/getCurrency', 'cater\Api\getUserInfoController@getCurrency'); //获取购物币消费记录
+    
     Route::any('getGoods/getHotRecGoods', 'cater\Api\getGoodsController@getHotRecGoods'); //获取首页菜品
     Route::any('getGoods/getCatGoods', 'cater\Api\getGoodsController@getCatGoods'); //分类和菜品
     Route::any('getGoods/getSubmitGoods', 'cater\Api\getGoodsController@getSubmitGoods'); //获取结算菜品详情

@@ -341,7 +341,12 @@ class orderController extends Controller
              }else{
                 $cater_type_name = "外卖";
              }
-
+             
+             if($payment_type == 0){
+               $payment_type_show = "微信支付";
+             }else{
+               $payment_type_show = "购物币支付";
+             }
              if($is_open_sms == 1){  //商家开启了短信通知
                 $param = "$batchcode,$real_pay,$user_name,$phone";
                 Sms::sendSms($admin_id,2,$param,$shop_phone);
@@ -351,7 +356,7 @@ class orderController extends Controller
                 $content .= "订单编号：".$batchcode."<br />";
                 $content .= "订单类型：".$cater_type_name."<br />";
                 $content .= $goods_name_mail_str."<br />";
-                $content .= "支付方式：微信支付<br />";
+                $content .= "支付方式：".$payment_type_show."<br />";
                 $content .= "支付金额：".$real_pay."元<br />";
                 $content .= "支付时间：".date("Y-m-d H:i:s",time())."<br />";
                 $content .= "备注：".$remark."<br />";
@@ -379,7 +384,7 @@ class orderController extends Controller
                             "value": "'.$goods_name_str.'"
                         },
                         "keyword5": {
-                            "value": "微信支付"
+                            "value": "'.$payment_type_show.'"
                         },
                         "keyword6": {
                             "value": "￥'.$real_pay.'元"
