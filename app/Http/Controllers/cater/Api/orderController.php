@@ -328,7 +328,7 @@ class orderController extends Controller
                       foreach($goods_id_arr as $k=>$v){
                           $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
 
-                          DB::table("cater_goods")->whereId($goods_info->id)->decrement((int)$v['number']);
+                          DB::table("cater_goods")->whereId($goods_info->id)->decrement('storenum',(int)$v['number']);
 
                       }  
 
