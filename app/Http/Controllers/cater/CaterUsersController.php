@@ -74,6 +74,7 @@ class CaterUsersController extends Controller
                    "user_id" => $user_id,
                    "operate_to" => DB::table("cater_users")->whereId($user_id)->value("weixin_name"),
                    "remark" => "后台充值".$money."元",
+                   "create_time" => time(),
                    "isvalid" => true
                 ]);
 
