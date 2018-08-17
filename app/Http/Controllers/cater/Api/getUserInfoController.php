@@ -367,16 +367,22 @@ class getUserInfoController extends Controller
     } 
 
     /**
-     * 获取用户单条信息
+     * 获取用户是否设置支付密码
      * @param Request $request
      * @return string
      */
-    public function getOneUsersInfo(Request $request) {
+    public function getOneUsersSetPassword(Request $request) {
        $user_id = (int)$request -> input("user_id",0);   
 
        $user_list = DB::table("cater_users")->whereId($user_id)->first();
 
-       return json_encode($user_list);
+       $is_set_password = false;
+       if($user_list){
+         if(!empty($user_list->currency_password)){
+           $is_set_password = true;
+         }
+       }
+       return $is_set_password;
     }    
     /**
      * curl

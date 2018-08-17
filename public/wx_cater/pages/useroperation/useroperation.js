@@ -95,6 +95,8 @@ Page({
       that.get_my_orders();
     } else if (operation === 'password') {
       operation = '修改支付密码';
+
+      that.get_users_info();
     } else if (operation === 'address') {
       operation = '我的地址';
 
@@ -126,6 +128,8 @@ Page({
       that.get_my_address();
     } else if (operation == "currency") {
       that.get_my_currency();
+    } else if (operation == "password") { 
+      that.get_currency();
     }
   },
   /**
@@ -346,6 +350,29 @@ Page({
             currency: currency
           });
         }
+      }
+    })
+  },
+  /**
+ * 获取用户信息
+ */
+  get_users_info: function () {
+    var that = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getUserInfo/getOneUsersInfo',
+      data: {
+        user_id: that.data.user_id,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()
+        console.log(res)
       }
     })
   },
