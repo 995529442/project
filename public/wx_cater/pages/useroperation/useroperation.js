@@ -366,6 +366,32 @@ Page({
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getUserInfo/getOneUsersSetPassword',
       data: {
+        admin_id: app.globalData.admin_id,
+        user_id: that.data.user_id,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()      
+        if (res.data.is_set_password){
+          that.setData({
+            is_set_password:1
+          })
+        }
+      }
+    })
+  },
+  // 获取验证码
+  getCode:function(){
+    var that = this;
+
+    wx.showLoading({
+      title: '获取中',
+    })
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getShop/getCode',
+      data: {
         user_id: that.data.user_id,
       },
       header: {
@@ -373,9 +399,21 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        console.log(res)
+        if (res.data.errcode > 0) {
+          wx.showToast({
+            title: '发送成功',
+            icon: 'success',
+            duration: 2000
+          })
+        }else{
+          wx.showToast({
+            title: '发送失败',
+            icon: 'none',
+            duration: 2000
+          })          
+        }
       }
-    })
+    })   
   },
   // 授权提示
   UserInfo_click: function (e) {

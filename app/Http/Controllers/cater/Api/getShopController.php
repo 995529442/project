@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Cater\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Librarys\Location;
+use App\Librarys\Sms;
 use DB;
 
 class getShopController extends Controller
@@ -73,6 +74,23 @@ class getShopController extends Controller
       $shop_info = DB::table("cater_figure_img")->where(["admin_id"=>$admin_id,"isvalid"=>true,"type"=>3])->get();
 
       return json_encode($shop_info);
+      
+    }
+
+    /**
+     * 验证码
+     * @param Request $request
+     * @return string
+     */
+    public function getCode(Request $request) {
+       $code = rand(pow(10,5), pow(10,6)-1);
+
+       \Cache::put('code',$code,3);  //添加缓存,有效期3分钟 
+
+       //发送短信
+       $result = Sms::sendSms($admin_id,2,$code,$shop_phone);
+
+       return json_encode($result); 
       
     }
 }

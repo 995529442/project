@@ -91,13 +91,14 @@
   <view wx:if="{{ operation == 'password' }}" class="number">
     <view class="businessCooperation">
       <form bindsubmit="formSubmit">
-        <view class="lxr">
+        <view class="lxr" wx:if="{{is_set_password == 1}}">
           <text>原密码</text>
           <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" />
         </view>
         <view class="lxr">
-          <text>新密码</text>
-          <input value="" name="currency_password" id="currency_password" placeholder="请填写收货手机号码" type="number" />
+          <text wx:if="{{is_set_password == 1}}">新密码</text>
+          <text wx:else>密码</text>
+          <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="number" />
         </view>
         <view class="lxr">
           <text>确认密码</text>
@@ -105,7 +106,8 @@
         </view>
         <view class="lxr">
           <text>验证码</text>
-          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" />
+          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:60%;"/>
+          <button open-type="getPhoneNumber" bindtap="getCode" type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">验证码</button>
         </view>
         <button formType="submit" class="start-shop">保存</button>
       </form>
