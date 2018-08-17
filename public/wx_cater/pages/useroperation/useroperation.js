@@ -16,7 +16,8 @@ Page({
     operation: null,
     pay_type: 0,
     currentCouponTab: 0,
-    orderNumber: ['点餐', '外卖']
+    orderNumber: ['点餐', '外卖'],
+    is_set_password:0  //是否已设置密码
   },
 
   /**
@@ -363,7 +364,7 @@ Page({
       title: '加载中',
     })
     wx.request({
-      url: app.globalData.appUrl + '/api/cater/getUserInfo/getOneUsersInfo',
+      url: app.globalData.appUrl + '/api/cater/getUserInfo/getOneUsersSetPassword',
       data: {
         user_id: that.data.user_id,
       },

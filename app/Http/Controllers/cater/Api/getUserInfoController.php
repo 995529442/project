@@ -382,7 +382,7 @@ class getUserInfoController extends Controller
            $is_set_password = true;
          }
        }
-       return $is_set_password;
+       return json_encode(['is_set_password'=>$is_set_password]);
     }    
     /**
      * curl
