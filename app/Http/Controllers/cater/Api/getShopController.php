@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Librarys\Location;
 use App\Librarys\Sms;
+use Illuminate\Support\Facades\Crypt;
 use DB;
 
 class getShopController extends Controller
@@ -91,6 +92,45 @@ class getShopController extends Controller
 
        //发送短信
        $result = Sms::sendSms($admin_id,1,$code,$phone);
+
+       return json_encode($result); 
+      
+    }
+
+    /**
+     * 修改支付密码
+     * @param Request $request
+     * @return string
+     */
+    public function savePassword(Request $request) {
+       $user_id = (int)$request -> input("user_id",0);
+       $phone = $request -> input("phone","");
+       $currency_password = $request -> input("currency_password","");
+       $code = $request -> input("code",""); 
+
+       $return = array(
+          "errcode" => -1,
+          "errmsg" => "失败"
+       );
+
+       if($code){
+          if(\Cache::has('code')){
+            $old_code = \Cache::get("code");
+
+            if($code == $old_code){
+                $result = DB::table("cater_users")->userId($user_id)->update(['currency_password'=>Crypt::encrypt($currency_password),'mobile'=>$phone]);
+
+                if($result){
+                  $return['errcode'] = -1;
+                  $return['errmsg'] = "设置成功";
+                }
+            }else{
+              $return['errmsg'] = "验证码错误";
+            }
+          }else{
+             $return['errmsg'] = "验证码已过期";
+          }
+       }
 
        return json_encode($result); 
       

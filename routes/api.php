@@ -36,7 +36,8 @@ Route::group(['prefix' => 'cater'], function () {
     Route::any('getShop/getShopInfo', 'cater\Api\getShopController@getShopInfo'); //获取店铺信息
     Route::any('getShop/getHomeImg', 'cater\Api\getShopController@getHomeImg'); //获取首页展示图
     Route::any('getShop/getCode', 'cater\Api\getShopController@getCode'); //获取验证码
-
+    Route::any('getShop/savePassword', 'cater\Api\getShopController@savePassword'); //修改支付密码
+    
     Route::any('order/checkSubmit', 'cater\Api\orderController@checkSubmit'); //结算
     Route::any('order/pay', 'cater\Api\orderController@pay'); //下单
     Route::any('order/getOrders', 'cater\Api\orderController@getOrders'); //获取我的订单

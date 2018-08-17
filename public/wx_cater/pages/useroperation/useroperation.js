@@ -444,6 +444,87 @@ Page({
       }
     })
   },
+  /**
+   * 保存密码设置信息
+   */
+  formSubmit:function(e){
+    var code = e.detail.value.code;
+    var currency_password = e.detail.value.currency_password;
+    var phone = e.detail.value.phone;
+    var re_currency_password = e.detail.value.re_currency_password;
+
+    if (currency_password == ""){
+      wx.showToast({
+        title: '请输入密码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;      
+    }
+    if (re_currency_password == "") {
+      wx.showToast({
+        title: '请输入确认密码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    if (currency_password != re_currency_password) {
+      wx.showToast({
+        title: '两次密码输入不一致',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    if (phone == "") {
+      wx.showToast({
+        title: '请输入手机号码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+
+    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    if (!myreg.test(phone)) {
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+
+    if (code == "") {
+      wx.showToast({
+        title: '请输入验证码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+
+    wx.showLoading({
+      title: '请求中',
+    })
+    wx.request({
+      url: app.globalData.appUrl + '/api/cater/getShop/savePassword',
+      data: {
+        user_id: that.data.user_id,
+        code: code,
+        currency_password: currency_password,
+        phone:phone
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()
+        console.log(res);
+      }
+    })
+  },
   // 授权提示
   UserInfo_click: function (e) {
     var that = this;
