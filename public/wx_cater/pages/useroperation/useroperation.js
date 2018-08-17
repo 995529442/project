@@ -17,7 +17,8 @@ Page({
     pay_type: 0,
     currentCouponTab: 0,
     orderNumber: ['点餐', '外卖'],
-    is_set_password:0  //是否已设置密码
+    is_set_password: 0,  //是否已设置密码
+    code_phone: ""   //验证手机号码
   },
 
   /**
@@ -129,7 +130,7 @@ Page({
       that.get_my_address();
     } else if (operation == "currency") {
       that.get_my_currency();
-    } else if (operation == "password") { 
+    } else if (operation == "password") {
       that.get_currency();
     }
   },
@@ -373,18 +374,44 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        wx.hideLoading()      
-        if (res.data.is_set_password){
+        wx.hideLoading()
+        if (res.data.is_set_password) {
           that.setData({
-            is_set_password:1
+            is_set_password: 1
           })
         }
       }
     })
   },
+  //验证手机号码
+  setPhone: function (e) {
+    var code_phone = e.detail.value;
+    this.setData({
+      code_phone: code_phone
+    })
+  },
   // 获取验证码
-  getCode:function(){
+  getCode: function () {
     var that = this;
+    var code_phone = that.data.code_phone;
+
+    if (code_phone == ""){
+      wx.showToast({
+        title: '手机号码不能为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    if (!myreg.test(code_phone)) {
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
 
     wx.showLoading({
       title: '获取中',
@@ -392,7 +419,9 @@ Page({
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getShop/getCode',
       data: {
+        admin_id: app.globalData.admin_id,
         user_id: that.data.user_id,
+        phone:code_phone
       },
       header: {
         'content-type': 'application/json'
@@ -405,15 +434,15 @@ Page({
             icon: 'success',
             duration: 2000
           })
-        }else{
+        } else {
           wx.showToast({
             title: '发送失败',
             icon: 'none',
             duration: 2000
-          })          
+          })
         }
       }
-    })   
+    })
   },
   // 授权提示
   UserInfo_click: function (e) {

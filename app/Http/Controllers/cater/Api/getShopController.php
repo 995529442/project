@@ -83,12 +83,14 @@ class getShopController extends Controller
      * @return string
      */
     public function getCode(Request $request) {
+       $admin_id = (int)$request -> input("admin_id",0);
+       $phone = $request -> input("phone","");
        $code = rand(pow(10,5), pow(10,6)-1);
 
        \Cache::put('code',$code,3);  //添加缓存,有效期3分钟 
 
        //发送短信
-       $result = Sms::sendSms($admin_id,2,$code,$shop_phone);
+       $result = Sms::sendSms($admin_id,1,$code,$phone);
 
        return json_encode($result); 
       
