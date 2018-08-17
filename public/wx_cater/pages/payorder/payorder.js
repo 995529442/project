@@ -19,7 +19,8 @@ Page({
     default_address: {},
     goods_id_arr: '',
     is_locked_pay: 0,
-    pay_type: -1      //支付方式 0微信支付 ，1购物币支付
+    pay_type: -1,      //支付方式 0微信支付 ，1购物币支付
+    is_open_currency:0  //是否开启购物币支付
   },
   /**
    * 支付货款
@@ -43,7 +44,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function onLoad(option) {
-    console.log(option)
     var that = this;
     var goods_id_arr = typeof (option.goods_id_arr) == 'undefined' ? '' : option.goods_id_arr;
     var cater_type = that.data.cater_type
@@ -88,17 +88,15 @@ Page({
             goods: res.data.goods_id_arr,
             allMoney: parseFloat(res.data.total_money)
           })
-
-          console.log(typeof that.data.allMoney)
         }
       }
     })
 
-    if (cater_type == 2) { //外卖。获取店铺信息，收货地址
-      that.get_shop_info();
+    that.get_shop_info(); //获取店铺信息
+
+    if (cater_type == 2) { //外卖。收货地址
       that.get_default_address();
     }
-
   },
 
   /**
@@ -150,13 +148,12 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-
         if (res.data) {
+          var is_open_currency = res.data.is_open_currency
           that.setData({
-            shop_info: res.data
-          })
-
-          console.log(that.data.shop_info)
+            shop_info: res.data,
+            is_open_currency: is_open_currency
+          })         
         }
       }
     })
@@ -190,8 +187,15 @@ Page({
    */
   select_pay_type: function (e) {
     var that = this;
+    var is_open_currency = that.data.is_open_currency;
+
+    if (is_open_currency == 1){
+      var show_pay_type = ['微信支付', '购物币支付'];
+    }else{
+      var show_pay_type = ['微信支付'];
+    }
     wx.showActionSheet({
-      itemList: ['微信支付', '购物币支付'],
+      itemList: show_pay_type,
       success: function (res) {
         that.setData({
           pay_type: res.tapIndex

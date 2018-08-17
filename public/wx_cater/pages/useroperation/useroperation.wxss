@@ -443,3 +443,19 @@ page {
 .merchant picker {
   height: 50rpx;
 }
+
+.lxr{
+  display: flex;
+  margin: 20rpx 0;
+  padding: 0 20rpx;
+  font-size: 32rpx;
+}
+.lxr input{
+  flex: 1;
+  text-align: right;
+  font-size: 24rpx;
+}
+.lxr {
+  padding-top: 20rpx;
+  margin: 20rpx 20rpx;
+}

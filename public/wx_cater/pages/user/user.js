@@ -33,6 +33,10 @@ Page({
       icon: 'iconfont icon-lingdang:before',
       title: '我的地址',
       id: 'address'
+    },{
+      icon: 'iconfont icon-lingdang:before',
+      title: '支付密码',
+      id: 'password'
     }]
   },
 

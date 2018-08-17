@@ -74,7 +74,7 @@
     <button type="primary" bindtap="add_address" style="position:absolute;bottom:20rpx;width:45%;">添加地址</button>
     <button type="warn" bindtap="add_wx_address" style="position:absolute;left:50%;bottom:20rpx;width:45%;">获取微信地址</button>
   </view>
-    <!--购物币消费记录-->
+  <!--购物币消费记录-->
   <view wx:if="{{ operation == 'currency' }}" class="number" style="height:100vh;">
     <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll">
       <block wx:for="{{currency}}" wx:for-item="item" wx:for-index="idx">
@@ -86,5 +86,29 @@
         </view>
       </block>
     </scroll-view>
+  </view>
+  <!--修改支付密码-->
+  <view wx:if="{{ operation == 'password' }}" class="number">
+    <view class="businessCooperation">
+      <form bindsubmit="formSubmit">
+        <view class="lxr">
+          <text>原密码</text>
+          <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" />
+        </view>
+        <view class="lxr">
+          <text>新密码</text>
+          <input value="" name="currency_password" id="currency_password" placeholder="请填写收货手机号码" type="number" />
+        </view>
+        <view class="lxr">
+          <text>确认密码</text>
+          <input value="" name="re_currency_password" id="re_currency_password" placeholder="请再次输入密码" type="number" />
+        </view>
+        <view class="lxr">
+          <text>验证码</text>
+          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" />
+        </view>
+        <button formType="submit" class="start-shop">保存</button>
+      </form>
+    </view>
   </view>
 </view>

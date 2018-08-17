@@ -55,9 +55,9 @@
     <view class="lxr" wx:if="{{cater_type == 2}}">
       <text>支付方式</text>
       <view bindtap="select_pay_type">
-      <block wx:if="{{pay_type == -1}}">请选择</block> 
-      <block wx:if="{{pay_type == 0}}">微信支付</block>     
-      <block wx:if="{{pay_type == 1}}">购物币支付</block> 
+        <block wx:if="{{pay_type == -1}}">请选择</block>
+        <block wx:if="{{pay_type == 0}}">微信支付</block>
+        <block wx:if="{{pay_type == 1}}">购物币支付</block>
       </view>
     </view>
     <view class="lxr">

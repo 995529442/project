@@ -364,6 +364,19 @@ class getUserInfoController extends Controller
        }
 
        return json_encode($return);
+    } 
+
+    /**
+     * 获取用户单条信息
+     * @param Request $request
+     * @return string
+     */
+    public function getOneUsersInfo(Request $request) {
+       $user_id = (int)$request -> input("user_id",0);   
+
+       $user_list = DB::table("cater_users")->whereId($user_id)->first();
+
+       return json_encode($user_list);
     }    
     /**
      * curl

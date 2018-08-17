@@ -93,8 +93,8 @@ Page({
       operation = '我的订单';
 
       that.get_my_orders();
-    } else if (operation === 'merchant') {
-      operation = '商家入驻';
+    } else if (operation === 'password') {
+      operation = '修改支付密码';
     } else if (operation === 'address') {
       operation = '我的地址';
 

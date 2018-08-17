@@ -173,6 +173,7 @@ class getGoodsController extends Controller
         }
         
         $total_money = round($total_money,2);
+
         return json_encode(['goods_id_arr'=>$goods_id_arr,'total_money'=>$total_money]);
     }
 
