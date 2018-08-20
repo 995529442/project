@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+date_default_timezone_set('PRC');
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-    	$admins = Auth::guard("admins")->user();
+    	  $admins = Auth::guard("admins")->user();
 
         $username = $admins->username;  //用户名
         $type = $admins->type;  //类型：1为超级管理员 2为普通管理员
@@ -438,5 +439,22 @@ class IndexController extends Controller
         return view('test_sms',['type'=>$type]);
     }
 
+    /**
+     * 首页获取订单(一分钟内的订单数目)
+     * @return view
+     */
+    public function getOrders(Request $request)
+    {
+      
+      $where = array(
+        'admin_id' => Auth::guard("admins")->user()->id,
+        'pay_type' => 1,
+        'status' => 1,
+        'isvalid' => true
+      );
 
+      $order_list = DB::table("cater_orders")->where($where)->where('pay_time','<',time())->where('pay_time','>=',time()-60)->get();
+
+      return json_encode($order_list);
+    }
 }

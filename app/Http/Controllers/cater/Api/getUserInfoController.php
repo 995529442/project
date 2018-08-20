@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\Cater\Api;
 
+date_default_timezone_set('PRC');
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Librarys\Location;

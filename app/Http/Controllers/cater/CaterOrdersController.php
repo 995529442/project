@@ -159,12 +159,83 @@ class CaterOrdersController extends Controller
           	  $data['status'] = 4;
           	  $data['shipping_con_time'] = time();
           	break;
-          	case 'confirm':
+          	case 'confirm':  //完成订单
           	  $data['status'] = 5;
           	  $data['confirm_time'] = time();
+
+              try {
+                  DB::beginTransaction();                 
+                  
+                  $user_id = (int)$order_info->user_id;
+
+                  $result = CaterOrders::where(['id'=>$order_id,'isvalid'=>true])->update($data);
+                  
+                  //更新用户数据
+                  $user_id = $order_info->user_id;
+                  $real_pay = $order_info->real_pay;
+
+                  $user_model = DB::table("cater_users")->whereId($user_id);
+                  $user_model->increment("order_complete_num");
+                  $user_model->increment("total_money",(float)$real_pay);
+
+                  DB::commit();
+
+                  if($return){
+                    $return['errcode'] = 1;
+                    $return['errmsg']  = "成功";
+                  }
+
+                  return json_encode($return);
+                 
+              }catch (\Exception $exception) {
+                 DB::rollback();//事务回滚
+                 throw $exception;
+              }
           	break;
-          	case 'confirm_refund':
+          	case 'confirm_refund':  //确认退款
           	  $data['status'] = 7;
+
+              try {
+                  DB::beginTransaction();
+                  
+                  $payment_type = (int)$order_info->payment_type;
+                  $user_id = (int)$order_info->user_id;
+                  $real_pay = (float)$order_info->real_pay;
+                  $user_name = $order_info->user_name;
+                  $batchcode = $order_info->batchcode;
+
+                  if($payment_type == 0){ //微信支付
+
+                  }elseif($payment_type == 1){ //购物币支付
+                     DB::table("cater_users")->whereId($user_id)->increment("currency_money",$real_pay);
+
+                     //记录日志
+                     DB::table("cater_currency_log")->insert([
+                        "admin_id" => Auth::guard('admins')->user()->id,
+                        "operate_from" => Auth::guard('admins')->user()->username,
+                        "user_id" => $user_id,
+                        "operate_to" => $user_name,
+                        "remark" => "商家确认退款，返还".$real_pay."元，订单号：".$batchcode,
+                        "create_time" => time(),
+                        "isvalid" => true
+                     ]);
+                  }
+                  
+                  $result = CaterOrders::where(['id'=>$order_id,'isvalid'=>true])->update($data);
+
+                  DB::commit();
+
+                  if($return){
+                    $return['errcode'] = 1;
+                    $return['errmsg']  = "成功";
+                  }
+
+                  return json_encode($return);
+                 
+              }catch (\Exception $exception) {
+                 DB::rollback();//事务回滚
+                 throw $exception;
+              }
           	break;
           	case 'reject_refund':
           	  $data['status'] = 8;

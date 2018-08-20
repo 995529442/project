@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">  
     <title>后台管理系统</title>
     <link rel="stylesheet" href="/assets/common/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
@@ -111,17 +112,23 @@
             <div style="padding: 15px;">主体内容加载中,请稍等...</div>
         </div>
 
-        <div class="layui-footer">
+        <div>
             <!-- 底部固定区域 -->
             2018 &copy;
             <a href="javascript::void(0);">牛叔叔科技股份有限公司,版权所有</a>
 
         </div>
+<!--         <div class="layui-footer">
+            2018 &copy;
+            <a href="javascript::void(0);">牛叔叔科技股份有限公司,版权所有</a>
+
+        </div> -->
     </div>
     <script type="text/javascript">
        // var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         //document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
     </script>
+    <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
     <script src="/assets/common/layui/layui.js"></script>
     <script>
         var message;
@@ -139,6 +146,27 @@
             }).init();
 
         });
+
+        //轮询获取订单
+        window.setInterval(function(){
+            console.log("ss")
+            $.ajax({  
+              type: "POST",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+              url: "{{ route('getOrders') }}",    
+              dataType: "json",  
+              success: function(data){
+                console.log(data);
+                 // if(data.errcode == 1){
+                 //    layer.msg(data.errmsg, {icon: 1},function(){
+                 //        location.reload();
+                 //    }); 
+                 // }else{
+                 //    layer.msg(data.errmsg, {icon: 2},1500); 
+                 // }
+              }  
+            }); 
+        },1000*60);
     </script>
 </body>
 

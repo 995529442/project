@@ -51,6 +51,8 @@ Route::group(['middleware'=>'AdminLogin'],function(){
     //测试短信、邮件
     Route::any('Index/test_sms', 'IndexController@testSms')->name('testSms'); //测试短信
 
+    Route::any('Index/get_orders', 'IndexController@getOrders')->name('getOrders'); //首页获取订单
+
    //微餐饮路由
     Route::group(['prefix'=>'cater'],function(){
        //餐厅信息
