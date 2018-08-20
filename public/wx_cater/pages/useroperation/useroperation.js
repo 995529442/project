@@ -375,7 +375,7 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        if (res.data.is_set_password) {
+        if (res.data.is_set_password)  {
           that.setData({
             is_set_password: 1
           })
@@ -449,11 +449,21 @@ Page({
    */
   formSubmit:function(e){
     var that=this;
+    var old_currency_password = typeof(e.detail.value.old_currency_password) == 'undefined' ? '' : e.detail.value.old_currency_password;
     var code = e.detail.value.code;
     var currency_password = e.detail.value.currency_password;
     var phone = e.detail.value.phone;
     var re_currency_password = e.detail.value.re_currency_password;
+    var is_set_password = that.data.is_set_password;
 
+    if (is_set_password == 1 && old_currency_password == ""){
+      wx.showToast({
+        title: '请输入原密码',
+        icon: 'none',
+        duration: 2000
+      })
+      return;         
+    }
     if (currency_password == ""){
       wx.showToast({
         title: '请输入密码',
@@ -516,14 +526,27 @@ Page({
         code: code,
         currency_password: currency_password,
         re_currency_password: re_currency_password,
-        phone:phone
+        phone:phone,
+        old_currency_password: old_currency_password
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
         wx.hideLoading()
-        console.log(res);
+        if (res.data.errcode > 0) {
+          wx.showToast({
+            title: '设置成功',
+            icon: 'success',
+            duration: 2000
+          })
+        } else {
+          wx.showToast({
+            title: res.data.errmsg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       }
     })
   },

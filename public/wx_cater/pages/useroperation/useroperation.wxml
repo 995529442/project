@@ -110,7 +110,7 @@
         </view>
         <view class="lxr">
           <text>验证码</text>
-          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:50%;"/>
+          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:90%;margin-left:20rpx;"/>
           <button bindtap="getCode" type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">验证码</button>
         </view>
         <button formType="submit" class="start-shop">保存</button>
