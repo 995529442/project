@@ -119,12 +119,13 @@ class getShopController extends Controller
             $old_code = \Cache::get("code");
 
              //判断原密码是否正确
-            var_dump($old_currency_password);
             if(!empty($old_currency_password)){
               $ori_old_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
-var_dump(Crypt::decrypt($ori_old_currency_password));
+
               if(Crypt::decrypt($ori_old_currency_password) != $old_currency_password){
-                $return['errmsg'] = "原密码错误，请重新输入";                
+                $return['errmsg'] = "原密码错误，请重新输入"; 
+
+                return json_encode($return);                
               }
             }
             if($code == $old_code){
