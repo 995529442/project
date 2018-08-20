@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\cater;
 
+date_default_timezone_set('PRC');
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -116,7 +117,7 @@ class CaterOrdersController extends Controller
                   $real_pay = (float)$order_info->real_pay;
                   $user_name = $order_info->user_name;
                   $batchcode = $order_info->batchcode;
-                  
+
                   if($payment_type == 0){ //微信支付
 
                   }elseif($payment_type == 1){ //购物币支付

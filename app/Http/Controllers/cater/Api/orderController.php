@@ -234,8 +234,6 @@ class orderController extends Controller
            $goods_name_mail_str = "";  //商品名称列表，用于发送邮件
 
            //插入订单数据
-           var_dump(date("Y-m-d H:i:s",time()));
-           exit;
            $order_data = array(
               "admin_id" => $admin_id,
               "user_id" => $user_id,
