@@ -538,7 +538,12 @@ Page({
           wx.showToast({
             title: '设置成功',
             icon: 'success',
-            duration: 2000
+            duration: 2000,
+            success: function () {
+              wx.redirectTo({
+                url: '../user/user',
+              })
+            }
           })
         } else {
           wx.showToast({

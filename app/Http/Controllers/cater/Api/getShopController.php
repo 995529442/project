@@ -118,7 +118,7 @@ class getShopController extends Controller
           if(\Cache::has('code')){
             $old_code = \Cache::get("code");
 
-            //判断原密码是否正确
+             //判断原密码是否正确
             if(!empty($old_currency_password)){
               $ori_old_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
 
