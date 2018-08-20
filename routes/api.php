@@ -41,4 +41,5 @@ Route::group(['prefix' => 'cater'], function () {
     Route::any('order/checkSubmit', 'cater\Api\orderController@checkSubmit'); //结算
     Route::any('order/pay', 'cater\Api\orderController@pay'); //下单
     Route::any('order/getOrders', 'cater\Api\orderController@getOrders'); //获取我的订单
+    Route::any('order/operate', 'cater\Api\orderController@operate'); //订单处理
 });

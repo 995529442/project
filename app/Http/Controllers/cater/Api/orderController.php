@@ -436,4 +436,71 @@ class orderController extends Controller
         }
       
     }
+
+    /**
+     * 订单处理
+     * @param Request $request
+     * @return string
+     */
+    public function operate(Request $request) {
+      $order_id = (int)$request -> input("order_id",0);
+      $type = $request -> input("type","");
+
+      $return = array(
+         "errcode" => -1,
+         "errmsg" => '失败'
+      );
+
+      if($order_id > 0){
+          $order_model = DB::table("cater_orders")->whereId($order_id);
+          switch ($type) {
+            case 'refund':
+              $result = $order_model->update(['status'=>6]); 
+              break;
+            case 'done':
+              try {
+                  DB::beginTransaction();
+
+                  $result = $order_model->update(['status'=>5,'shipping_con_time'=>time(),'confirm_time'=>time()]); 
+
+                  //更新用户数据
+                  $user_id = $order_model->first()->user_id;
+                  $real_pay = $order_model->first()->real_pay;
+
+                  $user_model = DB::table("cater_users")->whereId($user_id);
+                  $user_model->increment("order_complete_num");
+                  $user_model->increment("total_money",(float)$real_pay);
+
+                  DB::commit();
+
+                  if($return){
+                    $return['errcode'] = 1;
+                    $return['errmsg']  = "成功";
+                  }
+
+                  return json_encode($return);
+                 
+              }catch (\Exception $exception) {
+                 DB::rollback();//事务回滚
+                 throw $exception;
+              }
+              break;   
+            case 'cancel':
+              $result = $order_model->update(['status'=>-1,'recovery_time'=>time()]); 
+              break;         
+            default:
+              # code...
+              break;
+          }
+
+          if($result){
+             $return['errcode'] = 1;
+             $return['errmsg'] = "成功";
+          }
+      }else{
+         $return['errmsg'] = "系统错误";
+      }
+
+      return json_encode($return);
+    }
 }

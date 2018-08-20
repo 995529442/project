@@ -85,7 +85,7 @@ class CaterOrdersController extends Controller
         }
     }
 
-    //微餐饮-订单商品详情
+    //微餐饮-订单操作
     public function operate(Request $request){
        $order_id = (int)$request -> input("order_id",0);
        $type = $request -> input("type",'');
@@ -99,12 +99,56 @@ class CaterOrdersController extends Controller
        if($order_id > 0){
        	  $data = array();
 
+          $order_info = DB::table("cater_orders")->whereId($order_id)->first();
+
           switch($type){
           	case 'accept':
           	  $data['status'] = 2;
           	break;
-          	case 'reject':
-          	  $data['status'] = 9;
+          	case 'reject':  //拒单
+          	  $data['status'] = 9;           
+
+              try {
+                  DB::beginTransaction();
+                  
+                  $payment_type = (int)$order_info->payment_type;
+                  $user_id = (int)$order_info->user_id;
+                  $real_pay = (float)$order_info->real_pay;
+                  $user_name = $order_info->user_name;
+                  $batchcode = $order_info->batchcode;
+                  
+                  if($payment_type == 0){ //微信支付
+
+                  }elseif($payment_type == 1){ //购物币支付
+                     DB::table("cater_users")->whereId($user_id)->increment("currency_money",$real_pay);
+
+                     //记录日志
+                     DB::table("cater_currency_log")->insert([
+                        "admin_id" => Auth::guard('admins')->user()->id,
+                        "operate_from" => Auth::guard('admins')->user()->username,
+                        "user_id" => $user_id,
+                        "operate_to" => $user_name,
+                        "remark" => "商家拒单，返还".$real_pay."元，订单号：".$batchcode,
+                        "create_time" => time(),
+                        "isvalid" => true
+                     ]);
+                  }
+                  
+                  $result = CaterOrders::where(['id'=>$order_id,'isvalid'=>true])->update($data);
+
+                  DB::commit();
+
+                  if($return){
+                    $return['errcode'] = 1;
+                    $return['errmsg']  = "成功";
+                  }
+
+                  return json_encode($return);
+                 
+              }catch (\Exception $exception) {
+                 DB::rollback();//事务回滚
+                 throw $exception;
+              }
           	break;
           	case 'send':
           	  $data['status'] = 3;
@@ -141,8 +185,8 @@ class CaterOrdersController extends Controller
           }
        }
        return json_encode($return);
+   
     }
-
     //微餐饮-订单拒绝退款
     public function reject_refund(Request $request){
     	$order_id = (int)$request -> input("order_id",0);

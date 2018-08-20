@@ -319,7 +319,9 @@ Page({
             confirmText: '前往设置',
             success: function (res) {
               if (res.confirm) {
-
+                wx.navigateTo({
+                  url: '../useroperation/useroperation?operation=password&pay_type=1',
+                })
               } else if (res.cancel) {
 
               }

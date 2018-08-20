@@ -129,11 +129,13 @@
                         @elseif($v->status == 5)
                           已完成
                         @elseif($v->status == 6)
-                          申请退款
+                         退款中
                         @elseif($v->status == 7)
                           已退款
                         @elseif($v->status == 8)
-                          拒绝退款                           
+                          拒绝退款 
+                        @elseif($v->status == 9)
+                          已拒单                           
                         @endif
                     </td>
                     <td>{{$v->real_pay}}</td>
@@ -191,7 +193,6 @@ function operate(order_id,type){
     }else if(type == "confirm_refund"){
         msg = "确定要退款？";
     }else if(type == "reject_refund"){
-        console.log(order_id)
         layer.open({
           type: 2,
           title: false,

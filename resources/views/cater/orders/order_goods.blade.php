@@ -89,11 +89,13 @@
                   @elseif($order_detail->status == 5)
                     已完成
                   @elseif($order_detail->status == 6)
-                    申请退款
+                    退款中
                   @elseif($order_detail->status == 7)
                     已退款
                   @elseif($order_detail->status == 8)
-                    拒绝退款                           
+                    拒绝退款
+                  @elseif($order_detail->status == 9)
+                    已拒单                           
                   @endif
                 </td>
                 <td style="background-color: #f5f5f5;">配送费</td>

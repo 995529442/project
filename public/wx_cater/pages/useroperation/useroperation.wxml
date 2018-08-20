@@ -26,7 +26,7 @@
             <text wx:if="{{item.status == 3}}">配送中</text>
             <text wx:if="{{item.status == 4}}">配送完成</text>
             <text wx:if="{{item.status == 5}}">已完成</text>
-            <text wx:if="{{item.status == 6}}">申请退款</text>
+            <text wx:if="{{item.status == 6}}">退款中</text>
             <text wx:if="{{item.status == 7}}">已退款</text>
             <text wx:if="{{item.status == 8}}">拒绝退款</text>
             <text wx:if="{{item.status == 9}}">已拒单</text>
@@ -42,10 +42,10 @@
           <view class="go-pay-bottom" style="border-bottom:1px solid #EDEDED;">
             <text>共{{ item.total_num }}件菜品</text>
             <text>合计<text style="color:red;">￥{{ item.total_money }}</text></text>
-            <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn">去支付</view>
-            <view wx:if="{{item.pay_type == 1 && item.status==1}}" class="go-pay-btn">申请退款</view>
-            <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn">取消订单</view>
-            <view wx:if="{{item.pay_type == 1 && (item.status==3 || item.status==4)}}" class="go-pay-btn">完成订单</view>
+            <!-- <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn">去支付</view> -->
+            <view wx:if="{{item.pay_type == 1 && item.status==1}}" class="go-pay-btn" bindtap="operate" data-type="refund" data-order_id="{{item.order_id}}" >申请退款</view>
+            <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn" bindtap="operate" data-type="cancel" data-order_id="{{item.order_id}}">取消订单</view>
+            <view wx:if="{{item.pay_type == 1 && (item.status==3 || item.status==4)}}" class="go-pay-btn" bindtap="operate" data-type="done" data-order_id="{{item.order_id}}">完成订单</view>
           </view>
         </view>
       </scroll-view>
@@ -93,24 +93,24 @@
       <form bindsubmit="formSubmit">
         <view class="lxr" wx:if="{{is_set_password == 1}}">
           <text>原密码</text>
-          <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" />
+          <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" style="text-aligin:center;" />
         </view>
         <view class="lxr">
           <text wx:if="{{is_set_password == 1}}">新密码</text>
           <text wx:else>密码</text>
-          <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="password" />
+          <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="password" style="text-aligin:center;" />
         </view>
         <view class="lxr">
           <text>确认密码</text>
-          <input value="" name="re_currency_password" id="re_currency_password" placeholder="请再次输入密码" type="password" />
+          <input value="" name="re_currency_password" id="re_currency_password" placeholder="请再次输入密码" type="password" style="text-aligin:center;" />
         </view>
         <view class="lxr">
           <text>手机号码</text>
-          <input value="" name="phone" id="phone" placeholder="请输入手机号码" type="number" bindblur="setPhone" />
+          <input value="" name="phone" id="phone" placeholder="请输入手机号码" type="number" bindblur="setPhone" style="text-aligin:center;"/>
         </view>
         <view class="lxr">
           <text>验证码</text>
-          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:90%;margin-left:20rpx;"/>
+          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:85%;text-aligin:center;"/>
           <button bindtap="getCode" type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">验证码</button>
         </view>
         <button formType="submit" class="start-shop">保存</button>

@@ -375,7 +375,7 @@ Page({
       },
       success: function (res) {
         wx.hideLoading()
-        if (res.data.is_set_password)  {
+        if (res.data.is_set_password) {
           that.setData({
             is_set_password: 1
           })
@@ -395,7 +395,7 @@ Page({
     var that = this;
     var code_phone = that.data.code_phone;
 
-    if (code_phone == ""){
+    if (code_phone == "") {
       wx.showToast({
         title: '手机号码不能为空',
         icon: 'none',
@@ -421,7 +421,7 @@ Page({
       data: {
         admin_id: app.globalData.admin_id,
         user_id: that.data.user_id,
-        phone:code_phone
+        phone: code_phone
       },
       header: {
         'content-type': 'application/json'
@@ -447,30 +447,31 @@ Page({
   /**
    * 保存密码设置信息
    */
-  formSubmit:function(e){
-    var that=this;
-    var old_currency_password = typeof(e.detail.value.old_currency_password) == 'undefined' ? '' : e.detail.value.old_currency_password;
+  formSubmit: function (e) {
+    var that = this;
+    var old_currency_password = typeof (e.detail.value.old_currency_password) == 'undefined' ? '' : e.detail.value.old_currency_password;
     var code = e.detail.value.code;
     var currency_password = e.detail.value.currency_password;
     var phone = e.detail.value.phone;
     var re_currency_password = e.detail.value.re_currency_password;
     var is_set_password = that.data.is_set_password;
+    var pay_type = that.data.pay_type;
 
-    if (is_set_password == 1 && old_currency_password == ""){
+    if (is_set_password == 1 && old_currency_password == "") {
       wx.showToast({
         title: '请输入原密码',
         icon: 'none',
         duration: 2000
       })
-      return;         
+      return;
     }
-    if (currency_password == ""){
+    if (currency_password == "") {
       wx.showToast({
         title: '请输入密码',
         icon: 'none',
         duration: 2000
       })
-      return;      
+      return;
     }
     if (re_currency_password == "") {
       wx.showToast({
@@ -526,7 +527,7 @@ Page({
         code: code,
         currency_password: currency_password,
         re_currency_password: re_currency_password,
-        phone:phone,
+        phone: phone,
         old_currency_password: old_currency_password
       },
       header: {
@@ -554,6 +555,69 @@ Page({
         }
       }
     })
+  },
+  /**
+   * 订单操作
+   */
+  operate: function (e) {
+    var that = this;
+    var order_id = e.currentTarget.dataset.order_id;
+    var type = e.currentTarget.dataset.type;
+
+    var msg = "";
+    var success_msg = "";
+    if (type == 'refund') {
+      msg = "确定要申请退款吗";
+      success_msg = "成功,请等待商家处理";
+    } else if (type == 'done'){
+      msg = "确定要完成该订单吗";
+      success_msg = "成功,该订单已完成";
+    } else if (type == 'cancel') {
+      msg = "确定要取消该订单吗";
+      success_msg = "成功,该订单已取消";
+    }
+
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.appUrl + '/api/cater/order/operate',
+            data: {
+              order_id: order_id,
+              type: type
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              wx.hideLoading()
+              if (res.data.errcode) {
+                wx.showModal({
+                  title: '提示',
+                  content: success_msg,
+                  success: function (res) {
+                    if (res.confirm) {
+                      wx.redirectTo({
+                        url: '../useroperation/useroperation?operation=order&currentCouponTab='+(that.data.currentCouponTab+1),
+                      })
+                    } else if (res.cancel) {
+                      wx.redirectTo({
+                        url: '../useroperation/useroperation?operation=order$currentCouponTab=' + (that.data.currentCouponTab+1),
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+
   },
   // 授权提示
   UserInfo_click: function (e) {
