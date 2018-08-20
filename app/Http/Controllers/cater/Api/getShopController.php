@@ -122,7 +122,7 @@ class getShopController extends Controller
                 $result = DB::table("cater_users")->whereId($user_id)->update(['currency_password'=>Crypt::encrypt($currency_password),'mobile'=>$phone]);
 
                 if($result){
-                  $return['errcode'] = -1;
+                  $return['errcode'] = 1;
                   $return['errmsg'] = "设置成功";
                 }
             }else{
