@@ -538,10 +538,10 @@ Page({
           wx.showToast({
             title: '设置成功',
             icon: 'success',
-            duration: 2000,
+            duration: 3000,
             success: function () {
-              wx.redirectTo({
-                url: '../user/user',
+              wx.navigateBack({
+                delta: 1
               })
             }
           })
@@ -549,7 +549,7 @@ Page({
           wx.showToast({
             title: res.data.errmsg,
             icon: 'none',
-            duration: 2000
+            duration: 3000
           })
         }
       }
