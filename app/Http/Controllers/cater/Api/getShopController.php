@@ -118,7 +118,8 @@ class getShopController extends Controller
             $old_code = \Cache::get("code");
 
             if($code == $old_code){
-                $result = DB::table("cater_users")->userId($user_id)->update(['currency_password'=>Crypt::encrypt($currency_password),'mobile'=>$phone]);
+                //修改用户支付密码和手机号
+                $result = DB::table("cater_users")->whereId($user_id)->update(['currency_password'=>Crypt::encrypt($currency_password),'mobile'=>$phone]);
 
                 if($result){
                   $return['errcode'] = -1;

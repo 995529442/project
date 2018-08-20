@@ -448,6 +448,7 @@ Page({
    * 保存密码设置信息
    */
   formSubmit:function(e){
+    var that=this;
     var code = e.detail.value.code;
     var currency_password = e.detail.value.currency_password;
     var phone = e.detail.value.phone;
@@ -506,7 +507,7 @@ Page({
     }
 
     wx.showLoading({
-      title: '请求中',
+      title: '处理中',
     })
     wx.request({
       url: app.globalData.appUrl + '/api/cater/getShop/savePassword',
@@ -514,6 +515,7 @@ Page({
         user_id: that.data.user_id,
         code: code,
         currency_password: currency_password,
+        re_currency_password: re_currency_password,
         phone:phone
       },
       header: {
