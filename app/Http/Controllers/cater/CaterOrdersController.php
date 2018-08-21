@@ -131,6 +131,8 @@ class CaterOrdersController extends Controller
                         "operate_to" => $user_name,
                         "remark" => "商家拒单，返还".$real_pay."元，订单号：".$batchcode,
                         "create_time" => time(),
+						"type" => 1,
+						"currency_money" => $real_pay,
                         "isvalid" => true
                      ]);
                   }
@@ -217,6 +219,8 @@ class CaterOrdersController extends Controller
                         "operate_to" => $user_name,
                         "remark" => "商家确认退款，返还".$real_pay."元，订单号：".$batchcode,
                         "create_time" => time(),
+						"type" => 1,
+						"currency_money" => $real_pay,
                         "isvalid" => true
                      ]);
                   }

@@ -330,6 +330,8 @@ class orderController extends Controller
                           "operate_to" => $user_name,
                           "remark" => "订单支付，扣减".$real_pay."元，订单号:".$batchcode,
                           "create_time" => time(),
+						  "type" => 2,
+						  "currency_money" => $real_pay,
                           "isvalid" => true
                       ]);
                       

@@ -78,10 +78,13 @@
   <view wx:if="{{ operation == 'currency' }}" class="number" style="height:100vh;">
     <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll">
       <block wx:for="{{currency}}" wx:for-item="item" wx:for-index="idx">
-        <view class="number-top" bindtap="select_address" data-address_id="{{item.id}}" data-is_out="{{item.is_out}}">
+        <view class="number-top">
           <view class="n-t-center">
             <text>{{item.remark}} </text>
             <text>操作人：{{item.operate_from}} 时间：{{item.create_time}}</text>
+          </view>
+          <view style="float:right;color: #666;">
+            <text>666 </text>
           </view>
         </view>
       </block>
