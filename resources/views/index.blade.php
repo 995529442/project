@@ -112,17 +112,10 @@
             <div style="padding: 15px;">主体内容加载中,请稍等...</div>
         </div>
 
-        <div>
-            <!-- 底部固定区域 -->
+        <div class="layui-footer">
             2018 &copy;
             <a href="javascript::void(0);">牛叔叔科技股份有限公司,版权所有</a>
-
         </div>
-<!--         <div class="layui-footer">
-            2018 &copy;
-            <a href="javascript::void(0);">牛叔叔科技股份有限公司,版权所有</a>
-
-        </div> -->
     </div>
     <script type="text/javascript">
        // var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
