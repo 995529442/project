@@ -43,7 +43,7 @@
             <text>共{{ item.total_num }}件菜品</text>
             <text>合计<text style="color:red;">￥{{ item.total_money }}</text></text>
             <!-- <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn">去支付</view> -->
-            <view wx:if="{{item.pay_type == 1 && item.status==1}}" class="go-pay-btn" bindtap="operate" data-type="refund" data-order_id="{{item.order_id}}" >申请退款</view>
+            <view wx:if="{{item.pay_type == 1 && item.status==1}}" class="go-pay-btn" bindtap="operate" data-type="refund" data-order_id="{{item.order_id}}">申请退款</view>
             <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn" bindtap="operate" data-type="cancel" data-order_id="{{item.order_id}}">取消订单</view>
             <view wx:if="{{item.pay_type == 1 && (item.status==3 || item.status==4)}}" class="go-pay-btn" bindtap="operate" data-type="done" data-order_id="{{item.order_id}}">完成订单</view>
           </view>
@@ -76,19 +76,22 @@
   </view>
   <!--购物币消费记录-->
   <view wx:if="{{ operation == 'currency' }}" class="number" style="height:100vh;">
-    <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll">
+    <!-- <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll"> -->
       <block wx:for="{{currency}}" wx:for-item="item" wx:for-index="idx">
-        <view class="number-top">
+        <view class="number-top" style="width:85%;display:inline-block;">
           <view class="n-t-center">
             <text>{{item.remark}} </text>
             <text>操作人：{{item.operate_from}} 时间：{{item.create_time}}</text>
           </view>
-          <view style="float:right;color: #666;">
-            <text>666 </text>
-          </view>
+        </view>
+        <view style="width:8%;display:inline-block;color: #2995F0;position:relative;top:30rpx;right:30rpx;" wx:if="{{item.type == 1}}">
+          <text>+{{item.currency_money}}</text>
+        </view>
+        <view style="width:8%;display:inline-block;color: #F54D1A;position:relative;top:30rpx;right:30rpx;" wx:if="{{item.type == 2}}">
+          <text>-{{item.currency_money}}</text>
         </view>
       </block>
-    </scroll-view>
+    <!-- </scroll-view> -->
   </view>
   <!--修改支付密码-->
   <view wx:if="{{ operation == 'password' }}" class="number">
@@ -109,11 +112,11 @@
         </view>
         <view class="lxr">
           <text>手机号码</text>
-          <input value="" name="phone" id="phone" placeholder="请输入手机号码" type="number" bindblur="setPhone" style="text-aligin:center;"/>
+          <input value="" name="phone" id="phone" placeholder="请输入手机号码" type="number" bindblur="setPhone" style="text-aligin:center;" />
         </view>
         <view class="lxr">
           <text>验证码</text>
-          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:85%;text-aligin:center;"/>
+          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:85%;text-aligin:center;" />
           <button bindtap="getCode" type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">验证码</button>
         </view>
         <button formType="submit" class="start-shop">保存</button>
