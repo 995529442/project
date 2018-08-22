@@ -24,14 +24,14 @@ class Dumper extends CliDumper
     private $forceArrayIndexes;
 
     protected static $onlyControlCharsRx = '/^[\x00-\x1F\x7F]+$/';
-    protected static $controlCharsRx     = '/([\x00-\x1F\x7F]+)/';
-    protected static $controlCharsMap    = [
-        "\0"   => '\0',
-        "\t"   => '\t',
-        "\n"   => '\n',
-        "\v"   => '\v',
-        "\f"   => '\f',
-        "\r"   => '\r',
+    protected static $controlCharsRx = '/([\x00-\x1F\x7F]+)/';
+    protected static $controlCharsMap = [
+        "\0" => '\0',
+        "\t" => '\t',
+        "\n" => '\n',
+        "\v" => '\v',
+        "\f" => '\f',
+        "\r" => '\r',
         "\033" => '\e',
     ];
 

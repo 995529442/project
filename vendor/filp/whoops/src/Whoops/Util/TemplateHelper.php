@@ -205,7 +205,7 @@ class TemplateHelper
         if ($numFrames > 0) {
             $html = '<ol class="linenums">';
             foreach ($frame->getArgs() as $j => $frameArg) {
-                $html .= '<li>'. $this->dump($frameArg) .'</li>';
+                $html .= '<li>' . $this->dump($frameArg) . '</li>';
             }
             $html .= '</ol>';
         }
@@ -232,7 +232,7 @@ class TemplateHelper
      * passed to the template.
      *
      * @param string $template
-     * @param array  $additionalVariables
+     * @param array $additionalVariables
      */
     public function render($template, array $additionalVariables = null)
     {
@@ -266,7 +266,7 @@ class TemplateHelper
      * Sets a single template variable, by its name:
      *
      * @param string $variableName
-     * @param mixed  $variableValue
+     * @param mixed $variableValue
      */
     public function setVariable($variableName, $variableValue)
     {
@@ -278,7 +278,7 @@ class TemplateHelper
      * $defaultValue if the variable does not exist
      *
      * @param  string $variableName
-     * @param  mixed  $defaultValue
+     * @param  mixed $defaultValue
      * @return mixed
      */
     public function getVariable($variableName, $defaultValue = null)

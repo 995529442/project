@@ -57,28 +57,28 @@ abstract class Renderer
      * @param string $templatePath
      * @param string $generator
      * @param string $date
-     * @param int    $lowUpperBound
-     * @param int    $highLowerBound
+     * @param int $lowUpperBound
+     * @param int $highLowerBound
      */
     public function __construct($templatePath, $generator, $date, $lowUpperBound, $highLowerBound)
     {
-        $this->templatePath   = $templatePath;
-        $this->generator      = $generator;
-        $this->date           = $date;
-        $this->lowUpperBound  = $lowUpperBound;
+        $this->templatePath = $templatePath;
+        $this->generator = $generator;
+        $this->date = $date;
+        $this->lowUpperBound = $lowUpperBound;
         $this->highLowerBound = $highLowerBound;
-        $this->version        = Version::id();
+        $this->version = Version::id();
     }
 
     /**
      * @param \Text_Template $template
-     * @param array          $data
+     * @param array $data
      *
      * @return string
      */
     protected function renderItemTemplate(\Text_Template $template, array $data)
     {
-        $numSeparator  = '&nbsp;/&nbsp;';
+        $numSeparator = '&nbsp;/&nbsp;';
 
         if (isset($data['numClasses']) && $data['numClasses'] > 0) {
             $classesLevel = $this->getColorLevel($data['testedClassesPercent']);
@@ -90,9 +90,9 @@ abstract class Renderer
                 $data['testedClassesPercent']
             );
         } else {
-            $classesLevel                         = '';
-            $classesNumber                        = '0' . $numSeparator . '0';
-            $classesBar                           = '';
+            $classesLevel = '';
+            $classesNumber = '0' . $numSeparator . '0';
+            $classesBar = '';
             $data['testedClassesPercentAsString'] = 'n/a';
         }
 
@@ -106,9 +106,9 @@ abstract class Renderer
                 $data['testedMethodsPercent']
             );
         } else {
-            $methodsLevel                         = '';
-            $methodsNumber                        = '0' . $numSeparator . '0';
-            $methodsBar                           = '';
+            $methodsLevel = '';
+            $methodsNumber = '0' . $numSeparator . '0';
+            $methodsBar = '';
             $data['testedMethodsPercentAsString'] = 'n/a';
         }
 
@@ -122,29 +122,29 @@ abstract class Renderer
                 $data['linesExecutedPercent']
             );
         } else {
-            $linesLevel                           = '';
-            $linesNumber                          = '0' . $numSeparator . '0';
-            $linesBar                             = '';
+            $linesLevel = '';
+            $linesNumber = '0' . $numSeparator . '0';
+            $linesBar = '';
             $data['linesExecutedPercentAsString'] = 'n/a';
         }
 
         $template->setVar(
             [
-                'icon'                   => isset($data['icon']) ? $data['icon'] : '',
-                'crap'                   => isset($data['crap']) ? $data['crap'] : '',
-                'name'                   => $data['name'],
-                'lines_bar'              => $linesBar,
+                'icon' => isset($data['icon']) ? $data['icon'] : '',
+                'crap' => isset($data['crap']) ? $data['crap'] : '',
+                'name' => $data['name'],
+                'lines_bar' => $linesBar,
                 'lines_executed_percent' => $data['linesExecutedPercentAsString'],
-                'lines_level'            => $linesLevel,
-                'lines_number'           => $linesNumber,
-                'methods_bar'            => $methodsBar,
+                'lines_level' => $linesLevel,
+                'lines_number' => $linesNumber,
+                'methods_bar' => $methodsBar,
                 'methods_tested_percent' => $data['testedMethodsPercentAsString'],
-                'methods_level'          => $methodsLevel,
-                'methods_number'         => $methodsNumber,
-                'classes_bar'            => $classesBar,
+                'methods_level' => $methodsLevel,
+                'methods_number' => $methodsNumber,
+                'classes_bar' => $classesBar,
                 'classes_tested_percent' => isset($data['testedClassesPercentAsString']) ? $data['testedClassesPercentAsString'] : '',
-                'classes_level'          => $classesLevel,
-                'classes_number'         => $classesNumber
+                'classes_level' => $classesLevel,
+                'classes_number' => $classesNumber
             ]
         );
 
@@ -153,21 +153,21 @@ abstract class Renderer
 
     /**
      * @param \Text_Template $template
-     * @param AbstractNode   $node
+     * @param AbstractNode $node
      */
     protected function setCommonTemplateVariables(\Text_Template $template, AbstractNode $node)
     {
         $template->setVar(
             [
-                'id'               => $node->getId(),
-                'full_path'        => $node->getPath(),
-                'path_to_root'     => $this->getPathToRoot($node),
-                'breadcrumbs'      => $this->getBreadcrumbs($node),
-                'date'             => $this->date,
-                'version'          => $this->version,
-                'runtime'          => $this->getRuntimeString(),
-                'generator'        => $this->generator,
-                'low_upper_bound'  => $this->lowUpperBound,
+                'id' => $node->getId(),
+                'full_path' => $node->getPath(),
+                'path_to_root' => $this->getPathToRoot($node),
+                'breadcrumbs' => $this->getBreadcrumbs($node),
+                'date' => $this->date,
+                'version' => $this->version,
+                'runtime' => $this->getRuntimeString(),
+                'generator' => $this->generator,
+                'low_upper_bound' => $this->lowUpperBound,
                 'high_lower_bound' => $this->highLowerBound
             ]
         );
@@ -176,9 +176,9 @@ abstract class Renderer
     protected function getBreadcrumbs(AbstractNode $node)
     {
         $breadcrumbs = '';
-        $path        = $node->getPathAsArray();
-        $pathToRoot  = [];
-        $max         = \count($path);
+        $path = $node->getPathAsArray();
+        $pathToRoot = [];
+        $max = \count($path);
 
         if ($node instanceof FileNode) {
             $max--;
@@ -227,7 +227,7 @@ abstract class Renderer
 
     protected function getPathToRoot(AbstractNode $node)
     {
-        $id    = $node->getId();
+        $id = $node->getId();
         $depth = \substr_count($id, '/');
 
         if ($id != 'index' &&

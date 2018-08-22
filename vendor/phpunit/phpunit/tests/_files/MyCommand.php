@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\TextUI\Command;
 
 class MyCommand extends Command

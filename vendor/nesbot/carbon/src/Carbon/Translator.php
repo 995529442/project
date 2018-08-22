@@ -59,7 +59,7 @@ class Translator extends Translation\Translator
             return true;
         }
 
-        if (file_exists($filename = __DIR__.'/Lang/'.$locale.'.php')) {
+        if (file_exists($filename = __DIR__ . '/Lang/' . $locale . '.php')) {
             static::$messages[$locale] = require $filename;
             $this->addResource('array', static::$messages[$locale], $locale);
 
@@ -89,7 +89,7 @@ class Translator extends Translation\Translator
      * Set messages of a locale and take file first if present.
      *
      * @param string $locale
-     * @param array  $messages
+     * @param array $messages
      *
      * @return $this
      */
@@ -129,7 +129,7 @@ class Translator extends Translation\Translator
     {
         $locale = preg_replace_callback('/[-_]([a-z]{2,})/', function ($matches) {
             // _2-letters is a region, _3+-letters is a variant
-            return '_'.call_user_func(strlen($matches[1]) > 2 ? 'ucfirst' : 'strtoupper', $matches[1]);
+            return '_' . call_user_func(strlen($matches[1]) > 2 ? 'ucfirst' : 'strtoupper', $matches[1]);
         }, strtolower($locale));
 
         if ($this->loadMessagesFromFile($locale)) {

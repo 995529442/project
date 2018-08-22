@@ -24,7 +24,7 @@ class TranslatorCacheTest extends TestCase
 
     protected function setUp()
     {
-        $this->tmpDir = sys_get_temp_dir().'/sf2_translation';
+        $this->tmpDir = sys_get_temp_dir() . '/sf2_translation';
         $this->deleteTmpDir();
     }
 
@@ -72,7 +72,7 @@ class TranslatorCacheTest extends TestCase
         $translator = new Translator($locale, null, $this->tmpDir, $debug);
         $translator->addLoader($format, $this->createFailingLoader());
         $translator->addResource($format, array($msgid => 'OK'), $locale);
-        $this->assertEquals('OK', $translator->trans($msgid), '-> caching does not work in '.($debug ? 'debug' : 'production'));
+        $this->assertEquals('OK', $translator->trans($msgid), '-> caching does not work in ' . ($debug ? 'debug' : 'production'));
     }
 
     public function testCatalogueIsReloadedWhenResourcesAreNoLongerFresh()
@@ -100,8 +100,7 @@ class TranslatorCacheTest extends TestCase
         $loader
             ->expects($this->exactly(2))
             ->method('load')
-            ->will($this->returnValue($catalogue))
-        ;
+            ->will($this->returnValue($catalogue));
 
         // 1st pass
         $translator = new Translator($locale, null, $this->tmpDir, true);
@@ -146,7 +145,7 @@ class TranslatorCacheTest extends TestCase
         $translator = new Translator($locale, null, $this->tmpDir, $debug);
         $translator->addLoader($format, $this->createFailingLoader());
         $translator->addResource($format, array($msgid => 'OK'), $locale);
-        $this->assertEquals('OK', $translator->trans($msgid), '-> the cache was overwritten by another translator instance in '.($debug ? 'debug' : 'production'));
+        $this->assertEquals('OK', $translator->trans($msgid), '-> the cache was overwritten by another translator instance in ' . ($debug ? 'debug' : 'production'));
     }
 
     public function testGeneratedCacheFilesAreOnlyBelongRequestedLocales()
@@ -155,7 +154,7 @@ class TranslatorCacheTest extends TestCase
         $translator->setFallbackLocales(array('b'));
         $translator->trans('bar');
 
-        $cachedFiles = glob($this->tmpDir.'/*.php');
+        $cachedFiles = glob($this->tmpDir . '/*.php');
 
         $this->assertCount(1, $cachedFiles);
     }

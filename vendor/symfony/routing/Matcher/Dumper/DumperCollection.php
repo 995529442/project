@@ -126,8 +126,8 @@ class DumperCollection implements \IteratorAggregate
     /**
      * Returns an attribute by name.
      *
-     * @param string $name    The attribute name
-     * @param mixed  $default Default value is the attribute doesn't exist
+     * @param string $name The attribute name
+     * @param mixed $default Default value is the attribute doesn't exist
      *
      * @return mixed The attribute value
      */
@@ -139,8 +139,8 @@ class DumperCollection implements \IteratorAggregate
     /**
      * Sets an attribute by name.
      *
-     * @param string $name  The attribute name
-     * @param mixed  $value The attribute value
+     * @param string $name The attribute name
+     * @param mixed $value The attribute value
      */
     public function setAttribute($name, $value)
     {

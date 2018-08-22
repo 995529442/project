@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Librarys;
+
 use DB;
 
 class WeChatPay
@@ -18,18 +20,18 @@ class WeChatPay
 
     public function getConfig($admin_id)
     {
-        $config_info = DB::table("cater_system")->where(['admin_id'=>$admin_id,'isvalid'=>true])->first();
+        $config_info = DB::table("cater_system")->where(['admin_id' => $admin_id, 'isvalid' => true])->first();
 
-        if($config_info){
-          $this->appid =  $config_info->appid;
-          $this->mch_id = $config_info->mch_id;
-          $this->notify_url = '';
-          $this->key =  $config_info->key;
+        if ($config_info) {
+            $this->appid = $config_info->appid;
+            $this->mch_id = $config_info->mch_id;
+            $this->notify_url = '';
+            $this->key = $config_info->key;
 
-          return $config_info;
-        }else{
-          return false;
-        }      
+            return $config_info;
+        } else {
+            return false;
+        }
 
     }
 
@@ -49,18 +51,18 @@ class WeChatPay
      * @param $orderId
      * @return bool|mixed
      */
-    public function getPayParams($admin_id,$orderId)
+    public function getPayParams($admin_id, $orderId)
     {
         $order_info = DB::table("cater_orders")->whereId($orderId)->first();
 
-        if(!$order_info){
-           return $this->setError("订单不存在");
+        if (!$order_info) {
+            return $this->setError("订单不存在");
         }
 
         $config_info = $this->getConfig($admin_id);
-     
-        if(!$config_info){
-           return $this->setError("小程序还没配置");
+
+        if (!$config_info) {
+            return $this->setError("小程序还没配置");
         }
         $data['appid'] = $this->appid;
         $data['mch_id'] = $this->mch_id;
@@ -77,8 +79,8 @@ class WeChatPay
         // $user = $userModel->getObj("user_id = $order[user_id]");
         $openId = DB::table("cater_users")->whereId((int)$order_info->user_id)->value("openid");
 
-        if(!$openId){
-          return $this->setError("用户信息不存在");          
+        if (!$openId) {
+            return $this->setError("用户信息不存在");
         }
 
         $data['openid'] = $openId;
@@ -95,14 +97,15 @@ class WeChatPay
             return $this->setError($result['err_code_des']);
         }
         $prepay_id = $result['prepay_id'];
-        return $this->getJsPayParams($prepay_id,$orderId);
+        return $this->getJsPayParams($prepay_id, $orderId);
     }
 
-    private function getJsPayParams($prepay_id,$orderId) {
+    private function getJsPayParams($prepay_id, $orderId)
+    {
 //        appId,nonceStr,package,signType,timeStamp
         $data['appId'] = $this->appid;
         $data['nonceStr'] = $this->nonceStr(32);
-        $data['package'] = 'prepay_id='.$prepay_id;
+        $data['package'] = 'prepay_id=' . $prepay_id;
         $data['signType'] = 'MD5';
         $data['timeStamp'] = time();
         $data['sign'] = $this->sign($data);
@@ -110,7 +113,8 @@ class WeChatPay
         return $data;
     }
 
-    public function notifySign($data) {
+    public function notifySign($data)
+    {
         if (empty($data)) {
             return $this->setError('签名为空');
         }
@@ -212,22 +216,23 @@ class WeChatPay
      * 金额
      * 总金额
      */
-    public function refund($out_trade_no,$amount,$actAmount){
+    public function refund($out_trade_no, $amount, $actAmount)
+    {
         $nonce_str = $this->nonceStr(32);
         $refundFee = $amount; // 退款金额 退款金额小于等于订单金额
         $totalFee = $actAmount; // 订单总金额
-        $sign = $this->refundOrderSign( $this->appid,$this->mch_id, $nonce_str,$this->mch_id, $nonce_str,  $out_trade_no, $refundFee, $totalFee);
+        $sign = $this->refundOrderSign($this->appid, $this->mch_id, $nonce_str, $this->mch_id, $nonce_str, $out_trade_no, $refundFee, $totalFee);
         $data['appid'] = $this->appid;
         $data['mch_id'] = $this->mch_id;
         $data['nonce_str'] = $nonce_str;
         $data['op_user_id'] = $this->mch_id;
-        $data['out_refund_no'] =$nonce_str;
-        $data['out_trade_no'] =$out_trade_no;
-        $data['refund_fee'] =$refundFee;
-        $data['total_fee'] =$totalFee;
-        $data['sign'] =$sign;
+        $data['out_refund_no'] = $nonce_str;
+        $data['out_trade_no'] = $out_trade_no;
+        $data['refund_fee'] = $refundFee;
+        $data['total_fee'] = $totalFee;
+        $data['sign'] = $sign;
         $urlStr = 'https://api.mch.weixin.qq.com/secapi/pay/refund';
-        $result = $this->curl_post_ssl($urlStr,$this->arrayToXml($data),30);
+        $result = $this->curl_post_ssl($urlStr, $this->arrayToXml($data), 30);
         if ($result === false) {
             return false;
         }
@@ -240,39 +245,40 @@ class WeChatPay
         }
         //记录微信接口调用信息
         $mongoDb = new IMongo();
-        $mongoDb->insert("log_operation",array('author'=>"管理员:" . ISafe::get('admin_name'),'action'=>"调用微信退款接口",'content'=>'订单号：' . $out_trade_no."；退款金额：".($refundFee/100)."；IP：".IClient::getIp(),'datetime'=>date('Y-m-d H:i:s')));
+        $mongoDb->insert("log_operation", array('author' => "管理员:" . ISafe::get('admin_name'), 'action' => "调用微信退款接口", 'content' => '订单号：' . $out_trade_no . "；退款金额：" . ($refundFee / 100) . "；IP：" . IClient::getIp(), 'datetime' => date('Y-m-d H:i:s')));
         return true;
     }
 
     // 订单退款 签名算法
-    function refundOrderSign($appid,$mch_id,$nonce_str,$op_user_id,$out_refund_no,$out_trade_no,$refund_fee,$total_fee) {
-        $ret=array('appid'=>$appid,
-            'mch_id'=>$mch_id,
-            'nonce_str'=>$nonce_str,
-            'op_user_id'=>$op_user_id,
-            'out_refund_no'=>$out_refund_no,
-            'out_trade_no'=>$out_trade_no,
-            'refund_fee'=>$refund_fee,
-            'total_fee'=>$total_fee
+    function refundOrderSign($appid, $mch_id, $nonce_str, $op_user_id, $out_refund_no, $out_trade_no, $refund_fee, $total_fee)
+    {
+        $ret = array('appid' => $appid,
+            'mch_id' => $mch_id,
+            'nonce_str' => $nonce_str,
+            'op_user_id' => $op_user_id,
+            'out_refund_no' => $out_refund_no,
+            'out_trade_no' => $out_trade_no,
+            'refund_fee' => $refund_fee,
+            'total_fee' => $total_fee
         );
-        return  $this->sign($ret);
+        return $this->sign($ret);
     }
 
     /*
 请确保您的libcurl版本是否支持双向认证，版本高于7.20.1
 */
-    function curl_post_ssl($url, $vars, $second=30,$aHeader=array())
+    function curl_post_ssl($url, $vars, $second = 30, $aHeader = array())
     {
         $ch = curl_init();
         //超时时间
-        curl_setopt($ch,CURLOPT_TIMEOUT,$second);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $second);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //这里设置代理，如果有的话
         //curl_setopt($ch,CURLOPT_PROXY, '10.206.30.98');
         //curl_setopt($ch,CURLOPT_PROXYPORT, 8080);
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
         //以下两种方式需选择一种
         //第一种方法，cert 与 key 分别属于两个.pem文件
@@ -285,31 +291,29 @@ class WeChatPay
 
         //第二种方式，两个文件合成一个.pem文件
         // curl_setopt($ch,CURLOPT_SSLCERT,getcwd().'/all.pem');
-        curl_setopt($ch,CURLOPT_SSLCERT,dirname(__FILE__).DIRECTORY_SEPARATOR.
-            'cert'.DIRECTORY_SEPARATOR.'apiclient_cert.pem');
-        curl_setopt($ch,CURLOPT_SSLKEY,dirname(__FILE__).DIRECTORY_SEPARATOR.
-            'cert'.DIRECTORY_SEPARATOR.'apiclient_key.pem');
-         curl_setopt($ch,CURLOPT_CAINFO,dirname(__FILE__).DIRECTORY_SEPARATOR. 'cert'.DIRECTORY_SEPARATOR.'rootca.pem');
+        curl_setopt($ch, CURLOPT_SSLCERT, dirname(__FILE__) . DIRECTORY_SEPARATOR .
+            'cert' . DIRECTORY_SEPARATOR . 'apiclient_cert.pem');
+        curl_setopt($ch, CURLOPT_SSLKEY, dirname(__FILE__) . DIRECTORY_SEPARATOR .
+            'cert' . DIRECTORY_SEPARATOR . 'apiclient_key.pem');
+        curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cert' . DIRECTORY_SEPARATOR . 'rootca.pem');
 
-        if( count($aHeader) >= 1 ){
+        if (count($aHeader) >= 1) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $aHeader);
         }
 
-        curl_setopt($ch,CURLOPT_POST, 1);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$vars);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
         $data = curl_exec($ch);
-        if($data){
+        if ($data) {
             curl_close($ch);
             return $data;
-        }
-        else {
+        } else {
             $error = curl_errno($ch);
             echo "call faild, errorCode:$error\n";
             curl_close($ch);
             return false;
         }
     }
-
 
 
 }

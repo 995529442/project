@@ -36,7 +36,7 @@ class EllipseShape extends \Intervention\Image\AbstractShape
     /**
      * Draw ellipse instance on given image
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $x
      * @param  integer $y
      * @return boolean

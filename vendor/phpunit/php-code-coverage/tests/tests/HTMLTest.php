@@ -77,7 +77,7 @@ class HTMLTest extends TestCase
     private function assertFilesEquals($expectedFilesPath, $actualFilesPath)
     {
         $expectedFilesIterator = new \FilesystemIterator($expectedFilesPath);
-        $actualFilesIterator   = new \RegexIterator(new \FilesystemIterator($actualFilesPath), '/.html/');
+        $actualFilesIterator = new \RegexIterator(new \FilesystemIterator($actualFilesPath), '/.html/');
 
         $this->assertEquals(
             iterator_count($expectedFilesIterator),

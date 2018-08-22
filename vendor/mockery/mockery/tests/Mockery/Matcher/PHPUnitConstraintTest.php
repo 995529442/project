@@ -68,8 +68,7 @@ class PHPUnitConstraintTest extends TestCase
             ->shouldReceive('evaluate')
             ->once()
             ->with($value3)
-            ->getMock()
-        ;
+            ->getMock();
         $this->assertTrue($this->matcher->match($value1));
         $this->assertFalse($this->matcher->match($value2));
         $this->assertTrue($this->rethrowingMatcher->match($value3));
@@ -83,8 +82,7 @@ class PHPUnitConstraintTest extends TestCase
             ->shouldReceive('evaluate')
             ->once()
             ->with($value)
-            ->andThrow($this->assertionFailedError)
-        ;
+            ->andThrow($this->assertionFailedError);
         $this->rethrowingMatcher->match($value);
     }
 

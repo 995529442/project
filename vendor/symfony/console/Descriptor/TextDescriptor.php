@@ -46,7 +46,7 @@ class TextDescriptor extends Descriptor
             $argument->getName(),
             str_repeat(' ', $spacingWidth),
             // + 4 = 2 spaces before <info>, 2 spaces after </info>
-            preg_replace('/\s*[\r\n]\s*/', "\n".str_repeat(' ', $totalWidth + 4), $argument->getDescription()),
+            preg_replace('/\s*[\r\n]\s*/', "\n" . str_repeat(' ', $totalWidth + 4), $argument->getDescription()),
             $default
         ), $options);
     }
@@ -64,10 +64,10 @@ class TextDescriptor extends Descriptor
 
         $value = '';
         if ($option->acceptValue()) {
-            $value = '='.strtoupper($option->getName());
+            $value = '=' . strtoupper($option->getName());
 
             if ($option->isValueOptional()) {
-                $value = '['.$value.']';
+                $value = '[' . $value . ']';
             }
         }
 
@@ -83,7 +83,7 @@ class TextDescriptor extends Descriptor
             $synopsis,
             str_repeat(' ', $spacingWidth),
             // + 4 = 2 spaces before <info>, 2 spaces after </info>
-            preg_replace('/\s*[\r\n]\s*/', "\n".str_repeat(' ', $totalWidth + 4), $option->getDescription()),
+            preg_replace('/\s*[\r\n]\s*/', "\n" . str_repeat(' ', $totalWidth + 4), $option->getDescription()),
             $default,
             $option->isArray() ? '<comment> (multiple values allowed)</comment>' : ''
         ), $options);
@@ -143,7 +143,7 @@ class TextDescriptor extends Descriptor
         $this->writeText('<comment>Usage:</comment>', $options);
         foreach (array_merge(array($command->getSynopsis(true)), $command->getAliases(), $command->getUsages()) as $usage) {
             $this->writeText("\n");
-            $this->writeText('  '.OutputFormatter::escape($usage), $options);
+            $this->writeText('  ' . OutputFormatter::escape($usage), $options);
         }
         $this->writeText("\n");
 
@@ -158,7 +158,7 @@ class TextDescriptor extends Descriptor
             $this->writeText("\n");
             $this->writeText('<comment>Help:</comment>', $options);
             $this->writeText("\n");
-            $this->writeText('  '.str_replace("\n", "\n  ", $help), $options);
+            $this->writeText('  ' . str_replace("\n", "\n  ", $help), $options);
             $this->writeText("\n");
         }
     }
@@ -223,7 +223,7 @@ class TextDescriptor extends Descriptor
 
                 if (!$describedNamespace && ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                     $this->writeText("\n");
-                    $this->writeText(' <comment>'.$namespace['id'].'</comment>', $options);
+                    $this->writeText(' <comment>' . $namespace['id'] . '</comment>', $options);
                 }
 
                 foreach ($namespace['commands'] as $name) {
@@ -231,7 +231,7 @@ class TextDescriptor extends Descriptor
                     $spacingWidth = $width - Helper::strlen($name);
                     $command = $commands[$name];
                     $commandAliases = $name === $command->getName() ? $this->getCommandAliasesText($command) : '';
-                    $this->writeText(sprintf('  <info>%s</info>%s%s', $name, str_repeat(' ', $spacingWidth), $commandAliases.$command->getDescription()), $options);
+                    $this->writeText(sprintf('  <info>%s</info>%s%s', $name, str_repeat(' ', $spacingWidth), $commandAliases . $command->getDescription()), $options);
                 }
             }
 
@@ -261,7 +261,7 @@ class TextDescriptor extends Descriptor
         $aliases = $command->getAliases();
 
         if ($aliases) {
-            $text = '['.implode('|', $aliases).'] ';
+            $text = '[' . implode('|', $aliases) . '] ';
         }
 
         return $text;

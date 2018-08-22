@@ -72,7 +72,7 @@ class XMLTest extends TestCase
     private function assertFilesEquals($expectedFilesPath, $actualFilesPath)
     {
         $expectedFilesIterator = new \FilesystemIterator($expectedFilesPath);
-        $actualFilesIterator   = new \FilesystemIterator($actualFilesPath);
+        $actualFilesIterator = new \FilesystemIterator($actualFilesPath);
 
         $this->assertEquals(
             iterator_count($expectedFilesIterator),

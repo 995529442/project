@@ -1,10 +1,10 @@
 <?php
 /**
-* Whoops - php errors for cool kids
-* @author Filipe Dobreira <http://github.com/filp>
-* Plaintext handler for command line and logs.
-* @author Pierre-Yves Landuré <https://howto.biapy.com/>
-*/
+ * Whoops - php errors for cool kids
+ * @author Filipe Dobreira <http://github.com/filp>
+ * Plaintext handler for command line and logs.
+ * @author Pierre-Yves Landuré <https://howto.biapy.com/>
+ */
 
 namespace Whoops\Handler;
 
@@ -13,10 +13,10 @@ use Psr\Log\LoggerInterface;
 use Whoops\Exception\Frame;
 
 /**
-* Handler outputing plaintext error messages. Can be used
-* directly, or will be instantiated automagically by Whoops\Run
-* if passed to Run::pushHandler
-*/
+ * Handler outputing plaintext error messages. Can be used
+ * directly, or will be instantiated automagically by Whoops\Run
+ * if passed to Run::pushHandler
+ */
 class PlainTextHandler extends Handler
 {
     const VAR_DUMP_PREFIX = '   | ';
@@ -68,7 +68,7 @@ class PlainTextHandler extends Handler
      */
     public function setLogger($logger = null)
     {
-        if (! (is_null($logger)
+        if (!(is_null($logger)
             || $logger instanceof LoggerInterface)) {
             throw new InvalidArgumentException(
                 'Argument to ' . __METHOD__ .
@@ -101,7 +101,7 @@ class PlainTextHandler extends Handler
 
     /**
      * Add error trace to output.
-     * @param  bool|null  $addTraceToOutput
+     * @param  bool|null $addTraceToOutput
      * @return bool|$this
      */
     public function addTraceToOutput($addTraceToOutput = null)
@@ -110,7 +110,7 @@ class PlainTextHandler extends Handler
             return $this->addTraceToOutput;
         }
 
-        $this->addTraceToOutput = (bool) $addTraceToOutput;
+        $this->addTraceToOutput = (bool)$addTraceToOutput;
         return $this;
     }
 
@@ -126,8 +126,8 @@ class PlainTextHandler extends Handler
             return $this->addTraceFunctionArgsToOutput;
         }
 
-        if (! is_integer($addTraceFunctionArgsToOutput)) {
-            $this->addTraceFunctionArgsToOutput = (bool) $addTraceFunctionArgsToOutput;
+        if (!is_integer($addTraceFunctionArgsToOutput)) {
+            $this->addTraceFunctionArgsToOutput = (bool)$addTraceFunctionArgsToOutput;
         } else {
             $this->addTraceFunctionArgsToOutput = $addTraceFunctionArgsToOutput;
         }
@@ -141,7 +141,7 @@ class PlainTextHandler extends Handler
      */
     public function setTraceFunctionArgsOutputLimit($traceFunctionArgsOutputLimit)
     {
-        $this->traceFunctionArgsOutputLimit = (integer) $traceFunctionArgsOutputLimit;
+        $this->traceFunctionArgsOutputLimit = (integer)$traceFunctionArgsOutputLimit;
     }
 
     /**
@@ -183,7 +183,7 @@ class PlainTextHandler extends Handler
             return $this->loggerOnly;
         }
 
-        $this->loggerOnly = (bool) $loggerOnly;
+        $this->loggerOnly = (bool)$loggerOnly;
     }
 
     /**
@@ -198,7 +198,7 @@ class PlainTextHandler extends Handler
     /**
      * Get the frame args var_dump.
      * @param  \Whoops\Exception\Frame $frame [description]
-     * @param  integer                 $line  [description]
+     * @param  integer $line [description]
      * @return string
      */
     private function getFrameArgsOutput(Frame $frame, $line)
@@ -249,7 +249,7 @@ class PlainTextHandler extends Handler
      */
     private function getTraceOutput()
     {
-        if (! $this->addTraceToOutput()) {
+        if (!$this->addTraceToOutput()) {
             return '';
         }
         $inspector = $this->getInspector();
@@ -263,7 +263,7 @@ class PlainTextHandler extends Handler
             $class = $frame->getClass();
 
             $template = "\n%3d. %s->%s() %s:%d%s";
-            if (! $class) {
+            if (!$class) {
                 // Remove method arrow (->) from output.
                 $template = "\n%3d. %s%s() %s:%d%s";
             }
@@ -295,7 +295,7 @@ class PlainTextHandler extends Handler
             $this->getLogger()->error($response);
         }
 
-        if (! $this->canOutput()) {
+        if (!$this->canOutput()) {
             return Handler::DONE;
         }
 

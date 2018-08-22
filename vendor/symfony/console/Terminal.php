@@ -25,7 +25,7 @@ class Terminal
     {
         $width = getenv('COLUMNS');
         if (false !== $width) {
-            return (int) trim($width);
+            return (int)trim($width);
         }
 
         if (null === self::$width) {
@@ -44,7 +44,7 @@ class Terminal
     {
         $height = getenv('LINES');
         if (false !== $height) {
-            return (int) trim($height);
+            return (int)trim($height);
         }
 
         if (null === self::$height) {
@@ -60,22 +60,22 @@ class Terminal
             if (preg_match('/^(\d+)x(\d+)(?: \((\d+)x(\d+)\))?$/', trim(getenv('ANSICON')), $matches)) {
                 // extract [w, H] from "wxh (WxH)"
                 // or [w, h] from "wxh"
-                self::$width = (int) $matches[1];
-                self::$height = isset($matches[4]) ? (int) $matches[4] : (int) $matches[2];
+                self::$width = (int)$matches[1];
+                self::$height = isset($matches[4]) ? (int)$matches[4] : (int)$matches[2];
             } elseif (null !== $dimensions = self::getConsoleMode()) {
                 // extract [w, h] from "wxh"
-                self::$width = (int) $dimensions[0];
-                self::$height = (int) $dimensions[1];
+                self::$width = (int)$dimensions[0];
+                self::$height = (int)$dimensions[1];
             }
         } elseif ($sttyString = self::getSttyColumns()) {
             if (preg_match('/rows.(\d+);.columns.(\d+);/i', $sttyString, $matches)) {
                 // extract [w, h] from "rows h; columns w;"
-                self::$width = (int) $matches[2];
-                self::$height = (int) $matches[1];
+                self::$width = (int)$matches[2];
+                self::$height = (int)$matches[1];
             } elseif (preg_match('/;.(\d+).rows;.(\d+).columns/i', $sttyString, $matches)) {
                 // extract [w, h] from "; h rows; w columns"
-                self::$width = (int) $matches[2];
-                self::$height = (int) $matches[1];
+                self::$width = (int)$matches[2];
+                self::$height = (int)$matches[1];
             }
         }
     }
@@ -103,7 +103,7 @@ class Terminal
             proc_close($process);
 
             if (preg_match('/--------+\r?\n.+?(\d+)\r?\n.+?(\d+)\r?\n/', $info, $matches)) {
-                return array((int) $matches[2], (int) $matches[1]);
+                return array((int)$matches[2], (int)$matches[1]);
             }
         }
     }

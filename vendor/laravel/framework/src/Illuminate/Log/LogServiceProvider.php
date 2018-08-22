@@ -57,24 +57,24 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param  \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureHandler(Writer $log)
     {
-        $this->{'configure'.ucfirst($this->handler()).'Handler'}($log);
+        $this->{'configure' . ucfirst($this->handler()) . 'Handler'}($log);
     }
 
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param  \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureSingleHandler(Writer $log)
     {
         $log->useFiles(
-            $this->app->storagePath().'/logs/laravel.log',
+            $this->app->storagePath() . '/logs/laravel.log',
             $this->logLevel()
         );
     }
@@ -82,13 +82,13 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param  \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureDailyHandler(Writer $log)
     {
         $log->useDailyFiles(
-            $this->app->storagePath().'/logs/laravel.log', $this->maxFiles(),
+            $this->app->storagePath() . '/logs/laravel.log', $this->maxFiles(),
             $this->logLevel()
         );
     }
@@ -96,7 +96,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param  \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureSyslogHandler(Writer $log)
@@ -107,7 +107,7 @@ class LogServiceProvider extends ServiceProvider
     /**
      * Configure the Monolog handlers for the application.
      *
-     * @param  \Illuminate\Log\Writer  $log
+     * @param  \Illuminate\Log\Writer $log
      * @return void
      */
     protected function configureErrorlogHandler(Writer $log)

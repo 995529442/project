@@ -74,8 +74,8 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Returns a parameter by name.
      *
-     * @param string $key     The key
-     * @param mixed  $default The default value if the parameter key does not exist
+     * @param string $key The key
+     * @param mixed $default The default value if the parameter key does not exist
      *
      * @return mixed
      */
@@ -87,8 +87,8 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Sets a parameter by name.
      *
-     * @param string $key   The key
-     * @param mixed  $value The value
+     * @param string $key The key
+     * @param mixed $value The value
      */
     public function set($key, $value)
     {
@@ -120,7 +120,7 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Returns the alphabetic characters of the parameter value.
      *
-     * @param string $key     The parameter key
+     * @param string $key The parameter key
      * @param string $default The default value if the parameter key does not exist
      *
      * @return string The filtered value
@@ -133,7 +133,7 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Returns the alphabetic characters and digits of the parameter value.
      *
-     * @param string $key     The parameter key
+     * @param string $key The parameter key
      * @param string $default The default value if the parameter key does not exist
      *
      * @return string The filtered value
@@ -146,7 +146,7 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Returns the digits of the parameter value.
      *
-     * @param string $key     The parameter key
+     * @param string $key The parameter key
      * @param string $default The default value if the parameter key does not exist
      *
      * @return string The filtered value
@@ -160,21 +160,21 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Returns the parameter value converted to integer.
      *
-     * @param string $key     The parameter key
-     * @param int    $default The default value if the parameter key does not exist
+     * @param string $key The parameter key
+     * @param int $default The default value if the parameter key does not exist
      *
      * @return int The filtered value
      */
     public function getInt($key, $default = 0)
     {
-        return (int) $this->get($key, $default);
+        return (int)$this->get($key, $default);
     }
 
     /**
      * Returns the parameter value converted to boolean.
      *
-     * @param string $key     The parameter key
-     * @param mixed  $default The default value if the parameter key does not exist
+     * @param string $key The parameter key
+     * @param mixed $default The default value if the parameter key does not exist
      *
      * @return bool The filtered value
      */
@@ -186,10 +186,10 @@ class ParameterBag implements \IteratorAggregate, \Countable
     /**
      * Filter key.
      *
-     * @param string $key     Key
-     * @param mixed  $default Default = null
-     * @param int    $filter  FILTER_* constant
-     * @param mixed  $options Filter options
+     * @param string $key Key
+     * @param mixed $default Default = null
+     * @param int $filter FILTER_* constant
+     * @param mixed $options Filter options
      *
      * @see http://php.net/manual/en/function.filter-var.php
      *

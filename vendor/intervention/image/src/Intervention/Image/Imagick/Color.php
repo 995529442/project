@@ -101,7 +101,7 @@ class Color extends \Intervention\Image\AbstractColor
      * @param  integer $r
      * @param  integer $g
      * @param  integer $b
-     * @param  float   $a
+     * @param  float $a
      *
      * @return \Intervention\Image\AbstractColor
      */
@@ -175,7 +175,7 @@ class Color extends \Intervention\Image\AbstractColor
      * Determines if current color is different from given color
      *
      * @param  AbstractColor $color
-     * @param  integer       $tolerance
+     * @param  integer $tolerance
      * @return boolean
      */
     public function differs(\Intervention\Image\AbstractColor $color, $tolerance = 0)
@@ -271,7 +271,7 @@ class Color extends \Intervention\Image\AbstractColor
     private function rgb2alpha($value)
     {
         // (255 -> 1.0) / (0 -> 0.0)
-        return (float) round($value/255, 2);
+        return (float)round($value / 255, 2);
     }
 
 }

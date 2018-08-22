@@ -36,7 +36,8 @@ class DebugHandlersListenerTest extends TestCase
     public function testConfigure()
     {
         $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
-        $userHandler = function () {};
+        $userHandler = function () {
+        };
         $listener = new DebugHandlersListener($userHandler, $logger);
         $xHandler = new ExceptionHandler();
         $eHandler = new ErrorHandler();
@@ -133,7 +134,8 @@ class DebugHandlersListenerTest extends TestCase
 
     public function testReplaceExistingExceptionHandler()
     {
-        $userHandler = function () {};
+        $userHandler = function () {
+        };
         $listener = new DebugHandlersListener($userHandler);
         $eHandler = new ErrorHandler();
         $eHandler->setExceptionHandler('var_dump');

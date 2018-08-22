@@ -36,7 +36,7 @@ class WindowsPipes extends AbstractPipes
 
     public function __construct($input, $haveReadSupport)
     {
-        $this->haveReadSupport = (bool) $haveReadSupport;
+        $this->haveReadSupport = (bool)$haveReadSupport;
 
         if ($this->haveReadSupport) {
             // Fix for PHP bug #51800: reading from STDOUT pipe hangs forever on Windows if the output is too big.
@@ -50,8 +50,10 @@ class WindowsPipes extends AbstractPipes
             $tmpCheck = false;
             $tmpDir = sys_get_temp_dir();
             $lastError = 'unknown reason';
-            set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
-            for ($i = 0;; ++$i) {
+            set_error_handler(function ($type, $msg) use (&$lastError) {
+                $lastError = $msg;
+            });
+            for ($i = 0; ; ++$i) {
                 foreach ($pipes as $pipe => $name) {
                     $file = sprintf('%s\\sf_proc_%02X.%s', $tmpDir, $i, $name);
                     if (file_exists($file) && !unlink($file)) {

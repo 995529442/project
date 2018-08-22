@@ -32,7 +32,7 @@ class Wizard
 
     /**
      * @param string $filename
-     * @param int    $lineNumber
+     * @param int $lineNumber
      *
      * @return string
      */

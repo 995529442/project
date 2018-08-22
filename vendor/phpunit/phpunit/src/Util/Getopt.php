@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use PHPUnit\Framework\Exception;
@@ -22,7 +23,7 @@ class Getopt
             return [[], []];
         }
 
-        $opts     = [];
+        $opts = [];
         $non_opts = [];
 
         if ($long_options) {
@@ -79,7 +80,7 @@ class Getopt
         $argLen = \strlen($arg);
 
         for ($i = 0; $i < $argLen; $i++) {
-            $opt     = $arg[$i];
+            $opt = $arg[$i];
             $opt_arg = null;
 
             if (($spec = \strstr($short_options, $opt)) === false || $arg[$i] == ':') {
@@ -110,9 +111,9 @@ class Getopt
 
     protected static function parseLongOption($arg, $long_options, &$opts, &$args)
     {
-        $count   = \count($long_options);
-        $list    = \explode('=', $arg);
-        $opt     = $list[0];
+        $count = \count($long_options);
+        $list = \explode('=', $arg);
+        $opt = $list[0];
         $opt_arg = null;
 
         if (\count($list) > 1) {
@@ -122,7 +123,7 @@ class Getopt
         $opt_len = \strlen($opt);
 
         for ($i = 0; $i < $count; $i++) {
-            $long_opt  = $long_options[$i];
+            $long_opt = $long_options[$i];
             $opt_start = \substr($long_opt, 0, $opt_len);
 
             if ($opt_start != $opt) {
@@ -156,7 +157,7 @@ class Getopt
             }
 
             $full_option = '--' . \preg_replace('/={1,2}$/', '', $long_opt);
-            $opts[]      = [$full_option, $opt_arg];
+            $opts[] = [$full_option, $opt_arg];
 
             return;
         }

@@ -9,7 +9,7 @@ class Font extends \Intervention\Image\AbstractFont
     /**
      * Draws font to given image at given position
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $posx
      * @param  integer $posy
      * @return void
@@ -63,12 +63,12 @@ class Font extends \Intervention\Image\AbstractFont
             switch (strtolower($this->valign)) {
                 case 'center':
                 case 'middle':
-                $posy = $posy + $dimensions['textHeight'] * 0.65 / 2;
-                break;
+                    $posy = $posy + $dimensions['textHeight'] * 0.65 / 2;
+                    break;
 
                 case 'top':
-                $posy = $posy + $dimensions['textHeight'] * 0.65;
-                break;
+                    $posy = $posy + $dimensions['textHeight'] * 0.65;
+                    break;
             }
         }
 

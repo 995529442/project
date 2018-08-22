@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework\MockObject;
 
 use PHPUnit\Framework\TestCase;
@@ -87,13 +88,13 @@ class MockBuilder
     private $generator;
 
     /**
-     * @param TestCase     $testCase
+     * @param TestCase $testCase
      * @param array|string $type
      */
     public function __construct(TestCase $testCase, $type)
     {
-        $this->testCase  = $testCase;
-        $this->type      = $type;
+        $this->testCase = $testCase;
+        $this->type = $type;
         $this->generator = new Generator;
     }
 
@@ -348,7 +349,7 @@ class MockBuilder
     public function disableProxyingToOriginalMethods()
     {
         $this->callOriginalMethods = false;
-        $this->proxyTarget         = null;
+        $this->proxyTarget = null;
 
         return $this;
     }

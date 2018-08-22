@@ -21,19 +21,19 @@ use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
  * @covers SebastianBergmann\Diff\Output\DiffOnlyOutputBuilder
  * @covers SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
  *
- * @uses SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator
- * @uses SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
- * @uses SebastianBergmann\Diff\Chunk
- * @uses SebastianBergmann\Diff\Diff
- * @uses SebastianBergmann\Diff\Line
- * @uses SebastianBergmann\Diff\Parser
+ * @uses   SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator
+ * @uses   SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
+ * @uses   SebastianBergmann\Diff\Chunk
+ * @uses   SebastianBergmann\Diff\Diff
+ * @uses   SebastianBergmann\Diff\Line
+ * @uses   SebastianBergmann\Diff\Parser
  */
 final class DifferTest extends TestCase
 {
     const WARNING = 3;
     const REMOVED = 2;
-    const ADDED   = 1;
-    const OLD     = 0;
+    const ADDED = 1;
+    const OLD = 0;
 
     /**
      * @var Differ
@@ -46,7 +46,7 @@ final class DifferTest extends TestCase
     }
 
     /**
-     * @param array        $expected
+     * @param array $expected
      * @param string|array $from
      * @param string|array $to
      * @dataProvider arrayProvider
@@ -68,7 +68,7 @@ final class DifferTest extends TestCase
     }
 
     /**
-     * @param array        $expected
+     * @param array $expected
      * @param string|array $from
      * @param string|array $to
      * @dataProvider arrayProvider
@@ -379,7 +379,7 @@ final class DifferTest extends TestCase
 +w
 
 EOF
-            ,
+                ,
                 "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk",
                 "a\np\nc\nd\ne\nf\ng\nh\ni\nw\nk",
             ],
@@ -392,7 +392,7 @@ EOF
 +B
 
 EOF
-            ,
+                ,
                 "A\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1",
                 "B\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1",
             ],
@@ -492,15 +492,16 @@ EOL;
     }
 
     /**
-     * @param array  $expected
+     * @param array $expected
      * @param string $from
      * @param string $to
-     * @param int    $lineThreshold
+     * @param int $lineThreshold
      * @dataProvider provideGetCommonChunks
      */
     public function testGetCommonChunks(array $expected, string $from, string $to, int $lineThreshold = 5)
     {
-        $output = new class extends AbstractChunkOutputBuilder {
+        $output = new class extends AbstractChunkOutputBuilder
+        {
             public function getDiff(array $diff): string
             {
                 return '';
@@ -520,7 +521,7 @@ EOL;
 
     public function provideGetCommonChunks(): array
     {
-        return[
+        return [
             'same (with default threshold)' => [
                 [],
                 'A',
@@ -619,14 +620,14 @@ EOL;
     }
 
     /**
-     * @param array  $expected
+     * @param array $expected
      * @param string $input
      * @dataProvider provideSplitStringByLinesCases
      */
     public function testSplitStringByLines(array $expected, string $input)
     {
         $reflection = new \ReflectionObject($this->differ);
-        $method     = $reflection->getMethod('splitStringByLines');
+        $method = $reflection->getMethod('splitStringByLines');
         $method->setAccessible(true);
 
         $this->assertSame($expected, $method->invoke($this->differ, $input));
@@ -981,7 +982,7 @@ EOF
 +w
 
 EOF
-            ,
+                ,
                 "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk",
                 "a\np\nc\nd\ne\nf\ng\nh\ni\nw\nk",
             ],
@@ -994,7 +995,7 @@ EOF
 +B
 
 EOF
-            ,
+                ,
                 "A\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1",
                 "B\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1",
             ],

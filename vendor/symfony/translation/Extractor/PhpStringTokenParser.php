@@ -88,7 +88,7 @@ class PhpStringTokenParser
     /**
      * Parses escape sequences in strings (all string types apart from single quoted).
      *
-     * @param string      $str   String without quotes
+     * @param string $str String without quotes
      * @param null|string $quote Quote type
      *
      * @return string String with escape sequences parsed
@@ -96,7 +96,7 @@ class PhpStringTokenParser
     public static function parseEscapeSequences($str, $quote)
     {
         if (null !== $quote) {
-            $str = str_replace('\\'.$quote, $quote, $str);
+            $str = str_replace('\\' . $quote, $quote, $str);
         }
 
         return preg_replace_callback(
@@ -123,7 +123,7 @@ class PhpStringTokenParser
      * Parses a constant doc string.
      *
      * @param string $startToken Doc string start token content (<<<SMTHG)
-     * @param string $str        String token content
+     * @param string $str String token content
      *
      * @return string Parsed string
      */

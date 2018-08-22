@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework\Constraint;
 
 use PHPUnit\Util\InvalidArgumentHelper;
@@ -35,8 +36,8 @@ class TraversableContains extends Constraint
 
     /**
      * @param mixed $value
-     * @param bool  $checkForObjectIdentity
-     * @param bool  $checkForNonObjectIdentity
+     * @param bool $checkForObjectIdentity
+     * @param bool $checkForNonObjectIdentity
      *
      * @throws \PHPUnit\Framework\Exception
      */
@@ -52,9 +53,9 @@ class TraversableContains extends Constraint
             throw InvalidArgumentHelper::factory(3, 'boolean');
         }
 
-        $this->checkForObjectIdentity    = $checkForObjectIdentity;
+        $this->checkForObjectIdentity = $checkForObjectIdentity;
         $this->checkForNonObjectIdentity = $checkForNonObjectIdentity;
-        $this->value                     = $value;
+        $this->value = $value;
     }
 
     /**

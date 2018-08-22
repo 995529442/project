@@ -92,7 +92,7 @@ class ResponseHeaderBag extends HeaderBag
     {
         $headers = parent::all();
         foreach ($this->getCookies() as $cookie) {
-            $headers['set-cookie'][] = (string) $cookie;
+            $headers['set-cookie'][] = (string)$cookie;
         }
 
         return $headers;
@@ -109,7 +109,7 @@ class ResponseHeaderBag extends HeaderBag
             if ($replace) {
                 $this->cookies = array();
             }
-            foreach ((array) $values as $cookie) {
+            foreach ((array)$values as $cookie) {
                 $this->setCookie(Cookie::fromString($cookie));
             }
             $this->headerNames[$uniqueKey] = $key;
@@ -242,8 +242,8 @@ class ResponseHeaderBag extends HeaderBag
      * @param string $name
      * @param string $path
      * @param string $domain
-     * @param bool   $secure
-     * @param bool   $httpOnly
+     * @param bool $secure
+     * @param bool $httpOnly
      */
     public function clearCookie($name, $path = '/', $domain = null, $secure = false, $httpOnly = true)
     {
@@ -253,8 +253,8 @@ class ResponseHeaderBag extends HeaderBag
     /**
      * Generates a HTTP Content-Disposition field-value.
      *
-     * @param string $disposition      One of "inline" or "attachment"
-     * @param string $filename         A unicode string
+     * @param string $disposition One of "inline" or "attachment"
+     * @param string $filename A unicode string
      * @param string $filenameFallback A string containing only ASCII characters that
      *                                 is semantically equivalent to $filename. If the filename is already ASCII,
      *                                 it can be omitted, or just copied from $filename
@@ -325,7 +325,7 @@ class ResponseHeaderBag extends HeaderBag
 
         // public if s-maxage is defined, private otherwise
         if (!isset($this->cacheControl['s-maxage'])) {
-            return $header.', private';
+            return $header . ', private';
         }
 
         return $header;
@@ -335,6 +335,6 @@ class ResponseHeaderBag extends HeaderBag
     {
         $now = \DateTime::createFromFormat('U', time());
         $now->setTimezone(new \DateTimeZone('UTC'));
-        $this->set('Date', $now->format('D, d M Y H:i:s').' GMT');
+        $this->set('Date', $now->format('D, d M Y H:i:s') . ' GMT');
     }
 }

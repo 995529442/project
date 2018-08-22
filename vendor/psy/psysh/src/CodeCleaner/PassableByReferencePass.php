@@ -42,7 +42,7 @@ class PassableByReferencePass extends CodeCleanerPass
                 return;
             }
 
-            $name = (string) $node->name;
+            $name = (string)$node->name;
 
             if ($name === 'array_multisort') {
                 return $this->validateArrayMultisort($node);

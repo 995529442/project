@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util\TestDox;
 
 /**
@@ -28,7 +29,7 @@ class TextResultPrinter extends ResultPrinter
      * Handler for 'on test' event.
      *
      * @param string $name
-     * @param bool   $success
+     * @param bool $success
      */
     protected function onTest($name, $success = true)
     {

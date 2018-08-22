@@ -98,11 +98,11 @@ class EntityPopulator
                     $foreignKeys = $insertedEntities[$foreignModel];
                 } else {
                     $foreignKeys = $table->find('all')
-                    ->select(['id'])
-                    ->map(function ($row) {
-                        return $row->id;
-                    })
-                    ->toArray();
+                        ->select(['id'])
+                        ->map(function ($row) {
+                            return $row->id;
+                        })
+                        ->toArray();
                 }
 
                 if (empty($foreignKeys)) {

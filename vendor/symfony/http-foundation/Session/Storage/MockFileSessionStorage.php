@@ -27,9 +27,9 @@ class MockFileSessionStorage extends MockArraySessionStorage
     private $savePath;
 
     /**
-     * @param string      $savePath Path of directory to save session files
-     * @param string      $name     Session name
-     * @param MetadataBag $metaBag  MetadataBag instance
+     * @param string $savePath Path of directory to save session files
+     * @param string $name Session name
+     * @param MetadataBag $metaBag MetadataBag instance
      */
     public function __construct($savePath = null, $name = 'MOCKSESSID', MetadataBag $metaBag = null)
     {
@@ -136,7 +136,7 @@ class MockFileSessionStorage extends MockArraySessionStorage
      */
     private function getFilePath()
     {
-        return $this->savePath.'/'.$this->id.'.mocksess';
+        return $this->savePath . '/' . $this->id . '.mocksess';
     }
 
     /**

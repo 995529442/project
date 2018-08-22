@@ -103,7 +103,7 @@ class Xdebug implements Driver
     {
         if (!isset($this->cacheNumLines[$file])) {
             $buffer = \file_get_contents($file);
-            $lines  = \substr_count($buffer, "\n");
+            $lines = \substr_count($buffer, "\n");
 
             if (\substr($buffer, -1) !== "\n") {
                 $lines++;

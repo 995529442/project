@@ -17,8 +17,8 @@ class CreateCaterDeskTable extends Migration
             $table->engine = 'InnoDb';
             $table->increments('id');
             $table->integer('admin_id')->index()->comment("关联admins表");
-            $table->string('name',20)->default('')->comment("桌号");
-            $table->string('img_path',50)->default('')->comment("二维码路径");
+            $table->string('name', 20)->default('')->comment("桌号");
+            $table->string('img_path', 50)->default('')->comment("二维码路径");
             $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");
             $table->timestamps();
         });

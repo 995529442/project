@@ -22,11 +22,11 @@ class FileProfilerStorageTest extends TestCase
 
     protected function setUp()
     {
-        $this->tmpDir = sys_get_temp_dir().'/sf2_profiler_file_storage';
+        $this->tmpDir = sys_get_temp_dir() . '/sf2_profiler_file_storage';
         if (is_dir($this->tmpDir)) {
             self::cleanDir();
         }
-        $this->storage = new FileProfilerStorage('file:'.$this->tmpDir);
+        $this->storage = new FileProfilerStorage('file:' . $this->tmpDir);
         $this->storage->purge();
     }
 
@@ -38,7 +38,7 @@ class FileProfilerStorageTest extends TestCase
     public function testStore()
     {
         for ($i = 0; $i < 10; ++$i) {
-            $profile = new Profile('token_'.$i);
+            $profile = new Profile('token_' . $i);
             $profile->setIp('127.0.0.1');
             $profile->setUrl('http://foo.bar');
             $profile->setMethod('GET');
@@ -195,7 +195,7 @@ class FileProfilerStorageTest extends TestCase
 
         for ($i = 0; $i < 3; ++$i) {
             $dt->modify('+1 minute');
-            $profile = new Profile('time_'.$i);
+            $profile = new Profile('time_' . $i);
             $profile->setIp('127.0.0.1');
             $profile->setUrl('http://foo.bar');
             $profile->setTime($dt->getTimestamp());
@@ -216,7 +216,7 @@ class FileProfilerStorageTest extends TestCase
     public function testRetrieveByEmptyUrlAndIp()
     {
         for ($i = 0; $i < 5; ++$i) {
-            $profile = new Profile('token_'.$i);
+            $profile = new Profile('token_' . $i);
             $profile->setMethod('GET');
             $this->storage->write($profile);
         }
@@ -228,7 +228,7 @@ class FileProfilerStorageTest extends TestCase
     {
         foreach (array('POST', 'GET') as $method) {
             for ($i = 0; $i < 5; ++$i) {
-                $profile = new Profile('token_'.$i.$method);
+                $profile = new Profile('token_' . $i . $method);
                 $profile->setMethod($method);
                 $this->storage->write($profile);
             }
@@ -268,7 +268,7 @@ class FileProfilerStorageTest extends TestCase
     public function testDuplicates()
     {
         for ($i = 1; $i <= 5; ++$i) {
-            $profile = new Profile('foo'.$i);
+            $profile = new Profile('foo' . $i);
             $profile->setIp('127.0.0.1');
             $profile->setUrl('http://example.net/');
             $profile->setMethod('GET');
@@ -301,21 +301,21 @@ class FileProfilerStorageTest extends TestCase
     {
         $iteration = 3;
         for ($i = 0; $i < $iteration; ++$i) {
-            $profile = new Profile('token'.$i);
-            $profile->setIp('127.0.0.'.$i);
-            $profile->setUrl('http://foo.bar/'.$i);
+            $profile = new Profile('token' . $i);
+            $profile->setIp('127.0.0.' . $i);
+            $profile->setUrl('http://foo.bar/' . $i);
 
             $this->storage->write($profile);
             $this->storage->write($profile);
             $this->storage->write($profile);
         }
 
-        $handle = fopen($this->tmpDir.'/index.csv', 'r');
+        $handle = fopen($this->tmpDir . '/index.csv', 'r');
         for ($i = 0; $i < $iteration; ++$i) {
             $row = fgetcsv($handle);
-            $this->assertEquals('token'.$i, $row[0]);
-            $this->assertEquals('127.0.0.'.$i, $row[1]);
-            $this->assertEquals('http://foo.bar/'.$i, $row[3]);
+            $this->assertEquals('token' . $i, $row[0]);
+            $this->assertEquals('127.0.0.' . $i, $row[1]);
+            $this->assertEquals('http://foo.bar/' . $i, $row[3]);
         }
         $this->assertFalse(fgetcsv($handle));
     }

@@ -240,9 +240,9 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
     {
         $dialog = new QuestionHelper();
 
-        $inputStream = $this->getInputStream($question."\n");
+        $inputStream = $this->getInputStream($question . "\n");
         $question = new ConfirmationQuestion('Do you like French fries?', $default);
-        $this->assertEquals($expected, $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(), $question), 'confirmation question should '.($expected ? 'pass' : 'cancel'));
+        $this->assertEquals($expected, $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(), $question), 'confirmation question should ' . ($expected ? 'pass' : 'cancel'));
     }
 
     public function getAskConfirmationData()
@@ -316,7 +316,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
 
         $question = new ChoiceQuestion('Please select the environment to load', $possibleChoices);
         $question->setMaxAttempts(1);
-        $answer = $dialog->ask($this->createStreamableInputInterfaceMock($this->getInputStream($providedAnswer."\n")), $this->createOutputInterface(), $question);
+        $answer = $dialog->ask($this->createStreamableInputInterfaceMock($this->getInputStream($providedAnswer . "\n")), $this->createOutputInterface(), $question);
 
         $this->assertSame($expectedValue, $answer);
     }
@@ -344,7 +344,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
         );
 
         $dialog = new QuestionHelper();
-        $inputStream = $this->getInputStream($providedAnswer."\n");
+        $inputStream = $this->getInputStream($providedAnswer . "\n");
         $helperSet = new HelperSet(array(new FormatterHelper()));
         $dialog->setHelperSet($helperSet);
 
@@ -382,7 +382,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
 
         $question = new ChoiceQuestion('Please select the environment to load', $possibleChoices);
         $question->setMaxAttempts(1);
-        $answer = $dialog->ask($this->createStreamableInputInterfaceMock($this->getInputStream($providedAnswer."\n")), $this->createOutputInterface(), $question);
+        $answer = $dialog->ask($this->createStreamableInputInterfaceMock($this->getInputStream($providedAnswer . "\n")), $this->createOutputInterface(), $question);
 
         $this->assertSame($expectedValue, $answer);
     }
@@ -416,7 +416,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
 
         $question = new ChoiceQuestion('Please select the environment to load', $possibleChoices);
         $question->setMaxAttempts(1);
-        $answer = $dialog->ask($this->createStreamableInputInterfaceMock($this->getInputStream($providedAnswer."\n")), $this->createOutputInterface(), $question);
+        $answer = $dialog->ask($this->createStreamableInputInterfaceMock($this->getInputStream($providedAnswer . "\n")), $this->createOutputInterface(), $question);
 
         $this->assertSame($expectedValue, $answer);
     }
@@ -658,9 +658,9 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
     {
         $dialog = new QuestionHelper();
 
-        $dialog->setInputStream($this->getInputStream($question."\n"));
+        $dialog->setInputStream($this->getInputStream($question . "\n"));
         $question = new ConfirmationQuestion('Do you like French fries?', $default);
-        $this->assertEquals($expected, $dialog->ask($this->createInputInterfaceMock(), $this->createOutputInterface(), $question), 'confirmation question should '.($expected ? 'pass' : 'cancel'));
+        $this->assertEquals($expected, $dialog->ask($this->createInputInterfaceMock(), $this->createOutputInterface(), $question), 'confirmation question should ' . ($expected ? 'pass' : 'cancel'));
     }
 
     /**
@@ -725,7 +725,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
         );
 
         $dialog = new QuestionHelper();
-        $dialog->setInputStream($this->getInputStream($providedAnswer."\n"));
+        $dialog->setInputStream($this->getInputStream($providedAnswer . "\n"));
         $helperSet = new HelperSet(array(new FormatterHelper()));
         $dialog->setHelperSet($helperSet);
 
@@ -750,7 +750,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
         );
 
         $dialog = new QuestionHelper();
-        $dialog->setInputStream($this->getInputStream($providedAnswer."\n"));
+        $dialog->setInputStream($this->getInputStream($providedAnswer . "\n"));
         $helperSet = new HelperSet(array(new FormatterHelper()));
         $dialog->setHelperSet($helperSet);
 
@@ -774,7 +774,7 @@ class QuestionHelperTest extends AbstractQuestionHelperTest
         );
 
         $dialog = new QuestionHelper();
-        $dialog->setInputStream($this->getInputStream($providedAnswer."\n"));
+        $dialog->setInputStream($this->getInputStream($providedAnswer . "\n"));
         $helperSet = new HelperSet(array(new FormatterHelper()));
         $dialog->setHelperSet($helperSet);
 

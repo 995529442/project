@@ -112,8 +112,8 @@ class Address extends \Faker\Provider\Address
         'Tadzsikisztán', 'Tanzánia', 'Thaiföld', 'Togo', 'Tonga', 'Trinidad és Tobago', 'Tunézia', 'Tuvalu', 'Törökország', 'Türkmenisztán',
         'Uganda', 'Ukrajna', 'Uruguay',
         'Vanuatu', 'Venezuela', 'Vietnám',
-         'Zambia', 'Zimbabwe', 'Zöld-foki-szigetek',
-         'Észak-Korea', 'Észtország', 'Írország', 'Örményország', 'Új-Zéland', 'Üzbegisztán'
+        'Zambia', 'Zimbabwe', 'Zöld-foki-szigetek',
+        'Észak-Korea', 'Észtország', 'Írország', 'Örményország', 'Új-Zéland', 'Üzbegisztán'
     );
 
     /**

@@ -120,7 +120,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
     {
         $this->privateKey = $privateKey;
         $this->domainName = $domainName;
-        $this->signerIdentity = '@'.$domainName;
+        $this->signerIdentity = '@' . $domainName;
         $this->selector = $selector;
     }
 
@@ -294,7 +294,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
      */
     public function setDebugHeaders($debug)
     {
-        $this->debugHeaders = (bool) $debug;
+        $this->debugHeaders = (bool)$debug;
 
         return $this;
     }
@@ -387,7 +387,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
         $params = array('a' => $this->hashAlgorithm, 'b' => chunk_split(base64_encode($this->getEncryptedHash()), 73, ' '), 'c' => $this->canon, 'd' => $this->domainName, 'h' => implode(': ', $this->signedHeaders), 'q' => 'dns', 's' => $this->selector);
         $string = '';
         foreach ($params as $k => $v) {
-            $string .= $k.'='.$v.'; ';
+            $string .= $k . '=' . $v . '; ';
         }
         $string = trim($string);
         $headers->addTextHeader('DomainKey-Signature', $string);
@@ -406,7 +406,7 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
                 $name = strtolower(trim($exploded[0]));
                 $value = str_replace("\r\n", '', $exploded[1]);
                 $value = preg_replace("/[ \t][ \t]+/", ' ', $value);
-                $header = $name.':'.trim($value)."\r\n";
+                $header = $name . ':' . trim($value) . "\r\n";
             case 'simple':
                 // Nothing to do
         }
@@ -502,11 +502,11 @@ class Swift_Signers_DomainKeySigner implements Swift_Signers_HeaderSigner
         $signature = '';
         $pkeyId = openssl_get_privatekey($this->privateKey);
         if (!$pkeyId) {
-            throw new Swift_SwiftException('Unable to load DomainKey Private Key ['.openssl_error_string().']');
+            throw new Swift_SwiftException('Unable to load DomainKey Private Key [' . openssl_error_string() . ']');
         }
         if (openssl_sign($this->canonData, $signature, $pkeyId, OPENSSL_ALGO_SHA1)) {
             return $signature;
         }
-        throw new Swift_SwiftException('Unable to sign DomainKey Hash  ['.openssl_error_string().']');
+        throw new Swift_SwiftException('Unable to sign DomainKey Hash  [' . openssl_error_string() . ']');
     }
 }

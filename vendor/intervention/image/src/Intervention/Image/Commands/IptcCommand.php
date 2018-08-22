@@ -12,7 +12,7 @@ class IptcCommand extends AbstractCommand
      */
     public function execute($image)
     {
-        if ( ! function_exists('iptcparse')) {
+        if (!function_exists('iptcparse')) {
             throw new \Intervention\Image\Exception\NotSupportedException(
                 "Reading Iptc data is not supported by this PHP installation."
             );
@@ -21,7 +21,7 @@ class IptcCommand extends AbstractCommand
         $key = $this->argument(0)->value();
 
         $info = [];
-        @getimagesize($image->dirname .'/'. $image->basename, $info);
+        @getimagesize($image->dirname . '/' . $image->basename, $info);
 
         $data = [];
 
@@ -53,7 +53,7 @@ class IptcCommand extends AbstractCommand
             }
         }
 
-        if (! is_null($key) && is_array($data)) {
+        if (!is_null($key) && is_array($data)) {
             $data = array_key_exists($key, $data) ? $data[$key] : false;
         }
 

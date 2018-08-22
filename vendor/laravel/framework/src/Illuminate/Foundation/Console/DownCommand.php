@@ -62,6 +62,6 @@ class DownCommand extends Command
     {
         $retry = $this->option('retry');
 
-        return is_numeric($retry) && $retry > 0 ? (int) $retry : null;
+        return is_numeric($retry) && $retry > 0 ? (int)$retry : null;
     }
 }

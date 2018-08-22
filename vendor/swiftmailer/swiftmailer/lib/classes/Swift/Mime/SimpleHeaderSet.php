@@ -34,7 +34,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      * Create a new SimpleHeaderSet with the given $factory.
      *
      * @param Swift_Mime_SimpleHeaderFactory $factory
-     * @param string                         $charset
+     * @param string $charset
      */
     public function __construct(Swift_Mime_SimpleHeaderFactory $factory, $charset = null)
     {
@@ -64,25 +64,25 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
     /**
      * Add a new Mailbox Header with a list of $addresses.
      *
-     * @param string       $name
+     * @param string $name
      * @param array|string $addresses
      */
     public function addMailboxHeader($name, $addresses = null)
     {
         $this->storeHeader($name,
-        $this->factory->createMailboxHeader($name, $addresses));
+            $this->factory->createMailboxHeader($name, $addresses));
     }
 
     /**
      * Add a new Date header using $dateTime.
      *
-     * @param string            $name
+     * @param string $name
      * @param DateTimeInterface $dateTime
      */
     public function addDateHeader($name, DateTimeInterface $dateTime = null)
     {
         $this->storeHeader($name,
-        $this->factory->createDateHeader($name, $dateTime));
+            $this->factory->createDateHeader($name, $dateTime));
     }
 
     /**
@@ -94,7 +94,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
     public function addTextHeader($name, $value = null)
     {
         $this->storeHeader($name,
-        $this->factory->createTextHeader($name, $value));
+            $this->factory->createTextHeader($name, $value));
     }
 
     /**
@@ -102,7 +102,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      *
      * @param string $name
      * @param string $value
-     * @param array  $params
+     * @param array $params
      */
     public function addParameterizedHeader($name, $value = null, $params = array())
     {
@@ -112,7 +112,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
     /**
      * Add a new ID header for Message-ID or Content-ID.
      *
-     * @param string       $name
+     * @param string $name
      * @param string|array $ids
      */
     public function addIdHeader($name, $ids = null)
@@ -137,7 +137,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      * If multiple headers match, the actual one may be specified by $index.
      *
      * @param string $name
-     * @param int    $index
+     * @param int $index
      *
      * @return bool
      */
@@ -151,7 +151,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
 
         if (func_num_args() < 2) {
             // index was not specified, so we only need to check that there is at least one header value set
-            return (bool) count($this->headers[$lowerName]);
+            return (bool)count($this->headers[$lowerName]);
         }
 
         return array_key_exists($index, $this->headers[$lowerName]);
@@ -167,7 +167,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      * offset.
      *
      * @param Swift_Mime_Header $header
-     * @param int               $index
+     * @param int $index
      */
     public function set(Swift_Mime_Header $header, $index = 0)
     {
@@ -181,7 +181,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      * Returns NULL if none present.
      *
      * @param string $name
-     * @param int    $index
+     * @param int $index
      *
      * @return Swift_Mime_Header
      */
@@ -249,7 +249,7 @@ class Swift_Mime_SimpleHeaderSet implements Swift_Mime_CharsetObserver
      * If multiple headers match, the actual one may be specified by $index.
      *
      * @param string $name
-     * @param int    $index
+     * @param int $index
      */
     public function remove($name, $index = 0)
     {

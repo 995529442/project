@@ -12,8 +12,8 @@ namespace SebastianBergmann\Diff;
 
 final class Line
 {
-    const ADDED     = 1;
-    const REMOVED   = 2;
+    const ADDED = 1;
+    const REMOVED = 2;
     const UNCHANGED = 3;
 
     /**
@@ -28,7 +28,7 @@ final class Line
 
     public function __construct(int $type = self::UNCHANGED, string $content = '')
     {
-        $this->type    = $type;
+        $this->type = $type;
         $this->content = $content;
     }
 

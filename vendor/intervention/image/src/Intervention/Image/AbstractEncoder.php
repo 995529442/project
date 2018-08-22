@@ -31,7 +31,7 @@ abstract class AbstractEncoder
      * @var integer
      */
     public $quality;
-    
+
     /**
      * Processes and returns encoded image as JPEG string
      *
@@ -84,8 +84,8 @@ abstract class AbstractEncoder
     /**
      * Process a given image
      *
-     * @param  Image   $image
-     * @param  string  $format
+     * @param  Image $image
+     * @param  string $format
      * @param  integer $quality
      * @return Image
      */
@@ -158,7 +158,7 @@ abstract class AbstractEncoder
             case 'image/x-webp':
                 $this->result = $this->processWebp();
                 break;
-                
+
             default:
                 throw new \Intervention\Image\Exception\NotSupportedException(
                     "Encoding format ({$format}) is not supported."

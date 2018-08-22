@@ -16,7 +16,7 @@ class AlterTypeCurrencyLogTable extends Migration
         Schema::table('cater_currency_log', function (Blueprint $table) {
             $table->tinyInteger('type')->defalut('0')->comment("类型 1为增加 2为减少");
             $table->decimal('currency_money', 8, 2)->default('0.00')->comment("金额");
-        });  
+        });
     }
 
     /**

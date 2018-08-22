@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework;
 
 use SebastianBergmann\Comparator\ComparisonFailure;
@@ -23,9 +24,9 @@ class ExpectationFailedException extends AssertionFailedError
     protected $comparisonFailure;
 
     /**
-     * @param string                 $message
+     * @param string $message
      * @param ComparisonFailure|null $comparisonFailure
-     * @param \Exception|null        $previous
+     * @param \Exception|null $previous
      */
     public function __construct($message, ComparisonFailure $comparisonFailure = null, \Exception $previous = null)
     {

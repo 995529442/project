@@ -225,15 +225,15 @@ class TestResult implements Countable
     /**
      * Adds an error to the list of errors.
      *
-     * @param Test      $test
+     * @param Test $test
      * @param Throwable $t
-     * @param float     $time
+     * @param float $time
      */
     public function addError(Test $test, Throwable $t, $time)
     {
         if ($t instanceof RiskyTest) {
             $this->risky[] = new TestFailure($test, $t);
-            $notifyMethod  = 'addRiskyTest';
+            $notifyMethod = 'addRiskyTest';
 
             if ($test instanceof TestCase) {
                 $test->markAsRisky();
@@ -244,21 +244,21 @@ class TestResult implements Countable
             }
         } elseif ($t instanceof IncompleteTest) {
             $this->notImplemented[] = new TestFailure($test, $t);
-            $notifyMethod           = 'addIncompleteTest';
+            $notifyMethod = 'addIncompleteTest';
 
             if ($this->stopOnIncomplete) {
                 $this->stop();
             }
         } elseif ($t instanceof SkippedTest) {
             $this->skipped[] = new TestFailure($test, $t);
-            $notifyMethod    = 'addSkippedTest';
+            $notifyMethod = 'addSkippedTest';
 
             if ($this->stopOnSkipped) {
                 $this->stop();
             }
         } else {
             $this->errors[] = new TestFailure($test, $t);
-            $notifyMethod   = 'addError';
+            $notifyMethod = 'addError';
 
             if ($this->stopOnError || $this->stopOnFailure) {
                 $this->stop();
@@ -282,9 +282,9 @@ class TestResult implements Countable
      * Adds a warning to the list of warnings.
      * The passed in exception caused the warning.
      *
-     * @param Test    $test
+     * @param Test $test
      * @param Warning $e
-     * @param float   $time
+     * @param float $time
      */
     public function addWarning(Test $test, Warning $e, $time)
     {
@@ -305,15 +305,15 @@ class TestResult implements Countable
      * Adds a failure to the list of failures.
      * The passed in exception caused the failure.
      *
-     * @param Test                 $test
+     * @param Test $test
      * @param AssertionFailedError $e
-     * @param float                $time
+     * @param float $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
         if ($e instanceof RiskyTest || $e instanceof OutputError) {
             $this->risky[] = new TestFailure($test, $e);
-            $notifyMethod  = 'addRiskyTest';
+            $notifyMethod = 'addRiskyTest';
 
             if ($test instanceof TestCase) {
                 $test->markAsRisky();
@@ -324,21 +324,21 @@ class TestResult implements Countable
             }
         } elseif ($e instanceof IncompleteTest) {
             $this->notImplemented[] = new TestFailure($test, $e);
-            $notifyMethod           = 'addIncompleteTest';
+            $notifyMethod = 'addIncompleteTest';
 
             if ($this->stopOnIncomplete) {
                 $this->stop();
             }
         } elseif ($e instanceof SkippedTest) {
             $this->skipped[] = new TestFailure($test, $e);
-            $notifyMethod    = 'addSkippedTest';
+            $notifyMethod = 'addSkippedTest';
 
             if ($this->stopOnSkipped) {
                 $this->stop();
             }
         } else {
             $this->failures[] = new TestFailure($test, $e);
-            $notifyMethod     = 'addFailure';
+            $notifyMethod = 'addFailure';
 
             if ($this->stopOnFailure) {
                 $this->stop();
@@ -399,7 +399,7 @@ class TestResult implements Countable
     /**
      * Informs the result that a test was completed.
      *
-     * @param Test  $test
+     * @param Test $test
      * @param float $time
      */
     public function endTest(Test $test, $time)
@@ -410,11 +410,11 @@ class TestResult implements Countable
 
         if (!$this->lastTestFailed && $test instanceof TestCase) {
             $class = \get_class($test);
-            $key   = $class . '::' . $test->getName();
+            $key = $class . '::' . $test->getName();
 
             $this->passed[$key] = [
                 'result' => $test->getResult(),
-                'size'   => \PHPUnit\Util\Test::getSize(
+                'size' => \PHPUnit\Util\Test::getSize(
                     $class,
                     $test->getName(false)
                 )
@@ -627,12 +627,12 @@ class TestResult implements Countable
             }
         }
 
-        $error      = false;
-        $failure    = false;
-        $warning    = false;
+        $error = false;
+        $failure = false;
+        $warning = false;
         $incomplete = false;
-        $risky      = false;
-        $skipped    = false;
+        $risky = false;
+        $skipped = false;
 
         $this->startTest($test);
 
@@ -652,8 +652,8 @@ class TestResult implements Countable
         }
 
         $collectCodeCoverage = $this->codeCoverage !== null &&
-                               !$test instanceof WarningTestCase &&
-                               !$coversNothing;
+            !$test instanceof WarningTestCase &&
+            !$coversNothing;
 
         if ($collectCodeCoverage) {
             $this->codeCoverage->start($test);
@@ -727,7 +727,7 @@ class TestResult implements Countable
             $test->addToAssertionCount(1);
 
             $failure = true;
-            $frame   = $e->getTrace()[0];
+            $frame = $e->getTrace()[0];
 
             $e = new AssertionFailedError(
                 \sprintf(
@@ -742,7 +742,7 @@ class TestResult implements Countable
         } catch (Exception $e) {
             $error = true;
         } catch (Throwable $e) {
-            $e     = new ExceptionWrapper($e);
+            $e = new ExceptionWrapper($e);
             $error = true;
         }
 
@@ -778,9 +778,9 @@ class TestResult implements Countable
         }
 
         if ($collectCodeCoverage) {
-            $append           = !$risky && !$incomplete && !$skipped;
+            $append = !$risky && !$incomplete && !$skipped;
             $linesToBeCovered = [];
-            $linesToBeUsed    = [];
+            $linesToBeUsed = [];
 
             if ($append && $test instanceof TestCase) {
                 try {
@@ -1269,7 +1269,7 @@ class TestResult implements Countable
      * Returns the class hierarchy for a given class.
      *
      * @param string $className
-     * @param bool   $asReflectionObjects
+     * @param bool $asReflectionObjects
      *
      * @return array
      */

@@ -225,10 +225,10 @@ class Inspector
     protected function getFrameFromException($exception)
     {
         return [
-            'file'  => $exception->getFile(),
-            'line'  => $exception->getLine(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
             'class' => get_class($exception),
-            'args'  => [
+            'args' => [
                 $exception->getMessage(),
             ],
         ];
@@ -243,10 +243,10 @@ class Inspector
     protected function getFrameFromError(ErrorException $exception)
     {
         return [
-            'file'  => $exception->getFile(),
-            'line'  => $exception->getLine(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
             'class' => null,
-            'args'  => [],
+            'args' => [],
         ];
     }
 

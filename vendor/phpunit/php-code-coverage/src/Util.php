@@ -18,8 +18,8 @@ class Util
     /**
      * @param float $a
      * @param float $b
-     * @param bool  $asString
-     * @param bool  $fixedWidth
+     * @param bool $asString
+     * @param bool $fixedWidth
      *
      * @return float|int|string
      */

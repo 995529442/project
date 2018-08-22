@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 use PHPUnit\Framework\TestCase;
 
 class RequirementsTest extends TestCase
@@ -416,6 +417,7 @@ class RequirementsTest extends TestCase
     public function testVersionConstraintTildeOrCaret()
     {
     }
+
     /**
      * @requires PHP ^5.6 || ~7.0.17
      * @requires PHPUnit ^5.6 || ~7.0.17
@@ -438,6 +440,7 @@ class RequirementsTest extends TestCase
     public function testVersionConstraintInvalidPhpConstraint()
     {
     }
+
     /**
      * @requires   PHPUnit ~^12345
      */

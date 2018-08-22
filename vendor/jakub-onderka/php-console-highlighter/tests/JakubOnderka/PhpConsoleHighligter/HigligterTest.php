@@ -1,4 +1,5 @@
 <?php
+
 namespace JakubOnderka\PhpConsoleHighlighter;
 
 class HighlighterTest extends \PHPUnit_Framework_TestCase

@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class FailureTest extends TestCase
@@ -15,10 +16,10 @@ class FailureTest extends TestCase
 
     public function testAssertObjectEqualsObject()
     {
-        $a      = new stdClass;
+        $a = new stdClass;
         $a->foo = 'bar';
 
-        $b      = new stdClass;
+        $b = new stdClass;
         $b->bar = 'foo';
 
         $this->assertEquals($a, $b, 'message');

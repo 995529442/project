@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework\MockObject;
 
 use Doctrine\Instantiator\Exception\ExceptionInterface as InstantiatorException;
@@ -41,15 +42,15 @@ class Generator
      * @var array
      */
     private $blacklistedMethodNames = [
-        '__CLASS__'       => true,
-        '__DIR__'         => true,
-        '__FILE__'        => true,
-        '__FUNCTION__'    => true,
-        '__LINE__'        => true,
-        '__METHOD__'      => true,
-        '__NAMESPACE__'   => true,
-        '__TRAIT__'       => true,
-        '__clone'         => true,
+        '__CLASS__' => true,
+        '__DIR__' => true,
+        '__FILE__' => true,
+        '__FUNCTION__' => true,
+        '__LINE__' => true,
+        '__METHOD__' => true,
+        '__NAMESPACE__' => true,
+        '__TRAIT__' => true,
+        '__clone' => true,
         '__halt_compiler' => true,
     ];
 
@@ -57,16 +58,16 @@ class Generator
      * Returns a mock object for the specified class.
      *
      * @param string|string[] $type
-     * @param array           $methods
-     * @param array           $arguments
-     * @param string          $mockClassName
-     * @param bool            $callOriginalConstructor
-     * @param bool            $callOriginalClone
-     * @param bool            $callAutoload
-     * @param bool            $cloneArguments
-     * @param bool            $callOriginalMethods
-     * @param object          $proxyTarget
-     * @param bool            $allowMockingUnknownTypes
+     * @param array $methods
+     * @param array $arguments
+     * @param string $mockClassName
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param bool $cloneArguments
+     * @param bool $callOriginalMethods
+     * @param object $proxyTarget
+     * @param bool $allowMockingUnknownTypes
      *
      * @return MockObject
      *
@@ -202,14 +203,14 @@ class Generator
     }
 
     /**
-     * @param string       $code
-     * @param string       $className
+     * @param string $code
+     * @param string $className
      * @param array|string $type
-     * @param bool         $callOriginalConstructor
-     * @param bool         $callAutoload
-     * @param array        $arguments
-     * @param bool         $callOriginalMethods
-     * @param object       $proxyTarget
+     * @param bool $callOriginalConstructor
+     * @param bool $callAutoload
+     * @param array $arguments
+     * @param bool $callOriginalMethods
+     * @param object $proxyTarget
      *
      * @return MockObject
      *
@@ -226,13 +227,13 @@ class Generator
             if (\count($arguments) === 0) {
                 $object = new $className;
             } else {
-                $class  = new ReflectionClass($className);
+                $class = new ReflectionClass($className);
                 $object = $class->newInstanceArgs($arguments);
             }
         } else {
             try {
                 $instantiator = new Instantiator;
-                $object       = $instantiator->instantiate($className);
+                $object = $instantiator->instantiate($className);
             } catch (InstantiatorException $exception) {
                 throw new RuntimeException($exception->getMessage());
             }
@@ -243,7 +244,7 @@ class Generator
                 if (\count($arguments) === 0) {
                     $proxyTarget = new $type;
                 } else {
-                    $class       = new ReflectionClass($type);
+                    $class = new ReflectionClass($type);
                     $proxyTarget = $class->newInstanceArgs($arguments);
                 }
             }
@@ -271,13 +272,13 @@ class Generator
      * the last parameter
      *
      * @param string $originalClassName
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $mockClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
-     * @param array  $mockedMethods
-     * @param bool   $cloneArguments
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param array $mockedMethods
+     * @param bool $cloneArguments
      *
      * @return MockObject
      *
@@ -298,7 +299,7 @@ class Generator
         if (\class_exists($originalClassName, $callAutoload) ||
             \interface_exists($originalClassName, $callAutoload)) {
             $reflector = new ReflectionClass($originalClassName);
-            $methods   = $mockedMethods;
+            $methods = $mockedMethods;
 
             foreach ($reflector->getMethods() as $method) {
                 if ($method->isAbstract() && !\in_array($method->getName(), $methods)) {
@@ -333,13 +334,13 @@ class Generator
      * `$mockedMethods` parameter.
      *
      * @param string $traitName
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $mockClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
-     * @param array  $mockedMethods
-     * @param bool   $cloneArguments
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param array $mockedMethods
+     * @param bool $cloneArguments
      *
      * @return MockObject
      *
@@ -376,7 +377,7 @@ class Generator
 
         $classTemplate->setVar(
             [
-                'prologue'   => 'abstract ',
+                'prologue' => 'abstract ',
                 'class_name' => $className['className'],
                 'trait_name' => $traitName
             ]
@@ -394,11 +395,11 @@ class Generator
      * Returns an object for the specified trait.
      *
      * @param string $traitName
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $traitClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
      *
      * @return object
      *
@@ -435,7 +436,7 @@ class Generator
 
         $classTemplate->setVar(
             [
-                'prologue'   => '',
+                'prologue' => '',
                 'class_name' => $className['className'],
                 'trait_name' => $traitName
             ]
@@ -446,12 +447,12 @@ class Generator
 
     /**
      * @param array|string $type
-     * @param array        $methods
-     * @param string       $mockClassName
-     * @param bool         $callOriginalClone
-     * @param bool         $callAutoload
-     * @param bool         $cloneArguments
-     * @param bool         $callOriginalMethods
+     * @param array $methods
+     * @param string $mockClassName
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param bool $cloneArguments
+     * @param bool $callOriginalMethods
      *
      * @return array
      *
@@ -467,10 +468,10 @@ class Generator
         if ($mockClassName === '') {
             $key = \md5(
                 \is_array($type) ? \implode('_', $type) : $type .
-                \serialize($methods) .
-                \serialize($callOriginalClone) .
-                \serialize($cloneArguments) .
-                \serialize($callOriginalMethods)
+                    \serialize($methods) .
+                    \serialize($callOriginalClone) .
+                    \serialize($cloneArguments) .
+                    \serialize($callOriginalMethods)
             );
 
             if (isset(self::$cache[$key])) {
@@ -498,8 +499,8 @@ class Generator
     /**
      * @param string $wsdlFile
      * @param string $className
-     * @param array  $methods
-     * @param array  $options
+     * @param array $methods
+     * @param array $options
      *
      * @return string
      *
@@ -513,23 +514,23 @@ class Generator
             );
         }
 
-        $options  = \array_merge($options, ['cache_wsdl' => WSDL_CACHE_NONE]);
-        $client   = new SoapClient($wsdlFile, $options);
+        $options = \array_merge($options, ['cache_wsdl' => WSDL_CACHE_NONE]);
+        $client = new SoapClient($wsdlFile, $options);
         $_methods = \array_unique($client->__getFunctions());
         unset($client);
 
         \sort($_methods);
 
         $methodTemplate = $this->getTemplate('wsdl_method.tpl');
-        $methodsBuffer  = '';
+        $methodsBuffer = '';
 
         foreach ($_methods as $method) {
             $nameStart = \strpos($method, ' ') + 1;
-            $nameEnd   = \strpos($method, '(');
-            $name      = \substr($method, $nameStart, $nameEnd - $nameStart);
+            $nameEnd = \strpos($method, '(');
+            $name = \substr($method, $nameStart, $nameEnd - $nameStart);
 
             if (empty($methods) || \in_array($name, $methods)) {
-                $args    = \explode(
+                $args = \explode(
                     ',',
                     \substr(
                         $method,
@@ -545,7 +546,7 @@ class Generator
                 $methodTemplate->setVar(
                     [
                         'method_name' => $name,
-                        'arguments'   => \implode(', ', $args)
+                        'arguments' => \implode(', ', $args)
                     ]
                 );
 
@@ -562,21 +563,21 @@ class Generator
         $optionsBuffer .= ')';
 
         $classTemplate = $this->getTemplate('wsdl_class.tpl');
-        $namespace     = '';
+        $namespace = '';
 
         if (\strpos($className, '\\') !== false) {
-            $parts     = \explode('\\', $className);
+            $parts = \explode('\\', $className);
             $className = \array_pop($parts);
             $namespace = 'namespace ' . \implode('\\', $parts) . ';' . "\n\n";
         }
 
         $classTemplate->setVar(
             [
-                'namespace'  => $namespace,
+                'namespace' => $namespace,
                 'class_name' => $className,
-                'wsdl'       => $wsdlFile,
-                'options'    => $optionsBuffer,
-                'methods'    => $methodsBuffer
+                'wsdl' => $wsdlFile,
+                'options' => $optionsBuffer,
+                'methods' => $methodsBuffer
             ]
         );
 
@@ -585,12 +586,12 @@ class Generator
 
     /**
      * @param array|string $type
-     * @param array|null   $methods
-     * @param string       $mockClassName
-     * @param bool         $callOriginalClone
-     * @param bool         $callAutoload
-     * @param bool         $cloneArguments
-     * @param bool         $callOriginalMethods
+     * @param array|null $methods
+     * @param string $mockClassName
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param bool $cloneArguments
+     * @param bool $callOriginalMethods
      *
      * @return array
      *
@@ -600,13 +601,13 @@ class Generator
      */
     private function generateMock($type, $methods, $mockClassName, $callOriginalClone, $callAutoload, $cloneArguments, $callOriginalMethods)
     {
-        $methodReflections   = [];
-        $classTemplate       = $this->getTemplate('mocked_class.tpl');
+        $methodReflections = [];
+        $classTemplate = $this->getTemplate('mocked_class.tpl');
 
         $additionalInterfaces = [];
-        $cloneTemplate        = '';
-        $isClass              = false;
-        $isInterface          = false;
+        $cloneTemplate = '';
+        $isClass = false;
+        $isInterface = false;
         $isMultipleInterfaces = false;
 
         if (\is_array($type)) {
@@ -623,11 +624,11 @@ class Generator
                 $isMultipleInterfaces = true;
 
                 $additionalInterfaces[] = $_type;
-                $typeClass              = new ReflectionClass($this->generateClassName(
+                $typeClass = new ReflectionClass($this->generateClassName(
                     $_type,
                     $mockClassName,
                     'Mock_'
-                    )['fullClassName']
+                )['fullClassName']
                 );
 
                 foreach ($this->getClassMethods($_type) as $method) {
@@ -641,7 +642,7 @@ class Generator
                     }
 
                     $methodReflections[$method] = $typeClass->getMethod($method);
-                    $methods[]                  = $method;
+                    $methods[] = $method;
                 }
             }
         }
@@ -663,8 +664,8 @@ class Generator
 
             if (!empty($mockClassName['namespaceName'])) {
                 $prologue = 'namespace ' . $mockClassName['namespaceName'] .
-                            " {\n\n" . $prologue . "}\n\n" .
-                            "namespace {\n\n";
+                    " {\n\n" . $prologue . "}\n\n" .
+                    "namespace {\n\n";
 
                 $epilogue = "\n\n}";
             }
@@ -711,7 +712,7 @@ class Generator
         }
 
         $mockedMethods = '';
-        $configurable  = [];
+        $configurable = [];
 
         foreach ($methods as $methodName) {
             if ($methodName !== '__construct' && $methodName !== '__clone') {
@@ -725,7 +726,7 @@ class Generator
                 !$class->implementsInterface(Iterator::class) &&
                 !$class->implementsInterface(IteratorAggregate::class)) {
                 $additionalInterfaces[] = Iterator::class;
-                $methods                = \array_merge($methods, $this->getClassMethods(Iterator::class));
+                $methods = \array_merge($methods, $this->getClassMethods(Iterator::class));
             }
 
             foreach ($methods as $methodName) {
@@ -777,33 +778,33 @@ class Generator
 
         $classTemplate->setVar(
             [
-                'prologue'          => $prologue ?? '',
-                'epilogue'          => $epilogue ?? '',
+                'prologue' => $prologue ?? '',
+                'epilogue' => $epilogue ?? '',
                 'class_declaration' => $this->generateMockClassDeclaration(
                     $mockClassName,
                     $isInterface,
                     $additionalInterfaces
                 ),
-                'clone'             => $cloneTemplate,
-                'mock_class_name'   => $mockClassName['className'],
-                'mocked_methods'    => $mockedMethods,
-                'method'            => $method,
-                'configurable'      => '[' . \implode(', ', \array_map(function ($m) {
-                    return '\'' . $m . '\'';
-                }, $configurable)) . ']'
+                'clone' => $cloneTemplate,
+                'mock_class_name' => $mockClassName['className'],
+                'mocked_methods' => $mockedMethods,
+                'method' => $method,
+                'configurable' => '[' . \implode(', ', \array_map(function ($m) {
+                        return '\'' . $m . '\'';
+                    }, $configurable)) . ']'
             ]
         );
 
         return [
-          'code'          => $classTemplate->render(),
-          'mockClassName' => $mockClassName['className']
+            'code' => $classTemplate->render(),
+            'mockClassName' => $mockClassName['className']
         ];
     }
 
     /**
      * @param array|string $type
-     * @param string       $className
-     * @param string       $prefix
+     * @param string $className
+     * @param string $prefix
      *
      * @return array
      */
@@ -820,7 +821,7 @@ class Generator
         $classNameParts = \explode('\\', $type);
 
         if (\count($classNameParts) > 1) {
-            $type          = \array_pop($classNameParts);
+            $type = \array_pop($classNameParts);
             $namespaceName = \implode('\\', $classNameParts);
             $fullClassName = $namespaceName . '\\' . $type;
         } else {
@@ -831,21 +832,21 @@ class Generator
         if ($className === '') {
             do {
                 $className = $prefix . $type . '_' .
-                             \substr(\md5(\mt_rand()), 0, 8);
+                    \substr(\md5(\mt_rand()), 0, 8);
             } while (\class_exists($className, false));
         }
 
         return [
-          'className'         => $className,
-          'originalClassName' => $type,
-          'fullClassName'     => $fullClassName,
-          'namespaceName'     => $namespaceName
+            'className' => $className,
+            'originalClassName' => $type,
+            'fullClassName' => $fullClassName,
+            'namespaceName' => $namespaceName
         ];
     }
 
     /**
      * @param array $mockClassName
-     * @param bool  $isInterface
+     * @param bool $isInterface
      * @param array $additionalInterfaces
      *
      * @return string
@@ -855,7 +856,7 @@ class Generator
         $buffer = 'class ';
 
         $additionalInterfaces[] = MockObject::class;
-        $interfaces             = \implode(', ', $additionalInterfaces);
+        $interfaces = \implode(', ', $additionalInterfaces);
 
         if ($isInterface) {
             $buffer .= \sprintf(
@@ -888,8 +889,8 @@ class Generator
 
     /**
      * @param ReflectionMethod $method
-     * @param bool             $cloneArguments
-     * @param bool             $callOriginalMethods
+     * @param bool $cloneArguments
+     * @param bool $callOriginalMethods
      *
      * @return string
      *
@@ -916,7 +917,7 @@ class Generator
         }
 
         if ($method->hasReturnType()) {
-            $returnType = (string) $method->getReturnType();
+            $returnType = (string)$method->getReturnType();
         } else {
             $returnType = '';
         }
@@ -944,18 +945,18 @@ class Generator
     }
 
     /**
-     * @param string      $className
-     * @param string      $methodName
-     * @param bool        $cloneArguments
-     * @param string      $modifier
-     * @param string      $argumentsForDeclaration
-     * @param string      $argumentsForCall
-     * @param string      $returnType
-     * @param string      $reference
-     * @param bool        $callOriginalMethods
-     * @param bool        $static
+     * @param string $className
+     * @param string $methodName
+     * @param bool $cloneArguments
+     * @param string $modifier
+     * @param string $argumentsForDeclaration
+     * @param string $argumentsForCall
+     * @param string $returnType
+     * @param string $reference
+     * @param bool $callOriginalMethods
+     * @param bool $static
      * @param bool|string $deprecation
-     * @param bool        $allowsReturnNull
+     * @param bool $allowsReturnNull
      *
      * @return string
      *
@@ -987,7 +988,7 @@ class Generator
         }
 
         if (false !== $deprecation) {
-            $deprecation         = "The $className::$methodName method is deprecated ($deprecation).";
+            $deprecation = "The $className::$methodName method is deprecated ($deprecation).";
             $deprecationTemplate = $this->getTemplate('deprecation.tpl');
 
             $deprecationTemplate->setVar(
@@ -1003,17 +1004,17 @@ class Generator
 
         $template->setVar(
             [
-                'arguments_decl'  => $argumentsForDeclaration,
-                'arguments_call'  => $argumentsForCall,
-                'return_delim'    => $returnType ? ': ' : '',
-                'return_type'     => $allowsReturnNull ? '?' . $returnType : $returnType,
+                'arguments_decl' => $argumentsForDeclaration,
+                'arguments_call' => $argumentsForCall,
+                'return_delim' => $returnType ? ': ' : '',
+                'return_type' => $allowsReturnNull ? '?' . $returnType : $returnType,
                 'arguments_count' => !empty($argumentsForCall) ? \substr_count($argumentsForCall, ',') + 1 : 0,
-                'class_name'      => $className,
-                'method_name'     => $methodName,
-                'modifier'        => $modifier,
-                'reference'       => $reference,
+                'class_name' => $className,
+                'method_name' => $methodName,
+                'modifier' => $modifier,
+                'reference' => $reference,
                 'clone_arguments' => $cloneArguments ? 'true' : 'false',
-                'deprecation'     => $deprecation
+                'deprecation' => $deprecation
             ]
         );
 
@@ -1048,7 +1049,7 @@ class Generator
      * Returns the parameters of a function or method.
      *
      * @param ReflectionMethod $method
-     * @param bool             $forCall
+     * @param bool $forCall
      *
      * @return string
      *
@@ -1076,9 +1077,9 @@ class Generator
                 $name = '...' . $name;
             }
 
-            $nullable        = '';
-            $default         = '';
-            $reference       = '';
+            $nullable = '';
+            $default = '';
+            $reference = '';
             $typeDeclaration = '';
 
             if (!$forCall) {
@@ -1086,8 +1087,8 @@ class Generator
                     $nullable = '?';
                 }
 
-                if ($parameter->hasType() && (string) $parameter->getType() !== 'self') {
-                    $typeDeclaration = (string) $parameter->getType() . ' ';
+                if ($parameter->hasType() && (string)$parameter->getType() !== 'self') {
+                    $typeDeclaration = (string)$parameter->getType() . ' ';
                 } elseif ($parameter->isArray()) {
                     $typeDeclaration = 'array ';
                 } elseif ($parameter->isCallable()) {
@@ -1115,7 +1116,7 @@ class Generator
 
                 if (!$parameter->isVariadic()) {
                     if ($parameter->isDefaultValueAvailable()) {
-                        $value   = $parameter->getDefaultValue();
+                        $value = $parameter->getDefaultValue();
                         $default = ' = ' . \var_export($value, true);
                     } elseif ($parameter->isOptional()) {
                         $default = ' = null';
@@ -1142,7 +1143,7 @@ class Generator
      */
     public function getClassMethods($className)
     {
-        $class   = new ReflectionClass($className);
+        $class = new ReflectionClass($className);
         $methods = [];
 
         foreach ($class->getMethods() as $method) {

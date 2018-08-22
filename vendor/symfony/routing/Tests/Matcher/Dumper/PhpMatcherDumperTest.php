@@ -36,7 +36,7 @@ class PhpMatcherDumperTest extends TestCase
         parent::setUp();
 
         $this->matcherClass = uniqid('ProjectUrlMatcher');
-        $this->dumpPath = sys_get_temp_dir().DIRECTORY_SEPARATOR.'php_matcher.'.$this->matcherClass.'.php';
+        $this->dumpPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'php_matcher.' . $this->matcherClass . '.php';
     }
 
     protected function tearDown()
@@ -72,9 +72,9 @@ class PhpMatcherDumperTest extends TestCase
         $class = $this->generateDumpedMatcher($collection, true);
 
         $matcher = $this->getMockBuilder($class)
-                        ->setMethods(array('redirect'))
-                        ->setConstructorArgs(array(new RequestContext()))
-                        ->getMock();
+            ->setMethods(array('redirect'))
+            ->setConstructorArgs(array(new RequestContext()))
+            ->getMock();
 
         $matcher->expects($this->once())->method('redirect')->with('/foo%3Abar/', 'foo')->willReturn(array());
 
@@ -86,10 +86,10 @@ class PhpMatcherDumperTest extends TestCase
      */
     public function testDump(RouteCollection $collection, $fixture, $options = array())
     {
-        $basePath = __DIR__.'/../../Fixtures/dumper/';
+        $basePath = __DIR__ . '/../../Fixtures/dumper/';
 
         $dumper = new PhpMatcherDumper($collection);
-        $this->assertStringEqualsFile($basePath.$fixture, $dumper->dump($options), '->dump() correctly dumps routes as optimized PHP code.');
+        $this->assertStringEqualsFile($basePath . $fixture, $dumper->dump($options), '->dump() correctly dumps routes as optimized PHP code.');
     }
 
     public function getRouteCollections()
@@ -419,14 +419,14 @@ class PhpMatcherDumperTest extends TestCase
         $trailingSlashCollection->add('regex_not_trailing_slash_POST_method', new Route('/not-trailing/regex/post-method/{param}', array(), array(), array(), '', array(), array('POST')));
 
         return array(
-           array(new RouteCollection(), 'url_matcher0.php', array()),
-           array($collection, 'url_matcher1.php', array()),
-           array($redirectCollection, 'url_matcher2.php', array('base_class' => 'Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher')),
-           array($rootprefixCollection, 'url_matcher3.php', array()),
-           array($headMatchCasesCollection, 'url_matcher4.php', array()),
-           array($groupOptimisedCollection, 'url_matcher5.php', array('base_class' => 'Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher')),
-           array($trailingSlashCollection, 'url_matcher6.php', array()),
-           array($trailingSlashCollection, 'url_matcher7.php', array('base_class' => 'Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher')),
+            array(new RouteCollection(), 'url_matcher0.php', array()),
+            array($collection, 'url_matcher1.php', array()),
+            array($redirectCollection, 'url_matcher2.php', array('base_class' => 'Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher')),
+            array($rootprefixCollection, 'url_matcher3.php', array()),
+            array($headMatchCasesCollection, 'url_matcher4.php', array()),
+            array($groupOptimisedCollection, 'url_matcher5.php', array('base_class' => 'Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher')),
+            array($trailingSlashCollection, 'url_matcher6.php', array()),
+            array($trailingSlashCollection, 'url_matcher7.php', array('base_class' => 'Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher')),
         );
     }
 

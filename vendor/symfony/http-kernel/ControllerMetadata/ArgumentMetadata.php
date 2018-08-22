@@ -28,10 +28,10 @@ class ArgumentMetadata
     /**
      * @param string $name
      * @param string $type
-     * @param bool   $isVariadic
-     * @param bool   $hasDefaultValue
-     * @param mixed  $defaultValue
-     * @param bool   $isNullable
+     * @param bool $isVariadic
+     * @param bool $hasDefaultValue
+     * @param mixed $defaultValue
+     * @param bool $isNullable
      */
     public function __construct($name, $type, $isVariadic, $hasDefaultValue, $defaultValue, $isNullable = false)
     {

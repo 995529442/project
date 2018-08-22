@@ -28,7 +28,7 @@ abstract class AbstractShape
     /**
      * Draws shape to given image on given position
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $posx
      * @param  integer $posy
      * @return boolean
@@ -50,7 +50,7 @@ abstract class AbstractShape
      * Set border width and color of current shape
      *
      * @param  integer $width
-     * @param  string  $color
+     * @param  string $color
      * @return void
      */
     public function border($width, $color = null)

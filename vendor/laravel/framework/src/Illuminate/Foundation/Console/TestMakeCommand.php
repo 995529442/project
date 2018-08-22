@@ -36,37 +36,37 @@ class TestMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('unit')) {
-            return __DIR__.'/stubs/unit-test.stub';
+            return __DIR__ . '/stubs/unit-test.stub';
         }
 
-        return __DIR__.'/stubs/test.stub';
+        return __DIR__ . '/stubs/test.stub';
     }
 
     /**
      * Get the destination class path.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function getPath($name)
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return base_path('tests').str_replace('\\', '/', $name).'.php';
+        return base_path('tests') . str_replace('\\', '/', $name) . '.php';
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->option('unit')) {
-            return $rootNamespace.'\Unit';
+            return $rootNamespace . '\Unit';
         } else {
-            return $rootNamespace.'\Feature';
+            return $rootNamespace . '\Feature';
         }
     }
 

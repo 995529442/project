@@ -39,9 +39,9 @@ class DateTimeComparatorTest extends TestCase
         $datetime = new DateTime;
 
         return [
-          [$datetime, null],
-          [null, $datetime],
-          [null, null]
+            [$datetime, null],
+            [null, $datetime],
+            [null, null]
         ];
     }
 

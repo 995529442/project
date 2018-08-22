@@ -107,8 +107,8 @@ class UrlMatcher implements UrlMatcherInterface, RequestMatcherInterface
     /**
      * Tries to match a URL with a set of routes.
      *
-     * @param string          $pathinfo The path info to be parsed
-     * @param RouteCollection $routes   The set of routes
+     * @param string $pathinfo The path info to be parsed
+     * @param RouteCollection $routes The set of routes
      *
      * @return array An array of parameters
      *
@@ -168,9 +168,9 @@ class UrlMatcher implements UrlMatcherInterface, RequestMatcherInterface
      * in matchers that do not have access to the matched Route instance
      * (like the PHP and Apache matcher dumpers).
      *
-     * @param Route  $route      The route we are matching against
-     * @param string $name       The name of the route
-     * @param array  $attributes An array of attributes from the matcher
+     * @param Route $route The route we are matching against
+     * @param string $name The name of the route
+     * @param array $attributes An array of attributes from the matcher
      *
      * @return array An array of parameters
      */
@@ -185,8 +185,8 @@ class UrlMatcher implements UrlMatcherInterface, RequestMatcherInterface
      * Handles specific route requirements.
      *
      * @param string $pathinfo The path
-     * @param string $name     The route name
-     * @param Route  $route    The route
+     * @param string $name The route name
+     * @param Route $route The route
      *
      * @return array The first element represents the status, the second contains additional information
      */
@@ -207,7 +207,7 @@ class UrlMatcher implements UrlMatcherInterface, RequestMatcherInterface
     /**
      * Get merged default parameters.
      *
-     * @param array $params   The parameters
+     * @param array $params The parameters
      * @param array $defaults The defaults
      *
      * @return array Merged default parameters
@@ -244,7 +244,7 @@ class UrlMatcher implements UrlMatcherInterface, RequestMatcherInterface
             return null;
         }
 
-        return Request::create($this->context->getScheme().'://'.$this->context->getHost().$this->context->getBaseUrl().$pathinfo, $this->context->getMethod(), $this->context->getParameters(), array(), array(), array(
+        return Request::create($this->context->getScheme() . '://' . $this->context->getHost() . $this->context->getBaseUrl() . $pathinfo, $this->context->getMethod(), $this->context->getParameters(), array(), array(), array(
             'SCRIPT_FILENAME' => $this->context->getBaseUrl(),
             'SCRIPT_NAME' => $this->context->getBaseUrl(),
         ));

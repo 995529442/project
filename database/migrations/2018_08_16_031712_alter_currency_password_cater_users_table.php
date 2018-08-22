@@ -14,8 +14,8 @@ class AlterCurrencyPasswordCaterUsersTable extends Migration
     public function up()
     {
         Schema::table('cater_users', function (Blueprint $table) {
-            $table->string('currency_password',255)->default("")->comment("购物币支付密码");
-        });        
+            $table->string('currency_password', 255)->default("")->comment("购物币支付密码");
+        });
     }
 
     /**

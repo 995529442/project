@@ -62,7 +62,7 @@ class LegacyEmptyPass extends CodeCleanerPass
                 return json_encode($node->value);
 
             case 'Expr_ConstFetch':
-                return (string) $node->name;
+                return (string)$node->name;
 
             default:
                 return $node->getType();

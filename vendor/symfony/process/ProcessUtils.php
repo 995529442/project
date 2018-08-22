@@ -40,7 +40,7 @@ class ProcessUtils
      */
     public static function escapeArgument($argument)
     {
-        @trigger_error('The '.__METHOD__.'() method is deprecated since Symfony 3.3 and will be removed in 4.0. Use a command line array or give env vars to the Process::start/run() method instead.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __METHOD__ . '() method is deprecated since Symfony 3.3 and will be removed in 4.0. Use a command line array or give env vars to the Process::start/run() method instead.', E_USER_DEPRECATED);
 
         //Fix for PHP bug #43784 escapeshellarg removes % from given string
         //Fix for PHP bug #49446 escapeshellarg doesn't work on Windows
@@ -58,7 +58,7 @@ class ProcessUtils
                     $escapedArgument .= '\\"';
                 } elseif (self::isSurroundedBy($part, '%')) {
                     // Avoid environment variable expansion
-                    $escapedArgument .= '^%"'.substr($part, 1, -1).'"^%';
+                    $escapedArgument .= '^%"' . substr($part, 1, -1) . '"^%';
                 } else {
                     // escape trailing backslash
                     if ('\\' === substr($part, -1)) {
@@ -69,20 +69,20 @@ class ProcessUtils
                 }
             }
             if ($quote) {
-                $escapedArgument = '"'.$escapedArgument.'"';
+                $escapedArgument = '"' . $escapedArgument . '"';
             }
 
             return $escapedArgument;
         }
 
-        return "'".str_replace("'", "'\\''", $argument)."'";
+        return "'" . str_replace("'", "'\\''", $argument) . "'";
     }
 
     /**
      * Validates and normalizes a Process input.
      *
      * @param string $caller The name of method call that validates the input
-     * @param mixed  $input  The input to validate
+     * @param mixed $input The input to validate
      *
      * @return mixed The validated input
      *
@@ -98,7 +98,7 @@ class ProcessUtils
                 return $input;
             }
             if (is_scalar($input)) {
-                return (string) $input;
+                return (string)$input;
             }
             if ($input instanceof Process) {
                 return $input->getIterator($input::ITER_SKIP_ERR);

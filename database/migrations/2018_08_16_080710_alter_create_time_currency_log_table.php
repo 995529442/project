@@ -15,7 +15,7 @@ class AlterCreateTimeCurrencyLogTable extends Migration
     {
         Schema::table('cater_currency_log', function (Blueprint $table) {
             $table->Integer('create_time')->defalut('0')->comment("创建时间");
-        });  
+        });
     }
 
     /**

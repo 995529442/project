@@ -49,10 +49,10 @@ class Shell extends Application
 {
     const VERSION = 'v0.9.3';
 
-    const PROMPT      = '>>> ';
+    const PROMPT = '>>> ';
     const BUFF_PROMPT = '... ';
-    const REPLAY      = '--> ';
-    const RETVAL      = '=> ';
+    const REPLAY = '--> ';
+    const RETVAL = '=> ';
 
     private $config;
     private $cleaner;
@@ -81,15 +81,15 @@ class Shell extends Application
      */
     public function __construct(Configuration $config = null)
     {
-        $this->config        = $config ?: new Configuration();
-        $this->cleaner       = $this->config->getCodeCleaner();
-        $this->loop          = new ExecutionLoop();
-        $this->context       = new Context();
-        $this->includes      = [];
-        $this->readline      = $this->config->getReadline();
-        $this->inputBuffer   = [];
-        $this->codeStack     = [];
-        $this->stdoutBuffer  = '';
+        $this->config = $config ?: new Configuration();
+        $this->cleaner = $this->config->getCodeCleaner();
+        $this->loop = new ExecutionLoop();
+        $this->context = new Context();
+        $this->includes = [];
+        $this->readline = $this->config->getReadline();
+        $this->inputBuffer = [];
+        $this->codeStack = [];
+        $this->stdoutBuffer = '';
         $this->loopListeners = $this->getDefaultLoopListeners();
 
         parent::__construct('Psy Shell', self::VERSION);
@@ -109,7 +109,7 @@ class Shell extends Application
     public static function isIncluded(array $trace)
     {
         return isset($trace[0]['function']) &&
-          in_array($trace[0]['function'], ['require', 'include', 'require_once', 'include_once']);
+            in_array($trace[0]['function'], ['require', 'include', 'require_once', 'include_once']);
     }
 
     /**
@@ -118,7 +118,7 @@ class Shell extends Application
      * @see Psy\debug
      * @deprecated will be removed in 1.0. Use \Psy\debug instead
      *
-     * @param array  $vars        Scope variables from the calling context (default: array())
+     * @param array $vars Scope variables from the calling context (default: array())
      * @param object $boundObject Bound object ($this) value for the shell
      *
      * @return array Scope variables from the debugger session
@@ -294,7 +294,7 @@ class Shell extends Application
     /**
      * Runs the current application.
      *
-     * @param InputInterface  $input  An Input instance
+     * @param InputInterface $input An Input instance
      * @param OutputInterface $output An Output instance
      *
      * @return int 0 if everything went fine, or an error code
@@ -325,7 +325,7 @@ class Shell extends Application
      *
      * @throws Exception if thrown via the `throw-up` command
      *
-     * @param InputInterface  $input  An Input instance
+     * @param InputInterface $input An Input instance
      * @param OutputInterface $output An Output instance
      *
      * @return int 0 if everything went fine, or an error code
@@ -633,7 +633,7 @@ class Shell extends Application
      * Add code to the code buffer.
      *
      * @param string $code
-     * @param bool   $silent
+     * @param bool $silent
      */
     public function addCode($code, $silent = false)
     {
@@ -647,7 +647,7 @@ class Shell extends Application
             }
 
             $this->codeBuffer[] = $silent ? new SilentInput($code) : $code;
-            $this->code         = $this->cleaner->clean($this->codeBuffer, $this->config->requireSemicolons());
+            $this->code = $this->cleaner->clean($this->codeBuffer, $this->config->requireSemicolons());
         } catch (\Exception $e) {
             // Add failed code blocks to the readline history.
             $this->addCodeBufferToHistory();
@@ -666,7 +666,7 @@ class Shell extends Application
      * @throws \InvalidArgumentException if $code isn't a complete statement
      *
      * @param string $code
-     * @param bool   $silent
+     * @param bool $silent
      */
     private function setCode($code, $silent = false)
     {
@@ -744,7 +744,7 @@ class Shell extends Application
     public function resetCodeBuffer()
     {
         $this->codeBuffer = [];
-        $this->code       = false;
+        $this->code = false;
     }
 
     /**
@@ -753,11 +753,11 @@ class Shell extends Application
      * This is useful for commands which want to replay history.
      *
      * @param string|array $input
-     * @param bool         $silent
+     * @param bool $silent
      */
     public function addInput($input, $silent = false)
     {
-        foreach ((array) $input as $line) {
+        foreach ((array)$input as $line) {
             $this->inputBuffer[] = $silent ? new SilentInput($line) : $line;
         }
     }
@@ -794,9 +794,9 @@ class Shell extends Application
 
         list($codeBuffer, $codeBufferOpen, $code) = array_pop($this->codeStack);
 
-        $this->codeBuffer     = $codeBuffer;
+        $this->codeBuffer = $codeBuffer;
         $this->codeBufferOpen = $codeBufferOpen;
-        $this->code           = $code;
+        $this->code = $code;
     }
 
     /**
@@ -855,7 +855,7 @@ class Shell extends Application
      * This is used by the shell loop for rendering output from evaluated code.
      *
      * @param string $out
-     * @param int    $phase Output buffering phase
+     * @param int $phase Output buffering phase
      */
     public function writeStdout($out, $phase = PHP_OUTPUT_HANDLER_END)
     {
@@ -901,7 +901,7 @@ class Shell extends Application
         }
 
         $this->context->setReturnValue($ret);
-        $ret    = $this->presentValue($ret);
+        $ret = $this->presentValue($ret);
         $indent = str_repeat(' ', strlen(static::RETVAL));
 
         $this->output->writeln(static::RETVAL . str_replace(PHP_EOL, PHP_EOL . $indent, $ret));
@@ -991,7 +991,7 @@ class Shell extends Application
      * Execute code in the shell execution context.
      *
      * @param string $code
-     * @param bool   $throwExceptions
+     * @param bool $throwExceptions
      *
      * @return mixed
      */
@@ -1036,10 +1036,10 @@ class Shell extends Application
      *
      * @throws \Psy\Exception\ErrorException depending on the current error_reporting level
      *
-     * @param int    $errno   Error type
-     * @param string $errstr  Message
+     * @param int $errno Error type
+     * @param string $errstr Message
      * @param string $errfile Filename
-     * @param int    $errline Line number
+     * @param int $errline Line number
      */
     public function handleError($errno, $errstr, $errfile, $errline)
     {

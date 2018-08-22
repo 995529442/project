@@ -21,7 +21,7 @@ class PickColorCommand extends \Intervention\Image\Commands\AbstractCommand
         // pick color
         $color = imagecolorat($image->getCore(), $x, $y);
 
-        if ( ! imageistruecolor($image->getCore())) {
+        if (!imageistruecolor($image->getCore())) {
             $color = imagecolorsforindex($image->getCore(), $color);
             $color['alpha'] = round(1 - $color['alpha'] / 127, 2);
         }

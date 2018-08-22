@@ -34,16 +34,14 @@ class AnnotationDirectoryLoaderTest extends AbstractAnnotationLoaderTest
         $this->reader
             ->expects($this->any())
             ->method('getMethodAnnotations')
-            ->will($this->returnValue(array()))
-        ;
+            ->will($this->returnValue(array()));
 
         $this->reader
             ->expects($this->any())
             ->method('getClassAnnotations')
-            ->will($this->returnValue(array()))
-        ;
+            ->will($this->returnValue(array()));
 
-        $this->loader->load(__DIR__.'/../Fixtures/AnnotatedClasses');
+        $this->loader->load(__DIR__ . '/../Fixtures/AnnotatedClasses');
     }
 
     public function testLoadIgnoresHiddenDirectories()
@@ -57,21 +55,19 @@ class AnnotationDirectoryLoaderTest extends AbstractAnnotationLoaderTest
         $this->reader
             ->expects($this->any())
             ->method('getMethodAnnotations')
-            ->will($this->returnValue(array()))
-        ;
+            ->will($this->returnValue(array()));
 
         $this->reader
             ->expects($this->any())
             ->method('getClassAnnotations')
-            ->will($this->returnValue(array()))
-        ;
+            ->will($this->returnValue(array()));
 
-        $this->loader->load(__DIR__.'/../Fixtures/AnnotatedClasses');
+        $this->loader->load(__DIR__ . '/../Fixtures/AnnotatedClasses');
     }
 
     public function testSupports()
     {
-        $fixturesDir = __DIR__.'/../Fixtures';
+        $fixturesDir = __DIR__ . '/../Fixtures';
 
         $this->assertTrue($this->loader->supports($fixturesDir), '->supports() returns true if the resource is loadable');
         $this->assertFalse($this->loader->supports('foo.foo'), '->supports() returns true if the resource is loadable');
@@ -82,7 +78,7 @@ class AnnotationDirectoryLoaderTest extends AbstractAnnotationLoaderTest
 
     public function testItSupportsAnyAnnotation()
     {
-        $this->assertTrue($this->loader->supports(__DIR__.'/../Fixtures/even-with-not-existing-folder', 'annotation'));
+        $this->assertTrue($this->loader->supports(__DIR__ . '/../Fixtures/even-with-not-existing-folder', 'annotation'));
     }
 
     public function testLoadFileIfLocatedResourceIsFile()
@@ -92,10 +88,9 @@ class AnnotationDirectoryLoaderTest extends AbstractAnnotationLoaderTest
         $this->reader
             ->expects($this->any())
             ->method('getMethodAnnotations')
-            ->will($this->returnValue(array()))
-        ;
+            ->will($this->returnValue(array()));
 
-        $this->loader->load(__DIR__.'/../Fixtures/AnnotatedClasses/FooClass.php');
+        $this->loader->load(__DIR__ . '/../Fixtures/AnnotatedClasses/FooClass.php');
     }
 
     private function expectAnnotationsToBeReadFrom(array $classes)

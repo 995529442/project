@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Arrays;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\TypeSafeDiagnosingMatcher;
 use Hamcrest\Util;
@@ -41,8 +43,7 @@ class IsArrayContainingInAnyOrder extends TypeSafeDiagnosingMatcher
     public function describeTo(Description $description)
     {
         $description->appendList('[', ', ', ']', $this->_elementMatchers)
-                                ->appendText(' in any order')
-                                ;
+            ->appendText(' in any order');
     }
 
     /**

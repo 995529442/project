@@ -15,7 +15,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
      */
     public static function areaCode()
     {
-        return static::randomDigitNotNull().static::randomDigitNotNull();
+        return static::randomDigitNotNull() . static::randomDigitNotNull();
     }
 
     /**
@@ -68,18 +68,18 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
 
     /**
      * Generates a complete phone number.
-     * @param string $type      [def: landline] One of "landline" or "cellphone". Defaults to "landline" on invalid values.
-     * @param bool   $formatted [def: true] If the number should be formatted or not.
+     * @param string $type [def: landline] One of "landline" or "cellphone". Defaults to "landline" on invalid values.
+     * @param bool $formatted [def: true] If the number should be formatted or not.
      * @return string
      */
     protected static function anyPhoneNumber($type, $formatted = true)
     {
-        $area   = static::areaCode();
-        $number = ($type == 'cellphone')?
+        $area = static::areaCode();
+        $number = ($type == 'cellphone') ?
             static::cellphone($formatted) :
             static::landline($formatted);
 
-        return $formatted? "($area) $number" : $area.$number;
+        return $formatted ? "($area) $number" : $area . $number;
     }
 
     /**

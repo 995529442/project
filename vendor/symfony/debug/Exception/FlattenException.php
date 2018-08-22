@@ -247,7 +247,7 @@ class FlattenException
             } elseif (is_resource($value)) {
                 $result[$key] = array('resource', get_resource_type($value));
             } else {
-                $result[$key] = array('string', (string) $value);
+                $result[$key] = array('string', (string)$value);
             }
         }
 

@@ -36,7 +36,7 @@ class Barcode extends Base
      * ISBN-10 check digit
      * @link http://en.wikipedia.org/wiki/International_Standard_Book_Number#ISBN-10_check_digits
      *
-     * @param  string           $input ISBN without check-digit
+     * @param  string $input ISBN without check-digit
      * @throws \LengthException When wrong input length passed
      *
      * @return integer Check digit
@@ -61,7 +61,7 @@ class Barcode extends Base
         $result = (11 - array_sum($digits) % 11) % 11;
 
         // 10 is replaced by X
-        return ($result < 10)?$result:'X';
+        return ($result < 10) ? $result : 'X';
     }
 
     /**

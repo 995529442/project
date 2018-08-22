@@ -44,7 +44,7 @@ class StringMatchesFormatDescription extends RegularExpression
     protected function additionalFailureDescription($other)
     {
         $from = \preg_split('(\r\n|\r|\n)', $this->string);
-        $to   = \preg_split('(\r\n|\r|\n)', $other);
+        $to = \preg_split('(\r\n|\r|\n)', $other);
 
         foreach ($from as $index => $line) {
             if (isset($to[$index]) && $line !== $to[$index]) {
@@ -57,7 +57,7 @@ class StringMatchesFormatDescription extends RegularExpression
         }
 
         $this->string = \implode("\n", $from);
-        $other        = \implode("\n", $to);
+        $other = \implode("\n", $to);
 
         $differ = new Differ("--- Expected\n+++ Actual\n");
 

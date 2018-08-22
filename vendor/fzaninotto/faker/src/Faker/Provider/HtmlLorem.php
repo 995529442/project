@@ -90,7 +90,7 @@ class HtmlLorem extends Base
     private function addRandomLeaf(\DOMElement $node)
     {
         $rand = mt_rand(1, 10);
-        switch($rand){
+        switch ($rand) {
             case 1:
                 $this->addRandomP($node);
                 break;

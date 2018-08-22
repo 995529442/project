@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use Iterator;
@@ -31,18 +32,18 @@ use Traversable;
  */
 class Test
 {
-    const REGEX_DATA_PROVIDER               = '/@dataProvider\s+([a-zA-Z0-9._:-\\\\x7f-\xff]+)/';
-    const REGEX_TEST_WITH                   = '/@testWith\s+/';
-    const REGEX_EXPECTED_EXCEPTION          = '(@expectedException\s+([:.\w\\\\x7f-\xff]+)(?:[\t ]+(\S*))?(?:[\t ]+(\S*))?\s*$)m';
-    const REGEX_REQUIRES_VERSION            = '/@requires\s+(?P<name>PHP(?:Unit)?)\s+(?P<operator>[<>=!]{0,2})\s*(?P<version>[\d\.-]+(dev|(RC|alpha|beta)[\d\.])?)[ \t]*\r?$/m';
+    const REGEX_DATA_PROVIDER = '/@dataProvider\s+([a-zA-Z0-9._:-\\\\x7f-\xff]+)/';
+    const REGEX_TEST_WITH = '/@testWith\s+/';
+    const REGEX_EXPECTED_EXCEPTION = '(@expectedException\s+([:.\w\\\\x7f-\xff]+)(?:[\t ]+(\S*))?(?:[\t ]+(\S*))?\s*$)m';
+    const REGEX_REQUIRES_VERSION = '/@requires\s+(?P<name>PHP(?:Unit)?)\s+(?P<operator>[<>=!]{0,2})\s*(?P<version>[\d\.-]+(dev|(RC|alpha|beta)[\d\.])?)[ \t]*\r?$/m';
     const REGEX_REQUIRES_VERSION_CONSTRAINT = '/@requires\s+(?P<name>PHP(?:Unit)?)\s+(?P<constraint>[\d\t -.|~^]+)[ \t]*\r?$/m';
-    const REGEX_REQUIRES_OS                 = '/@requires\s+(?P<name>OS(?:FAMILY)?)\s+(?P<value>.+?)[ \t]*\r?$/m';
-    const REGEX_REQUIRES                    = '/@requires\s+(?P<name>function|extension)\s+(?P<value>([^ ]+?))\s*(?P<operator>[<>=!]{0,2})\s*(?P<version>[\d\.-]+[\d\.]?)?[ \t]*\r?$/m';
+    const REGEX_REQUIRES_OS = '/@requires\s+(?P<name>OS(?:FAMILY)?)\s+(?P<value>.+?)[ \t]*\r?$/m';
+    const REGEX_REQUIRES = '/@requires\s+(?P<name>function|extension)\s+(?P<value>([^ ]+?))\s*(?P<operator>[<>=!]{0,2})\s*(?P<version>[\d\.-]+[\d\.]?)?[ \t]*\r?$/m';
 
     const UNKNOWN = -1;
-    const SMALL   = 0;
-    const MEDIUM  = 1;
-    const LARGE   = 2;
+    const SMALL = 0;
+    const MEDIUM = 1;
+    const LARGE = 2;
 
     private static $annotationCache = [];
 
@@ -50,7 +51,7 @@ class Test
 
     /**
      * @param \PHPUnit\Framework\Test $test
-     * @param bool                    $asString
+     * @param bool $asString
      *
      * @return mixed
      */
@@ -184,9 +185,9 @@ class Test
      */
     public static function getRequirements($className, $methodName)
     {
-        $reflector  = new ReflectionClass($className);
+        $reflector = new ReflectionClass($className);
         $docComment = $reflector->getDocComment();
-        $reflector  = new ReflectionMethod($className, $methodName);
+        $reflector = new ReflectionMethod($className, $methodName);
         $docComment .= "\n" . $reflector->getDocComment();
         $requires = [];
 
@@ -199,7 +200,7 @@ class Test
         if ($count = \preg_match_all(self::REGEX_REQUIRES_VERSION, $docComment, $matches)) {
             foreach (\range(0, $count - 1) as $i) {
                 $requires[$matches['name'][$i]] = [
-                    'version'  => $matches['version'][$i],
+                    'version' => $matches['version'][$i],
                     'operator' => $matches['operator'][$i]
                 ];
             }
@@ -237,7 +238,7 @@ class Test
                 }
 
                 $requires['extension_versions'][$matches['value'][$i]] = [
-                    'version'  => $matches['version'][$i],
+                    'version' => $matches['version'][$i],
                     'operator' => $matches['operator'][$i]
                 ];
             }
@@ -257,7 +258,7 @@ class Test
     public static function getMissingRequirements($className, $methodName)
     {
         $required = static::getRequirements($className, $methodName);
-        $missing  = [];
+        $missing = [];
 
         if (!empty($required['PHP'])) {
             $operator = empty($required['PHP']['operator']) ? '>=' : $required['PHP']['operator'];
@@ -359,7 +360,7 @@ class Test
      */
     public static function getExpectedException($className, $methodName)
     {
-        $reflector  = new ReflectionMethod($className, $methodName);
+        $reflector = new ReflectionMethod($className, $methodName);
         $docComment = $reflector->getDocComment();
         $docComment = \substr($docComment, 3, -2);
 
@@ -369,9 +370,9 @@ class Test
                 $methodName
             );
 
-            $class         = $matches[1];
-            $code          = null;
-            $message       = '';
+            $class = $matches[1];
+            $code = null;
+            $message = '';
             $messageRegExp = '';
 
             if (isset($matches[2])) {
@@ -397,9 +398,9 @@ class Test
             }
 
             if (\is_numeric($code)) {
-                $code = (int) $code;
+                $code = (int)$code;
             } elseif (\is_string($code) && \defined($code)) {
-                $code = (int) \constant($code);
+                $code = (int)\constant($code);
             }
 
             return [
@@ -443,7 +444,7 @@ class Test
      */
     public static function getProvidedData($className, $methodName)
     {
-        $reflector  = new ReflectionMethod($className, $methodName);
+        $reflector = new ReflectionMethod($className, $methodName);
         $docComment = $reflector->getDocComment();
 
         $data = self::getDataFromDataProviderAnnotation($docComment, $className, $methodName);
@@ -491,8 +492,8 @@ class Test
 
             foreach ($matches[1] as $match) {
                 $dataProviderMethodNameNamespace = \explode('\\', $match);
-                $leaf                            = \explode('::', \array_pop($dataProviderMethodNameNamespace));
-                $dataProviderMethodName          = \array_pop($leaf);
+                $leaf = \explode('::', \array_pop($dataProviderMethodNameNamespace));
+                $dataProviderMethodName = \array_pop($leaf);
 
                 if (!empty($dataProviderMethodNameNamespace)) {
                     $dataProviderMethodNameNamespace = \implode('\\', $dataProviderMethodNameNamespace) . '\\';
@@ -506,7 +507,7 @@ class Test
                     $dataProviderClassName = $className;
                 }
 
-                $dataProviderClass  = new ReflectionClass($dataProviderClassName);
+                $dataProviderClass = new ReflectionClass($dataProviderClassName);
                 $dataProviderMethod = $dataProviderClass->getMethod(
                     $dataProviderMethodName
                 );
@@ -525,7 +526,7 @@ class Test
 
                 if ($data instanceof Traversable) {
                     $origData = $data;
-                    $data     = [];
+                    $data = [];
                     foreach ($origData as $key => $value) {
                         if (\is_int($key)) {
                             $data[] = $value;
@@ -557,9 +558,9 @@ class Test
         $docComment = self::cleanUpMultiLineAnnotation($docComment);
 
         if (\preg_match(self::REGEX_TEST_WITH, $docComment, $matches, PREG_OFFSET_CAPTURE)) {
-            $offset            = \strlen($matches[0][0]) + $matches[0][1];
+            $offset = \strlen($matches[0][0]) + $matches[0][1];
             $annotationContent = \substr($docComment, $offset);
-            $data              = [];
+            $data = [];
 
             foreach (\explode("\n", $annotationContent) as $candidateRow) {
                 $candidateRow = \trim($candidateRow);
@@ -609,8 +610,8 @@ class Test
     public static function parseTestMethodAnnotations($className, $methodName = '')
     {
         if (!isset(self::$annotationCache[$className])) {
-            $class       = new ReflectionClass($className);
-            $traits      = $class->getTraits();
+            $class = new ReflectionClass($className);
+            $traits = $class->getTraits();
             $annotations = [];
 
             foreach ($traits as $trait) {
@@ -628,7 +629,7 @@ class Test
 
         if (!empty($methodName) && !isset(self::$annotationCache[$className . '::' . $methodName])) {
             try {
-                $method      = new ReflectionMethod($className, $methodName);
+                $method = new ReflectionMethod($className, $methodName);
                 $annotations = self::parseAnnotations($method->getDocComment());
             } catch (ReflectionException $e) {
                 $annotations = [];
@@ -638,7 +639,7 @@ class Test
         }
 
         return [
-            'class'  => self::$annotationCache[$className],
+            'class' => self::$annotationCache[$className],
             'method' => !empty($methodName) ? self::$annotationCache[$className . '::' . $methodName] : []
         ];
     }
@@ -651,18 +652,18 @@ class Test
      */
     public static function getInlineAnnotations($className, $methodName)
     {
-        $method      = new ReflectionMethod($className, $methodName);
-        $code        = \file($method->getFileName());
-        $lineNumber  = $method->getStartLine();
-        $startLine   = $method->getStartLine() - 1;
-        $endLine     = $method->getEndLine() - 1;
+        $method = new ReflectionMethod($className, $methodName);
+        $code = \file($method->getFileName());
+        $lineNumber = $method->getStartLine();
+        $startLine = $method->getStartLine() - 1;
+        $endLine = $method->getEndLine() - 1;
         $methodLines = \array_slice($code, $startLine, $endLine - $startLine + 1);
         $annotations = [];
 
         foreach ($methodLines as $line) {
             if (\preg_match('#/\*\*?\s*@(?P<name>[A-Za-z_-]+)(?:[ \t]+(?P<value>.*?))?[ \t]*\r?\*/$#m', $line, $matches)) {
                 $annotations[\strtolower($matches['name'])] = [
-                    'line'  => $lineNumber,
+                    'line' => $lineNumber,
                     'value' => $matches['value']
                 ];
             }
@@ -688,7 +689,7 @@ class Test
             $numMatches = \count($matches[0]);
 
             for ($i = 0; $i < $numMatches; ++$i) {
-                $annotations[$matches['name'][$i]][] = (string) $matches['value'][$i];
+                $annotations[$matches['name'][$i]][] = (string)$matches['value'][$i];
             }
         }
 
@@ -830,7 +831,7 @@ class Test
     public static function getSize($className, $methodName)
     {
         $groups = \array_flip(self::getGroups($className, $methodName));
-        $class  = new ReflectionClass($className);
+        $class = new ReflectionClass($className);
 
         if (isset($groups['large']) ||
             (\class_exists('PHPUnit\DbUnit\TestCase', false) && $class->isSubclassOf('PHPUnit\DbUnit\TestCase'))) {
@@ -947,9 +948,9 @@ class Test
     {
         return [
             'beforeClass' => ['setUpBeforeClass'],
-            'before'      => ['setUp'],
-            'after'       => ['tearDown'],
-            'afterClass'  => ['tearDownAfterClass']
+            'before' => ['setUp'],
+            'after' => ['tearDown'],
+            'afterClass' => ['tearDownAfterClass']
         ];
     }
 
@@ -1020,7 +1021,7 @@ class Test
                         );
                     }
 
-                    $class   = new ReflectionClass($className);
+                    $class = new ReflectionClass($className);
                     $methods = $class->getMethods();
                     $inverse = isset($methodName[1]) && $methodName[1] == '!';
 
@@ -1071,7 +1072,7 @@ class Test
             $extended = false;
 
             if (\strpos($element, '<extended>') !== false) {
-                $element  = \str_replace('<extended>', '', $element);
+                $element = \str_replace('<extended>', '', $element);
                 $extended = true;
             }
 

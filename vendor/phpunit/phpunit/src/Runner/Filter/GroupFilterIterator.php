@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Runner\Filter;
 
 use PHPUnit\Framework\TestSuite;
@@ -22,8 +23,8 @@ abstract class GroupFilterIterator extends RecursiveFilterIterator
 
     /**
      * @param RecursiveIterator $iterator
-     * @param array             $groups
-     * @param TestSuite         $suite
+     * @param array $groups
+     * @param TestSuite $suite
      */
     public function __construct(RecursiveIterator $iterator, array $groups, TestSuite $suite)
     {

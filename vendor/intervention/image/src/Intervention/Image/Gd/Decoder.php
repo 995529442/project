@@ -14,7 +14,7 @@ class Decoder extends \Intervention\Image\AbstractDecoder
      */
     public function initFromPath($path)
     {
-        if ( ! file_exists($path)) {
+        if (!file_exists($path)) {
             throw new \Intervention\Image\Exception\NotReadableException(
                 "Unable to find file ({$path})."
             );
@@ -35,7 +35,7 @@ class Decoder extends \Intervention\Image\AbstractDecoder
             case 'image/pjpeg':
                 $core = @imagecreatefromjpeg($path);
                 if (!$core) {
-                    $core= @imagecreatefromstring(file_get_contents($path));
+                    $core = @imagecreatefromstring(file_get_contents($path));
                 }
                 break;
 
@@ -45,7 +45,7 @@ class Decoder extends \Intervention\Image\AbstractDecoder
 
             case 'image/webp':
             case 'image/x-webp':
-                if ( ! function_exists('imagecreatefromwebp')) {
+                if (!function_exists('imagecreatefromwebp')) {
                     throw new \Intervention\Image\Exception\NotReadableException(
                         "Unsupported image type. GD/PHP installation does not support WebP format."
                     );
@@ -110,7 +110,7 @@ class Decoder extends \Intervention\Image\AbstractDecoder
         $resource = @imagecreatefromstring($binary);
 
         if ($resource === false) {
-             throw new \Intervention\Image\Exception\NotReadableException(
+            throw new \Intervention\Image\Exception\NotReadableException(
                 "Unable to init from given binary data."
             );
         }

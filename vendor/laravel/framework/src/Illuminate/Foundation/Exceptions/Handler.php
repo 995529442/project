@@ -76,7 +76,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Create a new exception handler instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param  \Illuminate\Contracts\Container\Container $container
      * @return void
      */
     public function __construct(Container $container)
@@ -87,7 +87,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return mixed
      *
      * @throws \Exception
@@ -111,31 +111,31 @@ class Handler implements ExceptionHandlerContract
         $logger->error(
             $e->getMessage(),
             array_merge($this->context(), ['exception' => $e]
-        ));
+            ));
     }
 
     /**
      * Determine if the exception should be reported.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return bool
      */
     public function shouldReport(Exception $e)
     {
-        return ! $this->shouldntReport($e);
+        return !$this->shouldntReport($e);
     }
 
     /**
      * Determine if the exception is in the "do not report" list.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return bool
      */
     protected function shouldntReport(Exception $e)
     {
         $dontReport = array_merge($this->dontReport, $this->internalDontReport);
 
-        return ! is_null(Arr::first($dontReport, function ($type) use ($e) {
+        return !is_null(Arr::first($dontReport, function ($type) use ($e) {
             return $e instanceof $type;
         }));
     }
@@ -160,8 +160,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render an exception into a response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $e)
@@ -183,14 +183,14 @@ class Handler implements ExceptionHandlerContract
         }
 
         return $request->expectsJson()
-                        ? $this->prepareJsonResponse($request, $e)
-                        : $this->prepareResponse($request, $e);
+            ? $this->prepareJsonResponse($request, $e)
+            : $this->prepareResponse($request, $e);
     }
 
     /**
      * Prepare exception for rendering.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return \Exception
      */
     protected function prepareException(Exception $e)
@@ -209,22 +209,22 @@ class Handler implements ExceptionHandlerContract
     /**
      * Convert an authentication exception into a response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $request->expectsJson()
-                    ? response()->json(['message' => $exception->getMessage()], 401)
-                    : redirect()->guest(route('login'));
+            ? response()->json(['message' => $exception->getMessage()], 401)
+            : redirect()->guest(route('login'));
     }
 
     /**
      * Create a response object from the given validation exception.
      *
-     * @param  \Illuminate\Validation\ValidationException  $e
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Validation\ValidationException $e
+     * @param  \Illuminate\Http\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
@@ -234,15 +234,15 @@ class Handler implements ExceptionHandlerContract
         }
 
         return $request->expectsJson()
-                    ? $this->invalidJson($request, $e)
-                    : $this->invalid($request, $e);
+            ? $this->invalidJson($request, $e)
+            : $this->invalid($request, $e);
     }
 
     /**
      * Convert a validation exception into a response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Validation\ValidationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function invalid($request, ValidationException $exception)
@@ -250,18 +250,18 @@ class Handler implements ExceptionHandlerContract
         $url = $exception->redirectTo ?? url()->previous();
 
         return redirect($url)
-                ->withInput($request->except($this->dontFlash))
-                ->withErrors(
-                    $exception->errors(),
-                    $exception->errorBag
-                );
+            ->withInput($request->except($this->dontFlash))
+            ->withErrors(
+                $exception->errors(),
+                $exception->errorBag
+            );
     }
 
     /**
      * Convert a validation exception into a JSON response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Validation\ValidationException $exception
      * @return \Illuminate\Http\JsonResponse
      */
     protected function invalidJson($request, ValidationException $exception)
@@ -275,19 +275,19 @@ class Handler implements ExceptionHandlerContract
     /**
      * Prepare a response for the given exception.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  \Exception $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function prepareResponse($request, Exception $e)
     {
-        if (! $this->isHttpException($e) && config('app.debug')) {
+        if (!$this->isHttpException($e) && config('app.debug')) {
             return $this->toIlluminateResponse(
                 $this->convertExceptionToResponse($e), $e
             );
         }
 
-        if (! $this->isHttpException($e)) {
+        if (!$this->isHttpException($e)) {
             $e = new HttpException(500, $e->getMessage());
         }
 
@@ -299,7 +299,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Create a Symfony response for the given exception.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function convertExceptionToResponse(Exception $e)
@@ -310,8 +310,8 @@ class Handler implements ExceptionHandlerContract
 
         try {
             $content = config('app.debug') && class_exists(Whoops::class)
-                    ? $this->renderExceptionWithWhoops($e)
-                    : $this->renderExceptionWithSymfony($e, config('app.debug'));
+                ? $this->renderExceptionWithWhoops($e)
+                : $this->renderExceptionWithSymfony($e, config('app.debug'));
         } catch (Exception $e) {
             $content = $content ?? $this->renderExceptionWithSymfony($e, config('app.debug'));
         }
@@ -324,7 +324,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render an exception to a string using "Whoops".
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return string
      */
     protected function renderExceptionWithWhoops(Exception $e)
@@ -342,8 +342,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render an exception to a string using Symfony.
      *
-     * @param  \Exception  $e
-     * @param  bool  $debug
+     * @param  \Exception $e
+     * @param  bool $debug
      * @return string
      */
     protected function renderExceptionWithSymfony(Exception $e, $debug)
@@ -386,7 +386,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render the given HttpException.
      *
-     * @param  \Symfony\Component\HttpKernel\Exception\HttpException  $e
+     * @param  \Symfony\Component\HttpKernel\Exception\HttpException $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function renderHttpException(HttpException $e)
@@ -397,7 +397,7 @@ class Handler implements ExceptionHandlerContract
 
         view()->replaceNamespace('errors', $paths->map(function ($path) {
             return "{$path}/errors";
-        })->push(__DIR__.'/views')->all());
+        })->push(__DIR__ . '/views')->all());
 
         if (view()->exists($view = "errors::{$status}")) {
             return response()->view($view, ['exception' => $e], $status, $e->getHeaders());
@@ -409,8 +409,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Map the given exception into an Illuminate response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
-     * @param  \Exception  $e
+     * @param  \Symfony\Component\HttpFoundation\Response $response
+     * @param  \Exception $e
      * @return \Illuminate\Http\Response
      */
     protected function toIlluminateResponse($response, Exception $e)
@@ -431,7 +431,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Prepare a JSON response for the given exception.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param  \Exception $e
      * @return \Illuminate\Http\JsonResponse
      */
@@ -450,7 +450,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Convert the given exception to an array.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return array
      */
     protected function convertExceptionToArray(Exception $e)
@@ -471,8 +471,8 @@ class Handler implements ExceptionHandlerContract
     /**
      * Render an exception to the console.
      *
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @param  \Exception  $e
+     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @param  \Exception $e
      * @return void
      */
     public function renderForConsole($output, Exception $e)
@@ -483,7 +483,7 @@ class Handler implements ExceptionHandlerContract
     /**
      * Determine if the given exception is an HTTP exception.
      *
-     * @param  \Exception  $e
+     * @param  \Exception $e
      * @return bool
      */
     protected function isHttpException(Exception $e)

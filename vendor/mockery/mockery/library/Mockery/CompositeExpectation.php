@@ -146,7 +146,7 @@ class CompositeExpectation implements ExpectationInterface
         $return = '[';
         $parts = array();
         foreach ($this->_expectations as $exp) {
-            $parts[] = (string) $exp;
+            $parts[] = (string)$exp;
         }
         $return .= implode(', ', $parts) . ']';
         return $return;

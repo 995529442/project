@@ -17,7 +17,7 @@ class CreateSmsTemplateTable extends Migration
             $table->engine = 'InnoDb';
             $table->increments('id');
             $table->integer('admin_id')->index()->comment("关联admins表");
-            $table->string('template_id',20)->default('')->comment("模板ID");
+            $table->string('template_id', 20)->default('')->comment("模板ID");
             $table->tinyInteger('type')->defalut('0')->comment("类型，1为验证 2为下单提示");
             $table->tinyInteger('is_on')->defalut('0')->comment("是否启用 0关闭 1启用");
             $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");

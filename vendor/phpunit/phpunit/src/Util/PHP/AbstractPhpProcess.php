@@ -98,7 +98,7 @@ abstract class AbstractPhpProcess
      */
     public function setStdin($stdin)
     {
-        $this->stdin = (string) $stdin;
+        $this->stdin = (string)$stdin;
     }
 
     /**
@@ -118,7 +118,7 @@ abstract class AbstractPhpProcess
      */
     public function setArgs($args)
     {
-        $this->args = (string) $args;
+        $this->args = (string)$args;
     }
 
     /**
@@ -158,7 +158,7 @@ abstract class AbstractPhpProcess
      */
     public function setTimeout($timeout)
     {
-        $this->timeout = (int) $timeout;
+        $this->timeout = (int)$timeout;
     }
 
     /**
@@ -186,8 +186,8 @@ abstract class AbstractPhpProcess
     /**
      * Runs a single test in a separate PHP process.
      *
-     * @param string     $job
-     * @param Test       $test
+     * @param string $job
+     * @param Test $test
      * @param TestResult $result
      *
      * @throws Exception
@@ -209,7 +209,7 @@ abstract class AbstractPhpProcess
     /**
      * Returns the command based into the configurations.
      *
-     * @param array       $settings
+     * @param array $settings
      * @param string|null $file
      *
      * @return string
@@ -246,7 +246,7 @@ abstract class AbstractPhpProcess
      * Runs a single job (PHP code) using a separate PHP process.
      *
      * @param string $job
-     * @param array  $settings
+     * @param array $settings
      *
      * @return array
      *
@@ -273,10 +273,10 @@ abstract class AbstractPhpProcess
     /**
      * Processes the TestResult object from an isolated process.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param TestResult $result
-     * @param string     $stdout
-     * @param string     $stderr
+     * @param string $stdout
+     * @param string $stderr
      */
     private function processChildResult(Test $test, TestResult $result, $stdout, $stderr)
     {
@@ -328,13 +328,13 @@ abstract class AbstractPhpProcess
                     );
                 }
 
-                $time           = $childResult->time();
+                $time = $childResult->time();
                 $notImplemented = $childResult->notImplemented();
-                $risky          = $childResult->risky();
-                $skipped        = $childResult->skipped();
-                $errors         = $childResult->errors();
-                $warnings       = $childResult->warnings();
-                $failures       = $childResult->failures();
+                $risky = $childResult->risky();
+                $skipped = $childResult->skipped();
+                $errors = $childResult->errors();
+                $warnings = $childResult->warnings();
+                $failures = $childResult->failures();
 
                 if (!empty($notImplemented)) {
                     $result->addError(
@@ -398,8 +398,8 @@ abstract class AbstractPhpProcess
 
         if ($exception instanceof __PHP_Incomplete_Class) {
             $exceptionArray = [];
-            foreach ((array) $exception as $key => $value) {
-                $key                  = \substr($key, \strrpos($key, "\0") + 1);
+            foreach ((array)$exception as $key => $value) {
+                $key = \substr($key, \strrpos($key, "\0") + 1);
                 $exceptionArray[$key] = $value;
             }
 

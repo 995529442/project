@@ -25,16 +25,16 @@ class React extends Preset
     /**
      * Update the given package array.
      *
-     * @param  array  $packages
+     * @param  array $packages
      * @return array
      */
     protected static function updatePackageArray(array $packages)
     {
         return [
-            'babel-preset-react' => '^6.23.0',
-            'react' => '^15.4.2',
-            'react-dom' => '^15.4.2',
-        ] + Arr::except($packages, ['vue']);
+                'babel-preset-react' => '^6.23.0',
+                'react' => '^15.4.2',
+                'react-dom' => '^15.4.2',
+            ] + Arr::except($packages, ['vue']);
     }
 
     /**
@@ -44,7 +44,7 @@ class React extends Preset
      */
     protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/react-stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__ . '/react-stubs/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
@@ -59,7 +59,7 @@ class React extends Preset
         );
 
         copy(
-            __DIR__.'/react-stubs/Example.js',
+            __DIR__ . '/react-stubs/Example.js',
             resource_path('assets/js/components/Example.js')
         );
     }
@@ -71,6 +71,6 @@ class React extends Preset
      */
     protected static function updateBootstrapping()
     {
-        copy(__DIR__.'/react-stubs/app.js', resource_path('assets/js/app.js'));
+        copy(__DIR__ . '/react-stubs/app.js', resource_path('assets/js/app.js'));
     }
 }

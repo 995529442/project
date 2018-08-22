@@ -19,7 +19,7 @@ class Response extends BaseResponse
     /**
      * Set the content on the response.
      *
-     * @param  mixed  $content
+     * @param  mixed $content
      * @return $this
      */
     public function setContent($content)
@@ -50,22 +50,22 @@ class Response extends BaseResponse
     /**
      * Determine if the given content should be turned into JSON.
      *
-     * @param  mixed  $content
+     * @param  mixed $content
      * @return bool
      */
     protected function shouldBeJson($content)
     {
         return $content instanceof Arrayable ||
-               $content instanceof Jsonable ||
-               $content instanceof ArrayObject ||
-               $content instanceof JsonSerializable ||
-               is_array($content);
+            $content instanceof Jsonable ||
+            $content instanceof ArrayObject ||
+            $content instanceof JsonSerializable ||
+            is_array($content);
     }
 
     /**
      * Morph the given content into JSON.
      *
-     * @param  mixed   $content
+     * @param  mixed $content
      * @return string
      */
     protected function morphToJson($content)

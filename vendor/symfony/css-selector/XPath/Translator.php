@@ -57,8 +57,7 @@ class Translator implements TranslatorInterface
             ->registerExtension(new Extension\CombinationExtension())
             ->registerExtension(new Extension\FunctionExtension())
             ->registerExtension(new Extension\PseudoClassExtension())
-            ->registerExtension(new Extension\AttributeMatchingExtension())
-        ;
+            ->registerExtension(new Extension\AttributeMatchingExtension());
     }
 
     /**
@@ -69,11 +68,11 @@ class Translator implements TranslatorInterface
     public static function getXpathLiteral($element)
     {
         if (false === strpos($element, "'")) {
-            return "'".$element."'";
+            return "'" . $element . "'";
         }
 
         if (false === strpos($element, '"')) {
-            return '"'.$element.'"';
+            return '"' . $element . '"';
         }
 
         $string = $element;
@@ -116,7 +115,7 @@ class Translator implements TranslatorInterface
      */
     public function selectorToXPath(SelectorNode $selector, $prefix = 'descendant-or-self::')
     {
-        return ($prefix ?: '').$this->nodeToXPath($selector);
+        return ($prefix ?: '') . $this->nodeToXPath($selector);
     }
 
     /**
@@ -180,7 +179,7 @@ class Translator implements TranslatorInterface
     }
 
     /**
-     * @param string        $combiner
+     * @param string $combiner
      * @param NodeInterface $xpath
      * @param NodeInterface $combinedXpath
      *
@@ -213,7 +212,7 @@ class Translator implements TranslatorInterface
 
     /**
      * @param XPathExpr $xpath
-     * @param string    $pseudoClass
+     * @param string $pseudoClass
      *
      * @return XPathExpr
      *
@@ -230,9 +229,9 @@ class Translator implements TranslatorInterface
 
     /**
      * @param XPathExpr $xpath
-     * @param string    $operator
-     * @param string    $attribute
-     * @param string    $value
+     * @param string $operator
+     * @param string $attribute
+     * @param string $value
      *
      * @return XPathExpr
      *

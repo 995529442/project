@@ -14,7 +14,7 @@ class BlurCommand extends \Intervention\Image\Commands\AbstractCommand
     {
         $amount = $this->argument(0)->between(0, 100)->value(1);
 
-        for ($i=0; $i < intval($amount); $i++) {
+        for ($i = 0; $i < intval($amount); $i++) {
             imagefilter($image->getCore(), IMG_FILTER_GAUSSIAN_BLUR);
         }
 

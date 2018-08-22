@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Type;
 
 class IsBooleanTest extends \Hamcrest\AbstractMatcherTest

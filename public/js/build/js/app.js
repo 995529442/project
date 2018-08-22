@@ -1,5 +1,5 @@
 /** kit_admin-v1.0.4 MIT License By http://kit/zhengjinfan.cn */
- ;/**
+;/**
  * Name:app.js
  * Author:Van
  * E-mail:zheng_jinfan@126.com
@@ -7,7 +7,7 @@
  * LICENSE:MIT
  */
 var tab;
-layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel'], function(exports) {
+layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel'], function (exports) {
     console.log(exports)
     var $ = layui.jquery,
         element = layui.element,
@@ -22,22 +22,22 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
         _componentPath = 'components/';
     tab = layui.tab
     var app = {
-        hello: function(str) {
+        hello: function (str) {
             layer.alert('Hello ' + (str || 'test'));
         },
         config: {
             type: 'iframe'
         },
-        set: function(options) {
+        set: function (options) {
             var that = this;
             $.extend(true, that.config, options);
             return that;
         },
-        init: function() {
+        init: function () {
             var that = this,
                 _config = that.config;
             if (_config.type === 'page') {
-                $('a[kit-loader]').on('click', function() {
+                $('a[kit-loader]').on('click', function () {
                     var url = $(this).data('url'),
                         name = $(this).data('name'),
                         id = $(this).data('id');
@@ -51,7 +51,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     function success(data) {
                         switch (data.name) {
                             case 'table':
-                                loader.getScript(_componentPath + 'table/table.js', function() {
+                                loader.getScript(_componentPath + 'table/table.js', function () {
                                     var tableIns = table.render(moduleTable.config);
                                     moduleTable.extend({
                                         currTable: tableIns,
@@ -74,12 +74,12 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
             if (_config.type === 'iframe') {
                 tab.set({
                     elem: '#container',
-                    onSwitch: function(data) { //选项卡切换时触发
+                    onSwitch: function (data) { //选项卡切换时触发
                         //console.log(data.layId); //lay-id值
                         //console.log(data.index); //得到当前Tab的所在下标
                         //console.log(data.elem); //得到当前的Tab大容器
                     },
-                    closeBefore: function(data) { //关闭选项卡之前触发
+                    closeBefore: function (data) { //关闭选项卡之前触发
                         // console.log(data);
                         // console.log(data.icon); //显示的图标
                         // console.log(data.id); //lay-id
@@ -89,7 +89,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     }
                 }).render();
                 //navbar加载方式一，直接绑定已有的dom元素事件                
-                navbar.bind(function(data) {
+                navbar.bind(function (data) {
                     tab.tabAdd(data);
                 });
                 //navbar加载方式二，设置远程地址加载
@@ -136,14 +136,14 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                         remote: {
                             url: '/datas/onelevel1.json' //远程地址
                         },
-                        onClicked: function(id) {
+                        onClicked: function (id) {
                             switch (id) {
                                 case 1:
                                     navbar.set({
                                         remote: {
                                             url: '/datas/navbar1.json'
                                         }
-                                    }).render(function(data) {
+                                    }).render(function (data) {
                                         tab.tabAdd(data);
                                     });
                                     break;
@@ -152,7 +152,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                                         remote: {
                                             url: '/datas/navbar2.json'
                                         }
-                                    }).render(function(data) {
+                                    }).render(function (data) {
                                         tab.tabAdd(data);
                                     });
                                     break;
@@ -181,7 +181,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                                             url: "https://www.baidu.com",
                                             spread: false
                                         }]
-                                    }).render(function(data) {
+                                    }).render(function (data) {
                                         tab.tabAdd(data);
                                     });
                                     break;

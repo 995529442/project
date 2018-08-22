@@ -55,8 +55,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             AuthenticatableContract::class, function ($app) {
-                return call_user_func($app['auth']->userResolver());
-            }
+            return call_user_func($app['auth']->userResolver());
+        }
         );
     }
 

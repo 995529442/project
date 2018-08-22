@@ -78,7 +78,7 @@ class AutoExpireFlashBag implements FlashBagInterface
      */
     public function peekAll()
     {
-        return array_key_exists('display', $this->flashes) ? (array) $this->flashes['display'] : array();
+        return array_key_exists('display', $this->flashes) ? (array)$this->flashes['display'] : array();
     }
 
     /**
@@ -124,7 +124,7 @@ class AutoExpireFlashBag implements FlashBagInterface
      */
     public function set($type, $messages)
     {
-        $this->flashes['new'][$type] = (array) $messages;
+        $this->flashes['new'][$type] = (array)$messages;
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Core;
 
 class IsNotTest extends \Hamcrest\AbstractMatcherTest

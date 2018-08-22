@@ -1,6 +1,10 @@
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
 /* @preserve
  * The MIT License (MIT)
@@ -30,25 +34,40 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * bluebird build version 3.4.6
  * Features enabled: core
  * Features disabled: race, call_get, generators, map, nodeify, promisify, props, reduce, settle, some, using, timers, filter, any, each
-*/
+ */
 !function (e) {
-    if ("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "undefined" != typeof module) module.exports = e();else if ("function" == typeof define && define.amd) define([], e);else {
-        var f;"undefined" != typeof window ? f = window : "undefined" != typeof global ? f = global : "undefined" != typeof self && (f = self), f.Promise = e();
+    if ("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "undefined" != typeof module) module.exports = e(); else if ("function" == typeof define && define.amd) define([], e); else {
+        var f;
+        "undefined" != typeof window ? f = window : "undefined" != typeof global ? f = global : "undefined" != typeof self && (f = self), f.Promise = e();
     }
 }(function () {
-    var define, module, exports;return function e(t, n, r) {
+    var define, module, exports;
+    return function e(t, n, r) {
         function s(o, u) {
             if (!n[o]) {
                 if (!t[o]) {
-                    var a = typeof _dereq_ == "function" && _dereq_;if (!u && a) return a(o, !0);if (i) return i(o, !0);var f = new Error("Cannot find module '" + o + "'");throw f.code = "MODULE_NOT_FOUND", f;
-                }var l = n[o] = { exports: {} };t[o][0].call(l.exports, function (e) {
-                    var n = t[o][1][e];return s(n ? n : e);
+                    var a = typeof _dereq_ == "function" && _dereq_;
+                    if (!u && a) return a(o, !0);
+                    if (i) return i(o, !0);
+                    var f = new Error("Cannot find module '" + o + "'");
+                    throw f.code = "MODULE_NOT_FOUND", f;
+                }
+                var l = n[o] = {exports: {}};
+                t[o][0].call(l.exports, function (e) {
+                    var n = t[o][1][e];
+                    return s(n ? n : e);
                 }, l, l.exports, e, t, n, r);
-            }return n[o].exports;
-        }var i = typeof _dereq_ == "function" && _dereq_;for (var o = 0; o < r.length; o++) {
+            }
+            return n[o].exports;
+        }
+
+        var i = typeof _dereq_ == "function" && _dereq_;
+        for (var o = 0; o < r.length; o++) {
             s(r[o]);
-        }return s;
-    }({ 1: [function (_dereq_, module, exports) {
+        }
+        return s;
+    }({
+        1: [function (_dereq_, module, exports) {
             "use strict";
 
             var firstLineError;
@@ -220,7 +239,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             module.exports = Async;
             module.exports.firstLineError = firstLineError;
-        }, { "./queue": 17, "./schedule": 18, "./util": 21 }], 2: [function (_dereq_, module, exports) {
+        }, {"./queue": 17, "./schedule": 18, "./util": 21}], 2: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise, INTERNAL, tryConvertToPromise, debug) {
@@ -293,16 +312,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             var old;
             if (typeof Promise !== "undefined") old = Promise;
+
             function noConflict() {
                 try {
                     if (Promise === bluebird) Promise = old;
-                } catch (e) {}
+                } catch (e) {
+                }
                 return bluebird;
             }
+
             var bluebird = _dereq_("./promise")();
             bluebird.noConflict = noConflict;
             module.exports = bluebird;
-        }, { "./promise": 15 }], 4: [function (_dereq_, module, exports) {
+        }, {"./promise": 15}], 4: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise, PromiseArray, apiRejection, debug) {
@@ -431,7 +453,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     this.cancel();
                 };
             };
-        }, { "./util": 21 }], 5: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 5: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (NEXT_FILTER) {
@@ -474,23 +496,27 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 return catchFilter;
             };
-        }, { "./es5": 10, "./util": 21 }], 6: [function (_dereq_, module, exports) {
+        }, {"./es5": 10, "./util": 21}], 6: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise) {
                 var longStackTraces = false;
                 var contextStack = [];
 
-                Promise.prototype._promiseCreated = function () {};
-                Promise.prototype._pushContext = function () {};
+                Promise.prototype._promiseCreated = function () {
+                };
+                Promise.prototype._pushContext = function () {
+                };
                 Promise.prototype._popContext = function () {
                     return null;
                 };
-                Promise._peekContext = Promise.prototype._peekContext = function () {};
+                Promise._peekContext = Promise.prototype._peekContext = function () {
+                };
 
                 function Context() {
                     this._trace = new Context.CapturedTrace(peekContext());
                 }
+
                 Context.prototype._pushContext = function () {
                     if (this._trace !== undefined) {
                         this._trace._promiseCreated = null;
@@ -519,9 +545,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
                     return undefined;
                 }
+
                 Context.CapturedTrace = null;
                 Context.create = createContext;
-                Context.deactivateLongStackTraces = function () {};
+                Context.deactivateLongStackTraces = function () {
+                };
                 Context.activateLongStackTraces = function () {
                     var Promise_pushContext = Promise.prototype._pushContext;
                     var Promise_popContext = Promise.prototype._popContext;
@@ -646,7 +674,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     unhandledRejectionHandled = typeof fn === "function" ? domain === null ? fn : util.domainBind(domain, fn) : undefined;
                 };
 
-                var disableLongStackTraces = function disableLongStackTraces() {};
+                var disableLongStackTraces = function disableLongStackTraces() {
+                };
                 Promise.longStackTraces = function () {
                     if (async.haveItemsQueued() && !config.longStackTraces) {
                         throw new Error("cannot enable long stack traces after promises have been created\n\n    See http://goo.gl/MqrFmX\n");
@@ -708,7 +737,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                                 return !util.global.dispatchEvent(domEvent);
                             };
                         }
-                    } catch (e) {}
+                    } catch (e) {
+                    }
                     return function () {
                         return false;
                     };
@@ -736,7 +766,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }();
 
                 function generatePromiseLifecycleEventObject(name, promise) {
-                    return { promise: promise };
+                    return {promise: promise};
                 }
 
                 var eventToObjectGenerator = {
@@ -746,13 +776,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     promiseResolved: generatePromiseLifecycleEventObject,
                     promiseCancelled: generatePromiseLifecycleEventObject,
                     promiseChained: function promiseChained(name, promise, child) {
-                        return { promise: promise, child: child };
+                        return {promise: promise, child: child};
                     },
                     warning: function warning(name, _warning) {
-                        return { warning: _warning };
+                        return {warning: _warning};
                     },
                     unhandledRejection: function unhandledRejection(name, reason, promise) {
-                        return { reason: reason, promise: promise };
+                        return {reason: reason, promise: promise};
                     },
                     rejectionHandled: generatePromiseLifecycleEventObject
                 };
@@ -833,16 +863,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         return e;
                     }
                 };
-                Promise.prototype._onCancel = function () {};
+                Promise.prototype._onCancel = function () {
+                };
                 Promise.prototype._setOnCancel = function (handler) {
                     ;
                 };
                 Promise.prototype._attachCancellationCallback = function (onCancel) {
                     ;
                 };
-                Promise.prototype._captureStackTrace = function () {};
-                Promise.prototype._attachExtraTrace = function () {};
-                Promise.prototype._clearCancellationData = function () {};
+                Promise.prototype._captureStackTrace = function () {
+                };
+                Promise.prototype._attachExtraTrace = function () {
+                };
+                Promise.prototype._clearCancellationData = function () {
+                };
                 Promise.prototype._propagateFrom = function (parent, flags) {
                     ;
                     ;
@@ -909,6 +943,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         this._setBoundTo(parent._boundTo);
                     }
                 }
+
                 var _propagateFromFunction = bindingPropagateFrom;
 
                 function _boundValueFunction() {
@@ -1149,7 +1184,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                             try {
                                 var newStr = JSON.stringify(obj);
                                 str = newStr;
-                            } catch (e) {}
+                            } catch (e) {
+                            }
                         }
                         if (str.length === 0) {
                             str = "(empty array)";
@@ -1174,6 +1210,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     return false;
                 };
                 var parseLineInfoRegex = /[\/<\(]([^:\/]+):(\d+):(?:\d+)\)?\s*$/;
+
                 function parseLineInfo(line) {
                     var matches = line.match(parseLineInfoRegex);
                     if (matches) {
@@ -1231,6 +1268,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     captureStackTrace(this, CapturedTrace);
                     if (length > 32) this.uncycle();
                 }
+
                 util.inherits(CapturedTrace, Error);
                 Context.CapturedTrace = CapturedTrace;
 
@@ -1421,29 +1459,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     fireGlobalEvent: fireGlobalEvent
                 };
             };
-        }, { "./errors": 9, "./util": 21 }], 8: [function (_dereq_, module, exports) {
+        }, {"./errors": 9, "./util": 21}], 8: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise) {
                 function returner() {
                     return this.value;
                 }
+
                 function thrower() {
                     throw this.reason;
                 }
 
                 Promise.prototype["return"] = Promise.prototype.thenReturn = function (value) {
                     if (value instanceof Promise) value.suppressUnhandledRejections();
-                    return this._then(returner, undefined, undefined, { value: value }, undefined);
+                    return this._then(returner, undefined, undefined, {value: value}, undefined);
                 };
 
                 Promise.prototype["throw"] = Promise.prototype.thenThrow = function (reason) {
-                    return this._then(thrower, undefined, undefined, { reason: reason }, undefined);
+                    return this._then(thrower, undefined, undefined, {reason: reason}, undefined);
                 };
 
                 Promise.prototype.catchThrow = function (reason) {
                     if (arguments.length <= 1) {
-                        return this._then(undefined, thrower, undefined, { reason: reason }, undefined);
+                        return this._then(undefined, thrower, undefined, {reason: reason}, undefined);
                     } else {
                         var _reason = arguments[1];
                         var handler = function handler() {
@@ -1456,7 +1495,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 Promise.prototype.catchReturn = function (value) {
                     if (arguments.length <= 1) {
                         if (value instanceof Promise) value.suppressUnhandledRejections();
-                        return this._then(undefined, returner, undefined, { value: value }, undefined);
+                        return this._then(undefined, returner, undefined, {value: value}, undefined);
                     } else {
                         var _value = arguments[1];
                         if (_value instanceof Promise) _value.suppressUnhandledRejections();
@@ -1487,6 +1526,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         Error.call(this);
                     }
                 }
+
                 inherits(SubError, Error);
                 return SubError;
             }
@@ -1552,6 +1592,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     Error.captureStackTrace(this, this.constructor);
                 }
             }
+
             inherits(OperationalError, Error);
 
             var errorTypes = Error["__BluebirdErrorTypes__"];
@@ -1581,7 +1622,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 AggregateError: errorTypes.AggregateError,
                 Warning: Warning
             };
-        }, { "./es5": 10, "./util": 21 }], 10: [function (_dereq_, module, exports) {
+        }, {"./es5": 10, "./util": 21}], 10: [function (_dereq_, module, exports) {
             var isES5 = function () {
                 "use strict";
 
@@ -1619,7 +1660,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 };
 
                 var ObjectGetDescriptor = function ObjectGetDescriptor(o, key) {
-                    return { value: o[key] };
+                    return {value: o[key]};
                 };
 
                 var ObjectDefineProperty = function ObjectDefineProperty(o, key, desc) {
@@ -1705,11 +1746,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 function succeed() {
                     return finallyHandler.call(this, this.promise._target()._settledValue());
                 }
+
                 function fail(reason) {
                     if (checkCancel(this, reason)) return;
                     errorObj.e = reason;
                     return errorObj;
                 }
+
                 function finallyHandler(reasonOrValue) {
                     var promise = this.promise;
                     var handler = this.handler;
@@ -1761,7 +1804,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 return PassThroughHandlerContext;
             };
-        }, { "./util": 21 }], 12: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 12: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise, PromiseArray, tryConvertToPromise, INTERNAL, async, getDomain) {
@@ -1915,13 +1958,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                             }
                         }
                     }
-                    var args = [].slice.call(arguments);;
+                    var args = [].slice.call(arguments);
+                    ;
                     if (fn) args.pop();
                     var ret = new PromiseArray(args).promise();
                     return fn !== undefined ? ret.spread(fn) : ret;
                 };
             };
-        }, { "./util": 21 }], 13: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 13: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise, INTERNAL, tryConvertToPromise, apiRejection, debug) {
@@ -1974,7 +2018,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     }
                 };
             };
-        }, { "./util": 21 }], 14: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 14: [function (_dereq_, module, exports) {
             "use strict";
 
             var util = _dereq_("./util");
@@ -1988,6 +2032,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 
             var rErrorKey = /^(?:name|message|stack|cause)$/;
+
             function wrapAsOperationalError(obj) {
                 var ret;
                 if (isUntypedError(obj)) {
@@ -2018,7 +2063,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     } else if (!multiArgs) {
                         promise._fulfill(value);
                     } else {
-                        var args = [].slice.call(arguments, 1);;
+                        var args = [].slice.call(arguments, 1);
+                        ;
                         promise._fulfill(args);
                     }
                     promise = null;
@@ -2026,7 +2072,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
 
             module.exports = nodebackForPromise;
-        }, { "./errors": 9, "./es5": 10, "./util": 21 }], 15: [function (_dereq_, module, exports) {
+        }, {"./errors": 9, "./es5": 10, "./util": 21}], 15: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function () {
@@ -2039,7 +2085,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var apiRejection = function apiRejection(msg) {
                     return Promise.reject(new TypeError(msg));
                 };
-                function Proxyable() {}
+
+                function Proxyable() {
+                }
+
                 var UNDEFINED_BINDING = {};
                 var util = _dereq_("./util");
 
@@ -2060,7 +2109,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var es5 = _dereq_("./es5");
                 var Async = _dereq_("./async");
                 var async = new Async();
-                es5.defineProperty(Promise, "_async", { value: async });
+                es5.defineProperty(Promise, "_async", {value: async});
                 var errors = _dereq_("./errors");
                 var TypeError = Promise.TypeError = errors.TypeError;
                 Promise.RangeError = errors.RangeError;
@@ -2069,7 +2118,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 Promise.OperationalError = errors.OperationalError;
                 Promise.RejectionError = errors.OperationalError;
                 Promise.AggregateError = errors.AggregateError;
-                var INTERNAL = function INTERNAL() {};
+                var INTERNAL = function INTERNAL() {
+                };
                 var APPLY = {};
                 var NEXT_FILTER = {};
                 var tryConvertToPromise = _dereq_("./thenables")(Promise, INTERNAL);
@@ -2084,6 +2134,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var nodebackForPromise = _dereq_("./nodeback");
                 var errorObj = util.errorObj;
                 var tryCatch = util.tryCatch;
+
                 function check(self, executor) {
                     if (typeof executor !== "function") {
                         throw new TypeError("expecting a function but got " + util.classString(executor));
@@ -2366,7 +2417,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     return this[index * 4 - 4 + 1];
                 };
 
-                Promise.prototype._boundValue = function () {};
+                Promise.prototype._boundValue = function () {
+                };
 
                 Promise.prototype._migrateCallback0 = function (follower) {
                     var bitField = follower._bitField;
@@ -2521,7 +2573,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     var ret = this;
                     while (ret._isFollowing()) {
                         ret = ret._followee();
-                    }return ret;
+                    }
+                    return ret;
                 };
 
                 Promise.prototype._followee = function () {
@@ -2699,6 +2752,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 function deferResolve(v) {
                     this.promise._resolveCallback(v);
                 }
+
                 function deferReject(v) {
                     this.promise._rejectCallback(v, false);
                 }
@@ -2726,6 +2780,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 util.toFastProperties(Promise);
                 util.toFastProperties(Promise.prototype);
+
                 function fillTypes(value) {
                     var p = new Promise(INTERNAL);
                     p._fulfillmentHandler0 = value;
@@ -2733,20 +2788,40 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     p._promise0 = value;
                     p._receiver0 = value;
                 }
-                // Complete slack tracking, opt out of field-type tracking and           
+
+                // Complete slack tracking, opt out of field-type tracking and
                 // stabilize map                                                         
-                fillTypes({ a: 1 });
-                fillTypes({ b: 2 });
-                fillTypes({ c: 3 });
+                fillTypes({a: 1});
+                fillTypes({b: 2});
+                fillTypes({c: 3});
                 fillTypes(1);
-                fillTypes(function () {});
+                fillTypes(function () {
+                });
                 fillTypes(undefined);
                 fillTypes(false);
                 fillTypes(new Promise(INTERNAL));
                 debug.setBounds(Async.firstLineError, util.lastLineError);
                 return Promise;
             };
-        }, { "./async": 1, "./bind": 2, "./cancel": 4, "./catch_filter": 5, "./context": 6, "./debuggability": 7, "./direct_resolve": 8, "./errors": 9, "./es5": 10, "./finally": 11, "./join": 12, "./method": 13, "./nodeback": 14, "./promise_array": 16, "./synchronous_inspection": 19, "./thenables": 20, "./util": 21 }], 16: [function (_dereq_, module, exports) {
+        }, {
+            "./async": 1,
+            "./bind": 2,
+            "./cancel": 4,
+            "./catch_filter": 5,
+            "./context": 6,
+            "./debuggability": 7,
+            "./direct_resolve": 8,
+            "./errors": 9,
+            "./es5": 10,
+            "./finally": 11,
+            "./join": 12,
+            "./method": 13,
+            "./nodeback": 14,
+            "./promise_array": 16,
+            "./synchronous_inspection": 19,
+            "./thenables": 20,
+            "./util": 21
+        }], 16: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise, INTERNAL, tryConvertToPromise, apiRejection, Proxyable) {
@@ -2773,6 +2848,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     this._totalResolved = 0;
                     this._init(undefined, -2);
                 }
+
                 util.inherits(PromiseArray, Proxyable);
 
                 PromiseArray.prototype.length = function () {
@@ -2925,7 +3001,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 return PromiseArray;
             };
-        }, { "./util": 21 }], 17: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 17: [function (_dereq_, module, exports) {
             "use strict";
 
             function arrayMove(src, srcIndex, dst, dstIndex, len) {
@@ -3041,7 +3117,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             } else if (typeof MutationObserver !== "undefined" && !(typeof window !== "undefined" && window.navigator && (window.navigator.standalone || window.cordova))) {
                 schedule = function () {
                     var div = document.createElement("div");
-                    var opts = { attributes: true };
+                    var opts = {attributes: true};
                     var toggleScheduled = false;
                     var div2 = document.createElement("div");
                     var o2 = new MutationObserver(function () {
@@ -3077,7 +3153,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 schedule = noAsyncScheduler;
             }
             module.exports = schedule;
-        }, { "./util": 21 }], 19: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 19: [function (_dereq_, module, exports) {
             "use strict";
 
             module.exports = function (Promise) {
@@ -3222,6 +3298,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
 
                 var hasProp = {}.hasOwnProperty;
+
                 function isAnyBluebirdPromise(obj) {
                     try {
                         return hasProp.call(obj, "_promise0");
@@ -3256,18 +3333,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         promise._rejectCallback(reason, synchronous, true);
                         promise = null;
                     }
+
                     return ret;
                 }
 
                 return tryConvertToPromise;
             };
-        }, { "./util": 21 }], 21: [function (_dereq_, module, exports) {
+        }, {"./util": 21}], 21: [function (_dereq_, module, exports) {
             "use strict";
 
             var es5 = _dereq_("./es5");
             var canEvaluate = typeof navigator == "undefined";
 
-            var errorObj = { e: {} };
+            var errorObj = {e: {}};
             var tryCatchTarget;
             var globalObject = typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : this !== undefined ? this : null;
 
@@ -3281,6 +3359,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     return errorObj;
                 }
             }
+
             function tryCatch(fn) {
                 tryCatchTarget = fn;
                 return tryCatcher;
@@ -3298,6 +3377,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         }
                     }
                 }
+
                 T.prototype = Parent.prototype;
                 Child.prototype = new T();
                 return Child.prototype;
@@ -3418,6 +3498,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }();
 
             var thisAssignmentPattern = /this\s*\.\s*\S+\s*=/;
+
             function isClass(fn) {
                 try {
                     if (typeof fn === "function") {
@@ -3439,16 +3520,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             function toFastProperties(obj) {
                 /*jshint -W027,-W055,-W031*/
-                function FakeConstructor() {}
+                function FakeConstructor() {
+                }
+
                 FakeConstructor.prototype = obj;
                 var l = 8;
                 while (l--) {
                     new FakeConstructor();
-                }return obj;
+                }
+                return obj;
                 eval(obj);
             }
 
             var rident = /^[a-z$_][a-z$_0-9]*$/i;
+
             function isIdentifier(str) {
                 return rident.test(str);
             }
@@ -3476,7 +3561,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             function markAsOriginatingFromRejection(e) {
                 try {
                     notEnumerableProp(e, "isOperational", true);
-                } catch (ignore) {}
+                } catch (ignore) {
+                }
             }
 
             function originatesFromRejection(e) {
@@ -3517,7 +3603,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     if (filter(key)) {
                         try {
                             es5.defineProperty(to, key, es5.getDescriptor(from, key));
-                        } catch (ignore) {}
+                        } catch (ignore) {
+                        }
                     }
                 }
             }
@@ -3561,11 +3648,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             function getNativePromise() {
                 if (typeof Promise === "function") {
                     try {
-                        var promise = new Promise(function () {});
+                        var promise = new Promise(function () {
+                        });
                         if ({}.toString.call(promise) === "[object Promise]") {
                             return Promise;
                         }
-                    } catch (e) {}
+                    } catch (e) {
+                    }
                 }
             }
 
@@ -3620,8 +3709,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 ret.lastLineError = e;
             }
             module.exports = ret;
-        }, { "./es5": 10 }] }, {}, [3])(3);
-});;if (typeof window !== 'undefined' && window !== null) {
+        }, {"./es5": 10}]
+    }, {}, [3])(3);
+});
+;
+if (typeof window !== 'undefined' && window !== null) {
     window.P = window.Promise;
 } else if (typeof self !== 'undefined' && self !== null) {
     self.P = self.Promise;

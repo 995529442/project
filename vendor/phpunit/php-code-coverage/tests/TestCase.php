@@ -31,8 +31,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         return [
             [
                 TEST_FILES_PATH . 'BankAccount.php' => [
-                    8  => 1,
-                    9  => -2,
+                    8 => 1,
+                    9 => -2,
                     13 => -1,
                     14 => -1,
                     15 => -1,
@@ -48,7 +48,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             ],
             [
                 TEST_FILES_PATH . 'BankAccount.php' => [
-                    8  => 1,
+                    8 => 1,
                     13 => 1,
                     16 => 1,
                     29 => 1,
@@ -56,7 +56,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             ],
             [
                 TEST_FILES_PATH . 'BankAccount.php' => [
-                    8  => 1,
+                    8 => 1,
                     13 => 1,
                     16 => 1,
                     22 => 1,
@@ -64,7 +64,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             ],
             [
                 TEST_FILES_PATH . 'BankAccount.php' => [
-                    8  => 1,
+                    8 => 1,
                     13 => 1,
                     14 => 1,
                     15 => 1,
@@ -238,7 +238,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                     0 => 'BankAccountTest::testBalanceIsInitiallyZero',
                     1 => 'BankAccountTest::testDepositWithdrawMoney'
                 ],
-                9  => null,
+                9 => null,
                 13 => [],
                 14 => [],
                 15 => [],
@@ -325,8 +325,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             ->will($this->returnValue(
                 [
                     TEST_FILES_PATH . 'source_with_class_and_anonymous_function.php' => [
-                        7  => 1,
-                        9  => 1,
+                        7 => 1,
+                        9 => 1,
                         10 => -1,
                         11 => 1,
                         12 => 1,

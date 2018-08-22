@@ -33,10 +33,10 @@ class ErrorHandler
     }
 
     /**
-     * @param int    $errno
+     * @param int $errno
      * @param string $errstr
      * @param string $errfile
-     * @param int    $errline
+     * @param int $errline
      *
      * @return false
      *

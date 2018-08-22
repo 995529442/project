@@ -1,4 +1,5 @@
 <?php
+
 class Issue2145Test extends PHPUnit\Framework\TestCase
 {
     public static function setUpBeforeClass()

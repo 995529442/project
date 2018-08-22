@@ -48,7 +48,7 @@ class ThrowUpCommand extends Command implements ContextAware
     {
         $parserFactory = new ParserFactory();
 
-        $this->parser  = $parserFactory->createParser();
+        $this->parser = $parserFactory->createParser();
         $this->printer = new Printer();
 
         parent::__construct($name);

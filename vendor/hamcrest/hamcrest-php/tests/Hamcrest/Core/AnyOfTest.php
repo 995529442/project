@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Core;
 
 class AnyOfTest extends \Hamcrest\AbstractMatcherTest

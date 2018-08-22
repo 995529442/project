@@ -89,13 +89,13 @@ class PrettyPageHandler extends Handler
      * @var array
      */
     protected $editors = [
-        "sublime"  => "subl://open?url=file://%file&line=%line",
+        "sublime" => "subl://open?url=file://%file&line=%line",
         "textmate" => "txmt://open?url=file://%file&line=%line",
-        "emacs"    => "emacs://open?url=file://%file&line=%line",
-        "macvim"   => "mvim://open/?url=file://%file&line=%line",
+        "emacs" => "emacs://open?url=file://%file&line=%line",
+        "macvim" => "mvim://open/?url=file://%file&line=%line",
         "phpstorm" => "phpstorm://open?file=%file&line=%line",
-        "idea"     => "idea://open?file=%file&line=%line",
-        "vscode"   => "vscode://file/%file:%line",
+        "idea" => "idea://open?file=%file&line=%line",
+        "vscode" => "vscode://file/%file:%line",
     ];
 
     /**
@@ -157,7 +157,7 @@ class PrettyPageHandler extends Handler
                 if (isset($_ENV['whoops-test'])) {
                     throw new \Exception(
                         'Use handleUnconditionally instead of whoops-test'
-                        .' environment variable'
+                        . ' environment variable'
                     );
                 }
 
@@ -166,11 +166,11 @@ class PrettyPageHandler extends Handler
         }
 
         $templateFile = $this->getResource("views/layout.html.php");
-        $cssFile      = $this->getResource("css/whoops.base.css");
-        $zeptoFile    = $this->getResource("js/zepto.min.js");
+        $cssFile = $this->getResource("css/whoops.base.css");
+        $zeptoFile = $this->getResource("js/zepto.min.js");
         $prettifyFile = $this->getResource("js/prettify.min.js");
-        $clipboard    = $this->getResource("js/clipboard.min.js");
-        $jsFile       = $this->getResource("js/whoops.base.js");
+        $clipboard = $this->getResource("js/clipboard.min.js");
+        $jsFile = $this->getResource("js/whoops.base.js");
 
         if ($this->customCss) {
             $customCssFile = $this->getResource($this->customCss);
@@ -186,45 +186,45 @@ class PrettyPageHandler extends Handler
 
             // @todo: Asset compiler
             "stylesheet" => file_get_contents($cssFile),
-            "zepto"      => file_get_contents($zeptoFile),
-            "prettify"   => file_get_contents($prettifyFile),
-            "clipboard"  => file_get_contents($clipboard),
+            "zepto" => file_get_contents($zeptoFile),
+            "prettify" => file_get_contents($prettifyFile),
+            "clipboard" => file_get_contents($clipboard),
             "javascript" => file_get_contents($jsFile),
 
             // Template paths:
-            "header"                     => $this->getResource("views/header.html.php"),
-            "header_outer"               => $this->getResource("views/header_outer.html.php"),
-            "frame_list"                 => $this->getResource("views/frame_list.html.php"),
-            "frames_description"         => $this->getResource("views/frames_description.html.php"),
-            "frames_container"           => $this->getResource("views/frames_container.html.php"),
-            "panel_details"              => $this->getResource("views/panel_details.html.php"),
-            "panel_details_outer"        => $this->getResource("views/panel_details_outer.html.php"),
-            "panel_left"                 => $this->getResource("views/panel_left.html.php"),
-            "panel_left_outer"           => $this->getResource("views/panel_left_outer.html.php"),
-            "frame_code"                 => $this->getResource("views/frame_code.html.php"),
-            "env_details"                => $this->getResource("views/env_details.html.php"),
+            "header" => $this->getResource("views/header.html.php"),
+            "header_outer" => $this->getResource("views/header_outer.html.php"),
+            "frame_list" => $this->getResource("views/frame_list.html.php"),
+            "frames_description" => $this->getResource("views/frames_description.html.php"),
+            "frames_container" => $this->getResource("views/frames_container.html.php"),
+            "panel_details" => $this->getResource("views/panel_details.html.php"),
+            "panel_details_outer" => $this->getResource("views/panel_details_outer.html.php"),
+            "panel_left" => $this->getResource("views/panel_left.html.php"),
+            "panel_left_outer" => $this->getResource("views/panel_left_outer.html.php"),
+            "frame_code" => $this->getResource("views/frame_code.html.php"),
+            "env_details" => $this->getResource("views/env_details.html.php"),
 
-            "title"          => $this->getPageTitle(),
-            "name"           => explode("\\", $inspector->getExceptionName()),
-            "message"        => $inspector->getExceptionMessage(),
-            "docref_url"     => $inspector->getExceptionDocrefUrl(),
-            "code"           => $code,
+            "title" => $this->getPageTitle(),
+            "name" => explode("\\", $inspector->getExceptionName()),
+            "message" => $inspector->getExceptionMessage(),
+            "docref_url" => $inspector->getExceptionDocrefUrl(),
+            "code" => $code,
             "plain_exception" => Formatter::formatExceptionPlain($inspector),
-            "frames"         => $frames,
-            "has_frames"     => !!count($frames),
-            "handler"        => $this,
-            "handlers"       => $this->getRun()->getHandlers(),
+            "frames" => $frames,
+            "has_frames" => !!count($frames),
+            "handler" => $this,
+            "handlers" => $this->getRun()->getHandlers(),
 
-            "active_frames_tab" => count($frames) && $frames->offsetGet(0)->isApplication() ?  'application' : 'all',
-            "has_frames_tabs"   => $this->getApplicationPaths(),
+            "active_frames_tab" => count($frames) && $frames->offsetGet(0)->isApplication() ? 'application' : 'all',
+            "has_frames_tabs" => $this->getApplicationPaths(),
 
-            "tables"      => [
-                "GET Data"              => $this->masked($_GET, '_GET'),
-                "POST Data"             => $this->masked($_POST, '_POST'),
-                "Files"                 => isset($_FILES) ? $this->masked($_FILES, '_FILES') : [],
-                "Cookies"               => $this->masked($_COOKIE, '_COOKIE'),
-                "Session"               => isset($_SESSION) ? $this->masked($_SESSION, '_SESSION') :  [],
-                "Server/Request Data"   => $this->masked($_SERVER, '_SERVER'),
+            "tables" => [
+                "GET Data" => $this->masked($_GET, '_GET'),
+                "POST Data" => $this->masked($_POST, '_POST'),
+                "Files" => isset($_FILES) ? $this->masked($_FILES, '_FILES') : [],
+                "Cookies" => $this->masked($_COOKIE, '_COOKIE'),
+                "Session" => isset($_SESSION) ? $this->masked($_SESSION, '_SESSION') : [],
+                "Server/Request Data" => $this->masked($_SERVER, '_SERVER'),
                 "Environment Variables" => $this->masked($_ENV, '_ENV'),
             ],
         ];
@@ -243,7 +243,7 @@ class PrettyPageHandler extends Handler
         $plainTextHandler = new PlainTextHandler();
         $plainTextHandler->setException($this->getException());
         $plainTextHandler->setInspector($this->getInspector());
-        $vars["preface"] = "<!--\n\n\n" .  $this->templateHelper->escape($plainTextHandler->generateResponse()) . "\n\n\n\n\n\n\n\n\n\n\n-->";
+        $vars["preface"] = "<!--\n\n\n" . $this->templateHelper->escape($plainTextHandler->generateResponse()) . "\n\n\n\n\n\n\n\n\n\n\n-->";
 
         $this->templateHelper->setVariables($vars);
         $this->templateHelper->render($templateFile);
@@ -289,7 +289,7 @@ class PrettyPageHandler extends Handler
             $code = Misc::translateErrorCode($exception->getSeverity());
         }
 
-        return (string) $code;
+        return (string)$code;
     }
 
     /**
@@ -305,7 +305,7 @@ class PrettyPageHandler extends Handler
      * The expected data is a simple associative array. Any nested arrays
      * will be flattened with print_r
      * @param string $label
-     * @param array  $data
+     * @param array $data
      */
     public function addDataTable($label, array $data)
     {
@@ -319,10 +319,11 @@ class PrettyPageHandler extends Handler
      * be flattened with print_r.
      *
      * @throws InvalidArgumentException If $callback is not callable
-     * @param  string                   $label
-     * @param  callable                 $callback Callable returning an associative array
+     * @param  string $label
+     * @param  callable $callback Callable returning an associative array
      */
-    public function addDataTableCallback($label, /* callable */ $callback)
+    public function addDataTableCallback($label, /* callable */
+                                         $callback)
     {
         if (!is_callable($callback)) {
             throw new InvalidArgumentException('Expecting callback argument to be callable');
@@ -345,14 +346,14 @@ class PrettyPageHandler extends Handler
      * Returns all the extra data tables registered with this handler.
      * Optionally accepts a 'label' parameter, to only return the data
      * table under that label.
-     * @param  string|null      $label
+     * @param  string|null $label
      * @return array[]|callable
      */
     public function getDataTables($label = null)
     {
         if ($label !== null) {
             return isset($this->extraTables[$label]) ?
-                   $this->extraTables[$label] : [];
+                $this->extraTables[$label] : [];
         }
 
         return $this->extraTables;
@@ -371,7 +372,7 @@ class PrettyPageHandler extends Handler
             return $this->handleUnconditionally;
         }
 
-        $this->handleUnconditionally = (bool) $value;
+        $this->handleUnconditionally = (bool)$value;
     }
 
     /**
@@ -407,7 +408,7 @@ class PrettyPageHandler extends Handler
      *   $run->setEditor('sublime');
      *
      * @throws InvalidArgumentException If invalid argument identifier provided
-     * @param  string|callable          $editor
+     * @param  string|callable $editor
      */
     public function setEditor($editor)
     {
@@ -428,8 +429,8 @@ class PrettyPageHandler extends Handler
      * file reference.
      *
      * @throws InvalidArgumentException If editor resolver does not return a string
-     * @param  string                   $filePath
-     * @param  int                      $line
+     * @param  string $filePath
+     * @param  int $line
      * @return string|bool
      */
     public function getEditorHref($filePath, $line)
@@ -460,8 +461,8 @@ class PrettyPageHandler extends Handler
      * valid callable function/closure
      *
      * @throws UnexpectedValueException  If editor resolver does not return a boolean
-     * @param  string                   $filePath
-     * @param  int                      $line
+     * @param  string $filePath
+     * @param  int $line
      * @return bool
      */
     public function getEditorAjax($filePath, $line)
@@ -483,7 +484,7 @@ class PrettyPageHandler extends Handler
      * valid callable function/closure
      *
      * @param  string $filePath
-     * @param  int    $line
+     * @param  int $line
      * @return array
      */
     protected function getEditor($filePath, $line)
@@ -528,7 +529,7 @@ class PrettyPageHandler extends Handler
      */
     public function setPageTitle($title)
     {
-        $this->pageTitle = (string) $title;
+        $this->pageTitle = (string)$title;
     }
 
     /**
@@ -612,7 +613,7 @@ class PrettyPageHandler extends Handler
         // If we got this far, nothing was found.
         throw new RuntimeException(
             "Could not find resource '$resource' in any resource paths."
-            . "(searched: " . join(", ", $this->searchPaths). ")"
+            . "(searched: " . join(", ", $this->searchPaths) . ")"
         );
     }
 

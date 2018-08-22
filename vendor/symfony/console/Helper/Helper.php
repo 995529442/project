@@ -57,8 +57,8 @@ abstract class Helper implements HelperInterface
     /**
      * Returns the subset of a string, using mb_substr if it is available.
      *
-     * @param string   $string String to subset
-     * @param int      $from   Start offset
+     * @param string $string String to subset
+     * @param int $from Start offset
      * @param int|null $length Length to read
      *
      * @return string The string subset
@@ -95,7 +95,7 @@ abstract class Helper implements HelperInterface
                         return $format[1];
                     }
 
-                    return floor($secs / $format[2]).' '.$format[1];
+                    return floor($secs / $format[2]) . ' ' . $format[1];
                 }
             }
         }

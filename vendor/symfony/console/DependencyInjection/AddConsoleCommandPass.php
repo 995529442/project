@@ -47,7 +47,7 @@ class AddConsoleCommandPass implements CompilerPassInterface
             $definition = $container->getDefinition($id);
             $class = $container->getParameterBag()->resolveValue($definition->getClass());
 
-            $commandId = 'console.command.'.strtolower(str_replace('\\', '_', $class));
+            $commandId = 'console.command.' . strtolower(str_replace('\\', '_', $class));
 
             if (isset($tags[0]['command'])) {
                 $commandName = $tags[0]['command'];
@@ -63,7 +63,7 @@ class AddConsoleCommandPass implements CompilerPassInterface
 
             if (null === $commandName) {
                 if (isset($serviceIds[$commandId]) || $container->hasAlias($commandId)) {
-                    $commandId = $commandId.'_'.$id;
+                    $commandId = $commandId . '_' . $id;
                 }
                 if (!$definition->isPublic() || $definition->isPrivate()) {
                     $container->setAlias($commandId, $id)->setPublic(true);

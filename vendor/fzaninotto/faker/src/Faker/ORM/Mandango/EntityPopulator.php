@@ -102,7 +102,7 @@ class EntityPopulator
         $obj = $mandango->create($this->class);
         foreach ($this->columnFormatters as $column => $format) {
             if (null !== $format) {
-                $value =  is_callable($format) ? $format($insertedEntities, $obj) : $format;
+                $value = is_callable($format) ? $format($insertedEntities, $obj) : $format;
 
                 if (isset($metadata['fields'][$column]) ||
                     isset($metadata['referencesOne'][$column])) {
@@ -110,7 +110,7 @@ class EntityPopulator
                 }
 
                 if (isset($metadata['referencesMany'][$column])) {
-                    $adder = 'add'.ucfirst($column);
+                    $adder = 'add' . ucfirst($column);
                     $obj->$adder($value);
                 }
             }

@@ -206,31 +206,31 @@ class Mock implements MockInterface
 
         $lastExpectation = \Mockery::parseShouldReturnArgs(
             $this, $methodNames, function ($method) use ($self, $allowMockingProtectedMethods) {
-                $rm = $self->mockery_getMethod($method);
-                if ($rm) {
-                    if ($rm->isPrivate()) {
-                        throw new \InvalidArgumentException("$method() cannot be mocked as it is a private method");
-                    }
-                    if (!$allowMockingProtectedMethods && $rm->isProtected()) {
-                        throw new \InvalidArgumentException("$method() cannot be mocked as it is a protected method and mocking protected methods is not enabled for the currently used mock object. Use shouldAllowMockingProtectedMethods() to enable mocking of protected methods.");
-                    }
+            $rm = $self->mockery_getMethod($method);
+            if ($rm) {
+                if ($rm->isPrivate()) {
+                    throw new \InvalidArgumentException("$method() cannot be mocked as it is a private method");
                 }
-
-                $director = $self->mockery_getExpectationsFor($method);
-                if (!$director) {
-                    $director = new \Mockery\ExpectationDirector($method, $self);
-                    $self->mockery_setExpectationsFor($method, $director);
+                if (!$allowMockingProtectedMethods && $rm->isProtected()) {
+                    throw new \InvalidArgumentException("$method() cannot be mocked as it is a protected method and mocking protected methods is not enabled for the currently used mock object. Use shouldAllowMockingProtectedMethods() to enable mocking of protected methods.");
                 }
-                $expectation = new \Mockery\Expectation($self, $method);
-                $director->addExpectation($expectation);
-                return $expectation;
             }
+
+            $director = $self->mockery_getExpectationsFor($method);
+            if (!$director) {
+                $director = new \Mockery\ExpectationDirector($method, $self);
+                $self->mockery_setExpectationsFor($method, $director);
+            }
+            $expectation = new \Mockery\Expectation($self, $method);
+            $director->addExpectation($expectation);
+            return $expectation;
+        }
         );
         return $lastExpectation;
     }
 
     /**
-     * @param mixed $something  String method name or map of method => return
+     * @param mixed $something String method name or map of method => return
      * @return self|\Mockery\ExpectationInterface|\Mockery\Expectation|\Mockery\HigherOrderMessage
      */
     public function allows($something = [])
@@ -251,7 +251,7 @@ class Mock implements MockInterface
     }
 
     /**
-     * @param mixed $something  String method name (optional)
+     * @param mixed $something String method name (optional)
      * @return \Mockery\ExpectationInterface|\Mockery\Expectation|ExpectsHigherOrderMessage
      */
     public function expects($something = null)
@@ -692,14 +692,20 @@ class Mock implements MockInterface
             return null;
         }
 
-        $type = (string) $returnType;
+        $type = (string)$returnType;
         switch ($type) {
-            case '':       return;
-            case 'string': return '';
-            case 'int':    return 0;
-            case 'float':  return 0.0;
-            case 'bool':   return false;
-            case 'array':  return [];
+            case '':
+                return;
+            case 'string':
+                return '';
+            case 'int':
+                return 0;
+            case 'float':
+                return 0.0;
+            case 'bool':
+                return false;
+            case 'array':
+                return [];
 
             case 'callable':
             case 'Closure':

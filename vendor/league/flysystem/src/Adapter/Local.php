@@ -65,9 +65,9 @@ class Local extends AbstractAdapter
      * Constructor.
      *
      * @param string $root
-     * @param int    $writeFlags
-     * @param int    $linkHandling
-     * @param array  $permissions
+     * @param int $writeFlags
+     * @param int $linkHandling
+     * @param array $permissions
      *
      * @throws LogicException
      */
@@ -77,7 +77,7 @@ class Local extends AbstractAdapter
         $this->permissionMap = array_replace_recursive(static::$permissions, $permissions);
         $this->ensureDirectory($root);
 
-        if ( ! is_dir($root) || ! is_readable($root)) {
+        if (!is_dir($root) || !is_readable($root)) {
             throw new LogicException('The root path ' . $root . ' is not readable.');
         }
 
@@ -97,12 +97,12 @@ class Local extends AbstractAdapter
      */
     protected function ensureDirectory($root)
     {
-        if ( ! is_dir($root)) {
+        if (!is_dir($root)) {
             $umask = umask(0);
             @mkdir($root, $this->permissionMap['dir']['public'], true);
             umask($umask);
 
-            if ( ! is_dir($root)) {
+            if (!is_dir($root)) {
                 throw new Exception(sprintf('Impossible to create the root directory "%s".', $root));
             }
         }
@@ -150,13 +150,13 @@ class Local extends AbstractAdapter
         $this->ensureDirectory(dirname($location));
         $stream = fopen($location, 'w+b');
 
-        if ( ! $stream) {
+        if (!$stream) {
             return false;
         }
 
         stream_copy_to_stream($resource, $stream);
 
-        if ( ! fclose($stream)) {
+        if (!fclose($stream)) {
             return false;
         }
 
@@ -272,7 +272,7 @@ class Local extends AbstractAdapter
         $result = [];
         $location = $this->applyPathPrefix($directory);
 
-        if ( ! is_dir($location)) {
+        if (!is_dir($location)) {
             return [];
         }
 
@@ -372,7 +372,7 @@ class Local extends AbstractAdapter
         $umask = umask(0);
         $visibility = $config->get('visibility', 'public');
 
-        if ( ! is_dir($location) && ! mkdir($location, $this->permissionMap['dir'][$visibility], true)) {
+        if (!is_dir($location) && !mkdir($location, $this->permissionMap['dir'][$visibility], true)) {
             $return = false;
         } else {
             $return = ['path' => $dirname, 'type' => 'dir'];
@@ -390,7 +390,7 @@ class Local extends AbstractAdapter
     {
         $location = $this->applyPathPrefix($dirname);
 
-        if ( ! is_dir($location)) {
+        if (!is_dir($location)) {
             return false;
         }
 
@@ -433,7 +433,7 @@ class Local extends AbstractAdapter
      */
     protected function normalizeFileInfo(SplFileInfo $file)
     {
-        if ( ! $file->isLink()) {
+        if (!$file->isLink()) {
             return $this->mapFileInfo($file);
         }
 
@@ -459,7 +459,7 @@ class Local extends AbstractAdapter
 
     /**
      * @param string $path
-     * @param int    $mode
+     * @param int $mode
      *
      * @return RecursiveIteratorIterator
      */
@@ -511,7 +511,7 @@ class Local extends AbstractAdapter
      */
     protected function guardAgainstUnreadableFileInfo(SplFileInfo $file)
     {
-        if ( ! $file->isReadable()) {
+        if (!$file->isReadable()) {
             throw UnreadableFileException::forFileInfo($file);
         }
     }

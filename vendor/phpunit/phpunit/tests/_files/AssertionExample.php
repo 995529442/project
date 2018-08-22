@@ -1,4 +1,5 @@
 <?php
+
 class AssertionExample
 {
     public function doSomething()

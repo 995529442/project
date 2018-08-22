@@ -45,7 +45,7 @@ class Facade
 
     /**
      * @param CodeCoverage $coverage
-     * @param string       $target
+     * @param string $target
      *
      * @throws RuntimeException
      */
@@ -274,7 +274,7 @@ class Facade
     {
         $filename = \sprintf('%s/%s.xml', $this->getTargetDirectory(), $name);
 
-        $document->formatOutput       = true;
+        $document->formatOutput = true;
         $document->preserveWhiteSpace = false;
         $this->initTargetDirectory(\dirname($filename));
 

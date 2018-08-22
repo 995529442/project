@@ -59,8 +59,8 @@ class AbstractPhpProcessTest extends TestCase
             'display_errors=1',
         ];
 
-        $expectedCommandFormat  = '%s -d %callow_url_fopen=1%c -d %cauto_append_file=%c -d %cdisplay_errors=1%c';
-        $actualCommand          = $this->phpProcess->getCommand($settings);
+        $expectedCommandFormat = '%s -d %callow_url_fopen=1%c -d %cauto_append_file=%c -d %cdisplay_errors=1%c';
+        $actualCommand = $this->phpProcess->getCommand($settings);
 
         $this->assertStringMatchesFormat($expectedCommandFormat, $actualCommand);
     }
@@ -69,8 +69,8 @@ class AbstractPhpProcessTest extends TestCase
     {
         $this->phpProcess->setUseStderrRedirection(true);
 
-        $expectedCommandFormat  = '%s 2>&1';
-        $actualCommand          = $this->phpProcess->getCommand([]);
+        $expectedCommandFormat = '%s 2>&1';
+        $actualCommand = $this->phpProcess->getCommand([]);
 
         $this->assertStringMatchesFormat($expectedCommandFormat, $actualCommand);
     }
@@ -79,8 +79,8 @@ class AbstractPhpProcessTest extends TestCase
     {
         $this->phpProcess->setArgs('foo=bar');
 
-        $expectedCommandFormat  = '%s -- foo=bar';
-        $actualCommand          = $this->phpProcess->getCommand([]);
+        $expectedCommandFormat = '%s -- foo=bar';
+        $actualCommand = $this->phpProcess->getCommand([]);
 
         $this->assertStringMatchesFormat($expectedCommandFormat, $actualCommand);
     }
@@ -88,8 +88,8 @@ class AbstractPhpProcessTest extends TestCase
     public function testShouldHaveFileToCreateCommand()
     {
         $argumentEscapingCharacter = DIRECTORY_SEPARATOR === '\\' ? '"' : '\'';
-        $expectedCommandFormat     = \sprintf('%%s -%%c %1$sfile.php%1$s', $argumentEscapingCharacter);
-        $actualCommand             = $this->phpProcess->getCommand([], 'file.php');
+        $expectedCommandFormat = \sprintf('%%s -%%c %1$sfile.php%1$s', $argumentEscapingCharacter);
+        $actualCommand = $this->phpProcess->getCommand([], 'file.php');
 
         $this->assertStringMatchesFormat($expectedCommandFormat, $actualCommand);
     }

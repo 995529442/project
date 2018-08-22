@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class DataProviderIncompleteTest extends TestCase
@@ -24,16 +25,16 @@ class DataProviderIncompleteTest extends TestCase
         $this->markTestIncomplete('incomplete');
 
         return [
-          [0, 0, 0],
-          [0, 1, 1],
+            [0, 0, 0],
+            [0, 1, 1],
         ];
     }
 
     public static function providerMethod()
     {
         return [
-          [0, 0, 0],
-          [0, 1, 1],
+            [0, 0, 0],
+            [0, 1, 1],
         ];
     }
 }

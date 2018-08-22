@@ -108,7 +108,7 @@ class Person extends \Faker\Provider\Person
         'Haselaar', 'van Haspengouw', 'Hazenveld', 'de Heer', 'Heere', 'Heerkens',
         'Heerschop', 'Hehl', 'van der Heiden', 'van der Heijden', 'Heijman', 'Heijmans', 'Heijmen', 'Heinrichs',
         'Hekker', 'Hellevoort', 'Helmerhorst', 'van Hemert', 'Hemma', 'Hendricks', 'Hendriks',
-        'Hendrikse', 'van Henegouwen',  'van den Henst', 'Heribert van Laon', "d' Heripon",
+        'Hendrikse', 'van Henegouwen', 'van den Henst', 'Heribert van Laon', "d' Heripon",
         'Hermans', 'van Herstal', 'van Heusden', 'Hexspoor', 'Heymans', 'Heyne', 'Hoedemakers', 'van den Hoek', 'Hoeks',
         'Hoelen', 'Hoes', 'van Hoevel en van Zwindrecht', 'van der Hoeven', 'van Holland', 'Hollander', 'Holthuis',
         'Hondeveld', 'Honing', 'de Hoog', 'Hoogers', 'de Hoogh', 'Hoppenbrouwer', 'Horrocks', 'van der Horst',

@@ -61,8 +61,8 @@ class MongoDbSessionHandler extends AbstractSessionHandler
      * If you use such an index, you can drop `gc_probability` to 0 since
      * no garbage-collection is required.
      *
-     * @param \MongoDB\Client $mongo   A MongoDB\Client instance
-     * @param array           $options An associative array of field options
+     * @param \MongoDB\Client $mongo A MongoDB\Client instance
+     * @param array $options An associative array of field options
      *
      * @throws \InvalidArgumentException When MongoClient or Mongo instance not provided
      * @throws \InvalidArgumentException When "database" or "collection" not provided
@@ -132,7 +132,7 @@ class MongoDbSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite($sessionId, $data)
     {
-        $expiry = $this->createDateTime(time() + (int) ini_get('session.gc_maxlifetime'));
+        $expiry = $this->createDateTime(time() + (int)ini_get('session.gc_maxlifetime'));
 
         $fields = array(
             $this->options['time_field'] => $this->createDateTime(),
@@ -164,7 +164,7 @@ class MongoDbSessionHandler extends AbstractSessionHandler
      */
     public function updateTimestamp($sessionId, $data)
     {
-        $expiry = $this->createDateTime(time() + (int) ini_get('session.gc_maxlifetime'));
+        $expiry = $this->createDateTime(time() + (int)ini_get('session.gc_maxlifetime'));
 
         if ($this->mongo instanceof \MongoDB\Client) {
             $methodName = 'updateOne';

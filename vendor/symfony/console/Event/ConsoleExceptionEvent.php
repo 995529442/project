@@ -34,7 +34,7 @@ class ConsoleExceptionEvent extends ConsoleEvent
         parent::__construct($command, $input, $output);
 
         $this->setException($exception);
-        $this->exitCode = (int) $exitCode;
+        $this->exitCode = (int)$exitCode;
     }
 
     /**

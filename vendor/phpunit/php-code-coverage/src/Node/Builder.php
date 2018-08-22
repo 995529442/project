@@ -21,9 +21,9 @@ class Builder
      */
     public function build(CodeCoverage $coverage)
     {
-        $files      = $coverage->getData();
+        $files = $coverage->getData();
         $commonPath = $this->reducePaths($files);
-        $root       = new Directory(
+        $root = new Directory(
             $commonPath,
             null
         );
@@ -40,9 +40,9 @@ class Builder
 
     /**
      * @param Directory $root
-     * @param array     $items
-     * @param array     $tests
-     * @param bool      $cacheTokens
+     * @param array $items
+     * @param array $tests
+     * @param bool $cacheTokens
      */
     private function addItems(Directory $root, array $items, array $tests, $cacheTokens)
     {
@@ -109,9 +109,9 @@ class Builder
         $result = [];
 
         foreach ($files as $path => $file) {
-            $path    = \explode('/', $path);
+            $path = \explode('/', $path);
             $pointer = &$result;
-            $max     = \count($path);
+            $max = \count($path);
 
             for ($i = 0; $i < $max; $i++) {
                 if ($i == ($max - 1)) {
@@ -177,10 +177,10 @@ class Builder
         }
 
         $commonPath = '';
-        $paths      = \array_keys($files);
+        $paths = \array_keys($files);
 
         if (\count($files) == 1) {
-            $commonPath                  = \dirname($paths[0]) . '/';
+            $commonPath = \dirname($paths[0]) . '/';
             $files[\basename($paths[0])] = $files[$paths[0]];
 
             unset($files[$paths[0]]);
@@ -204,7 +204,7 @@ class Builder
         }
 
         $done = false;
-        $max  = \count($paths);
+        $max = \count($paths);
 
         while (!$done) {
             for ($i = 0; $i < $max - 1; $i++) {
@@ -231,7 +231,7 @@ class Builder
         }
 
         $original = \array_keys($files);
-        $max      = \count($original);
+        $max = \count($original);
 
         for ($i = 0; $i < $max; $i++) {
             $files[\implode('/', $paths[$i])] = $files[$original[$i]];

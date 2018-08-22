@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Text;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\BaseMatcher;
 use Hamcrest\Core\AnyOf;
 use Hamcrest\Core\IsNull;

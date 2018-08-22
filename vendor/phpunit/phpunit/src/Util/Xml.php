@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use DOMCharacterData;
@@ -37,10 +38,10 @@ class Xml
      * DOMDocument, use loadFile() instead.
      *
      * @param string|DOMDocument $actual
-     * @param bool               $isHtml
-     * @param string             $filename
-     * @param bool               $xinclude
-     * @param bool               $strict
+     * @param bool $isHtml
+     * @param string $filename
+     * @param bool $xinclude
+     * @param bool $strict
      *
      * @return DOMDocument
      */
@@ -64,11 +65,11 @@ class Xml
             @\chdir(\dirname($filename));
         }
 
-        $document                     = new DOMDocument;
+        $document = new DOMDocument;
         $document->preserveWhiteSpace = false;
 
-        $internal  = \libxml_use_internal_errors(true);
-        $message   = '';
+        $internal = \libxml_use_internal_errors(true);
+        $message = '';
         $reporting = \error_reporting(0);
 
         if ('' !== $filename) {
@@ -122,16 +123,16 @@ class Xml
      * Loads an XML (or HTML) file into a DOMDocument object.
      *
      * @param string $filename
-     * @param bool   $isHtml
-     * @param bool   $xinclude
-     * @param bool   $strict
+     * @param bool $isHtml
+     * @param bool $xinclude
+     * @param bool $strict
      *
      * @return DOMDocument
      */
     public static function loadFile($filename, $isHtml = false, $xinclude = false, $strict = false)
     {
         $reporting = \error_reporting(0);
-        $contents  = \file_get_contents($filename);
+        $contents = \file_get_contents($filename);
         \error_reporting($reporting);
 
         if ($contents === false) {
@@ -211,7 +212,7 @@ class Xml
                     $value = self::xmlToVariable($item);
 
                     if ($entry->hasAttribute('key')) {
-                        $variable[(string) $entry->getAttribute('key')] = $value;
+                        $variable[(string)$entry->getAttribute('key')] = $value;
                     } else {
                         $variable[] = $value;
                     }
@@ -223,7 +224,7 @@ class Xml
                 $className = $element->getAttribute('class');
 
                 if ($element->hasChildNodes()) {
-                    $arguments       = $element->childNodes->item(0)->childNodes;
+                    $arguments = $element->childNodes->item(0)->childNodes;
                     $constructorArgs = [];
 
                     foreach ($arguments as $argument) {
@@ -232,7 +233,7 @@ class Xml
                         }
                     }
 
-                    $class    = new ReflectionClass($className);
+                    $class = new ReflectionClass($className);
                     $variable = $class->newInstanceArgs($constructorArgs);
                 } else {
                     $variable = new $className;

@@ -34,8 +34,7 @@ class ErrorListenerTest extends TestCase
         $logger
             ->expects($this->once())
             ->method('error')
-            ->with('Error thrown while running command "{command}". Message: "{message}"', array('exception' => $error, 'command' => 'test:run --foo=baz buzz', 'message' => 'An error occurred'))
-        ;
+            ->with('Error thrown while running command "{command}". Message: "{message}"', array('exception' => $error, 'command' => 'test:run --foo=baz buzz', 'message' => 'An error occurred'));
 
         $listener = new ErrorListener($logger);
         $listener->onConsoleError(new ConsoleErrorEvent(new ArgvInput(array('console.php', 'test:run', '--foo=baz', 'buzz')), $this->getOutput(), $error, new Command('test:run')));
@@ -49,8 +48,7 @@ class ErrorListenerTest extends TestCase
         $logger
             ->expects($this->once())
             ->method('error')
-            ->with('An error occurred while using the console. Message: "{message}"', array('exception' => $error, 'message' => 'An error occurred'))
-        ;
+            ->with('An error occurred while using the console. Message: "{message}"', array('exception' => $error, 'message' => 'An error occurred'));
 
         $listener = new ErrorListener($logger);
         $listener->onConsoleError(new ConsoleErrorEvent(new NonStringInput(), $this->getOutput(), $error));
@@ -62,8 +60,7 @@ class ErrorListenerTest extends TestCase
         $logger
             ->expects($this->once())
             ->method('debug')
-            ->with('Command "{command}" exited with code "{code}"', array('command' => 'test:run', 'code' => 255))
-        ;
+            ->with('Command "{command}" exited with code "{code}"', array('command' => 'test:run', 'code' => 255));
 
         $listener = new ErrorListener($logger);
         $listener->onConsoleTerminate($this->getConsoleTerminateEvent(new ArgvInput(array('console.php', 'test:run')), 255));
@@ -74,8 +71,7 @@ class ErrorListenerTest extends TestCase
         $logger = $this->getLogger();
         $logger
             ->expects($this->never())
-            ->method('debug')
-        ;
+            ->method('debug');
 
         $listener = new ErrorListener($logger);
         $listener->onConsoleTerminate($this->getConsoleTerminateEvent(new ArgvInput(array('console.php', 'test:run')), 0));
@@ -98,8 +94,7 @@ class ErrorListenerTest extends TestCase
         $logger
             ->expects($this->exactly(3))
             ->method('debug')
-            ->with('Command "{command}" exited with code "{code}"', array('command' => 'test:run --foo=bar', 'code' => 255))
-        ;
+            ->with('Command "{command}" exited with code "{code}"', array('command' => 'test:run --foo=bar', 'code' => 255));
 
         $listener = new ErrorListener($logger);
         $listener->onConsoleTerminate($this->getConsoleTerminateEvent(new ArgvInput(array('console.php', 'test:run', '--foo=bar')), 255));
@@ -113,8 +108,7 @@ class ErrorListenerTest extends TestCase
         $logger
             ->expects($this->once())
             ->method('debug')
-            ->with('Command "{command}" exited with code "{code}"', array('command' => 'test:run', 'code' => 255))
-        ;
+            ->with('Command "{command}" exited with code "{code}"', array('command' => 'test:run', 'code' => 255));
 
         $listener = new ErrorListener($logger);
         $listener->onConsoleTerminate($this->getConsoleTerminateEvent($this->getMockBuilder(InputInterface::class)->getMock(), 255));

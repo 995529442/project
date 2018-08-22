@@ -25,7 +25,7 @@ class ReflectionConstant implements \Reflector
     /**
      * Construct a ReflectionConstant object.
      *
-     * @param mixed  $class
+     * @param mixed $class
      * @param string $name
      */
     public function __construct($class, $name)
@@ -35,7 +35,7 @@ class ReflectionConstant implements \Reflector
         }
 
         $this->class = $class;
-        $this->name  = $name;
+        $this->name = $name;
 
         $constants = $class->getConstants();
         if (!array_key_exists($name, $constants)) {
@@ -60,7 +60,7 @@ class ReflectionConstant implements \Reflector
         //
         // While this isn't _technically_ correct, it's prolly close enough.
         do {
-            $class  = $parent;
+            $class = $parent;
             $parent = $class->getParentClass();
         } while ($parent && $parent->hasConstant($this->name) && $parent->getConstant($this->name) === $this->value);
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Type;
 
 class IsStringTest extends \Hamcrest\AbstractMatcherTest

@@ -84,8 +84,8 @@ EOF
         \fclose($fh);
 
         return [
-            'open resource'     => [\fopen(__FILE__, 'r')],
-            'closed resource'   => [$fh],
+            'open resource' => [\fopen(__FILE__, 'r')],
+            'closed resource' => [$fh],
         ];
     }
 

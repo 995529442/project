@@ -72,11 +72,11 @@ abstract class FileDumper implements DumperInterface
         // save a file for each domain
         foreach ($messages->getDomains() as $domain) {
             // backup
-            $fullpath = $options['path'].'/'.$this->getRelativePath($domain, $messages->getLocale());
+            $fullpath = $options['path'] . '/' . $this->getRelativePath($domain, $messages->getLocale());
             if (file_exists($fullpath)) {
                 if ($this->backup) {
                     @trigger_error('Creating a backup while dumping a message catalogue is deprecated since Symfony 3.1 and will be removed in 4.0. Use TranslationWriter::disableBackup() to disable the backup.', E_USER_DEPRECATED);
-                    copy($fullpath, $fullpath.'~');
+                    copy($fullpath, $fullpath . '~');
                 }
             } else {
                 $directory = dirname($fullpath);
@@ -93,8 +93,8 @@ abstract class FileDumper implements DumperInterface
      * Transforms a domain of a message catalogue to its string representation.
      *
      * @param MessageCatalogue $messages
-     * @param string           $domain
-     * @param array            $options
+     * @param string $domain
+     * @param array $options
      *
      * @return string representation
      */

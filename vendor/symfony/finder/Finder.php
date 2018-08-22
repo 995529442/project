@@ -309,7 +309,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function exclude($dirs)
     {
-        $this->exclude = array_merge($this->exclude, (array) $dirs);
+        $this->exclude = array_merge($this->exclude, (array)$dirs);
 
         return $this;
     }
@@ -367,7 +367,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public static function addVCSPattern($pattern)
     {
-        foreach ((array) $pattern as $p) {
+        foreach ((array)$pattern as $p) {
             self::$vcsPatterns[] = $p;
         }
 
@@ -520,7 +520,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function ignoreUnreadableDirs($ignore = true)
     {
-        $this->ignoreUnreadableDirs = (bool) $ignore;
+        $this->ignoreUnreadableDirs = (bool)$ignore;
 
         return $this;
     }
@@ -538,7 +538,7 @@ class Finder implements \IteratorAggregate, \Countable
     {
         $resolvedDirs = array();
 
-        foreach ((array) $dirs as $dir) {
+        foreach ((array)$dirs as $dir) {
             if (is_dir($dir)) {
                 $resolvedDirs[] = $this->normalizeDir($dir);
             } elseif ($glob = glob($dir, (defined('GLOB_BRACE') ? GLOB_BRACE : 0) | GLOB_ONLYDIR)) {
@@ -738,6 +738,6 @@ class Finder implements \IteratorAggregate, \Countable
      */
     private function normalizeDir($dir)
     {
-        return rtrim($dir, '/'.\DIRECTORY_SEPARATOR);
+        return rtrim($dir, '/' . \DIRECTORY_SEPARATOR);
     }
 }

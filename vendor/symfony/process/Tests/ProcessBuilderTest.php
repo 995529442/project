@@ -46,8 +46,7 @@ class ProcessBuilderTest extends TestCase
             ->add('command')
             ->setEnv('foo', 'bar2')
             ->addEnvironmentVariables($env)
-            ->getProcess()
-        ;
+            ->getProcess();
 
         $this->assertSame($env, $proc->getEnv());
     }

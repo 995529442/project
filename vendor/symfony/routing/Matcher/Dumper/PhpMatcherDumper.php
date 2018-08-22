@@ -119,8 +119,8 @@ EOF;
     /**
      * Generates PHP code to match a RouteCollection with all its routes.
      *
-     * @param RouteCollection $routes               A RouteCollection instance
-     * @param bool            $supportsRedirections Whether redirections are supported by the base class
+     * @param RouteCollection $routes A RouteCollection instance
+     * @param bool $supportsRedirections Whether redirections are supported by the base class
      *
      * @return string PHP code
      */
@@ -178,9 +178,9 @@ EOF;
     /**
      * Generates PHP code to match a tree of routes.
      *
-     * @param StaticPrefixCollection $collection           A StaticPrefixCollection instance
-     * @param bool                   $supportsRedirections Whether redirections are supported by the base class
-     * @param string                 $ifOrElseIf           either "if" or "elseif" to influence chaining
+     * @param StaticPrefixCollection $collection A StaticPrefixCollection instance
+     * @param bool $supportsRedirections Whether redirections are supported by the base class
+     * @param string $ifOrElseIf either "if" or "elseif" to influence chaining
      *
      * @return string PHP code
      */
@@ -200,7 +200,7 @@ EOF;
                 $code .= $this->compileStaticPrefixRoutes($route, $supportsRedirections, $ifOrElseIf);
                 $ifOrElseIf = 'elseif';
             } else {
-                $code .= $this->compileRoute($route[1]->getRoute(), $route[1]->getName(), $supportsRedirections, $prefix)."\n";
+                $code .= $this->compileRoute($route[1]->getRoute(), $route[1]->getName(), $supportsRedirections, $prefix) . "\n";
                 $ifOrElseIf = 'if';
             }
         }
@@ -217,10 +217,10 @@ EOF;
     /**
      * Compiles a single Route to PHP code used to match it against the path info.
      *
-     * @param Route       $route                A Route instance
-     * @param string      $name                 The name of the Route
-     * @param bool        $supportsRedirections Whether redirections are supported by the base class
-     * @param string|null $parentPrefix         The prefix of the parent collection used to optimize the code
+     * @param Route $route A Route instance
+     * @param string $name The name of the Route
+     * @param bool $supportsRedirections Whether redirections are supported by the base class
+     * @param string|null $parentPrefix The prefix of the parent collection used to optimize the code
      *
      * @return string PHP code
      *
@@ -239,7 +239,7 @@ EOF;
         $supportsTrailingSlash = $supportsRedirections && (!$methods || in_array('GET', $methods));
         $regex = $compiledRoute->getRegex();
 
-        if (!count($compiledRoute->getPathVariables()) && false !== preg_match('#^(.)\^(?P<url>.*?)\$\1#'.('u' === substr($regex, -1) ? 'u' : ''), $regex, $m)) {
+        if (!count($compiledRoute->getPathVariables()) && false !== preg_match('#^(.)\^(?P<url>.*?)\$\1#' . ('u' === substr($regex, -1) ? 'u' : ''), $regex, $m)) {
             if ($supportsTrailingSlash && '/' === substr($m['url'], -1)) {
                 $conditions[] = sprintf('%s === $trimmedPathinfo', var_export(rtrim(str_replace('\\', '', $m['url']), '/'), true));
                 $hasTrailingSlash = true;
@@ -252,7 +252,7 @@ EOF;
             }
 
             if ($supportsTrailingSlash && $pos = strpos($regex, '/$')) {
-                $regex = substr($regex, 0, $pos).'/?$'.substr($regex, $pos + 2);
+                $regex = substr($regex, 0, $pos) . '/?$' . substr($regex, $pos + 2);
                 $hasTrailingSlash = true;
             }
             $conditions[] = sprintf('preg_match(%s, $pathinfo, $matches)', var_export($regex, true));
@@ -276,7 +276,7 @@ EOF;
 
 EOF;
 
-        $gotoname = 'not_'.preg_replace('/[^A-Za-z0-9_]/', '', $name);
+        $gotoname = 'not_' . preg_replace('/[^A-Za-z0-9_]/', '', $name);
 
         // the offset where the return value is appended below, with indendation
         $retOffset = 12 + strlen($code);

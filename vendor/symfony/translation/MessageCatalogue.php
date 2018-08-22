@@ -27,8 +27,8 @@ class MessageCatalogue implements MessageCatalogueInterface, MetadataAwareInterf
     private $parent;
 
     /**
-     * @param string $locale   The locale
-     * @param array  $messages An array of messages classified by domain
+     * @param string $locale The locale
+     * @param array $messages An array of messages classified by domain
      */
     public function __construct($locale, array $messages = array())
     {

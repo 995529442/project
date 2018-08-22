@@ -9,7 +9,7 @@ class Person extends \Faker\Provider\Person
     );
 
     protected static $femaleNameFormats = array(
-         '{{lastName}} {{firstNameFemale}}',
+        '{{lastName}} {{firstNameFemale}}',
     );
 
     /**

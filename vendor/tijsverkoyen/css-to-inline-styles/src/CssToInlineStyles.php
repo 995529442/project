@@ -53,7 +53,7 @@ class CssToInlineStyles
     /**
      * Inline the given properties on an given DOMElement
      *
-     * @param \DOMElement             $element
+     * @param \DOMElement $element
      * @param Css\Property\Property[] $properties
      * @return \DOMElement
      */
@@ -139,11 +139,11 @@ class CssToInlineStyles
             $doctype = strtolower($doctype);
         }
 
-        return $doctype."\n".$html;
+        return $doctype . "\n" . $html;
     }
 
     /**
-     * @param \DOMDocument    $document
+     * @param \DOMDocument $document
      * @param Css\Rule\Rule[] $rules
      * @return \DOMDocument
      */

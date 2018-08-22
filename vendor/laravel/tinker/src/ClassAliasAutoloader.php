@@ -24,8 +24,8 @@ class ClassAliasAutoloader
     /**
      * Register a new alias loader instance.
      *
-     * @param  \Psy\Shell  $shell
-     * @param  string  $classMapPath
+     * @param  \Psy\Shell $shell
+     * @param  string $classMapPath
      * @return static
      */
     public static function register(Shell $shell, $classMapPath)
@@ -38,8 +38,8 @@ class ClassAliasAutoloader
     /**
      * Create a new alias loader instance.
      *
-     * @param  \Psy\Shell  $shell
-     * @param  string  $classMapPath
+     * @param  \Psy\Shell $shell
+     * @param  string $classMapPath
      * @return void
      */
     public function __construct(Shell $shell, $classMapPath)
@@ -53,11 +53,11 @@ class ClassAliasAutoloader
         $excludedAliases = collect(config('tinker.dont_alias', []));
 
         foreach ($classes as $class => $path) {
-            if (! Str::contains($class, '\\') || Str::startsWith($path, $vendorPath)) {
+            if (!Str::contains($class, '\\') || Str::startsWith($path, $vendorPath)) {
                 continue;
             }
 
-            if (! $excludedAliases->filter(function ($alias) use ($class) {
+            if (!$excludedAliases->filter(function ($alias) use ($class) {
                 return Str::startsWith($class, $alias);
             })->isEmpty()) {
                 continue;
@@ -65,7 +65,7 @@ class ClassAliasAutoloader
 
             $name = class_basename($class);
 
-            if (! isset($this->classes[$name])) {
+            if (!isset($this->classes[$name])) {
                 $this->classes[$name] = $class;
             }
         }
@@ -74,7 +74,7 @@ class ClassAliasAutoloader
     /**
      * Find the closest class by name.
      *
-     * @param  string  $class
+     * @param  string $class
      * @return void
      */
     public function aliasClass($class)

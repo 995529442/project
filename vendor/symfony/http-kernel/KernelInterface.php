@@ -61,8 +61,8 @@ interface KernelInterface extends HttpKernelInterface, \Serializable
      * The second argument is deprecated as of 3.4 and will be removed in 4.0. This method
      * will always return an instance of BundleInterface in 4.0.
      *
-     * @param string $name  Bundle name
-     * @param bool   $first Whether to return the first bundle only or together with its descendants
+     * @param string $name Bundle name
+     * @param bool $first Whether to return the first bundle only or together with its descendants
      *
      * @return BundleInterface|BundleInterface[] A BundleInterface instance or an array of BundleInterface instances if $first is false
      *
@@ -89,9 +89,9 @@ interface KernelInterface extends HttpKernelInterface, \Serializable
      *
      * before looking in the bundle resource folder.
      *
-     * @param string $name  A resource name to locate
-     * @param string $dir   A directory where to look for the resource first
-     * @param bool   $first Whether to return the first path or paths for all matching bundles
+     * @param string $name A resource name to locate
+     * @param string $dir A directory where to look for the resource first
+     * @param bool $first Whether to return the first path or paths for all matching bundles
      *
      * @return string|array The absolute path of the resource or an array if $first is false
      *

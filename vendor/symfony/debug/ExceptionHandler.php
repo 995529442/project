@@ -46,8 +46,8 @@ class ExceptionHandler
     /**
      * Registers the exception handler.
      *
-     * @param bool        $debug          Enable/disable debug mode, where the stack trace is displayed
-     * @param string|null $charset        The charset used by exception messages
+     * @param bool $debug Enable/disable debug mode, where the stack trace is displayed
+     * @param string|null $charset The charset used by exception messages
      * @param string|null $fileLinkFormat The IDE link template
      *
      * @return static
@@ -169,9 +169,9 @@ class ExceptionHandler
         if (!headers_sent()) {
             header(sprintf('HTTP/1.0 %s', $exception->getStatusCode()));
             foreach ($exception->getHeaders() as $name => $value) {
-                header($name.': '.$value, false);
+                header($name . ': ' . $value, false);
             }
-            header('Content-Type: text/html; charset='.$this->charset);
+            header('Content-Type: text/html; charset=' . $this->charset);
         }
 
         echo $this->decorate($this->getContent($exception), $this->getStylesheet($exception));
@@ -358,7 +358,7 @@ EOF;
         $fmt = $this->fileLinkFormat ?: ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format');
 
         if (!$fmt) {
-            return sprintf('<span class="block trace-file-path">in <a title="%s%3$s"><strong>%s</strong>%s</a></span>', $this->escapeHtml($path), $file, 0 < $line ? ' line '.$line : '');
+            return sprintf('<span class="block trace-file-path">in <a title="%s%3$s"><strong>%s</strong>%s</a></span>', $this->escapeHtml($path), $file, 0 < $line ? ' line ' . $line : '');
         }
 
         if (\is_string($fmt)) {
@@ -377,7 +377,7 @@ EOF;
             $link = $fmt->format($path, $line);
         }
 
-        return sprintf('<span class="block trace-file-path">in <a href="%s" title="Go to source"><strong>%s</string>%s</a></span>', $this->escapeHtml($link), $file, 0 < $line ? ' line '.$line : '');
+        return sprintf('<span class="block trace-file-path">in <a href="%s" title="Go to source"><strong>%s</string>%s</a></span>', $this->escapeHtml($link), $file, 0 < $line ? ' line ' . $line : '');
     }
 
     /**
@@ -398,7 +398,7 @@ EOF;
             } elseif ('null' === $item[0]) {
                 $formattedValue = '<em>null</em>';
             } elseif ('boolean' === $item[0]) {
-                $formattedValue = '<em>'.strtolower(var_export($item[1], true)).'</em>';
+                $formattedValue = '<em>' . strtolower(var_export($item[1], true)) . '</em>';
             } elseif ('resource' === $item[0]) {
                 $formattedValue = '<em>resource</em>';
             } else {

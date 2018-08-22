@@ -156,20 +156,20 @@ class FileBagTest extends TestCase
 
     protected function createTempFile()
     {
-        return tempnam(sys_get_temp_dir().'/form_test', 'FormTest');
+        return tempnam(sys_get_temp_dir() . '/form_test', 'FormTest');
     }
 
     protected function setUp()
     {
-        mkdir(sys_get_temp_dir().'/form_test', 0777, true);
+        mkdir(sys_get_temp_dir() . '/form_test', 0777, true);
     }
 
     protected function tearDown()
     {
-        foreach (glob(sys_get_temp_dir().'/form_test/*') as $file) {
+        foreach (glob(sys_get_temp_dir() . '/form_test/*') as $file) {
             unlink($file);
         }
 
-        rmdir(sys_get_temp_dir().'/form_test');
+        rmdir(sys_get_temp_dir() . '/form_test');
     }
 }

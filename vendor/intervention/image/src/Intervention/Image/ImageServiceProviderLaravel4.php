@@ -22,7 +22,7 @@ class ImageServiceProviderLaravel4 extends ServiceProvider
             $app = $this->app;
 
             // load imagecache config
-            $app['config']->package('intervention/imagecache', __DIR__.'/../../../../imagecache/src/config', 'imagecache');
+            $app['config']->package('intervention/imagecache', __DIR__ . '/../../../../imagecache/src/config', 'imagecache');
             $config = $app['config'];
 
             // create dynamic manipulation route
@@ -32,7 +32,7 @@ class ImageServiceProviderLaravel4 extends ServiceProvider
                 $config->set('imagecache::templates.original', null);
 
                 // setup image manipulator route
-                $app['router']->get($config->get('imagecache::route').'/{template}/{filename}', ['as' => 'imagecache', function ($template, $filename) use ($app, $config) {
+                $app['router']->get($config->get('imagecache::route') . '/{template}/{filename}', ['as' => 'imagecache', function ($template, $filename) use ($app, $config) {
 
                     // disable session cookies for image route
                     $app['config']->set('session.driver', 'array');
@@ -40,7 +40,7 @@ class ImageServiceProviderLaravel4 extends ServiceProvider
                     // find file
                     foreach ($config->get('imagecache::paths') as $path) {
                         // don't allow '..' in filenames
-                        $image_path = $path.'/'.str_replace('..', '', $filename);
+                        $image_path = $path . '/' . str_replace('..', '', $filename);
                         if (file_exists($image_path) && is_file($image_path)) {
                             break;
                         } else {
@@ -60,12 +60,12 @@ class ImageServiceProviderLaravel4 extends ServiceProvider
 
                         // image manipulation based on callback
                         $content = $app['image']->cache(function ($image) use ($image_path, $callback) {
-                            
+
                             switch (true) {
                                 case is_callable($callback):
                                     return $callback($image->make($image_path));
                                     break;
-                                
+
                                 case class_exists($callback):
                                     return $image->make($image_path)->filter(new $callback);
                                     break;
@@ -85,7 +85,7 @@ class ImageServiceProviderLaravel4 extends ServiceProvider
                     // return http response
                     return new IlluminateResponse($content, 200, [
                         'Content-Type' => $mime,
-                        'Cache-Control' => 'max-age='.($config->get('imagecache::lifetime')*60).', public',
+                        'Cache-Control' => 'max-age=' . ($config->get('imagecache::lifetime') * 60) . ', public',
                         'Etag' => md5($content)
                     ]);
 

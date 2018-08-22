@@ -13,19 +13,19 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-         'App\Console\Commands\orderTask', 
+        'App\Console\Commands\orderTask',
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('orderTask')
-                  ->dailyAt('02:00');;      //未支付订单过期取消订单,每天凌晨2点执行
+            ->dailyAt('02:00');      //未支付订单过期取消订单,每天凌晨2点执行
     }
 
     /**
@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

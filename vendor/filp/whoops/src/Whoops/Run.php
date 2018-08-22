@@ -18,13 +18,13 @@ use Whoops\Util\SystemFacade;
 final class Run implements RunInterface
 {
     private $isRegistered;
-    private $allowQuit       = true;
-    private $sendOutput      = true;
+    private $allowQuit = true;
+    private $sendOutput = true;
 
     /**
      * @var integer|false
      */
-    private $sendHttpCode    = 500;
+    private $sendHttpCode = 500;
 
     /**
      * @var HandlerInterface[]
@@ -55,7 +55,7 @@ final class Run implements RunInterface
 
         if (!$handler instanceof HandlerInterface) {
             throw new InvalidArgumentException(
-                  "Argument to " . __METHOD__ . " must be a callable, or instance of "
+                "Argument to " . __METHOD__ . " must be a callable, or instance of "
                 . "Whoops\\Handler\\HandlerInterface"
             );
         }
@@ -155,13 +155,13 @@ final class Run implements RunInterface
             return $this->allowQuit;
         }
 
-        return $this->allowQuit = (bool) $exit;
+        return $this->allowQuit = (bool)$exit;
     }
 
     /**
      * Silence particular errors in particular files
      * @param  array|string $patterns List or a single regex pattern to match
-     * @param  int          $levels   Defaults to E_STRICT | E_DEPRECATED
+     * @param  int $levels Defaults to E_STRICT | E_DEPRECATED
      * @return \Whoops\Run
      */
     public function silenceErrorsInPaths($patterns, $levels = 10240)
@@ -175,7 +175,7 @@ final class Run implements RunInterface
                         "levels" => $levels,
                     ];
                 },
-                (array) $patterns
+                (array)$patterns
             )
         );
         return $this;
@@ -216,7 +216,7 @@ final class Run implements RunInterface
 
         if ($code < 400 || 600 <= $code) {
             throw new InvalidArgumentException(
-                 "Invalid status code '$code', must be 4xx or 5xx"
+                "Invalid status code '$code', must be 4xx or 5xx"
             );
         }
 
@@ -235,7 +235,7 @@ final class Run implements RunInterface
             return $this->sendOutput;
         }
 
-        return $this->sendOutput = (bool) $send;
+        return $this->sendOutput = (bool)$send;
     }
 
     /**
@@ -323,10 +323,10 @@ final class Run implements RunInterface
      *
      * This method MUST be compatible with set_error_handler.
      *
-     * @param int    $level
+     * @param int $level
      * @param string $message
      * @param string $file
-     * @param int    $line
+     * @param int $line
      *
      * @return bool
      * @throws ErrorException
@@ -335,7 +335,7 @@ final class Run implements RunInterface
     {
         if ($level & $this->system->getErrorReportingLevel()) {
             foreach ($this->silencedPatterns as $entry) {
-                $pathMatches = (bool) preg_match($entry["pattern"], $file);
+                $pathMatches = (bool)preg_match($entry["pattern"], $file);
                 $levelMatches = $level & $entry["levels"];
                 if ($pathMatches && $levelMatches) {
                     // Ignore the error, abort handling
@@ -346,7 +346,9 @@ final class Run implements RunInterface
 
             // XXX we pass $level for the "code" param only for BC reasons.
             // see https://github.com/filp/whoops/issues/267
-            $exception = new ErrorException($message, /*code*/ $level, /*severity*/ $level, $file, $line);
+            $exception = new ErrorException($message, /*code*/
+                $level, /*severity*/
+                $level, $file, $line);
             if ($this->canThrowExceptions) {
                 throw $exception;
             } else {

@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Arrays;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\Matcher;
 use Hamcrest\TypeSafeMatcher;
@@ -39,8 +41,7 @@ class IsArrayContainingKey extends TypeSafeMatcher
     {
         //Not using appendValueList() so that keys can be shown
         $mismatchDescription->appendText('array was ')
-                                                ->appendText('[')
-                                                ;
+            ->appendText('[');
         $loop = false;
         foreach ($array as $key => $value) {
             if ($loop) {
@@ -55,9 +56,8 @@ class IsArrayContainingKey extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description
-                 ->appendText('array with key ')
-                 ->appendDescriptionOf($this->_keyMatcher)
-                 ;
+            ->appendText('array with key ')
+            ->appendDescriptionOf($this->_keyMatcher);
     }
 
     /**

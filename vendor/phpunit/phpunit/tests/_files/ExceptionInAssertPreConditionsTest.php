@@ -1,13 +1,14 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class ExceptionInAssertPreConditionsTest extends TestCase
 {
-    public $setUp                = false;
-    public $assertPreConditions  = false;
+    public $setUp = false;
+    public $assertPreConditions = false;
     public $assertPostConditions = false;
-    public $tearDown             = false;
-    public $testSomething        = false;
+    public $tearDown = false;
+    public $testSomething = false;
 
     protected function setUp()
     {

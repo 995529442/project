@@ -14,31 +14,32 @@ use DB;
 class getGoodsController extends Controller
 {
     /**
-     * 
-     * @param Request $request获取推荐,热卖,上新菜品
+     *
+     * @param Request $request获取推荐 ,热卖,上新菜品
      * @return string
      */
-    public function getHotRecGoods(Request $request) {
-      $admin_id = (int)$request -> input("admin_id",0);
-      $type = $request -> input("type",'');
-      
-      $where = array(
-         "admin_id" => $admin_id,
-         "isout" => 2,
-         "isvalid" => true
-      );
-      if($type == "hot"){
-        $where['is_hot'] = 1;
-      }elseif($type == "rec"){
-        $where['is_recommend'] = 1;
-      }elseif($type == "new"){
-        $where['is_new'] = 1;
-      }
-      //热卖
-      $goods =  DB::table("cater_goods")
+    public function getHotRecGoods(Request $request)
+    {
+        $admin_id = (int)$request->input("admin_id", 0);
+        $type = $request->input("type", '');
+
+        $where = array(
+            "admin_id" => $admin_id,
+            "isout" => 2,
+            "isvalid" => true
+        );
+        if ($type == "hot") {
+            $where['is_hot'] = 1;
+        } elseif ($type == "rec") {
+            $where['is_recommend'] = 1;
+        } elseif ($type == "new") {
+            $where['is_new'] = 1;
+        }
+        //热卖
+        $goods = DB::table("cater_goods")
             ->where($where)
-            ->select(['id as goods_id','good_name','thumb_img','sell_count','virtual_sell_count','now_price'])->orderBy("id","desc")->take(6)->get();                  
-      return json_encode($goods);
+            ->select(['id as goods_id', 'good_name', 'thumb_img', 'sell_count', 'virtual_sell_count', 'now_price'])->orderBy("id", "desc")->take(6)->get();
+        return json_encode($goods);
     }
 
     /**
@@ -46,59 +47,60 @@ class getGoodsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function getCatGoods(Request $request) {
-      $admin_id = (int)$request -> input("admin_id",0);
-      
-      $data = array();
+    public function getCatGoods(Request $request)
+    {
+        $admin_id = (int)$request->input("admin_id", 0);
 
-      $cat_list = DB::table("cater_category")
-                  ->select(['id as cat_id','cate_name'])
-                  ->where(['admin_id'=>$admin_id,'isvalid'=>true])
-                  ->orderBy("sort","desc")
-                  ->orderBy("id","desc")
-                  ->get();
+        $data = array();
 
-      //查询分类下是否与商品
-      $new_cat_list = array();
-      foreach($cat_list as $k=>$v){
-          $good_list = DB::table("cater_goods")->where(['admin_id'=>$admin_id,'cate_id'=>$v->cat_id,'isout'=>2,'isvalid'=>true])->where("storenum",">",0)->get();
+        $cat_list = DB::table("cater_category")
+            ->select(['id as cat_id', 'cate_name'])
+            ->where(['admin_id' => $admin_id, 'isvalid' => true])
+            ->orderBy("sort", "desc")
+            ->orderBy("id", "desc")
+            ->get();
 
-          if(count($good_list) > 0){
-            array_push($new_cat_list, $v);
-          }
-      }
+        //查询分类下是否与商品
+        $new_cat_list = array();
+        foreach ($cat_list as $k => $v) {
+            $good_list = DB::table("cater_goods")->where(['admin_id' => $admin_id, 'cate_id' => $v->cat_id, 'isout' => 2, 'isvalid' => true])->where("storenum", ">", 0)->get();
 
-      if($new_cat_list){
-         foreach($new_cat_list as $k=>$v){
-            //$k = $k+3;
-            $data[$k]['title'] = $v->cate_name;
-            $data[$k]['id'] = "list".($k+1);
-
-            //获取该分类下的菜品
-            $good_list = DB::table("cater_goods")->select(['id as goods_id','good_name','sell_count','virtual_sell_count','thumb_img','original_price','now_price','introduce'])->where(['admin_id'=>$admin_id,'cate_id'=>$v->cat_id,'isout'=>2,'isvalid'=>true])->where("storenum",">",0)->get();
-
-            $list = array();
-
-            if($good_list){
-              foreach($good_list as $kk=>$vv){
-                $list[$kk]['img'] = "http://".$_SERVER['HTTP_HOST'].$vv->thumb_img;
-                $list[$kk]['name'] = $vv->good_name;
-                $list[$kk]['count'] = $vv->sell_count+$vv->virtual_sell_count;
-                $list[$kk]['original_price'] = $vv->original_price;
-                $list[$kk]['price'] = $vv->now_price;
-                $list[$kk]['introduce'] = $vv->introduce;
-                $list[$kk]['id'] = $data[$k]['id']."_".$vv->goods_id;
-              }
+            if (count($good_list) > 0) {
+                array_push($new_cat_list, $v);
             }
+        }
 
-            $data[$k]['list'] = $list;
+        if ($new_cat_list) {
+            foreach ($new_cat_list as $k => $v) {
+                //$k = $k+3;
+                $data[$k]['title'] = $v->cate_name;
+                $data[$k]['id'] = "list" . ($k + 1);
 
-            unset($list);
-         }
-        return json_encode($data);
-      }else{
-        return false;
-      }
+                //获取该分类下的菜品
+                $good_list = DB::table("cater_goods")->select(['id as goods_id', 'good_name', 'sell_count', 'virtual_sell_count', 'thumb_img', 'original_price', 'now_price', 'introduce'])->where(['admin_id' => $admin_id, 'cate_id' => $v->cat_id, 'isout' => 2, 'isvalid' => true])->where("storenum", ">", 0)->get();
+
+                $list = array();
+
+                if ($good_list) {
+                    foreach ($good_list as $kk => $vv) {
+                        $list[$kk]['img'] = "http://" . $_SERVER['HTTP_HOST'] . $vv->thumb_img;
+                        $list[$kk]['name'] = $vv->good_name;
+                        $list[$kk]['count'] = $vv->sell_count + $vv->virtual_sell_count;
+                        $list[$kk]['original_price'] = $vv->original_price;
+                        $list[$kk]['price'] = $vv->now_price;
+                        $list[$kk]['introduce'] = $vv->introduce;
+                        $list[$kk]['id'] = $data[$k]['id'] . "_" . $vv->goods_id;
+                    }
+                }
+
+                $data[$k]['list'] = $list;
+
+                unset($list);
+            }
+            return json_encode($data);
+        } else {
+            return false;
+        }
 
     }
 
@@ -107,44 +109,45 @@ class getGoodsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function getCateGoods($admin_id,$type) {  
-      $num = 0;   
-      $where = array(
-         "admin_id" => $admin_id,
-         "isout" => 2,
-         "isvalid" => true
-      );
-      if($type == "hot"){
-        $num = 1;
-        $where['is_hot'] = 1;
-      }elseif($type == "rec"){
-        $num = 2;
-        $where['is_recommend'] = 1;
-      }elseif($type == "new"){
-        $num = 3;
-        $where['is_new'] = 1;
-      }
-      //热卖
-      $goods =  DB::table("cater_goods")
+    public function getCateGoods($admin_id, $type)
+    {
+        $num = 0;
+        $where = array(
+            "admin_id" => $admin_id,
+            "isout" => 2,
+            "isvalid" => true
+        );
+        if ($type == "hot") {
+            $num = 1;
+            $where['is_hot'] = 1;
+        } elseif ($type == "rec") {
+            $num = 2;
+            $where['is_recommend'] = 1;
+        } elseif ($type == "new") {
+            $num = 3;
+            $where['is_new'] = 1;
+        }
+        //热卖
+        $goods = DB::table("cater_goods")
             ->where($where)
-            ->select(['id as goods_id','good_name','thumb_img','sell_count','virtual_sell_count','now_price','original_price'])->orderBy("id","desc")->get(); 
-      
-      $list = array();
-      if($goods){
-         foreach($goods as $k=>$v){
-            $temp = (object)array();
-            $temp->img = "http://".$_SERVER['HTTP_HOST'].$v->thumb_img;
-            $temp->name = $v->good_name;
-            $temp->count = $v->sell_count+$v->virtual_sell_count;
-            $temp->original_price = $v->original_price;
-            $temp->price = $v->now_price;
-            $temp->id = "list".$num."_".$v->goods_id;
+            ->select(['id as goods_id', 'good_name', 'thumb_img', 'sell_count', 'virtual_sell_count', 'now_price', 'original_price'])->orderBy("id", "desc")->get();
 
-            array_push($list, $temp);
-         }       
-       }
+        $list = array();
+        if ($goods) {
+            foreach ($goods as $k => $v) {
+                $temp = (object)array();
+                $temp->img = "http://" . $_SERVER['HTTP_HOST'] . $v->thumb_img;
+                $temp->name = $v->good_name;
+                $temp->count = $v->sell_count + $v->virtual_sell_count;
+                $temp->original_price = $v->original_price;
+                $temp->price = $v->now_price;
+                $temp->id = "list" . $num . "_" . $v->goods_id;
 
-      return $list;
+                array_push($list, $temp);
+            }
+        }
+
+        return $list;
     }
 
     /**
@@ -152,29 +155,30 @@ class getGoodsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function getSubmitGoods(Request $request) {  
-        $goods_id_arr = $request -> input("goods_id_arr","");
+    public function getSubmitGoods(Request $request)
+    {
+        $goods_id_arr = $request->input("goods_id_arr", "");
 
-        $goods_id_arr = json_decode($goods_id_arr,true);
-        
+        $goods_id_arr = json_decode($goods_id_arr, true);
+
         $total_money = 0;
-        if($goods_id_arr){
-            foreach($goods_id_arr as $k=>$v){
-              $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
+        if ($goods_id_arr) {
+            foreach ($goods_id_arr as $k => $v) {
+                $goods_info = DB::table("cater_goods")->whereId((int)$v['goods_id'])->first();
 
-              $goods_id_arr[$k]['good_name'] = $goods_info->good_name;
+                $goods_id_arr[$k]['good_name'] = $goods_info->good_name;
 
-              $money = $goods_info->now_price * $v['number'];
+                $money = $goods_info->now_price * $v['number'];
 
-              $goods_id_arr[$k]['money'] = $money;
+                $goods_id_arr[$k]['money'] = $money;
 
-              $total_money += $money;
-          }
+                $total_money += $money;
+            }
         }
-        
-        $total_money = round($total_money,2);
 
-        return json_encode(['goods_id_arr'=>$goods_id_arr,'total_money'=>$total_money]);
+        $total_money = round($total_money, 2);
+
+        return json_encode(['goods_id_arr' => $goods_id_arr, 'total_money' => $total_money]);
     }
 
     /**
@@ -182,40 +186,41 @@ class getGoodsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function getOneGoods(Request $request) {  
-        $admin_id = (int)$request -> input("admin_id",0);
-        $goods_id = (int)$request -> input("goods_id",0);
+    public function getOneGoods(Request $request)
+    {
+        $admin_id = (int)$request->input("admin_id", 0);
+        $goods_id = (int)$request->input("goods_id", 0);
 
         $return = array(
-           'errcode' => -1,
-           'errmsg' => '失败',
-           'data' =>[]
+            'errcode' => -1,
+            'errmsg' => '失败',
+            'data' => []
         );
 
-        if($admin_id){
-           $good_info = DB::table("cater_goods")->whereId($goods_id)->first();
+        if ($admin_id) {
+            $good_info = DB::table("cater_goods")->whereId($goods_id)->first();
 
-           if($good_info){
-             //获取菜品展示图
-             $figure_img = DB::table("cater_figure_img")->where(['admin_id'=>$admin_id,"isvalid"=>true,"foreign_id"=>$good_info->id,"type"=>2])->get();
+            if ($good_info) {
+                //获取菜品展示图
+                $figure_img = DB::table("cater_figure_img")->where(['admin_id' => $admin_id, "isvalid" => true, "foreign_id" => $good_info->id, "type" => 2])->get();
 
-             if($figure_img){
-                foreach($figure_img as $k=>$v){
-                  $figure_img[$k]->img_path = "http://".$_SERVER['HTTP_HOST'].$v->img_path;
+                if ($figure_img) {
+                    foreach ($figure_img as $k => $v) {
+                        $figure_img[$k]->img_path = "http://" . $_SERVER['HTTP_HOST'] . $v->img_path;
+                    }
                 }
-             }
-             $good_info->figure_img = $figure_img;
+                $good_info->figure_img = $figure_img;
 
-             $return['errcode'] = 1;
-             $return['errmsg'] = "成功";
-             $return['data'] = $good_info;
+                $return['errcode'] = 1;
+                $return['errmsg'] = "成功";
+                $return['data'] = $good_info;
 
-           }
-        }else{
-          $return['errmsg'] = '系统错误';
+            }
+        } else {
+            $return['errmsg'] = '系统错误';
         }
 
         return json_encode($return);
 
-    }    
+    }
 }

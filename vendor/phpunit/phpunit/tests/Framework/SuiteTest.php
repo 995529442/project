@@ -191,9 +191,9 @@ class SuiteTest extends TestCase
 
         $suite->run($this->result);
 
-        $skipped           = $this->result->skipped();
+        $skipped = $this->result->skipped();
         $lastSkippedResult = \array_pop($skipped);
-        $message           = $lastSkippedResult->thrownException()->getMessage();
+        $message = $lastSkippedResult->thrownException()->getMessage();
 
         $this->assertContains('Test for DataProviderDependencyTest::testDependency skipped by data provider', $message);
     }

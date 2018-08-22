@@ -252,7 +252,7 @@ class Command
             $statusCode = $this->execute($input, $output);
         }
 
-        return is_numeric($statusCode) ? (int) $statusCode : 0;
+        return is_numeric($statusCode) ? (int)$statusCode : 0;
     }
 
     /**
@@ -366,10 +366,10 @@ class Command
     /**
      * Adds an argument.
      *
-     * @param string $name        The argument name
-     * @param int    $mode        The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
+     * @param string $name The argument name
+     * @param int $mode The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
      * @param string $description A description text
-     * @param mixed  $default     The default value (for InputArgument::OPTIONAL mode only)
+     * @param mixed $default The default value (for InputArgument::OPTIONAL mode only)
      *
      * @return $this
      */
@@ -383,11 +383,11 @@ class Command
     /**
      * Adds an option.
      *
-     * @param string $name        The option name
-     * @param string $shortcut    The shortcut (can be null)
-     * @param int    $mode        The option mode: One of the InputOption::VALUE_* constants
+     * @param string $name The option name
+     * @param string $shortcut The shortcut (can be null)
+     * @param int $mode The option mode: One of the InputOption::VALUE_* constants
      * @param string $description A description text
-     * @param mixed  $default     The default value (must be null for InputOption::VALUE_NONE)
+     * @param mixed $default The default value (must be null for InputOption::VALUE_NONE)
      *
      * @return $this
      */
@@ -457,7 +457,7 @@ class Command
      */
     public function setHidden($hidden)
     {
-        $this->hidden = (bool) $hidden;
+        $this->hidden = (bool)$hidden;
 
         return $this;
     }
@@ -534,7 +534,7 @@ class Command
         );
         $replacements = array(
             $name,
-            $_SERVER['PHP_SELF'].' '.$name,
+            $_SERVER['PHP_SELF'] . ' ' . $name,
         );
 
         return str_replace($placeholders, $replacements, $this->getHelp() ?: $this->getDescription());

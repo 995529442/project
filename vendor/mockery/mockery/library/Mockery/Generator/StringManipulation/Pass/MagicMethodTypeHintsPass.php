@@ -77,7 +77,8 @@ class MagicMethodTypeHintsPass implements Pass
      */
     public function getMagicMethods(
         TargetClassInterface $class = null
-    ) {
+    )
+    {
         if (is_null($class)) {
             return array();
         }
@@ -120,9 +121,9 @@ class MagicMethodTypeHintsPass implements Pass
     private function isMethodWithinCode($code, Method $method)
     {
         return preg_match(
-            $this->getDeclarationRegex($method->getName()),
-            $code
-        ) == 1;
+                $this->getDeclarationRegex($method->getName()),
+                $code
+            ) == 1;
     }
 
     /**
@@ -154,7 +155,7 @@ class MagicMethodTypeHintsPass implements Pass
 
         $groupMatches = end($parameterMatches);
         $parameterNames = is_array($groupMatches) ?
-            $groupMatches                         :
+            $groupMatches :
             array($groupMatches);
 
         return $parameterNames;
@@ -164,23 +165,24 @@ class MagicMethodTypeHintsPass implements Pass
      * Gets the declaration code, as a string, for the passed method.
      *
      * @param Method $method
-     * @param array  $namedParameters
+     * @param array $namedParameters
      * @return string
      */
     private function getMethodDeclaration(
         Method $method,
         array $namedParameters
-    ) {
+    )
+    {
         $declaration = 'public';
         $declaration .= $method->isStatic() ? ' static' : '';
-        $declaration .= ' function '.$method->getName().'(';
+        $declaration .= ' function ' . $method->getName() . '(';
 
         foreach ($method->getParameters() as $index => $parameter) {
-            $declaration .= $parameter->getTypeHintAsString().' ';
+            $declaration .= $parameter->getTypeHintAsString() . ' ';
             $name = isset($namedParameters[$index]) ?
-                $namedParameters[$index]            :
+                $namedParameters[$index] :
                 $parameter->getName();
-            $declaration .= '$'.$name;
+            $declaration .= '$' . $name;
             $declaration .= ',';
         }
         $declaration = rtrim($declaration, ',');
@@ -188,7 +190,7 @@ class MagicMethodTypeHintsPass implements Pass
 
         $returnType = $method->getReturnType();
         if (!empty($returnType)) {
-            $declaration .= ': '.$returnType;
+            $declaration .= ': ' . $returnType;
         }
 
         return $declaration;

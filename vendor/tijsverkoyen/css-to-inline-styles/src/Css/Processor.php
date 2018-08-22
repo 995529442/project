@@ -11,7 +11,7 @@ class Processor
      * Get the rules from a given CSS-string
      *
      * @param string $css
-     * @param array  $existingRules
+     * @param array $existingRules
      * @return Rule[]
      */
     public function getRules($css, $existingRules = array())

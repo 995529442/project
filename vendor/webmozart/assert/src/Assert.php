@@ -46,7 +46,7 @@ use Traversable;
  * @method static void nullOrTrue($value, $message = '')
  * @method static void nullOrFalse($value, $message = '')
  * @method static void nullOrEq($value, $value2, $message = '')
- * @method static void nullOrNotEq($value,$value2,  $message = '')
+ * @method static void nullOrNotEq($value, $value2, $message = '')
  * @method static void nullOrSame($value, $value2, $message = '')
  * @method static void nullOrNotSame($value, $value2, $message = '')
  * @method static void nullOrGreaterThan($value, $value2, $message = '')
@@ -115,7 +115,7 @@ use Traversable;
  * @method static void allTrue($values, $message = '')
  * @method static void allFalse($values, $message = '')
  * @method static void allEq($values, $value2, $message = '')
- * @method static void allNotEq($values,$value2,  $message = '')
+ * @method static void allNotEq($values, $value2, $message = '')
  * @method static void allSame($values, $value2, $message = '')
  * @method static void allNotSame($values, $value2, $message = '')
  * @method static void allGreaterThan($values, $value2, $message = '')
@@ -194,7 +194,7 @@ class Assert
 
     public static function integerish($value, $message = '')
     {
-        if (!is_numeric($value) || $value != (int) $value) {
+        if (!is_numeric($value) || $value != (int)$value) {
             static::reportInvalidArgument(sprintf(
                 $message ?: 'Expected an integerish value. Got: %s',
                 static::typeToString($value)
@@ -1022,7 +1022,7 @@ class Assert
             return;
         }
 
-        throw new BadMethodCallException('No such method: '.$name);
+        throw new BadMethodCallException('No such method: ' . $name);
     }
 
     protected static function valueToString($value)
@@ -1052,10 +1052,10 @@ class Assert
         }
 
         if (is_string($value)) {
-            return '"'.$value.'"';
+            return '"' . $value . '"';
         }
 
-        return (string) $value;
+        return (string)$value;
     }
 
     protected static function typeToString($value)

@@ -122,36 +122,36 @@ class TestTest extends TestCase
     public function requirementsProvider()
     {
         return [
-            ['testOne',    []],
-            ['testTwo',    ['PHPUnit'    => ['version' => '1.0', 'operator' => '']]],
-            ['testThree',  ['PHP'        => ['version' => '2.0', 'operator' => '']]],
-            ['testFour',   [
-                'PHPUnit'    => ['version' => '2.0', 'operator' => ''],
-                'PHP'        => ['version' => '1.0', 'operator' => ''],
+            ['testOne', []],
+            ['testTwo', ['PHPUnit' => ['version' => '1.0', 'operator' => '']]],
+            ['testThree', ['PHP' => ['version' => '2.0', 'operator' => '']]],
+            ['testFour', [
+                'PHPUnit' => ['version' => '2.0', 'operator' => ''],
+                'PHP' => ['version' => '1.0', 'operator' => ''],
             ]],
-            ['testFive',   ['PHP'        => ['version' => '5.4.0RC6', 'operator' => '']]],
-            ['testSix',    ['PHP'        => ['version' => '5.4.0-alpha1', 'operator' => '']]],
-            ['testSeven',  ['PHP'        => ['version' => '5.4.0beta2', 'operator' => '']]],
-            ['testEight',  ['PHP'        => ['version' => '5.4-dev', 'operator' => '']]],
-            ['testNine',   ['functions'  => ['testFunc']]],
-            ['testTen',    ['extensions' => ['testExt']]],
+            ['testFive', ['PHP' => ['version' => '5.4.0RC6', 'operator' => '']]],
+            ['testSix', ['PHP' => ['version' => '5.4.0-alpha1', 'operator' => '']]],
+            ['testSeven', ['PHP' => ['version' => '5.4.0beta2', 'operator' => '']]],
+            ['testEight', ['PHP' => ['version' => '5.4-dev', 'operator' => '']]],
+            ['testNine', ['functions' => ['testFunc']]],
+            ['testTen', ['extensions' => ['testExt']]],
             ['testEleven', [
-                'OS'         => 'SunOS',
-                'OSFAMILY'   => 'Solaris',
+                'OS' => 'SunOS',
+                'OSFAMILY' => 'Solaris',
             ]],
             [
                 'testSpace',
                 [
                     'extensions' => ['spl'],
-                    'OS'         => '.*',
+                    'OS' => '.*',
                 ],
             ],
             [
                 'testAllPossibleRequirements',
                 [
-                    'PHP'       => ['version' => '99-dev', 'operator' => ''],
-                    'PHPUnit'   => ['version' => '9-dev', 'operator' => ''],
-                    'OS'        => 'DOESNOTEXIST',
+                    'PHP' => ['version' => '99-dev', 'operator' => ''],
+                    'PHPUnit' => ['version' => '9-dev', 'operator' => ''],
+                    'OS' => 'DOESNOTEXIST',
                     'functions' => [
                         'testFuncOne',
                         'testFuncTwo',
@@ -169,7 +169,7 @@ class TestTest extends TestCase
             ['testSpecificExtensionVersion',
                 [
                     'extension_versions' => ['testExt' => ['version' => '1.8.0', 'operator' => '']],
-                    'extensions'         => ['testExt']
+                    'extensions' => ['testExt']
                 ]
             ],
             ['testPHPVersionOperatorLessThan',
@@ -264,49 +264,49 @@ class TestTest extends TestCase
             ],
             ['testExtensionVersionOperatorLessThanEquals',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '1.0', 'operator' => '<=']]
                 ]
             ],
             ['testExtensionVersionOperatorGreaterThan',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '99', 'operator' => '>']]
                 ]
             ],
             ['testExtensionVersionOperatorGreaterThanEquals',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '99', 'operator' => '>=']]
                 ]
             ],
             ['testExtensionVersionOperatorEquals',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '1.0', 'operator' => '=']]
                 ]
             ],
             ['testExtensionVersionOperatorDoubleEquals',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '1.0', 'operator' => '==']]
                 ]
             ],
             ['testExtensionVersionOperatorBangEquals',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '99', 'operator' => '!=']]
                 ]
             ],
             ['testExtensionVersionOperatorNotEquals',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '99', 'operator' => '<>']]
                 ]
             ],
             ['testExtensionVersionOperatorNoSpace',
                 [
-                    'extensions'         => ['testExtOne'],
+                    'extensions' => ['testExtOne'],
                     'extension_versions' => ['testExtOne' => ['version' => '99', 'operator' => '>=']]
                 ]
             ]
@@ -464,16 +464,16 @@ class TestTest extends TestCase
     public function testGetRequirementsMergesClassAndMethodDocBlocks()
     {
         $expectedAnnotations = [
-            'PHP'       => ['version' => '5.4', 'operator' => ''],
-            'PHPUnit'   => ['version' => '3.7', 'operator' => ''],
-            'OS'        => 'WINNT',
+            'PHP' => ['version' => '5.4', 'operator' => ''],
+            'PHPUnit' => ['version' => '3.7', 'operator' => ''],
+            'OS' => 'WINNT',
             'functions' => [
-              'testFuncClass',
-              'testFuncMethod',
+                'testFuncClass',
+                'testFuncMethod',
             ],
             'extensions' => [
-              'testExtClass',
-              'testExtMethod',
+                'testExtClass',
+                'testExtMethod',
             ]
         ];
 
@@ -497,21 +497,21 @@ class TestTest extends TestCase
     public function missingRequirementsProvider()
     {
         return [
-            ['testOne',            []],
-            ['testNine',           ['Function testFunc is required.']],
-            ['testTen',            ['Extension testExt is required.']],
-            ['testAlwaysSkip',     ['PHPUnit >= 1111111 is required.']],
-            ['testAlwaysSkip2',    ['PHP >= 9999999 is required.']],
-            ['testAlwaysSkip3',    ['Operating system matching /DOESNOTEXIST/i is required.']],
+            ['testOne', []],
+            ['testNine', ['Function testFunc is required.']],
+            ['testTen', ['Extension testExt is required.']],
+            ['testAlwaysSkip', ['PHPUnit >= 1111111 is required.']],
+            ['testAlwaysSkip2', ['PHP >= 9999999 is required.']],
+            ['testAlwaysSkip3', ['Operating system matching /DOESNOTEXIST/i is required.']],
             ['testAllPossibleRequirements', [
-              'PHP >= 99-dev is required.',
-              'PHPUnit >= 9-dev is required.',
-              'Operating system matching /DOESNOTEXIST/i is required.',
-              'Function testFuncOne is required.',
-              'Function testFuncTwo is required.',
-              'Extension testExtOne is required.',
-              'Extension testExtTwo is required.',
-              'Extension testExtThree >= 2.0 is required.',
+                'PHP >= 99-dev is required.',
+                'PHPUnit >= 9-dev is required.',
+                'Operating system matching /DOESNOTEXIST/i is required.',
+                'Function testFuncOne is required.',
+                'Function testFuncTwo is required.',
+                'Extension testExtOne is required.',
+                'Extension testExtTwo is required.',
+                'Extension testExtThree >= 2.0 is required.',
             ]],
             ['testPHPVersionOperatorLessThan', ['PHP < 5.4 is required.']],
             ['testPHPVersionOperatorLessThanEquals', ['PHP <= 5.4 is required.']],
@@ -757,7 +757,7 @@ class TestTest extends TestCase
     {
         if (\strpos($test, 'Namespace') === 0) {
             $expected = [
-              TEST_FILES_PATH . 'NamespaceCoveredClass.php' => $lines
+                TEST_FILES_PATH . 'NamespaceCoveredClass.php' => $lines
             ];
         } elseif ($test === 'CoverageNoneTest') {
             $expected = [];
@@ -765,7 +765,7 @@ class TestTest extends TestCase
             $expected = false;
         } elseif ($test === 'CoverageFunctionTest') {
             $expected = [
-              TEST_FILES_PATH . 'CoveredFunction.php' => $lines
+                TEST_FILES_PATH . 'CoveredFunction.php' => $lines
             ];
         } else {
             $expected = [TEST_FILES_PATH . 'CoveredClass.php' => $lines];
@@ -891,102 +891,102 @@ class TestTest extends TestCase
     public function getLinesToBeCoveredProvider()
     {
         return [
-          [
-            'CoverageNoneTest',
-            []
-          ],
-          [
-            'CoverageClassExtendedTest',
-            \array_merge(\range(19, 36), \range(2, 17))
-          ],
-          [
-            'CoverageClassTest',
-            \range(19, 36)
-          ],
-          [
-            'CoverageMethodTest',
-            \range(31, 35)
-          ],
-          [
-            'CoverageMethodOneLineAnnotationTest',
-            \range(31, 35)
-          ],
-          [
-            'CoverageNotPrivateTest',
-            \array_merge(\range(25, 29), \range(31, 35))
-          ],
-          [
-            'CoverageNotProtectedTest',
-            \array_merge(\range(21, 23), \range(31, 35))
-          ],
-          [
-            'CoverageNotPublicTest',
-            \array_merge(\range(21, 23), \range(25, 29))
-          ],
-          [
-            'CoveragePrivateTest',
-            \range(21, 23)
-          ],
-          [
-            'CoverageProtectedTest',
-            \range(25, 29)
-          ],
-          [
-            'CoveragePublicTest',
-            \range(31, 35)
-          ],
-          [
-            'CoverageFunctionTest',
-            \range(2, 4)
-          ],
-          [
-            'NamespaceCoverageClassExtendedTest',
-            \array_merge(\range(21, 38), \range(4, 19))
-          ],
-          [
-            'NamespaceCoverageClassTest',
-            \range(21, 38)
-          ],
-          [
-            'NamespaceCoverageMethodTest',
-            \range(33, 37)
-          ],
-          [
-            'NamespaceCoverageNotPrivateTest',
-            \array_merge(\range(27, 31), \range(33, 37))
-          ],
-          [
-            'NamespaceCoverageNotProtectedTest',
-            \array_merge(\range(23, 25), \range(33, 37))
-          ],
-          [
-            'NamespaceCoverageNotPublicTest',
-            \array_merge(\range(23, 25), \range(27, 31))
-          ],
-          [
-            'NamespaceCoveragePrivateTest',
-            \range(23, 25)
-          ],
-          [
-            'NamespaceCoverageProtectedTest',
-            \range(27, 31)
-          ],
-          [
-            'NamespaceCoveragePublicTest',
-            \range(33, 37)
-          ],
-          [
-            'NamespaceCoverageCoversClassTest',
-            \array_merge(\range(23, 25), \range(27, 31), \range(33, 37), \range(6, 8), \range(10, 13), \range(15, 18))
-          ],
-          [
-            'NamespaceCoverageCoversClassPublicTest',
-            \range(33, 37)
-          ],
-          [
-            'CoverageNothingTest',
-            false
-          ]
+            [
+                'CoverageNoneTest',
+                []
+            ],
+            [
+                'CoverageClassExtendedTest',
+                \array_merge(\range(19, 36), \range(2, 17))
+            ],
+            [
+                'CoverageClassTest',
+                \range(19, 36)
+            ],
+            [
+                'CoverageMethodTest',
+                \range(31, 35)
+            ],
+            [
+                'CoverageMethodOneLineAnnotationTest',
+                \range(31, 35)
+            ],
+            [
+                'CoverageNotPrivateTest',
+                \array_merge(\range(25, 29), \range(31, 35))
+            ],
+            [
+                'CoverageNotProtectedTest',
+                \array_merge(\range(21, 23), \range(31, 35))
+            ],
+            [
+                'CoverageNotPublicTest',
+                \array_merge(\range(21, 23), \range(25, 29))
+            ],
+            [
+                'CoveragePrivateTest',
+                \range(21, 23)
+            ],
+            [
+                'CoverageProtectedTest',
+                \range(25, 29)
+            ],
+            [
+                'CoveragePublicTest',
+                \range(31, 35)
+            ],
+            [
+                'CoverageFunctionTest',
+                \range(2, 4)
+            ],
+            [
+                'NamespaceCoverageClassExtendedTest',
+                \array_merge(\range(21, 38), \range(4, 19))
+            ],
+            [
+                'NamespaceCoverageClassTest',
+                \range(21, 38)
+            ],
+            [
+                'NamespaceCoverageMethodTest',
+                \range(33, 37)
+            ],
+            [
+                'NamespaceCoverageNotPrivateTest',
+                \array_merge(\range(27, 31), \range(33, 37))
+            ],
+            [
+                'NamespaceCoverageNotProtectedTest',
+                \array_merge(\range(23, 25), \range(33, 37))
+            ],
+            [
+                'NamespaceCoverageNotPublicTest',
+                \array_merge(\range(23, 25), \range(27, 31))
+            ],
+            [
+                'NamespaceCoveragePrivateTest',
+                \range(23, 25)
+            ],
+            [
+                'NamespaceCoverageProtectedTest',
+                \range(27, 31)
+            ],
+            [
+                'NamespaceCoveragePublicTest',
+                \range(33, 37)
+            ],
+            [
+                'NamespaceCoverageCoversClassTest',
+                \array_merge(\range(23, 25), \range(27, 31), \range(33, 37), \range(6, 8), \range(10, 13), \range(15, 18))
+            ],
+            [
+                'NamespaceCoverageCoversClassPublicTest',
+                \range(33, 37)
+            ],
+            [
+                'CoverageNothingTest',
+                false
+            ]
         ];
     }
 

@@ -81,7 +81,7 @@ class FileLinkFormatter implements \Serializable
     public static function generateUrlFormat(UrlGeneratorInterface $router, $routeName, $queryString)
     {
         try {
-            return $router->generate($routeName).$queryString;
+            return $router->generate($routeName) . $queryString;
         } catch (ExceptionInterface $e) {
             return null;
         }
@@ -100,8 +100,8 @@ class FileLinkFormatter implements \Serializable
                 }
 
                 return array(
-                    $request->getSchemeAndHttpHost().$request->getBaseUrl().$this->urlFormat,
-                    $this->baseDir.DIRECTORY_SEPARATOR, '',
+                    $request->getSchemeAndHttpHost() . $request->getBaseUrl() . $this->urlFormat,
+                    $this->baseDir . DIRECTORY_SEPARATOR, '',
                 );
             }
         }

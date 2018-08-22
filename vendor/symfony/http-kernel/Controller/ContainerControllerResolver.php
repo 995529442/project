@@ -109,7 +109,7 @@ class ContainerControllerResolver extends ControllerResolver
     }
 
     /**
-     * @param string                     $controller
+     * @param string $controller
      * @param \Exception|\Throwable|null $previous
      */
     private function throwExceptionIfControllerWasRemoved($controller, $previous = null)

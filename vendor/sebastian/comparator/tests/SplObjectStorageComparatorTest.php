@@ -33,9 +33,9 @@ class SplObjectStorageComparatorTest extends TestCase
     public function acceptsFailsProvider()
     {
         return [
-          [new SplObjectStorage, new stdClass],
-          [new stdClass, new SplObjectStorage],
-          [new stdClass, new stdClass]
+            [new SplObjectStorage, new stdClass],
+            [new stdClass, new SplObjectStorage],
+            [new stdClass, new stdClass]
         ];
     }
 
@@ -56,10 +56,10 @@ class SplObjectStorageComparatorTest extends TestCase
         $storage4->attach($object1);
 
         return [
-          [$storage1, $storage1],
-          [$storage1, $storage2],
-          [$storage3, $storage3],
-          [$storage3, $storage4]
+            [$storage1, $storage1],
+            [$storage1, $storage2],
+            [$storage3, $storage3],
+            [$storage3, $storage4]
         ];
     }
 
@@ -78,9 +78,9 @@ class SplObjectStorageComparatorTest extends TestCase
         $storage3->attach($object1);
 
         return [
-          [$storage1, $storage2],
-          [$storage1, $storage3],
-          [$storage2, $storage3],
+            [$storage1, $storage2],
+            [$storage1, $storage3],
+            [$storage2, $storage3],
         ];
     }
 
@@ -90,10 +90,10 @@ class SplObjectStorageComparatorTest extends TestCase
     public function testAcceptsSucceeds()
     {
         $this->assertTrue(
-          $this->comparator->accepts(
-            new SplObjectStorage,
-            new SplObjectStorage
-          )
+            $this->comparator->accepts(
+                new SplObjectStorage,
+                new SplObjectStorage
+            )
         );
     }
 
@@ -104,7 +104,7 @@ class SplObjectStorageComparatorTest extends TestCase
     public function testAcceptsFails($expected, $actual)
     {
         $this->assertFalse(
-          $this->comparator->accepts($expected, $actual)
+            $this->comparator->accepts($expected, $actual)
         );
     }
 

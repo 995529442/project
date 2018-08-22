@@ -424,16 +424,16 @@ class Carbon extends DateTime implements JsonSerializable
             $tzName = timezone_name_from_abbr(null, $object * 3600, true);
 
             if ($tzName === false) {
-                throw new InvalidArgumentException('Unknown or bad timezone ('.$object.')');
+                throw new InvalidArgumentException('Unknown or bad timezone (' . $object . ')');
             }
 
             $object = $tzName;
         }
 
-        $tz = @timezone_open((string) $object);
+        $tz = @timezone_open((string)$object);
 
         if ($tz === false) {
-            throw new InvalidArgumentException('Unknown or bad timezone ('.$object.')');
+            throw new InvalidArgumentException('Unknown or bad timezone (' . $object . ')');
         }
 
         return $tz;
@@ -449,7 +449,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Please see the testing aids section (specifically static::setTestNow())
      * for more on the possibility of this constructor returning a test instance.
      *
-     * @param string|null               $time
+     * @param string|null $time
      * @param \DateTimeZone|string|null $tz
      */
     public function __construct($time = null, $tz = null)
@@ -486,12 +486,12 @@ class Carbon extends DateTime implements JsonSerializable
             list($microTime, $timeStamp) = explode(' ', microtime());
             $dateTime = new DateTime('now', $timezone);
             $dateTime->setTimestamp($timeStamp); // Use the timestamp returned by microtime as now can happen in the next second
-            $time = $dateTime->format(static::DEFAULT_TO_STRING_FORMAT).substr($microTime, 1, 7);
+            $time = $dateTime->format(static::DEFAULT_TO_STRING_FORMAT) . substr($microTime, 1, 7);
         }
         // @codeCoverageIgnoreEnd
 
         // Work-around for PHP bug https://bugs.php.net/bug.php?id=67127
-        if (strpos((string) .1, '.') === false) {
+        if (strpos((string).1, '.') === false) {
             $locale = setlocale(LC_NUMERIC, '0');
             setlocale(LC_NUMERIC, 'C');
         }
@@ -527,7 +527,7 @@ class Carbon extends DateTime implements JsonSerializable
      * as it allows you to do Carbon::parse('Monday next week')->fn() rather
      * than (new Carbon('Monday next week'))->fn().
      *
-     * @param string|null               $time
+     * @param string|null $time
      * @param \DateTimeZone|string|null $tz
      *
      * @return static
@@ -629,12 +629,12 @@ class Carbon extends DateTime implements JsonSerializable
      * If $hour is not null then the default values for $minute and $second
      * will be 0.
      *
-     * @param int|null                  $year
-     * @param int|null                  $month
-     * @param int|null                  $day
-     * @param int|null                  $hour
-     * @param int|null                  $minute
-     * @param int|null                  $second
+     * @param int|null $year
+     * @param int|null $month
+     * @param int|null $day
+     * @param int|null $hour
+     * @param int|null $minute
+     * @param int|null $second
      * @param \DateTimeZone|string|null $tz
      *
      * @throws \InvalidArgumentException
@@ -701,12 +701,12 @@ class Carbon extends DateTime implements JsonSerializable
      * If one of the set values is not valid, an \InvalidArgumentException
      * will be thrown.
      *
-     * @param int|null                  $year
-     * @param int|null                  $month
-     * @param int|null                  $day
-     * @param int|null                  $hour
-     * @param int|null                  $minute
-     * @param int|null                  $second
+     * @param int|null $year
+     * @param int|null $month
+     * @param int|null $day
+     * @param int|null $hour
+     * @param int|null $minute
+     * @param int|null $second
      * @param \DateTimeZone|string|null $tz
      *
      * @throws \Carbon\Exceptions\InvalidDateException|\InvalidArgumentException
@@ -744,9 +744,9 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from just a date. The time portion is set to now.
      *
-     * @param int|null                  $year
-     * @param int|null                  $month
-     * @param int|null                  $day
+     * @param int|null $year
+     * @param int|null $month
+     * @param int|null $day
      * @param \DateTimeZone|string|null $tz
      *
      * @throws \InvalidArgumentException
@@ -761,9 +761,9 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from just a date. The time portion is set to midnight.
      *
-     * @param int|null                  $year
-     * @param int|null                  $month
-     * @param int|null                  $day
+     * @param int|null $year
+     * @param int|null $month
+     * @param int|null $day
      * @param \DateTimeZone|string|null $tz
      *
      * @return static
@@ -776,9 +776,9 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from just a time. The date portion is set to today.
      *
-     * @param int|null                  $hour
-     * @param int|null                  $minute
-     * @param int|null                  $second
+     * @param int|null $hour
+     * @param int|null $minute
+     * @param int|null $second
      * @param \DateTimeZone|string|null $tz
      *
      * @throws \InvalidArgumentException
@@ -793,7 +793,7 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from a time string. The date portion is set to today.
      *
-     * @param string                    $time
+     * @param string $time
      * @param \DateTimeZone|string|null $tz
      *
      * @throws \InvalidArgumentException
@@ -808,8 +808,8 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from a specific format.
      *
-     * @param string                    $format Datetime format
-     * @param string                    $time
+     * @param string $format Datetime format
+     * @param string $time
      * @param \DateTimeZone|string|null $tz
      *
      * @throws InvalidArgumentException
@@ -859,7 +859,7 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from a timestamp.
      *
-     * @param int                       $timestamp
+     * @param int $timestamp
      * @param \DateTimeZone|string|null $tz
      *
      * @return static
@@ -872,7 +872,7 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Create a Carbon instance from a timestamp in milliseconds.
      *
-     * @param int                       $timestamp
+     * @param int $timestamp
      * @param \DateTimeZone|string|null $tz
      *
      * @return static
@@ -892,7 +892,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public static function createFromTimestampUTC($timestamp)
     {
-        return new static('@'.$timestamp);
+        return new static('@' . $timestamp);
     }
 
     /**
@@ -926,8 +926,8 @@ class Carbon extends DateTime implements JsonSerializable
     {
         if (!$date instanceof DateTime && !$date instanceof DateTimeInterface) {
             throw new InvalidArgumentException(
-                'Expected null, string, DateTime or DateTimeInterface, '.
-                (is_object($date) ? get_class($date) : gettype($date)).' given'
+                'Expected null, string, DateTime or DateTimeInterface, ' .
+                (is_object($date) ? get_class($date) : gettype($date)) . ' given'
             );
         }
     }
@@ -989,19 +989,19 @@ class Carbon extends DateTime implements JsonSerializable
 
         switch (true) {
             case isset($formats[$name]):
-                return (int) $this->format($formats[$name]);
+                return (int)$this->format($formats[$name]);
 
             case $name === 'weekOfMonth':
-                return (int) ceil($this->day / static::DAYS_PER_WEEK);
+                return (int)ceil($this->day / static::DAYS_PER_WEEK);
 
             case $name === 'weekNumberInMonth':
-                return (int) ceil(($this->day + $this->copy()->startOfMonth()->dayOfWeek - 1) / static::DAYS_PER_WEEK);
+                return (int)ceil(($this->day + $this->copy()->startOfMonth()->dayOfWeek - 1) / static::DAYS_PER_WEEK);
 
             case $name === 'age':
                 return $this->diffInYears();
 
             case $name === 'quarter':
-                return (int) ceil($this->month / static::MONTHS_PER_QUARTER);
+                return (int)ceil($this->month / static::MONTHS_PER_QUARTER);
 
             case $name === 'offset':
                 return $this->getOffset();
@@ -1050,7 +1050,7 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Set a part of the Carbon object
      *
-     * @param string                   $name
+     * @param string $name
      * @param string|int|\DateTimeZone $value
      *
      * @throws \InvalidArgumentException
@@ -1428,7 +1428,7 @@ class Carbon extends DateTime implements JsonSerializable
      * To clear the test instance call this method using the default
      * parameter of null.
      *
-     * @param \Carbon\Carbon|null        $testNow real or mock Carbon instance
+     * @param \Carbon\Carbon|null $testNow real or mock Carbon instance
      * @param \Carbon\Carbon|string|null $testNow
      */
     public static function setTestNow($testNow = null)
@@ -1977,7 +1977,7 @@ class Carbon extends DateTime implements JsonSerializable
      *
      * @param \Carbon\Carbon|\DateTimeInterface|mixed $date1
      * @param \Carbon\Carbon|\DateTimeInterface|mixed $date2
-     * @param bool                                    $equal Indicates if a > and < comparison should be used or <= or >=
+     * @param bool $equal Indicates if a > and < comparison should be used or <= or >=
      *
      * @return bool
      */
@@ -2253,8 +2253,8 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Compares the formatted values of the two dates.
      *
-     * @param string                                 $format The date formats to compare.
-     * @param \Carbon\Carbon|\DateTimeInterface|null $date   The instance to compare with or null to use current day.
+     * @param string $format The date formats to compare.
+     * @param \Carbon\Carbon|\DateTimeInterface|null $date The instance to compare with or null to use current day.
      *
      * @throws \InvalidArgumentException
      *
@@ -2304,8 +2304,8 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Checks if the passed in date is in the same quarter as the instance quarter (and year if needed).
      *
-     * @param \Carbon\Carbon|\DateTimeInterface|null $date       The instance to compare with or null to use current day.
-     * @param bool                                   $ofSameYear Check if it is the same month in the same year.
+     * @param \Carbon\Carbon|\DateTimeInterface|null $date The instance to compare with or null to use current day.
+     * @param bool $ofSameYear Check if it is the same month in the same year.
      *
      * @return bool
      */
@@ -2334,8 +2334,8 @@ class Carbon extends DateTime implements JsonSerializable
      * Note that this defaults to only comparing the month while ignoring the year.
      * To test if it is the same exact month of the same year, pass in true as the second parameter.
      *
-     * @param \Carbon\Carbon|\DateTimeInterface|null $date       The instance to compare with or null to use the current date.
-     * @param bool                                   $ofSameYear Check if it is the same month in the same year.
+     * @param \Carbon\Carbon|\DateTimeInterface|null $date The instance to compare with or null to use the current date.
+     * @param bool $ofSameYear Check if it is the same month in the same year.
      *
      * @return bool
      */
@@ -2559,7 +2559,7 @@ class Carbon extends DateTime implements JsonSerializable
                 static::$regexFormats
             );
 
-            return (bool) preg_match('/^'.$regex.'$/', $date);
+            return (bool)preg_match('/^' . $regex . '$/', $date);
         } catch (InvalidArgumentException $e) {
         }
 
@@ -2685,7 +2685,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addYearsWithOverflow($value)
     {
-        return $this->modify((int) $value.' year');
+        return $this->modify((int)$value . ' year');
     }
 
     /**
@@ -2884,7 +2884,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addMonthsWithOverflow($value)
     {
-        return $this->modify((int) $value.' month');
+        return $this->modify((int)$value . ' month');
     }
 
     /**
@@ -2935,7 +2935,7 @@ class Carbon extends DateTime implements JsonSerializable
     {
         $day = $this->day;
 
-        $this->modify((int) $value.' month');
+        $this->modify((int)$value . ' month');
 
         if ($day !== $this->day) {
             $this->modify('last day of previous month');
@@ -2990,7 +2990,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addDays($value)
     {
-        return $this->modify((int) $value.' day');
+        return $this->modify((int)$value . ' day');
     }
 
     /**
@@ -3041,7 +3041,7 @@ class Carbon extends DateTime implements JsonSerializable
     {
         // Fix for weekday bug https://bugs.php.net/bug.php?id=54909
         $t = $this->toTimeString();
-        $this->modify((int) $value.' weekday');
+        $this->modify((int)$value . ' weekday');
 
         return $this->setTimeFromTimeString($t);
     }
@@ -3092,7 +3092,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addWeeks($value)
     {
-        return $this->modify((int) $value.' week');
+        return $this->modify((int)$value . ' week');
     }
 
     /**
@@ -3141,7 +3141,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addHours($value)
     {
-        return $this->modify((int) $value.' hour');
+        return $this->modify((int)$value . ' hour');
     }
 
     /**
@@ -3239,7 +3239,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addMinutes($value)
     {
-        return $this->modify((int) $value.' minute');
+        return $this->modify((int)$value . ' minute');
     }
 
     /**
@@ -3337,7 +3337,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function addSeconds($value)
     {
-        return $this->modify((int) $value.' second');
+        return $this->modify((int)$value . ' second');
     }
 
     /**
@@ -3433,7 +3433,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Get the difference as a CarbonInterval instance
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return CarbonInterval
      */
@@ -3446,20 +3446,20 @@ class Carbon extends DateTime implements JsonSerializable
      * Get the difference in years
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInYears($date = null, $absolute = true)
     {
-        return (int) $this->diff($this->resolveCarbon($date), $absolute)->format('%r%y');
+        return (int)$this->diff($this->resolveCarbon($date), $absolute)->format('%r%y');
     }
 
     /**
      * Get the difference in months
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3467,41 +3467,41 @@ class Carbon extends DateTime implements JsonSerializable
     {
         $date = $this->resolveCarbon($date);
 
-        return $this->diffInYears($date, $absolute) * static::MONTHS_PER_YEAR + (int) $this->diff($date, $absolute)->format('%r%m');
+        return $this->diffInYears($date, $absolute) * static::MONTHS_PER_YEAR + (int)$this->diff($date, $absolute)->format('%r%m');
     }
 
     /**
      * Get the difference in weeks
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInWeeks($date = null, $absolute = true)
     {
-        return (int) ($this->diffInDays($date, $absolute) / static::DAYS_PER_WEEK);
+        return (int)($this->diffInDays($date, $absolute) / static::DAYS_PER_WEEK);
     }
 
     /**
      * Get the difference in days
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInDays($date = null, $absolute = true)
     {
-        return (int) $this->diff($this->resolveCarbon($date), $absolute)->format('%r%a');
+        return (int)$this->diff($this->resolveCarbon($date), $absolute)->format('%r%a');
     }
 
     /**
      * Get the difference in days using a filter closure
      *
-     * @param Closure                                       $callback
+     * @param Closure $callback
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3513,9 +3513,9 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Get the difference in hours using a filter closure
      *
-     * @param Closure                                       $callback
+     * @param Closure $callback
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3527,10 +3527,10 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Get the difference by the given interval using a filter closure
      *
-     * @param CarbonInterval                                $ci       An interval to traverse by
-     * @param Closure                                       $callback
+     * @param CarbonInterval $ci An interval to traverse by
+     * @param Closure $callback
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3560,7 +3560,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Get the difference in weekdays
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3575,7 +3575,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Get the difference in weekend days using a filter
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3590,59 +3590,59 @@ class Carbon extends DateTime implements JsonSerializable
      * Get the difference in hours.
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInHours($date = null, $absolute = true)
     {
-        return (int) ($this->diffInSeconds($date, $absolute) / static::SECONDS_PER_MINUTE / static::MINUTES_PER_HOUR);
+        return (int)($this->diffInSeconds($date, $absolute) / static::SECONDS_PER_MINUTE / static::MINUTES_PER_HOUR);
     }
 
     /**
      * Get the difference in hours using timestamps.
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInRealHours($date = null, $absolute = true)
     {
-        return (int) ($this->diffInRealSeconds($date, $absolute) / static::SECONDS_PER_MINUTE / static::MINUTES_PER_HOUR);
+        return (int)($this->diffInRealSeconds($date, $absolute) / static::SECONDS_PER_MINUTE / static::MINUTES_PER_HOUR);
     }
 
     /**
      * Get the difference in minutes.
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInMinutes($date = null, $absolute = true)
     {
-        return (int) ($this->diffInSeconds($date, $absolute) / static::SECONDS_PER_MINUTE);
+        return (int)($this->diffInSeconds($date, $absolute) / static::SECONDS_PER_MINUTE);
     }
 
     /**
      * Get the difference in minutes using timestamps.
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
     public function diffInRealMinutes($date = null, $absolute = true)
     {
-        return (int) ($this->diffInRealSeconds($date, $absolute) / static::SECONDS_PER_MINUTE);
+        return (int)($this->diffInRealSeconds($date, $absolute) / static::SECONDS_PER_MINUTE);
     }
 
     /**
      * Get the difference in seconds.
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3661,7 +3661,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Get the difference in seconds using timestamps.
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
-     * @param bool                                          $absolute Get the absolute of the difference
+     * @param bool $absolute Get the absolute of the difference
      *
      * @return int
      */
@@ -3713,9 +3713,9 @@ class Carbon extends DateTime implements JsonSerializable
      * 5 months after
      *
      * @param Carbon|null $other
-     * @param bool        $absolute removes time difference modifiers ago, after, etc
-     * @param bool        $short    displays short format of time units
-     * @param int         $parts    displays number of parts in the interval
+     * @param bool $absolute removes time difference modifiers ago, after, etc
+     * @param bool $short displays short format of time units
+     * @param int $parts displays number of parts in the interval
      *
      * @return string
      */
@@ -3724,7 +3724,7 @@ class Carbon extends DateTime implements JsonSerializable
         $isNow = $other === null;
         $interval = array();
 
-        $parts = min(6, max(1, (int) $parts));
+        $parts = min(6, max(1, (int)$parts));
         $count = 1;
         $unit = $short ? 's' : 'second';
 
@@ -3737,12 +3737,12 @@ class Carbon extends DateTime implements JsonSerializable
         $diffInterval = $this->diff($other);
 
         $diffIntervalArray = array(
-            array('value' => $diffInterval->y, 'unit' => 'year',    'unitShort' => 'y'),
-            array('value' => $diffInterval->m, 'unit' => 'month',   'unitShort' => 'm'),
-            array('value' => $diffInterval->d, 'unit' => 'day',     'unitShort' => 'd'),
-            array('value' => $diffInterval->h, 'unit' => 'hour',    'unitShort' => 'h'),
-            array('value' => $diffInterval->i, 'unit' => 'minute',  'unitShort' => 'min'),
-            array('value' => $diffInterval->s, 'unit' => 'second',  'unitShort' => 's'),
+            array('value' => $diffInterval->y, 'unit' => 'year', 'unitShort' => 'y'),
+            array('value' => $diffInterval->m, 'unit' => 'month', 'unitShort' => 'm'),
+            array('value' => $diffInterval->d, 'unit' => 'day', 'unitShort' => 'd'),
+            array('value' => $diffInterval->h, 'unit' => 'hour', 'unitShort' => 'h'),
+            array('value' => $diffInterval->i, 'unit' => 'minute', 'unitShort' => 'min'),
+            array('value' => $diffInterval->s, 'unit' => 'second', 'unitShort' => 's'),
         );
 
         foreach ($diffIntervalArray as $diffIntervalData) {
@@ -3752,12 +3752,12 @@ class Carbon extends DateTime implements JsonSerializable
 
                 if ($diffIntervalData['unit'] === 'day' && $count >= static::DAYS_PER_WEEK) {
                     $unit = $short ? 'w' : 'week';
-                    $count = (int) ($count / static::DAYS_PER_WEEK);
+                    $count = (int)($count / static::DAYS_PER_WEEK);
 
                     $interval[] = static::translator()->transChoice($unit, $count, array(':count' => $count));
 
                     // get the count days excluding weeks (might be zero)
-                    $numOfDaysCount = (int) ($diffIntervalData['value'] - ($count * static::DAYS_PER_WEEK));
+                    $numOfDaysCount = (int)($diffIntervalData['value'] - ($count * static::DAYS_PER_WEEK));
 
                     if ($numOfDaysCount > 0 && count($interval) < $parts) {
                         $unit = $short ? 'd' : 'day';
@@ -3819,7 +3819,7 @@ class Carbon extends DateTime implements JsonSerializable
                 }
             }
             // Some langs have special pluralization for past and future tense.
-            $key = $unit.'_'.$transId;
+            $key = $unit . '_' . $transId;
             $count = isset($count) ? $count : 1;
             if ($key !== static::translator()->transChoice($key, $count)) {
                 $time = static::translator()->transChoice($key, $count, array(':count' => $count));
@@ -4057,7 +4057,7 @@ class Carbon extends DateTime implements JsonSerializable
             $dayOfWeek = $this->dayOfWeek;
         }
 
-        return $this->startOfDay()->modify('next '.static::$days[$dayOfWeek]);
+        return $this->startOfDay()->modify('next ' . static::$days[$dayOfWeek]);
     }
 
     /**
@@ -4135,7 +4135,7 @@ class Carbon extends DateTime implements JsonSerializable
             $dayOfWeek = $this->dayOfWeek;
         }
 
-        return $this->startOfDay()->modify('last '.static::$days[$dayOfWeek]);
+        return $this->startOfDay()->modify('last ' . static::$days[$dayOfWeek]);
     }
 
     /**
@@ -4156,7 +4156,7 @@ class Carbon extends DateTime implements JsonSerializable
             return $this->day(1);
         }
 
-        return $this->modify('first '.static::$days[$dayOfWeek].' of '.$this->format('F').' '.$this->year);
+        return $this->modify('first ' . static::$days[$dayOfWeek] . ' of ' . $this->format('F') . ' ' . $this->year);
     }
 
     /**
@@ -4177,7 +4177,7 @@ class Carbon extends DateTime implements JsonSerializable
             return $this->day($this->daysInMonth);
         }
 
-        return $this->modify('last '.static::$days[$dayOfWeek].' of '.$this->format('F').' '.$this->year);
+        return $this->modify('last ' . static::$days[$dayOfWeek] . ' of ' . $this->format('F') . ' ' . $this->year);
     }
 
     /**
@@ -4195,7 +4195,7 @@ class Carbon extends DateTime implements JsonSerializable
     {
         $date = $this->copy()->firstOfMonth();
         $check = $date->format('Y-m');
-        $date->modify('+'.$nth.' '.static::$days[$dayOfWeek]);
+        $date->modify('+' . $nth . ' ' . static::$days[$dayOfWeek]);
 
         return $date->format('Y-m') === $check ? $this->modify($date) : false;
     }
@@ -4246,7 +4246,7 @@ class Carbon extends DateTime implements JsonSerializable
         $date = $this->copy()->day(1)->month($this->quarter * static::MONTHS_PER_QUARTER);
         $lastMonth = $date->month;
         $year = $date->year;
-        $date->firstOfQuarter()->modify('+'.$nth.' '.static::$days[$dayOfWeek]);
+        $date->firstOfQuarter()->modify('+' . $nth . ' ' . static::$days[$dayOfWeek]);
 
         return ($lastMonth < $date->month || $year !== $date->year) ? false : $this->modify($date);
     }
@@ -4294,7 +4294,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function nthOfYear($nth, $dayOfWeek)
     {
-        $date = $this->copy()->firstOfYear()->modify('+'.$nth.' '.static::$days[$dayOfWeek]);
+        $date = $this->copy()->firstOfYear()->modify('+' . $nth . ' ' . static::$days[$dayOfWeek]);
 
         return $this->year === $date->year ? $this->modify($date) : false;
     }
@@ -4308,7 +4308,7 @@ class Carbon extends DateTime implements JsonSerializable
      */
     public function average($date = null)
     {
-        return $this->addSeconds((int) ($this->diffInSeconds($this->resolveCarbon($date), false) / 2));
+        return $this->addSeconds((int)($this->diffInSeconds($this->resolveCarbon($date), false) / 2));
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -4394,7 +4394,7 @@ class Carbon extends DateTime implements JsonSerializable
     /**
      * Register a custom macro.
      *
-     * @param string          $name
+     * @param string $name
      * @param object|callable $macro
      *
      * @return void
@@ -4443,7 +4443,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Dynamically handle calls to the class.
      *
      * @param string $method
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @throws \BadMethodCallException
      *
@@ -4466,7 +4466,7 @@ class Carbon extends DateTime implements JsonSerializable
      * Dynamically handle calls to the class.
      *
      * @param string $method
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @throws \BadMethodCallException|\ReflectionException
      *

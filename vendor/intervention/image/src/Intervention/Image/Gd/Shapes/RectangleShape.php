@@ -54,7 +54,7 @@ class RectangleShape extends \Intervention\Image\AbstractShape
     /**
      * Draw rectangle to given image at certain position
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $x
      * @param  integer $y
      * @return boolean

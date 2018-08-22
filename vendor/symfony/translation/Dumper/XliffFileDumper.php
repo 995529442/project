@@ -141,7 +141,7 @@ class XliffFileDumper extends FileDumper
         $xliff->setAttribute('trgLang', str_replace('_', '-', $messages->getLocale()));
 
         $xliffFile = $xliff->appendChild($dom->createElement('file'));
-        $xliffFile->setAttribute('id', $domain.'.'.$messages->getLocale());
+        $xliffFile->setAttribute('id', $domain . '.' . $messages->getLocale());
 
         foreach ($messages->all($domain) as $source => $target) {
             $translation = $dom->createElement('unit');
@@ -188,7 +188,7 @@ class XliffFileDumper extends FileDumper
     }
 
     /**
-     * @param string     $key
+     * @param string $key
      * @param array|null $metadata
      *
      * @return bool

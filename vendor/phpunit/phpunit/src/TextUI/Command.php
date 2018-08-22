@@ -47,14 +47,14 @@ class Command
      * @var array
      */
     protected $arguments = [
-        'listGroups'              => false,
-        'listSuites'              => false,
-        'listTests'               => false,
-        'listTestsXml'            => false,
-        'loader'                  => null,
+        'listGroups' => false,
+        'listSuites' => false,
+        'listTests' => false,
+        'listTestsXml' => false,
+        'loader' => null,
         'useDefaultConfiguration' => true,
-        'loadedExtensions'        => [],
-        'notLoadedExtensions'     => []
+        'loadedExtensions' => [],
+        'notLoadedExtensions' => []
     ];
 
     /**
@@ -66,71 +66,71 @@ class Command
      * @var array
      */
     protected $longOptions = [
-        'atleast-version='          => null,
-        'bootstrap='                => null,
-        'check-version'             => null,
-        'colors=='                  => null,
-        'columns='                  => null,
-        'configuration='            => null,
-        'coverage-clover='          => null,
-        'coverage-crap4j='          => null,
-        'coverage-html='            => null,
-        'coverage-php='             => null,
-        'coverage-text=='           => null,
-        'coverage-xml='             => null,
-        'debug'                     => null,
-        'disallow-test-output'      => null,
-        'disallow-resource-usage'   => null,
-        'disallow-todo-tests'       => null,
-        'enforce-time-limit'        => null,
-        'exclude-group='            => null,
-        'filter='                   => null,
-        'generate-configuration'    => null,
-        'globals-backup'            => null,
-        'group='                    => null,
-        'help'                      => null,
-        'include-path='             => null,
-        'list-groups'               => null,
-        'list-suites'               => null,
-        'list-tests'                => null,
-        'list-tests-xml='           => null,
-        'loader='                   => null,
-        'log-junit='                => null,
-        'log-teamcity='             => null,
-        'no-configuration'          => null,
-        'no-coverage'               => null,
-        'no-logging'                => null,
-        'no-extensions'             => null,
-        'printer='                  => null,
-        'process-isolation'         => null,
-        'repeat='                   => null,
+        'atleast-version=' => null,
+        'bootstrap=' => null,
+        'check-version' => null,
+        'colors==' => null,
+        'columns=' => null,
+        'configuration=' => null,
+        'coverage-clover=' => null,
+        'coverage-crap4j=' => null,
+        'coverage-html=' => null,
+        'coverage-php=' => null,
+        'coverage-text==' => null,
+        'coverage-xml=' => null,
+        'debug' => null,
+        'disallow-test-output' => null,
+        'disallow-resource-usage' => null,
+        'disallow-todo-tests' => null,
+        'enforce-time-limit' => null,
+        'exclude-group=' => null,
+        'filter=' => null,
+        'generate-configuration' => null,
+        'globals-backup' => null,
+        'group=' => null,
+        'help' => null,
+        'include-path=' => null,
+        'list-groups' => null,
+        'list-suites' => null,
+        'list-tests' => null,
+        'list-tests-xml=' => null,
+        'loader=' => null,
+        'log-junit=' => null,
+        'log-teamcity=' => null,
+        'no-configuration' => null,
+        'no-coverage' => null,
+        'no-logging' => null,
+        'no-extensions' => null,
+        'printer=' => null,
+        'process-isolation' => null,
+        'repeat=' => null,
         'dont-report-useless-tests' => null,
-        'reverse-list'              => null,
-        'static-backup'             => null,
-        'stderr'                    => null,
-        'stop-on-error'             => null,
-        'stop-on-failure'           => null,
-        'stop-on-warning'           => null,
-        'stop-on-incomplete'        => null,
-        'stop-on-risky'             => null,
-        'stop-on-skipped'           => null,
-        'fail-on-warning'           => null,
-        'fail-on-risky'             => null,
-        'strict-coverage'           => null,
-        'disable-coverage-ignore'   => null,
-        'strict-global-state'       => null,
-        'teamcity'                  => null,
-        'testdox'                   => null,
-        'testdox-group='            => null,
-        'testdox-exclude-group='    => null,
-        'testdox-html='             => null,
-        'testdox-text='             => null,
-        'testdox-xml='              => null,
-        'test-suffix='              => null,
-        'testsuite='                => null,
-        'verbose'                   => null,
-        'version'                   => null,
-        'whitelist='                => null
+        'reverse-list' => null,
+        'static-backup' => null,
+        'stderr' => null,
+        'stop-on-error' => null,
+        'stop-on-failure' => null,
+        'stop-on-warning' => null,
+        'stop-on-incomplete' => null,
+        'stop-on-risky' => null,
+        'stop-on-skipped' => null,
+        'fail-on-warning' => null,
+        'fail-on-risky' => null,
+        'strict-coverage' => null,
+        'disable-coverage-ignore' => null,
+        'strict-global-state' => null,
+        'teamcity' => null,
+        'testdox' => null,
+        'testdox-group=' => null,
+        'testdox-exclude-group=' => null,
+        'testdox-html=' => null,
+        'testdox-text=' => null,
+        'testdox-xml=' => null,
+        'test-suffix=' => null,
+        'testsuite=' => null,
+        'verbose' => null,
+        'version' => null,
+        'whitelist=' => null
     ];
 
     /**
@@ -150,7 +150,7 @@ class Command
 
     /**
      * @param array $argv
-     * @param bool  $exit
+     * @param bool $exit
      *
      * @return int
      */
@@ -293,7 +293,7 @@ class Command
 
                 case '--columns':
                     if (\is_numeric($option[1])) {
-                        $this->arguments['columns'] = (int) $option[1];
+                        $this->arguments['columns'] = (int)$option[1];
                     } elseif ($option[1] === 'max') {
                         $this->arguments['columns'] = 'max';
                     }
@@ -331,9 +331,9 @@ class Command
                         $option[1] = 'php://stdout';
                     }
 
-                    $this->arguments['coverageText']                   = $option[1];
+                    $this->arguments['coverageText'] = $option[1];
                     $this->arguments['coverageTextShowUncoveredFiles'] = false;
-                    $this->arguments['coverageTextShowOnlySummary']    = false;
+                    $this->arguments['coverageTextShowOnlySummary'] = false;
 
                     break;
 
@@ -493,7 +493,7 @@ class Command
                     break;
 
                 case '--repeat':
-                    $this->arguments['repeat'] = (int) $option[1];
+                    $this->arguments['repeat'] = (int)$option[1];
 
                     break;
 
@@ -722,7 +722,7 @@ class Command
                 \is_file($this->arguments['test']) &&
                 \substr($this->arguments['test'], -5, 5) != '.phpt') {
                 $this->arguments['testFile'] = \realpath($this->arguments['test']);
-                $this->arguments['test']     = \substr($this->arguments['test'], 0, \strrpos($this->arguments['test'], '.'));
+                $this->arguments['test'] = \substr($this->arguments['test'], 0, \strrpos($this->arguments['test'], '.'));
             }
         }
 
@@ -999,7 +999,7 @@ class Command
         $this->printVersionString();
 
         $latestVersion = \file_get_contents('https://phar.phpunit.de/latest-version-of/phpunit');
-        $isOutdated    = \version_compare($latestVersion, Version::id(), '>');
+        $isOutdated = \version_compare($latestVersion, Version::id(), '>');
 
         if ($isOutdated) {
             \printf(
@@ -1164,8 +1164,8 @@ EOT;
 
             try {
                 $applicationName = new ApplicationName('phpunit/phpunit');
-                $version         = new PharIoVersion(Version::series());
-                $manifest        = ManifestLoader::fromFile('phar://' . $file . '/manifest.xml');
+                $version = new PharIoVersion(Version::series());
+                $manifest = ManifestLoader::fromFile('phar://' . $file . '/manifest.xml');
 
                 if (!$manifest->isExtensionFor($applicationName)) {
                     $this->arguments['notLoadedExtensions'][] = $file . ' is not an extension for PHPUnit';

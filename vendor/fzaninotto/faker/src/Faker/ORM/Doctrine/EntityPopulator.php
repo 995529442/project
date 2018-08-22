@@ -236,9 +236,9 @@ class EntityPopulator
         /* @var $repository \Doctrine\Common\Persistence\ObjectRepository */
         $repository = $manager->getRepository(get_class($obj));
         $result = $repository->createQueryBuilder('e')
-                ->select(sprintf('e.%s', $column))
-                ->getQuery()
-                ->execute();
+            ->select(sprintf('e.%s', $column))
+            ->getQuery()
+            ->execute();
         $ids = array_map('current', $result->toArray());
 
         $id = null;

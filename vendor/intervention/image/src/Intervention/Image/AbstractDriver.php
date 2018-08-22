@@ -23,7 +23,7 @@ abstract class AbstractDriver
      *
      * @param  integer $width
      * @param  integer $height
-     * @param  string  $background
+     * @param  string $background
      * @return \Intervention\Image\Image
      */
     abstract public function newImage($width, $height, $background);
@@ -67,8 +67,8 @@ abstract class AbstractDriver
     /**
      * Encodes given image
      *
-     * @param  Image   $image
-     * @param  string  $format
+     * @param  Image $image
+     * @param  string $format
      * @param  integer $quality
      * @return \Intervention\Image\Image
      */
@@ -80,7 +80,7 @@ abstract class AbstractDriver
     /**
      * Executes named command on given image
      *
-     * @param  Image  $image
+     * @param  Image $image
      * @param  string $name
      * @param  array $arguments
      * @return \Intervention\Image\Commands\AbstractCommand

@@ -85,7 +85,7 @@ class MountManager
     /**
      * Mount filesystems.
      *
-     * @param string              $prefix
+     * @param string $prefix
      * @param FilesystemInterface $filesystem
      *
      * @throws InvalidArgumentException
@@ -94,7 +94,7 @@ class MountManager
      */
     public function mountFilesystem($prefix, FilesystemInterface $filesystem)
     {
-        if ( ! is_string($prefix)) {
+        if (!is_string($prefix)) {
             throw new InvalidArgumentException(__METHOD__ . ' expects argument #1 to be a string.');
         }
 
@@ -114,7 +114,7 @@ class MountManager
      */
     public function getFilesystem($prefix)
     {
-        if ( ! isset($this->filesystems[$prefix])) {
+        if (!isset($this->filesystems[$prefix])) {
             throw new FilesystemNotFoundException('No filesystem mounted with prefix ' . $prefix);
         }
 
@@ -138,7 +138,7 @@ class MountManager
 
         $path = array_shift($arguments);
 
-        if ( ! is_string($path)) {
+        if (!is_string($path)) {
             throw new InvalidArgumentException('First argument should be a string');
         }
 
@@ -150,7 +150,7 @@ class MountManager
 
     /**
      * @param string $directory
-     * @param bool   $recursive
+     * @param bool $recursive
      *
      * @throws InvalidArgumentException
      * @throws FilesystemNotFoundException
@@ -174,7 +174,7 @@ class MountManager
      * Call forwarder.
      *
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @throws InvalidArgumentException
      * @throws FilesystemNotFoundException
@@ -191,7 +191,7 @@ class MountManager
     /**
      * @param string $from
      * @param string $to
-     * @param array  $config
+     * @param array $config
      *
      * @throws InvalidArgumentException
      * @throws FilesystemNotFoundException
@@ -222,9 +222,9 @@ class MountManager
     /**
      * List with plugin adapter.
      *
-     * @param array  $keys
+     * @param array $keys
      * @param string $directory
-     * @param bool   $recursive
+     * @param bool $recursive
      *
      * @throws InvalidArgumentException
      * @throws FilesystemNotFoundException
@@ -244,7 +244,7 @@ class MountManager
      *
      * @param string $from
      * @param string $to
-     * @param array  $config
+     * @param array $config
      *
      * @throws InvalidArgumentException
      * @throws FilesystemNotFoundException
@@ -280,7 +280,7 @@ class MountManager
      * Invoke a plugin on a filesystem mounted on a given prefix.
      *
      * @param string $method
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $prefix
      *
      * @throws FilesystemNotFoundException

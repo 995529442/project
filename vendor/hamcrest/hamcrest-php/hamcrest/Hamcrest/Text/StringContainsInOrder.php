@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Text;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\TypeSafeMatcher;
 
@@ -43,9 +45,8 @@ class StringContainsInOrder extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('a string containing ')
-                                ->appendValueList('', ', ', '', $this->_substrings)
-                                ->appendText(' in order')
-                                ;
+            ->appendValueList('', ', ', '', $this->_substrings)
+            ->appendText(' in order');
     }
 
     /**

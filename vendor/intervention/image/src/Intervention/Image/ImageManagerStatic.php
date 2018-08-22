@@ -74,9 +74,9 @@ class ImageManagerStatic
     /**
      * Create new cached image and run callback statically
      *
-     * @param  Closure  $callback
-     * @param  integer  $lifetime
-     * @param  boolean  $returnObj
+     * @param  Closure $callback
+     * @param  integer $lifetime
+     * @param  boolean $returnObj
      *
      * @return mixed
      */

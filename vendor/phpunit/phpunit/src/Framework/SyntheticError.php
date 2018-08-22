@@ -40,17 +40,17 @@ class SyntheticError extends AssertionFailedError
      * Constructor.
      *
      * @param string $message
-     * @param int    $code
+     * @param int $code
      * @param string $file
-     * @param int    $line
-     * @param array  $trace
+     * @param int $line
+     * @param array $trace
      */
     public function __construct($message, $code, $file, $line, $trace)
     {
         parent::__construct($message, $code);
 
-        $this->syntheticFile  = $file;
-        $this->syntheticLine  = $line;
+        $this->syntheticFile = $file;
+        $this->syntheticLine = $line;
         $this->syntheticTrace = $trace;
     }
 

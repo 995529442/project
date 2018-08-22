@@ -28,7 +28,7 @@ class ResizeCommand extends \Intervention\Image\Commands\AbstractCommand
     /**
      * Wrapper function for 'imagecopyresampled'
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $dst_x
      * @param  integer $dst_y
      * @param  integer $src_x

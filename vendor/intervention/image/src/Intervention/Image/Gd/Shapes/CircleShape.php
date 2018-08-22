@@ -28,7 +28,7 @@ class CircleShape extends EllipseShape
     /**
      * Draw current circle on given image
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $x
      * @param  integer $y
      * @return boolean

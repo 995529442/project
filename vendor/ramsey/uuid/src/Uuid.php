@@ -182,7 +182,8 @@ class Uuid implements UuidInterface
         array $fields,
         NumberConverterInterface $converter,
         CodecInterface $codec
-    ) {
+    )
+    {
         $this->fields = $fields;
         $this->codec = $codec;
         $this->converter = $converter;
@@ -572,7 +573,7 @@ class Uuid implements UuidInterface
     public function getVersion()
     {
         if ($this->getVariant() == self::RFC_4122) {
-            return (int) (($this->getTimeHiAndVersion() >> 12) & 0x0f);
+            return (int)(($this->getTimeHiAndVersion() >> 12) & 0x0f);
         }
 
         return null;

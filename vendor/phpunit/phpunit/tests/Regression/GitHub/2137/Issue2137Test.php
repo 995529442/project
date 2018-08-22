@@ -1,4 +1,5 @@
 <?php
+
 class Issue2137Test extends PHPUnit\Framework\TestCase
 {
     /**

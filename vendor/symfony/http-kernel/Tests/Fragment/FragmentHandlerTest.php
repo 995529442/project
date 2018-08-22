@@ -27,13 +27,11 @@ class FragmentHandlerTest extends TestCase
     {
         $this->requestStack = $this->getMockBuilder('Symfony\\Component\\HttpFoundation\\RequestStack')
             ->disableOriginalConstructor()
-            ->getMock()
-        ;
+            ->getMock();
         $this->requestStack
             ->expects($this->any())
             ->method('getCurrentRequest')
-            ->will($this->returnValue(Request::create('/')))
-        ;
+            ->will($this->returnValue(Request::create('/')));
     }
 
     /**
@@ -79,13 +77,11 @@ class FragmentHandlerTest extends TestCase
         $renderer
             ->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue('foo'))
-        ;
+            ->will($this->returnValue('foo'));
         $e = $renderer
             ->expects($this->any())
             ->method('render')
-            ->will($returnValue)
-        ;
+            ->will($returnValue);
 
         if ($arguments) {
             call_user_func_array(array($e, 'with'), $arguments);

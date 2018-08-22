@@ -40,13 +40,13 @@ class DirectoryLoaderTest extends AbstractAnnotationLoaderTest
 
     public function testLoadDirectory()
     {
-        $collection = $this->loader->load(__DIR__.'/../Fixtures/directory', 'directory');
+        $collection = $this->loader->load(__DIR__ . '/../Fixtures/directory', 'directory');
         $this->verifyCollection($collection);
     }
 
     public function testImportDirectory()
     {
-        $collection = $this->loader->load(__DIR__.'/../Fixtures/directory_import', 'directory');
+        $collection = $this->loader->load(__DIR__ . '/../Fixtures/directory_import', 'directory');
         $this->verifyCollection($collection);
     }
 
@@ -58,13 +58,13 @@ class DirectoryLoaderTest extends AbstractAnnotationLoaderTest
         $this->assertContainsOnly('Symfony\Component\Routing\Route', $routes);
 
         for ($i = 1; $i <= 3; ++$i) {
-            $this->assertSame('/route/'.$i, $routes['route'.$i]->getPath());
+            $this->assertSame('/route/' . $i, $routes['route' . $i]->getPath());
         }
     }
 
     public function testSupports()
     {
-        $fixturesDir = __DIR__.'/../Fixtures';
+        $fixturesDir = __DIR__ . '/../Fixtures';
 
         $this->assertFalse($this->loader->supports($fixturesDir), '->supports(*) returns false');
 

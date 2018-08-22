@@ -14,7 +14,7 @@ class Expression
     /**
      * Create a new raw query expression.
      *
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return void
      */
     public function __construct($value)
@@ -39,6 +39,6 @@ class Expression
      */
     public function __toString()
     {
-        return (string) $this->getValue();
+        return (string)$this->getValue();
     }
 }

@@ -20,7 +20,7 @@ class CallQueuedHandler
     /**
      * Create a new handler instance.
      *
-     * @param  \Illuminate\Contracts\Bus\Dispatcher  $dispatcher
+     * @param  \Illuminate\Contracts\Bus\Dispatcher $dispatcher
      * @return void
      */
     public function __construct(Dispatcher $dispatcher)
@@ -31,8 +31,8 @@ class CallQueuedHandler
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  array  $data
+     * @param  \Illuminate\Contracts\Queue\Job $job
+     * @param  array $data
      * @return void
      */
     public function call(Job $job, array $data)
@@ -49,11 +49,11 @@ class CallQueuedHandler
             $command, $this->resolveHandler($job, $command)
         );
 
-        if (! $job->hasFailed() && ! $job->isReleased()) {
+        if (!$job->hasFailed() && !$job->isReleased()) {
             $this->ensureNextJobInChainIsDispatched($command);
         }
 
-        if (! $job->isDeletedOrReleased()) {
+        if (!$job->isDeletedOrReleased()) {
             $job->delete();
         }
     }
@@ -61,8 +61,8 @@ class CallQueuedHandler
     /**
      * Resolve the handler for the given command.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  mixed  $command
+     * @param  \Illuminate\Contracts\Queue\Job $job
+     * @param  mixed $command
      * @return mixed
      */
     protected function resolveHandler($job, $command)
@@ -79,8 +79,8 @@ class CallQueuedHandler
     /**
      * Set the job instance of the given class if necessary.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  mixed  $instance
+     * @param  \Illuminate\Contracts\Queue\Job $job
+     * @param  mixed $instance
      * @return mixed
      */
     protected function setJobInstanceIfNecessary(Job $job, $instance)
@@ -95,7 +95,7 @@ class CallQueuedHandler
     /**
      * Ensure the next job in the chain is dispatched if applicable.
      *
-     * @param  mixed  $command
+     * @param  mixed $command
      * @return void
      */
     protected function ensureNextJobInChainIsDispatched($command)
@@ -108,8 +108,8 @@ class CallQueuedHandler
     /**
      * Handle a model not found exception.
      *
-     * @param  \Illuminate\Contracts\Queue\Job  $job
-     * @param  \Exception  $e
+     * @param  \Illuminate\Contracts\Queue\Job $job
+     * @param  \Exception $e
      * @return void
      */
     protected function handleModelNotFound(Job $job, $e)
@@ -137,8 +137,8 @@ class CallQueuedHandler
      *
      * The exception that caused the failure will be passed.
      *
-     * @param  array  $data
-     * @param  \Exception  $e
+     * @param  array $data
+     * @param  \Exception $e
      * @return void
      */
     public function failed(array $data, $e)

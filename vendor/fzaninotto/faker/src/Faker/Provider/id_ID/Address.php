@@ -89,16 +89,16 @@ class Address extends \Faker\Provider\Address
      * @var array
      */
     protected static $stateAbbr = array(
-       'Aceh', 'SumUt', 'SumBar', 'Jambi', 'BaBel', 'Riau', 'KepR', 'Bengkulu', 'SumSel',
-       'Lampung', 'Banten', 'DKI', 'JaBar', 'JaTeng', 'JaTim', 'NTT', 'DIY',
-       'Bali', 'NTB', 'KalBar', 'KalTeng', 'KalSel', 'KalTim', 'KalUt', 'SulSel',
-       'SulUt', 'Gorontalo', 'SulTeng', 'SulBar', 'SulTra', 'Maluku', 'MalUt',
-       'PapBar', 'Papua'
+        'Aceh', 'SumUt', 'SumBar', 'Jambi', 'BaBel', 'Riau', 'KepR', 'Bengkulu', 'SumSel',
+        'Lampung', 'Banten', 'DKI', 'JaBar', 'JaTeng', 'JaTim', 'NTT', 'DIY',
+        'Bali', 'NTB', 'KalBar', 'KalTeng', 'KalSel', 'KalTim', 'KalUt', 'SulSel',
+        'SulUt', 'Gorontalo', 'SulTeng', 'SulBar', 'SulTra', 'Maluku', 'MalUt',
+        'PapBar', 'Papua'
     );
 
     /**
-    * @link http://id.wikipedia.org/wiki/Daftar_negara-negara_di_dunia
-    **/
+     * @link http://id.wikipedia.org/wiki/Daftar_negara-negara_di_dunia
+     **/
     protected static $country = array(
         'Afganistan', 'Afrika Selatan', 'Albania', 'Aljazair',
         'Amerika Serikat', 'Andorra', 'Angola', 'Anguilla',

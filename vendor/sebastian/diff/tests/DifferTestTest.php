@@ -22,8 +22,8 @@ final class DifferTestTest extends TestCase
 
     protected function setUp()
     {
-        $dir             = \realpath(__DIR__ . '/../') . '/';
-        $this->fileFrom  = $dir . 'from.txt';
+        $dir = \realpath(__DIR__ . '/../') . '/';
+        $this->fileFrom = $dir . 'from.txt';
         $this->filePatch = $dir . 'patch.txt';
     }
 
@@ -38,7 +38,7 @@ final class DifferTestTest extends TestCase
     public function provideDiffWithLineNumbers()
     {
         require_once __DIR__ . '/DifferTest.php';
-        $test  = new DifferTest();
+        $test = new DifferTest();
         $tests = $test->provideDiffWithLineNumbers();
 
         $tests = \array_filter(

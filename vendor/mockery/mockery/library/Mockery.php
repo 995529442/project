@@ -67,7 +67,7 @@ class Mockery
      */
     public static function globalHelpers()
     {
-        require_once __DIR__.'/helpers.php';
+        require_once __DIR__ . '/helpers.php';
     }
 
     /**
@@ -547,7 +547,7 @@ class Mockery
     private static function formatArgument($argument, $depth = 0)
     {
         if ($argument instanceof MatcherAbstract) {
-            return (string) $argument;
+            return (string)$argument;
         }
 
         if (is_object($argument)) {
@@ -569,10 +569,10 @@ class Mockery
                     $sample[] = "$key => $value";
                 }
 
-                $argument = "[".implode(", ", $sample)."]";
+                $argument = "[" . implode(", ", $sample) . "]";
             }
 
-            return ((strlen($argument) > 1000) ? substr($argument, 0, 1000).'...]' : $argument);
+            return ((strlen($argument) > 1000) ? substr($argument, 0, 1000) . '...]' : $argument);
         }
 
         if (is_bool($argument)) {
@@ -587,7 +587,7 @@ class Mockery
             return 'NULL';
         }
 
-        return "'".(string) $argument."'";
+        return "'" . (string)$argument . "'";
     }
 
     /**
@@ -832,7 +832,8 @@ class Mockery
         $parent,
         $method,
         Mockery\ExpectationInterface $exp
-    ) {
+    )
+    {
         $newMockName = 'demeter_' . md5($parent) . '_' . $method;
 
         if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
@@ -850,7 +851,7 @@ class Mockery
                 $parRefMethodRetType = $parRefMethod->getReturnType();
 
                 if ($parRefMethodRetType !== null) {
-                    $mock = self::namedMock($newMockName, (string) $parRefMethodRetType);
+                    $mock = self::namedMock($newMockName, (string)$parRefMethodRetType);
                     $exp->andReturn($mock);
 
                     return $mock;
@@ -876,7 +877,8 @@ class Mockery
     private static function getExistingDemeterMock(
         Mockery\Container $container,
         $demeterMockKey
-    ) {
+    )
+    {
         $mocks = $container->getMocks();
         $mock = $mocks[$demeterMockKey];
 
@@ -917,10 +919,10 @@ class Mockery
             $shortName = trim(array_pop($parts));
             $namespace = implode("\\", $parts);
 
-            $targetCode.= "namespace $namespace;\n";
+            $targetCode .= "namespace $namespace;\n";
         }
 
-        $targetCode.= "$type $shortName {} ";
+        $targetCode .= "$type $shortName {} ";
 
         /*
          * We could eval here, but it doesn't play well with the way

@@ -57,7 +57,7 @@ class FillCommand extends \Intervention\Image\Commands\AbstractCommand
                 // replace image core
                 $image->setCore($canvas);
 
-            // flood fill with color
+                // flood fill with color
             } elseif ($filling instanceof Color) {
 
                 // create canvas with filling

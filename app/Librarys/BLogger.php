@@ -7,11 +7,13 @@
 namespace App\Librarys;
 
 date_default_timezone_set('PRC');
+
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class BLogger {
+class BLogger
+{
 
     private static $logError = 'error';
 
@@ -22,14 +24,14 @@ class BLogger {
     private static function setLog($type, $file, $day)
     {
         if (empty(self::$loggers[$type])) {
-            self::$loggers[$type.$file] = new Logger($type);
+            self::$loggers[$type . $file] = new Logger($type);
             if ($day == true) {
-                self::$loggers[$type.$file]->pushHandler((new StreamHandler(storage_path().'/logs/'. $file.'-'.date('Y-m-d').'.log'))->setFormatter(new LineFormatter(null, null, true, true)));
+                self::$loggers[$type . $file]->pushHandler((new StreamHandler(storage_path() . '/logs/' . $file . '-' . date('Y-m-d') . '.log'))->setFormatter(new LineFormatter(null, null, true, true)));
             } else {
-                self::$loggers[$type.$file]->pushHandler((new StreamHandler(storage_path().'/logs/'. $file.'-'.date('Y-m-d').'.log'))->setFormatter(new LineFormatter(null, null, true, true)));
+                self::$loggers[$type . $file]->pushHandler((new StreamHandler(storage_path() . '/logs/' . $file . '-' . date('Y-m-d') . '.log'))->setFormatter(new LineFormatter(null, null, true, true)));
             }
         }
-        $log = self::$loggers[$type.$file];
+        $log = self::$loggers[$type . $file];
         return $log;
     }
 

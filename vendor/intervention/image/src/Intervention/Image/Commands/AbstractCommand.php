@@ -64,7 +64,7 @@ abstract class AbstractCommand
      */
     public function hasOutput()
     {
-        return ! is_null($this->output);
+        return !is_null($this->output);
     }
 
     /**

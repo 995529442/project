@@ -26,8 +26,8 @@ abstract class Seeder
     /**
      * Seed the given connection from the given path.
      *
-     * @param  array|string  $class
-     * @param  bool  $silent
+     * @param  array|string $class
+     * @param  bool $silent
      * @return $this
      */
     public function call($class, $silent = false)
@@ -48,7 +48,7 @@ abstract class Seeder
     /**
      * Silently seed the given connection from the given path.
      *
-     * @param  array|string  $class
+     * @param  array|string $class
      * @return void
      */
     public function callSilent($class)
@@ -59,7 +59,7 @@ abstract class Seeder
     /**
      * Resolve an instance of the given seeder class.
      *
-     * @param  string  $class
+     * @param  string $class
      * @return \Illuminate\Database\Seeder
      */
     protected function resolve($class)
@@ -82,7 +82,7 @@ abstract class Seeder
     /**
      * Set the IoC container instance.
      *
-     * @param  \Illuminate\Container\Container  $container
+     * @param  \Illuminate\Container\Container $container
      * @return $this
      */
     public function setContainer(Container $container)
@@ -95,7 +95,7 @@ abstract class Seeder
     /**
      * Set the console command instance.
      *
-     * @param  \Illuminate\Console\Command  $command
+     * @param  \Illuminate\Console\Command $command
      * @return $this
      */
     public function setCommand(Command $command)
@@ -114,12 +114,12 @@ abstract class Seeder
      */
     public function __invoke()
     {
-        if (! method_exists($this, 'run')) {
-            throw new InvalidArgumentException('Method [run] missing from '.get_class($this));
+        if (!method_exists($this, 'run')) {
+            throw new InvalidArgumentException('Method [run] missing from ' . get_class($this));
         }
 
         return isset($this->container)
-                    ? $this->container->call([$this, 'run'])
-                    : $this->run();
+            ? $this->container->call([$this, 'run'])
+            : $this->run();
     }
 }

@@ -115,7 +115,7 @@ class Color extends AbstractColor
      * @param  integer $r
      * @param  integer $g
      * @param  integer $b
-     * @param  float   $a
+     * @param  float $a
      * @return \Intervention\Image\AbstractColor
      */
     public function initFromRgba($r, $g, $b, $a = 1)
@@ -184,7 +184,7 @@ class Color extends AbstractColor
      * Determines if current color is different from given color
      *
      * @param  AbstractColor $color
-     * @param  integer       $tolerance
+     * @param  integer $tolerance
      * @return boolean
      */
     public function differs(AbstractColor $color, $tolerance = 0)
@@ -221,6 +221,6 @@ class Color extends AbstractColor
         $newMin = 127;
         $newMax = 0;
 
-        return ceil(((($input- $oldMin) * ($newMax - $newMin)) / ($oldMax - $oldMin)) + $newMin);
+        return ceil(((($input - $oldMin) * ($newMax - $newMin)) / ($oldMax - $oldMin)) + $newMin);
     }
 }

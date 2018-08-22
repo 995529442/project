@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\ExampleExtension\TestCaseTrait;
 use PHPUnit\Framework\TestCase;
 

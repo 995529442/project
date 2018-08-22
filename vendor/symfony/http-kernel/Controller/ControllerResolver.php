@@ -116,8 +116,8 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
     }
 
     /**
-     * @param Request                $request
-     * @param callable               $controller
+     * @param Request $request
+     * @param callable $controller
      * @param \ReflectionParameter[] $parameters
      *
      * @return array The arguments to use when calling the action

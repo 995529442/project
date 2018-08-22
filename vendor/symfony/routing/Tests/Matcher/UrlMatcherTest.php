@@ -193,11 +193,11 @@ class UrlMatcherTest extends TestCase
     {
         $collection = new RouteCollection();
         $chars = '!"$%éà &\'()*+,./:;<=>@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[]^_`abcdefghijklmnopqrstuvwxyz{|}~-';
-        $collection->add('foo', new Route('/{foo}/bar', array(), array('foo' => '['.preg_quote($chars).']+'), array('utf8' => true)));
+        $collection->add('foo', new Route('/{foo}/bar', array(), array('foo' => '[' . preg_quote($chars) . ']+'), array('utf8' => true)));
 
         $matcher = $this->getUrlMatcher($collection);
-        $this->assertEquals(array('_route' => 'foo', 'foo' => $chars), $matcher->match('/'.rawurlencode($chars).'/bar'));
-        $this->assertEquals(array('_route' => 'foo', 'foo' => $chars), $matcher->match('/'.strtr($chars, array('%' => '%25')).'/bar'));
+        $this->assertEquals(array('_route' => 'foo', 'foo' => $chars), $matcher->match('/' . rawurlencode($chars) . '/bar'));
+        $this->assertEquals(array('_route' => 'foo', 'foo' => $chars), $matcher->match('/' . strtr($chars, array('%' => '%25')) . '/bar'));
     }
 
     public function testMatchWithDotMetacharacterInRequirements()
@@ -206,7 +206,7 @@ class UrlMatcherTest extends TestCase
         $collection->add('foo', new Route('/{foo}/bar', array(), array('foo' => '.+')));
 
         $matcher = $this->getUrlMatcher($collection);
-        $this->assertEquals(array('_route' => 'foo', 'foo' => "\n"), $matcher->match('/'.urlencode("\n").'/bar'), 'linefeed character is matched');
+        $this->assertEquals(array('_route' => 'foo', 'foo' => "\n"), $matcher->match('/' . urlencode("\n") . '/bar'), 'linefeed character is matched');
     }
 
     public function testMatchOverriddenRoute()

@@ -90,7 +90,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
      */
     public function setInteractive($interactive)
     {
-        $this->interactive = (bool) $interactive;
+        $this->interactive = (bool)$interactive;
     }
 
     /**

@@ -4,13 +4,14 @@ namespace PhpParser;
 
 class CodeTestParser
 {
-    public function parseTest($code, $chunksPerTest) {
+    public function parseTest($code, $chunksPerTest)
+    {
         $code = canonicalize($code);
 
         // evaluate @@{expr}@@ expressions
         $code = preg_replace_callback(
             '/@@\{(.*?)\}@@/',
-            function($matches) {
+            function ($matches) {
                 return eval('return ' . $matches[1] . ';');
             },
             $code
@@ -34,7 +35,8 @@ class CodeTestParser
         return [$name, $tests];
     }
 
-    public function reconstructTest($name, array $tests) {
+    public function reconstructTest($name, array $tests)
+    {
         $result = $name;
         foreach ($tests as list($mode, $parts)) {
             $lastPart = array_pop($parts);
@@ -51,7 +53,8 @@ class CodeTestParser
         return $result;
     }
 
-    private function extractMode($expected) {
+    private function extractMode($expected)
+    {
         $firstNewLine = strpos($expected, "\n");
         if (false === $firstNewLine) {
             $firstNewLine = strlen($expected);
@@ -62,7 +65,7 @@ class CodeTestParser
             return [$expected, null];
         }
 
-        $expected = (string) substr($expected, $firstNewLine + 1);
+        $expected = (string)substr($expected, $firstNewLine + 1);
         return [$expected, substr($firstLine, 2)];
     }
 }

@@ -27,9 +27,9 @@ class DayOfMonthField extends AbstractField
     /**
      * Get the nearest day of the week for a given day in a month
      *
-     * @param int $currentYear  Current year
+     * @param int $currentYear Current year
      * @param int $currentMonth Current month
-     * @param int $targetDay    Target day of the month
+     * @param int $targetDay Target day of the month
      *
      * @return \DateTime Returns the nearest date
      */
@@ -37,7 +37,7 @@ class DayOfMonthField extends AbstractField
     {
         $tday = str_pad($targetDay, 2, '0', STR_PAD_LEFT);
         $target = DateTime::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tday");
-        $currentWeekday = (int) $target->format('N');
+        $currentWeekday = (int)$target->format('N');
 
         if ($currentWeekday < 6) {
             return $target;
@@ -76,10 +76,10 @@ class DayOfMonthField extends AbstractField
             $targetDay = substr($value, 0, strpos($value, 'W'));
             // Find out if the current day is the nearest day of the week
             return $date->format('j') == self::getNearestWeekday(
-                $date->format('Y'),
-                $date->format('m'),
-                $targetDay
-            )->format('j');
+                    $date->format('Y'),
+                    $date->format('m'),
+                    $targetDay
+                )->format('j');
         }
 
         return $this->isSatisfied($date->format('d'), $value);
@@ -114,14 +114,14 @@ class DayOfMonthField extends AbstractField
         }
 
         // If you only contain numbers and are within 1-31
-        if ((bool) preg_match('/^\d{1,2}$/', $value) && ($value >= 1 && $value <= 31)) {
+        if ((bool)preg_match('/^\d{1,2}$/', $value) && ($value >= 1 && $value <= 31)) {
             return true;
         }
 
         // If you have a -, we will deal with each of your chunks
-        if ((bool) preg_match('/-/', $value)) {
+        if ((bool)preg_match('/-/', $value)) {
             // We cannot have a range within a list or vice versa
-            if ((bool) preg_match('/,/', $value)) {
+            if ((bool)preg_match('/,/', $value)) {
                 return false;
             }
 
@@ -136,9 +136,9 @@ class DayOfMonthField extends AbstractField
         }
 
         // If you have a comma, we will deal with each value
-        if ((bool) preg_match('/,/', $value)) {
+        if ((bool)preg_match('/,/', $value)) {
             // We cannot have a range within a list or vice versa
-            if ((bool) preg_match('/-/', $value)) {
+            if ((bool)preg_match('/-/', $value)) {
                 return false;
             }
 
@@ -153,7 +153,7 @@ class DayOfMonthField extends AbstractField
         }
 
         // If you contain a /, we'll deal with it
-        if ((bool) preg_match('/\//', $value)) {
+        if ((bool)preg_match('/\//', $value)) {
             $chunks = explode('/', $value);
             foreach ($chunks as $chunk) {
                 if (!$this->validate($chunk)) {
@@ -164,7 +164,7 @@ class DayOfMonthField extends AbstractField
         }
 
         // If you end in W, make sure that it has a numeric in front of it
-        if ((bool) preg_match('/^\d{1,2}W$/', $value)) {
+        if ((bool)preg_match('/^\d{1,2}W$/', $value)) {
             return true;
         }
 

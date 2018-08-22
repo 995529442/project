@@ -31,7 +31,7 @@ final class Context
      */
     public function __construct()
     {
-        $this->arrays  = array();
+        $this->arrays = array();
         $this->objects = new \SplObjectStorage;
     }
 
@@ -92,7 +92,7 @@ final class Context
             return $key;
         }
 
-        $key            = count($this->arrays);
+        $key = count($this->arrays);
         $this->arrays[] = &$array;
 
         if (!isset($array[PHP_INT_MAX]) && !isset($array[PHP_INT_MAX - 1])) {

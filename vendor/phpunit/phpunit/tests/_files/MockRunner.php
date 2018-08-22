@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Runner\BaseTestRunner;
 
 class MockRunner extends BaseTestRunner

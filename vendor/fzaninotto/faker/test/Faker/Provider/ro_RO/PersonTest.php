@@ -89,12 +89,13 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     public function validInputDataProvider()
     {
         return array(
-            array(Person::GENDER_MALE, '1981-06-16','B2', true, '181061642'),
-            array(Person::GENDER_FEMALE, '1981-06-16','B2', true, '281061642'),
-            array(Person::GENDER_MALE, '1981-06-16','B2', false, '981061642'),
-            array(Person::GENDER_FEMALE, '1981-06-16','B2', false, '981061642'),
+            array(Person::GENDER_MALE, '1981-06-16', 'B2', true, '181061642'),
+            array(Person::GENDER_FEMALE, '1981-06-16', 'B2', true, '281061642'),
+            array(Person::GENDER_MALE, '1981-06-16', 'B2', false, '981061642'),
+            array(Person::GENDER_FEMALE, '1981-06-16', 'B2', false, '981061642'),
         );
     }
+
     /**
      *
      */

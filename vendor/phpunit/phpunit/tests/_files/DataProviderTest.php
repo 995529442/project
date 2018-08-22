@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 class DataProviderTest extends TestCase
@@ -14,10 +15,10 @@ class DataProviderTest extends TestCase
     public static function providerMethod()
     {
         return [
-          [0, 0, 0],
-          [0, 1, 1],
-          [1, 1, 3],
-          [1, 0, 1]
+            [0, 0, 0],
+            [0, 1, 1],
+            [1, 1, 3],
+            [1, 0, 1]
         ];
     }
 }

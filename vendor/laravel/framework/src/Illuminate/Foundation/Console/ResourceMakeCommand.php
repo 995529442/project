@@ -51,8 +51,8 @@ class ResourceMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         return $this->collection()
-                    ? __DIR__.'/stubs/resource-collection.stub'
-                    : __DIR__.'/stubs/resource.stub';
+            ? __DIR__ . '/stubs/resource-collection.stub'
+            : __DIR__ . '/stubs/resource.stub';
     }
 
     /**
@@ -63,18 +63,18 @@ class ResourceMakeCommand extends GeneratorCommand
     protected function collection()
     {
         return $this->option('collection') ||
-               Str::endsWith($this->argument('name'), 'Collection');
+            Str::endsWith($this->argument('name'), 'Collection');
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Resources';
+        return $rootNamespace . '\Http\Resources';
     }
 
     /**

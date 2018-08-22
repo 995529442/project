@@ -32,7 +32,7 @@ class Size
      *
      * @param integer $width
      * @param integer $height
-     * @param Point   $pivot
+     * @param Point $pivot
      */
     public function __construct($width = null, $height = null, Point $pivot = null)
     {
@@ -205,7 +205,7 @@ class Size
      * Calculate the relative position to another Size
      * based on the pivot point settings of both sizes.
      *
-     * @param  Size   $size
+     * @param  Size $size
      * @return \Intervention\Image\Point
      */
     public function relativePosition(Size $size)
@@ -219,7 +219,7 @@ class Size
     /**
      * Resize given Size to best fitting size of current size.
      *
-     * @param  Size   $size
+     * @param  Size $size
      * @return \Intervention\Image\Size
      */
     public function fit(Size $size, $position = 'center')
@@ -258,7 +258,7 @@ class Size
     /**
      * Checks if given size fits into current size
      *
-     * @param  Size   $size
+     * @param  Size $size
      * @return boolean
      */
     public function fitsInto(Size $size)
@@ -270,7 +270,7 @@ class Size
      * Aligns current size's pivot point to given position
      * and moves point automatically by offset.
      *
-     * @param  string  $position
+     * @param  string $position
      * @param  integer $offset_x
      * @param  integer $offset_y
      * @return \Intervention\Image\Size

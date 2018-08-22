@@ -180,10 +180,10 @@ class CodeCoverage
     public function clear()
     {
         $this->isInitialized = false;
-        $this->currentId     = null;
-        $this->data          = [];
-        $this->tests         = [];
-        $this->report        = null;
+        $this->currentId = null;
+        $this->data = [];
+        $this->tests = [];
+        $this->report = null;
     }
 
     /**
@@ -220,7 +220,7 @@ class CodeCoverage
      */
     public function setData(array $data)
     {
-        $this->data   = $data;
+        $this->data = $data;
         $this->report = null;
     }
 
@@ -248,7 +248,7 @@ class CodeCoverage
      * Start collection of code coverage information.
      *
      * @param mixed $id
-     * @param bool  $clear
+     * @param bool $clear
      *
      * @throws InvalidArgumentException
      */
@@ -277,10 +277,10 @@ class CodeCoverage
     /**
      * Stop collection of code coverage information.
      *
-     * @param bool  $append
+     * @param bool $append
      * @param mixed $linesToBeCovered
      * @param array $linesToBeUsed
-     * @param bool  $ignoreForceCoversAnnotation
+     * @param bool $ignoreForceCoversAnnotation
      *
      * @return array
      *
@@ -316,10 +316,10 @@ class CodeCoverage
      *
      * @param array $data
      * @param mixed $id
-     * @param bool  $append
+     * @param bool $append
      * @param mixed $linesToBeCovered
      * @param array $linesToBeUsed
-     * @param bool  $ignoreForceCoversAnnotation
+     * @param bool $ignoreForceCoversAnnotation
      *
      * @throws \SebastianBergmann\CodeCoverage\UnintentionallyCoveredCodeException
      * @throws \SebastianBergmann\CodeCoverage\MissingCoversAnnotationException
@@ -359,7 +359,7 @@ class CodeCoverage
             return;
         }
 
-        $size   = 'unknown';
+        $size = 'unknown';
         $status = null;
 
         if ($id instanceof TestCase) {
@@ -374,10 +374,10 @@ class CodeCoverage
             }
 
             $status = $id->getStatus();
-            $id     = \get_class($id) . '::' . $id->getName();
+            $id = \get_class($id) . '::' . $id->getName();
         } elseif ($id instanceof PhptTestCase) {
             $size = 'large';
-            $id   = $id->getName();
+            $id = $id->getName();
         }
 
         $this->tests[$id] = ['size' => $size, 'status' => $status];
@@ -432,7 +432,7 @@ class CodeCoverage
             }
         }
 
-        $this->tests  = \array_merge($this->tests, $that->getTests());
+        $this->tests = \array_merge($this->tests, $that->getTests());
         $this->report = null;
     }
 
@@ -622,7 +622,7 @@ class CodeCoverage
      * @param array $data
      * @param mixed $linesToBeCovered
      * @param array $linesToBeUsed
-     * @param bool  $ignoreForceCoversAnnotation
+     * @param bool $ignoreForceCoversAnnotation
      *
      * @throws \SebastianBergmann\CodeCoverage\CoveredCodeNotExecutedException
      * @throws \ReflectionException
@@ -648,7 +648,7 @@ class CodeCoverage
 
         if ($this->checkForUnintentionallyCoveredCode &&
             (!$this->currentId instanceof TestCase ||
-            (!$this->currentId->isMedium() && !$this->currentId->isLarge()))) {
+                (!$this->currentId->isMedium() && !$this->currentId->isLarge()))) {
             $this->performUnintentionallyCoveredCodeCheck($data, $linesToBeCovered, $linesToBeUsed);
         }
 
@@ -660,7 +660,7 @@ class CodeCoverage
 
         foreach (\array_keys($data) as $filename) {
             $_linesToBeCovered = \array_flip($linesToBeCovered[$filename]);
-            $data[$filename]   = \array_intersect_key($data[$filename], $_linesToBeCovered);
+            $data[$filename] = \array_intersect_key($data[$filename], $_linesToBeCovered);
         }
     }
 
@@ -719,7 +719,7 @@ class CodeCoverage
      */
     private function addUncoveredFilesFromWhitelist()
     {
-        $data           = [];
+        $data = [];
         $uncoveredFiles = \array_diff(
             $this->filter->getWhitelist(),
             \array_keys($this->data)
@@ -782,7 +782,7 @@ class CodeCoverage
 
         foreach ($tokens->getInterfaces() as $interface) {
             $interfaceStartLine = $interface['startLine'];
-            $interfaceEndLine   = $interface['endLine'];
+            $interfaceEndLine = $interface['endLine'];
 
             foreach (\range($interfaceStartLine, $interfaceEndLine) as $line) {
                 $this->ignoredLines[$filename][] = $line;
@@ -791,7 +791,7 @@ class CodeCoverage
 
         foreach (\array_merge($tokens->getClasses(), $tokens->getTraits()) as $classOrTrait) {
             $classOrTraitStartLine = $classOrTrait['startLine'];
-            $classOrTraitEndLine   = $classOrTrait['endLine'];
+            $classOrTraitEndLine = $classOrTrait['endLine'];
 
             if (empty($classOrTrait['methods'])) {
                 foreach (\range($classOrTraitStartLine, $classOrTraitEndLine) as $line) {
@@ -801,10 +801,10 @@ class CodeCoverage
                 continue;
             }
 
-            $firstMethod          = \array_shift($classOrTrait['methods']);
+            $firstMethod = \array_shift($classOrTrait['methods']);
             $firstMethodStartLine = $firstMethod['startLine'];
-            $firstMethodEndLine   = $firstMethod['endLine'];
-            $lastMethodEndLine    = $firstMethodEndLine;
+            $firstMethodEndLine = $firstMethod['endLine'];
+            $lastMethodEndLine = $firstMethodEndLine;
 
             do {
                 $lastMethod = \array_pop($classOrTrait['methods']);
@@ -831,19 +831,19 @@ class CodeCoverage
         }
 
         $ignore = false;
-        $stop   = false;
+        $stop = false;
 
         foreach ($tokens->tokens() as $token) {
             switch (\get_class($token)) {
                 case \PHP_Token_COMMENT::class:
                 case \PHP_Token_DOC_COMMENT::class:
                     $_token = \trim($token);
-                    $_line  = \trim($lines[$token->getLine() - 1]);
+                    $_line = \trim($lines[$token->getLine() - 1]);
 
                     if ($_token === '// @codeCoverageIgnore' ||
                         $_token === '//@codeCoverageIgnore') {
                         $ignore = true;
-                        $stop   = true;
+                        $stop = true;
                     } elseif ($_token === '// @codeCoverageIgnoreStart' ||
                         $_token === '//@codeCoverageIgnoreStart') {
                         $ignore = true;
@@ -854,7 +854,7 @@ class CodeCoverage
 
                     if (!$ignore) {
                         $start = $token->getLine();
-                        $end   = $start + \substr_count($token, "\n");
+                        $end = $start + \substr_count($token, "\n");
 
                         // Do not ignore the first line when there is a token
                         // before the comment
@@ -918,7 +918,7 @@ class CodeCoverage
 
                 if ($stop) {
                     $ignore = false;
-                    $stop   = false;
+                    $stop = false;
                 }
             }
         }
@@ -979,7 +979,7 @@ class CodeCoverage
     private function performUnexecutedCoveredCodeCheck(array &$data, array $linesToBeCovered, array $linesToBeUsed)
     {
         $executedCodeUnits = $this->coverageToCodeUnits($data);
-        $message           = '';
+        $message = '';
 
         foreach ($this->linesToCodeUnits($linesToBeCovered) as $codeUnit) {
             if (!\in_array($codeUnit, $executedCodeUnits)) {
@@ -1123,7 +1123,7 @@ class CodeCoverage
                 }
             }
 
-            $data     = [];
+            $data = [];
             $coverage = $this->driver->stop();
 
             foreach ($coverage as $file => $fileCoverage) {

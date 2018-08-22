@@ -15,15 +15,15 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \PHPUnit\Framework\MockObject\Generator
  *
- * @uses \PHPUnit\Framework\MockObject\InvocationMocker
- * @uses \PHPUnit\Framework\MockObject\Builder\InvocationMocker
- * @uses \PHPUnit\Framework\MockObject\Invocation\ObjectInvocation
- * @uses \PHPUnit\Framework\MockObject\Invocation\StaticInvocation
- * @uses \PHPUnit\Framework\MockObject\Matcher
- * @uses \PHPUnit\Framework\MockObject\Matcher\InvokedRecorder
- * @uses \PHPUnit\Framework\MockObject\Matcher\MethodName
- * @uses \PHPUnit\Framework\MockObject\Stub\ReturnStub
- * @uses \PHPUnit\Framework\MockObject\Matcher\InvokedCount
+ * @uses   \PHPUnit\Framework\MockObject\InvocationMocker
+ * @uses   \PHPUnit\Framework\MockObject\Builder\InvocationMocker
+ * @uses   \PHPUnit\Framework\MockObject\Invocation\ObjectInvocation
+ * @uses   \PHPUnit\Framework\MockObject\Invocation\StaticInvocation
+ * @uses   \PHPUnit\Framework\MockObject\Matcher
+ * @uses   \PHPUnit\Framework\MockObject\Matcher\InvokedRecorder
+ * @uses   \PHPUnit\Framework\MockObject\Matcher\MethodName
+ * @uses   \PHPUnit\Framework\MockObject\Stub\ReturnStub
+ * @uses   \PHPUnit\Framework\MockObject\Matcher\InvokedCount
  */
 class GeneratorTest extends TestCase
 {
@@ -105,8 +105,8 @@ class GeneratorTest extends TestCase
         $mock = $this->generator->getMockForAbstractClass(AbstractMockTestClass::class);
 
         $mock->expects($this->any())
-             ->method('doSomething')
-             ->willReturn('testing');
+            ->method('doSomething')
+            ->willReturn('testing');
 
         $this->assertEquals('testing', $mock->doSomething());
         $this->assertEquals(1, $mock->returnAnything());
@@ -132,7 +132,7 @@ class GeneratorTest extends TestCase
     public function getMockForAbstractClassExpectsInvalidArgumentExceptionDataprovider()
     {
         return [
-            'className not a string'     => [[], ''],
+            'className not a string' => [[], ''],
             'mockClassName not a string' => [Countable::class, new stdClass],
         ];
     }

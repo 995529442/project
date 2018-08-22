@@ -32,12 +32,12 @@ class JsonResponseHandler extends Handler
      */
     public function setJsonApi($jsonApi = false)
     {
-        $this->jsonApi = (bool) $jsonApi;
+        $this->jsonApi = (bool)$jsonApi;
         return $this;
     }
 
     /**
-     * @param  bool|null  $returnFrames
+     * @param  bool|null $returnFrames
      * @return bool|$this
      */
     public function addTraceToOutput($returnFrames = null)
@@ -46,7 +46,7 @@ class JsonResponseHandler extends Handler
             return $this->returnFrames;
         }
 
-        $this->returnFrames = (bool) $returnFrames;
+        $this->returnFrames = (bool)$returnFrames;
         return $this;
     }
 

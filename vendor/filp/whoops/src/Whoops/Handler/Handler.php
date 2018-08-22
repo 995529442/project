@@ -18,8 +18,8 @@ abstract class Handler implements HandlerInterface
      Return constants that can be returned from Handler::handle
      to message the handler walker.
      */
-    const DONE         = 0x10; // returning this is optional, only exists for
-                               // semantic purposes
+    const DONE = 0x10; // returning this is optional, only exists for
+    // semantic purposes
     /**
      * The Handler has handled the Throwable in some way, and wishes to skip any other Handler.
      * Execution will continue.
@@ -28,7 +28,7 @@ abstract class Handler implements HandlerInterface
     /**
      * The Handler has handled the Throwable in some way, and wishes to quit/stop execution
      */
-    const QUIT         = 0x30;
+    const QUIT = 0x30;
 
     /**
      * @var RunInterface

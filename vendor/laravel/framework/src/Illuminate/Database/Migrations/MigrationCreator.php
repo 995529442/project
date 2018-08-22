@@ -26,7 +26,7 @@ class MigrationCreator
     /**
      * Create a new migration creator instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  \Illuminate\Filesystem\Filesystem $files
      * @return void
      */
     public function __construct(Filesystem $files)
@@ -37,10 +37,10 @@ class MigrationCreator
     /**
      * Create a new migration at the given path.
      *
-     * @param  string  $name
-     * @param  string  $path
-     * @param  string  $table
-     * @param  bool    $create
+     * @param  string $name
+     * @param  string $path
+     * @param  string $table
+     * @param  bool $create
      * @return string
      * @throws \Exception
      */
@@ -69,7 +69,7 @@ class MigrationCreator
     /**
      * Ensure that a migration with the given name doesn't already exist.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return void
      *
      * @throws \InvalidArgumentException
@@ -84,14 +84,14 @@ class MigrationCreator
     /**
      * Get the migration stub file.
      *
-     * @param  string  $table
-     * @param  bool    $create
+     * @param  string $table
+     * @param  bool $create
      * @return string
      */
     protected function getStub($table, $create)
     {
         if (is_null($table)) {
-            return $this->files->get($this->stubPath().'/blank.stub');
+            return $this->files->get($this->stubPath() . '/blank.stub');
         }
 
         // We also have stubs for creating new tables and modifying existing tables
@@ -99,15 +99,15 @@ class MigrationCreator
         // or modifying existing tables. We'll grab the appropriate stub here.
         $stub = $create ? 'create.stub' : 'update.stub';
 
-        return $this->files->get($this->stubPath()."/{$stub}");
+        return $this->files->get($this->stubPath() . "/{$stub}");
     }
 
     /**
      * Populate the place-holders in the migration stub.
      *
-     * @param  string  $name
-     * @param  string  $stub
-     * @param  string  $table
+     * @param  string $name
+     * @param  string $stub
+     * @param  string $table
      * @return string
      */
     protected function populateStub($name, $stub, $table)
@@ -117,7 +117,7 @@ class MigrationCreator
         // Here we will replace the table place-holders with the table specified by
         // the developer, which is useful for quickly creating a tables creation
         // or update migration from the console instead of typing it manually.
-        if (! is_null($table)) {
+        if (!is_null($table)) {
             $stub = str_replace('DummyTable', $table, $stub);
         }
 
@@ -127,7 +127,7 @@ class MigrationCreator
     /**
      * Get the class name of a migration name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function getClassName($name)
@@ -138,13 +138,13 @@ class MigrationCreator
     /**
      * Get the full path to the migration.
      *
-     * @param  string  $name
-     * @param  string  $path
+     * @param  string $name
+     * @param  string $path
      * @return string
      */
     protected function getPath($name, $path)
     {
-        return $path.'/'.$this->getDatePrefix().'_'.$name.'.php';
+        return $path . '/' . $this->getDatePrefix() . '_' . $name . '.php';
     }
 
     /**
@@ -162,7 +162,7 @@ class MigrationCreator
     /**
      * Register a post migration create hook.
      *
-     * @param  \Closure  $callback
+     * @param  \Closure $callback
      * @return void
      */
     public function afterCreate(Closure $callback)
@@ -187,7 +187,7 @@ class MigrationCreator
      */
     public function stubPath()
     {
-        return __DIR__.'/stubs';
+        return __DIR__ . '/stubs';
     }
 
     /**

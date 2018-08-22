@@ -94,9 +94,9 @@ class NativeSessionStorage implements SessionStorageInterface
      * trans_sid_hosts, $_SERVER['HTTP_HOST']
      * trans_sid_tags, "a=href,area=href,frame=src,form="
      *
-     * @param array                         $options Session configuration options
+     * @param array $options Session configuration options
      * @param \SessionHandlerInterface|null $handler
-     * @param MetadataBag                   $metaBag MetadataBag
+     * @param MetadataBag $metaBag MetadataBag
      */
     public function __construct(array $options = array(), $handler = null, MetadataBag $metaBag = null)
     {
@@ -363,7 +363,7 @@ class NativeSessionStorage implements SessionStorageInterface
 
         foreach ($options as $key => $value) {
             if (isset($validOptions[$key])) {
-                ini_set('url_rewriter.tags' !== $key ? 'session.'.$key : $key, $value);
+                ini_set('url_rewriter.tags' !== $key ? 'session.' . $key : $key, $value);
             }
         }
     }

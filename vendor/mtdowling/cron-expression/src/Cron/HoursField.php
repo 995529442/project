@@ -1,6 +1,7 @@
 <?php
 
 namespace Cron;
+
 use DateTime;
 use DateTimeZone;
 
@@ -56,8 +57,7 @@ class HoursField extends AbstractField
         if ((!$invert && $date->format('H') >= $hour) || ($invert && $date->format('H') <= $hour)) {
             $date->modify(($invert ? '-' : '+') . '1 day');
             $date->setTime($invert ? 23 : 0, $invert ? 59 : 0);
-        }
-        else {
+        } else {
             $date->setTime($hour, $invert ? 59 : 0);
         }
 
@@ -66,6 +66,6 @@ class HoursField extends AbstractField
 
     public function validate($value)
     {
-        return (bool) preg_match('/^[\*,\/\-0-9]+$/', $value);
+        return (bool)preg_match('/^[\*,\/\-0-9]+$/', $value);
     }
 }

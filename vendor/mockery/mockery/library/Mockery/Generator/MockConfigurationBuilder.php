@@ -141,7 +141,7 @@ class MockConfigurationBuilder
 
     public function setInstanceMock($instanceMock)
     {
-        $this->instanceMock = (bool) $instanceMock;
+        $this->instanceMock = (bool)$instanceMock;
     }
 
     public function setParameterOverrides(array $overrides)

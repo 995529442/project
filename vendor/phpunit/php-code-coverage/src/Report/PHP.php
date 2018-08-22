@@ -20,7 +20,7 @@ class PHP
 {
     /**
      * @param CodeCoverage $coverage
-     * @param string       $target
+     * @param string $target
      *
      * @return string
      */

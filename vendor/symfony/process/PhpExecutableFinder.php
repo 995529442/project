@@ -36,16 +36,16 @@ class PhpExecutableFinder
     public function find($includeArgs = true)
     {
         $args = $this->findArguments();
-        $args = $includeArgs && $args ? ' '.implode(' ', $args) : '';
+        $args = $includeArgs && $args ? ' ' . implode(' ', $args) : '';
 
         // HHVM support
         if (defined('HHVM_VERSION')) {
-            return (getenv('PHP_BINARY') ?: PHP_BINARY).$args;
+            return (getenv('PHP_BINARY') ?: PHP_BINARY) . $args;
         }
 
         // PHP_BINARY return the current sapi executable
         if (PHP_BINARY && \in_array(PHP_SAPI, array('cli', 'cli-server', 'phpdbg'), true)) {
-            return PHP_BINARY.$args;
+            return PHP_BINARY . $args;
         }
 
         if ($php = getenv('PHP_PATH')) {
@@ -62,7 +62,7 @@ class PhpExecutableFinder
             }
         }
 
-        if (is_executable($php = PHP_BINDIR.('\\' === DIRECTORY_SEPARATOR ? '\\php.exe' : '/php'))) {
+        if (is_executable($php = PHP_BINDIR . ('\\' === DIRECTORY_SEPARATOR ? '\\php.exe' : '/php'))) {
             return $php;
         }
 

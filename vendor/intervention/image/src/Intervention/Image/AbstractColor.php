@@ -52,7 +52,7 @@ abstract class AbstractColor
      * @param  integer $r
      * @param  integer $g
      * @param  integer $b
-     * @param  float   $a
+     * @param  float $a
      * @return \Intervention\Image\AbstractColor
      */
     abstract public function initFromRgba($r, $g, $b, $a);
@@ -90,7 +90,7 @@ abstract class AbstractColor
      * Determines if current color is different from given color
      *
      * @param  AbstractColor $color
-     * @param  integer       $tolerance
+     * @param  integer $tolerance
      * @return boolean
      */
     abstract public function differs(AbstractColor $color, $tolerance = 0);
@@ -199,9 +199,9 @@ abstract class AbstractColor
 
         if (preg_match($hexPattern, $value, $matches)) {
             $result = [];
-            $result[0] = strlen($matches[1]) == '1' ? hexdec($matches[1].$matches[1]) : hexdec($matches[1]);
-            $result[1] = strlen($matches[2]) == '1' ? hexdec($matches[2].$matches[2]) : hexdec($matches[2]);
-            $result[2] = strlen($matches[3]) == '1' ? hexdec($matches[3].$matches[3]) : hexdec($matches[3]);
+            $result[0] = strlen($matches[1]) == '1' ? hexdec($matches[1] . $matches[1]) : hexdec($matches[1]);
+            $result[1] = strlen($matches[2]) == '1' ? hexdec($matches[2] . $matches[2]) : hexdec($matches[2]);
+            $result[2] = strlen($matches[3]) == '1' ? hexdec($matches[3] . $matches[3]) : hexdec($matches[3]);
             $result[3] = 1;
         } elseif (preg_match($rgbPattern, $value, $matches)) {
             $result = [];
