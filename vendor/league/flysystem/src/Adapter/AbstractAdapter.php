@@ -25,7 +25,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function setPathPrefix($prefix)
     {
-        $prefix = (string) $prefix;
+        $prefix = (string)$prefix;
 
         if ($prefix === '') {
             $this->pathPrefix = null;

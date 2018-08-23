@@ -11,7 +11,8 @@ class TextTest extends \PHPUnit_Framework_TestCase
         $this->textClass = new \ReflectionClass('Faker\Provider\zh_TW\Text');
     }
 
-    protected function getMethod($name) {
+    protected function getMethod($name)
+    {
         $method = $this->textClass->getMethod($name);
 
         $method->setAccessible(true);

@@ -7,18 +7,18 @@ class PostgresBuilder extends Builder
     /**
      * Determine if the given table exists.
      *
-     * @param  string  $table
+     * @param  string $table
      * @return bool
      */
     public function hasTable($table)
     {
         list($schema, $table) = $this->parseSchemaAndTable($table);
 
-        $table = $this->connection->getTablePrefix().$table;
+        $table = $this->connection->getTablePrefix() . $table;
 
         return count($this->connection->select(
-            $this->grammar->compileTableExists(), [$schema, $table]
-        )) > 0;
+                $this->grammar->compileTableExists(), [$schema, $table]
+            )) > 0;
     }
 
     /**
@@ -33,11 +33,11 @@ class PostgresBuilder extends Builder
         $excludedTables = ['spatial_ref_sys'];
 
         foreach ($this->getAllTables() as $row) {
-            $row = (array) $row;
+            $row = (array)$row;
 
             $table = reset($row);
 
-            if (! in_array($table, $excludedTables)) {
+            if (!in_array($table, $excludedTables)) {
                 $tables[] = $table;
             }
         }
@@ -66,14 +66,14 @@ class PostgresBuilder extends Builder
     /**
      * Get the column listing for a given table.
      *
-     * @param  string  $table
+     * @param  string $table
      * @return array
      */
     public function getColumnListing($table)
     {
         list($schema, $table) = $this->parseSchemaAndTable($table);
 
-        $table = $this->connection->getTablePrefix().$table;
+        $table = $this->connection->getTablePrefix() . $table;
 
         $results = $this->connection->select(
             $this->grammar->compileColumnListing(), [$schema, $table]
@@ -85,7 +85,7 @@ class PostgresBuilder extends Builder
     /**
      * Parse the table name and extract the schema and table.
      *
-     * @param  string  $table
+     * @param  string $table
      * @return array
      */
     protected function parseSchemaAndTable($table)

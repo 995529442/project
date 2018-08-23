@@ -61,8 +61,8 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
         putenv("HOME=$home");
 
         $config = new Configuration();
-        $this->assertSame(realpath($configFile),   realpath($config->getConfigFile()));
-        $this->assertSame(realpath($historyFile),  realpath($config->getHistoryFile()));
+        $this->assertSame(realpath($configFile), realpath($config->getConfigFile()));
+        $this->assertSame(realpath($historyFile), realpath($config->getHistoryFile()));
         $this->assertSame(realpath($manualDbFile), realpath($config->getManualDbFile()));
 
         putenv("HOME=$oldHome");
@@ -96,19 +96,19 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadConfig()
     {
-        $config  = $this->getConfig();
+        $config = $this->getConfig();
         $cleaner = new CodeCleaner();
-        $pager   = new PassthruPager(new ConsoleOutput());
+        $pager = new PassthruPager(new ConsoleOutput());
 
         $config->loadConfig([
-            'useReadline'       => false,
-            'usePcntl'          => false,
-            'codeCleaner'       => $cleaner,
-            'pager'             => $pager,
+            'useReadline' => false,
+            'usePcntl' => false,
+            'codeCleaner' => $cleaner,
+            'pager' => $pager,
             'requireSemicolons' => true,
             'errorLoggingLevel' => E_ERROR | E_WARNING,
-            'colorMode'         => Configuration::COLOR_MODE_FORCED,
-            'startupMessage'    => 'Psysh is awesome!',
+            'colorMode' => Configuration::COLOR_MODE_FORCED,
+            'startupMessage' => 'Psysh is awesome!',
         ]);
 
         $this->assertFalse($config->useReadline());
@@ -173,7 +173,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     {
         $config = new Configuration([
             'defaultIncludes' => ['/file.php'],
-            'configFile'      => __DIR__ . '/fixtures/empty.php',
+            'configFile' => __DIR__ . '/fixtures/empty.php',
         ]);
 
         $includes = $config->getDefaultIncludes();
@@ -219,8 +219,8 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     public function setColorModeValidProvider()
     {
         return [
-            'auto'     => [Configuration::COLOR_MODE_AUTO],
-            'forced'   => [Configuration::COLOR_MODE_FORCED],
+            'auto' => [Configuration::COLOR_MODE_AUTO],
+            'forced' => [Configuration::COLOR_MODE_FORCED],
             'disabled' => [Configuration::COLOR_MODE_DISABLED],
         ];
     }
@@ -246,7 +246,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
 
     public function testSetCheckerValid()
     {
-        $config  = $this->getConfig();
+        $config = $this->getConfig();
         $checker = new GitHubChecker();
 
         $config->setChecker($checker);

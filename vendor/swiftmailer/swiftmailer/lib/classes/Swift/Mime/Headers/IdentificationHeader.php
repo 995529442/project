@@ -37,7 +37,7 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
     /**
      * Creates a new IdentificationHeader with the given $name and $id.
      *
-     * @param string         $name
+     * @param string $name
      * @param EmailValidator $emailValidator
      */
     public function __construct($name, EmailValidator $emailValidator)
@@ -159,7 +159,7 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
             $angleAddrs = array();
 
             foreach ($this->ids as $id) {
-                $angleAddrs[] = '<'.$id.'>';
+                $angleAddrs[] = '<' . $id . '>';
             }
 
             $this->setCachedValue(implode(' ', $angleAddrs));
@@ -178,7 +178,7 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
     private function assertValidId($id)
     {
         if (!$this->emailValidator->isValid($id, new RFCValidation())) {
-            throw new Swift_RfcComplianceException('Invalid ID given <'.$id.'>');
+            throw new Swift_RfcComplianceException('Invalid ID given <' . $id . '>');
         }
     }
 }

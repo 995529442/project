@@ -25,7 +25,7 @@ class ConnectionFactory
     /**
      * Create a new connection factory instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param  \Illuminate\Contracts\Container\Container $container
      * @return void
      */
     public function __construct(Container $container)
@@ -36,8 +36,8 @@ class ConnectionFactory
     /**
      * Establish a PDO connection based on the configuration.
      *
-     * @param  array   $config
-     * @param  string  $name
+     * @param  array $config
+     * @param  string $name
      * @return \Illuminate\Database\Connection
      */
     public function make(array $config, $name = null)
@@ -54,8 +54,8 @@ class ConnectionFactory
     /**
      * Parse and prepare the database configuration.
      *
-     * @param  array   $config
-     * @param  string  $name
+     * @param  array $config
+     * @param  string $name
      * @return array
      */
     protected function parseConfig(array $config, $name)
@@ -66,7 +66,7 @@ class ConnectionFactory
     /**
      * Create a single database connection instance.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Illuminate\Database\Connection
      */
     protected function createSingleConnection(array $config)
@@ -81,7 +81,7 @@ class ConnectionFactory
     /**
      * Create a single database connection instance.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Illuminate\Database\Connection
      */
     protected function createReadWriteConnection(array $config)
@@ -94,7 +94,7 @@ class ConnectionFactory
     /**
      * Create a new PDO instance for reading.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Closure
      */
     protected function createReadPdo(array $config)
@@ -105,7 +105,7 @@ class ConnectionFactory
     /**
      * Get the read configuration for a read / write connection.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return array
      */
     protected function getReadConfig(array $config)
@@ -118,7 +118,7 @@ class ConnectionFactory
     /**
      * Get the read configuration for a read / write connection.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return array
      */
     protected function getWriteConfig(array $config)
@@ -131,22 +131,22 @@ class ConnectionFactory
     /**
      * Get a read / write level configuration.
      *
-     * @param  array   $config
-     * @param  string  $type
+     * @param  array $config
+     * @param  string $type
      * @return array
      */
     protected function getReadWriteConfig(array $config, $type)
     {
         return isset($config[$type][0])
-                        ? Arr::random($config[$type])
-                        : $config[$type];
+            ? Arr::random($config[$type])
+            : $config[$type];
     }
 
     /**
      * Merge a configuration for a read / write connection.
      *
-     * @param  array  $config
-     * @param  array  $merge
+     * @param  array $config
+     * @param  array $merge
      * @return array
      */
     protected function mergeReadWriteConfig(array $config, array $merge)
@@ -157,20 +157,20 @@ class ConnectionFactory
     /**
      * Create a new Closure that resolves to a PDO instance.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Closure
      */
     protected function createPdoResolver(array $config)
     {
         return array_key_exists('host', $config)
-                            ? $this->createPdoResolverWithHosts($config)
-                            : $this->createPdoResolverWithoutHosts($config);
+            ? $this->createPdoResolverWithHosts($config)
+            : $this->createPdoResolverWithoutHosts($config);
     }
 
     /**
      * Create a new Closure that resolves to a PDO instance with a specific host or an array of hosts.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Closure
      */
     protected function createPdoResolverWithHosts(array $config)
@@ -195,7 +195,7 @@ class ConnectionFactory
     /**
      * Parse the hosts configuration item into an array.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return array
      */
     protected function parseHosts(array $config)
@@ -212,7 +212,7 @@ class ConnectionFactory
     /**
      * Create a new Closure that resolves to a PDO instance where there is no configured host.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Closure
      */
     protected function createPdoResolverWithoutHosts(array $config)
@@ -225,14 +225,14 @@ class ConnectionFactory
     /**
      * Create a connector instance based on the configuration.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \Illuminate\Database\Connectors\ConnectorInterface
      *
      * @throws \InvalidArgumentException
      */
     public function createConnector(array $config)
     {
-        if (! isset($config['driver'])) {
+        if (!isset($config['driver'])) {
             throw new InvalidArgumentException('A driver must be specified.');
         }
 
@@ -257,11 +257,11 @@ class ConnectionFactory
     /**
      * Create a new connection instance.
      *
-     * @param  string   $driver
-     * @param  \PDO|\Closure     $connection
-     * @param  string   $database
-     * @param  string   $prefix
-     * @param  array    $config
+     * @param  string $driver
+     * @param  \PDO|\Closure $connection
+     * @param  string $database
+     * @param  string $prefix
+     * @param  array $config
      * @return \Illuminate\Database\Connection
      *
      * @throws \InvalidArgumentException

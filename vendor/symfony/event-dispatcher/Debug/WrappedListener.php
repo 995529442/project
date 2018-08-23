@@ -42,14 +42,14 @@ class WrappedListener
 
         if (is_array($listener)) {
             $this->name = is_object($listener[0]) ? get_class($listener[0]) : $listener[0];
-            $this->pretty = $this->name.'::'.$listener[1];
+            $this->pretty = $this->name . '::' . $listener[1];
         } elseif ($listener instanceof \Closure) {
             $this->pretty = $this->name = 'closure';
         } elseif (is_string($listener)) {
             $this->pretty = $this->name = $listener;
         } else {
             $this->name = get_class($listener);
-            $this->pretty = $this->name.'::__invoke';
+            $this->pretty = $this->name . '::__invoke';
         }
 
         if (null !== $name) {
@@ -84,7 +84,7 @@ class WrappedListener
     public function getInfo($eventName)
     {
         if (null === $this->stub) {
-            $this->stub = self::$hasClassStub ? new ClassStub($this->pretty.'()', $this->listener) : $this->pretty.'()';
+            $this->stub = self::$hasClassStub ? new ClassStub($this->pretty . '()', $this->listener) : $this->pretty . '()';
         }
 
         return array(

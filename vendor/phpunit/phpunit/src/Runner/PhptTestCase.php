@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Runner;
 
 use PHP_Timer;
@@ -66,7 +67,7 @@ class PhptTestCase implements Test, SelfDescribing
     /**
      * Constructs a test case with the given filename.
      *
-     * @param string             $filename
+     * @param string $filename
      * @param AbstractPhpProcess $phpUtil
      *
      * @throws Exception
@@ -87,7 +88,7 @@ class PhptTestCase implements Test, SelfDescribing
         }
 
         $this->filename = $filename;
-        $this->phpUtil  = $phpUtil ?: AbstractPhpProcess::factory();
+        $this->phpUtil = $phpUtil ?: AbstractPhpProcess::factory();
     }
 
     /**
@@ -101,7 +102,7 @@ class PhptTestCase implements Test, SelfDescribing
     }
 
     /**
-     * @param array  $sections
+     * @param array $sections
      * @param string $output
      *
      * @throws Exception
@@ -109,8 +110,8 @@ class PhptTestCase implements Test, SelfDescribing
     private function assertPhptExpectation(array $sections, $output)
     {
         $assertions = [
-            'EXPECT'      => 'assertEquals',
-            'EXPECTF'     => 'assertStringMatchesFormat',
+            'EXPECT' => 'assertEquals',
+            'EXPECTF' => 'assertStringMatchesFormat',
             'EXPECTREGEX' => 'assertRegExp',
         ];
 
@@ -119,8 +120,8 @@ class PhptTestCase implements Test, SelfDescribing
         foreach ($assertions as $sectionName => $sectionAssertion) {
             if (isset($sections[$sectionName])) {
                 $sectionContent = \preg_replace('/\r\n/', "\n", \trim($sections[$sectionName]));
-                $assertion      = $sectionAssertion;
-                $expected       = $sectionName === 'EXPECTREGEX' ? "/{$sectionContent}/" : $sectionContent;
+                $assertion = $sectionAssertion;
+                $expected = $sectionName === 'EXPECTREGEX' ? "/{$sectionContent}/" : $sectionContent;
 
                 break;
             }
@@ -147,13 +148,13 @@ class PhptTestCase implements Test, SelfDescribing
     public function run(TestResult $result = null)
     {
         $sections = $this->parse();
-        $code     = $this->render($sections['FILE']);
+        $code = $this->render($sections['FILE']);
 
         if ($result === null) {
             $result = new TestResult;
         }
 
-        $xfail    = false;
+        $xfail = false;
         $settings = $this->parseIniSection($this->settings);
 
         $result->startTest($this);
@@ -198,7 +199,7 @@ class PhptTestCase implements Test, SelfDescribing
         PHP_Timer::start();
 
         $jobResult = $this->phpUtil->runJob($code, $this->stringifyIni($settings));
-        $time      = PHP_Timer::stop();
+        $time = PHP_Timer::stop();
 
         if ($result->getCollectCodeCoverageInformation() && ($coverage = $this->cleanupForCoverage())) {
             $result->getCodeCoverage()->append($coverage, $this, true, [], [], true);
@@ -229,8 +230,8 @@ class PhptTestCase implements Test, SelfDescribing
 
     /**
      * @param array<string, string> $sections
-     * @param TestResult            $result
-     * @param array                 $settings
+     * @param TestResult $result
+     * @param array $settings
      *
      * @return bool
      */
@@ -240,7 +241,7 @@ class PhptTestCase implements Test, SelfDescribing
             return false;
         }
 
-        $skipif    = $this->render($sections['SKIPIF']);
+        $skipif = $this->render($sections['SKIPIF']);
         $jobResult = $this->phpUtil->runJob($skipif, $this->stringifyIni($settings));
 
         if (!\strncasecmp('skip', \ltrim($jobResult['stdout']), 4)) {
@@ -301,7 +302,7 @@ class PhptTestCase implements Test, SelfDescribing
     private function parse()
     {
         $sections = [];
-        $section  = '';
+        $section = '';
 
         $unsupportedSections = [
             'REDIRECTTEST',
@@ -322,7 +323,7 @@ class PhptTestCase implements Test, SelfDescribing
 
         foreach (\file($this->filename) as $line) {
             if (\preg_match('/^--([_A-Z]+)--/', $line, $result)) {
-                $section            = $result[1];
+                $section = $result[1];
                 $sections[$section] = '';
 
                 continue;
@@ -458,12 +459,12 @@ class PhptTestCase implements Test, SelfDescribing
      */
     private function getCoverageFiles()
     {
-        $baseDir          = \dirname($this->filename) . DIRECTORY_SEPARATOR;
-        $basename         = \basename($this->filename, 'phpt');
+        $baseDir = \dirname($this->filename) . DIRECTORY_SEPARATOR;
+        $basename = \basename($this->filename, 'phpt');
 
         return [
             'coverage' => $baseDir . $basename . 'coverage',
-            'job'      => $baseDir . $basename . 'php'
+            'job' => $baseDir . $basename . 'php'
         ];
     }
 
@@ -498,11 +499,11 @@ class PhptTestCase implements Test, SelfDescribing
         $template->setVar(
             [
                 'composerAutoload' => $composerAutoload,
-                'phar'             => $phar,
-                'globals'          => $globals,
-                'job'              => $files['job'],
-                'coverageFile'     => $files['coverage'],
-                'autoPrependFile'  => \var_export(
+                'phar' => $phar,
+                'globals' => $globals,
+                'job' => $files['job'],
+                'coverageFile' => $files['coverage'],
+                'autoPrependFile' => \var_export(
                     !empty($settings['auto_prepend_file']) ? $settings['auto_prepend_file'] : false,
                     true
                 )
@@ -519,7 +520,7 @@ class PhptTestCase implements Test, SelfDescribing
      */
     private function cleanupForCoverage()
     {
-        $files    = $this->getCoverageFiles();
+        $files = $this->getCoverageFiles();
         $coverage = @\unserialize(\file_get_contents($files['coverage']));
 
         foreach ($files as $file) {
@@ -572,8 +573,8 @@ class PhptTestCase implements Test, SelfDescribing
             }
 
             $setting = \explode('=', $setting, 2);
-            $name    = \trim($setting[0]);
-            $value   = \trim($setting[1]);
+            $name = \trim($setting[0]);
+            $value = \trim($setting[1]);
 
             if ($name === 'extension' || $name === 'zend_extension') {
                 if (!isset($ini[$name])) {

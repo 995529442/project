@@ -37,7 +37,7 @@ class DataTest extends TestCase
             $this->assertSame($values[$k], $data->seek($k)->getValue());
             $this->assertSame($values[$k], $data->{$k});
             $this->assertSame($values[$k], $data[$k]);
-            $this->assertSame((string) $values[$k], (string) $data->seek($k));
+            $this->assertSame((string)$values[$k], (string)$data->seek($k));
 
             $clonedValues[$k] = $v->getValue();
         }
@@ -52,12 +52,12 @@ class DataTest extends TestCase
         $this->assertSame('Exception', $data->getType());
 
         $this->assertSame('foo', $data->message);
-        $this->assertSame('foo', $data->{Caster::PREFIX_PROTECTED.'message'});
+        $this->assertSame('foo', $data->{Caster::PREFIX_PROTECTED . 'message'});
 
         $this->assertSame('foo', $data['message']);
-        $this->assertSame('foo', $data[Caster::PREFIX_PROTECTED.'message']);
+        $this->assertSame('foo', $data[Caster::PREFIX_PROTECTED . 'message']);
 
-        $this->assertStringMatchesFormat('Exception (count=%d)', (string) $data);
+        $this->assertStringMatchesFormat('Exception (count=%d)', (string)$data);
     }
 
     public function testArray()
@@ -88,7 +88,7 @@ class DataTest extends TestCase
 
         $this->assertSame('string', $data->getType());
         $this->assertSame('stdClass', $data->getValue());
-        $this->assertSame('stdClass', (string) $data);
+        $this->assertSame('stdClass', (string)$data);
     }
 
     public function testHardRefs()
@@ -103,7 +103,7 @@ class DataTest extends TestCase
         $this->assertSame(array(), $data[1]->getValue());
         $this->assertEquals(array($data[2]->getValue()), $data[2]->getValue(true));
 
-        $this->assertSame('array (count=3)', (string) $data);
+        $this->assertSame('array (count=3)', (string)$data);
     }
 
     private function cloneVar($value)

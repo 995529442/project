@@ -32,8 +32,8 @@ use Psy\VersionUpdater\NoopChecker;
  */
 class Configuration
 {
-    const COLOR_MODE_AUTO     = 'auto';
-    const COLOR_MODE_FORCED   = 'forced';
+    const COLOR_MODE_AUTO = 'auto';
+    const COLOR_MODE_FORCED = 'forced';
     const COLOR_MODE_DISABLED = 'disabled';
 
     private static $AVAILABLE_OPTIONS = [
@@ -76,7 +76,7 @@ class Configuration
     private $useBracketedPaste;
     private $hasPcntl;
     private $usePcntl;
-    private $newCommands       = [];
+    private $newCommands = [];
     private $requireSemicolons = false;
     private $useUnicode;
     private $useTabCompletion;
@@ -146,7 +146,7 @@ class Configuration
     {
         // feature detection
         $this->hasReadline = function_exists('readline');
-        $this->hasPcntl    = function_exists('pcntl_signal') && function_exists('posix_getpid');
+        $this->hasPcntl = function_exists('pcntl_signal') && function_exists('posix_getpid');
 
         if ($configFile = $this->getConfigFile()) {
             $this->loadConfigFile($configFile);
@@ -302,7 +302,7 @@ class Configuration
      */
     public function setConfigDir($dir)
     {
-        $this->configDir = (string) $dir;
+        $this->configDir = (string)$dir;
     }
 
     /**
@@ -322,7 +322,7 @@ class Configuration
      */
     public function setDataDir($dir)
     {
-        $this->dataDir = (string) $dir;
+        $this->dataDir = (string)$dir;
     }
 
     /**
@@ -342,7 +342,7 @@ class Configuration
      */
     public function setRuntimeDir($dir)
     {
-        $this->runtimeDir = (string) $dir;
+        $this->runtimeDir = (string)$dir;
     }
 
     /**
@@ -415,7 +415,7 @@ class Configuration
      */
     public function setHistorySize($value)
     {
-        $this->historySize = (int) $value;
+        $this->historySize = (int)$value;
     }
 
     /**
@@ -435,7 +435,7 @@ class Configuration
      */
     public function setEraseDuplicates($value)
     {
-        $this->eraseDuplicates = (bool) $value;
+        $this->eraseDuplicates = (bool)$value;
     }
 
     /**
@@ -456,7 +456,7 @@ class Configuration
      * @see self::getRuntimeDir
      *
      * @param string $type
-     * @param int    $pid
+     * @param int $pid
      *
      * @return string Temporary file name
      */
@@ -471,7 +471,7 @@ class Configuration
      * The pipe will be created inside the current temporary directory.
      *
      * @param string $type
-     * @param int    $pid
+     * @param int $pid
      *
      * @return string Pipe name
      */
@@ -497,7 +497,7 @@ class Configuration
      */
     public function setUseReadline($useReadline)
     {
-        $this->useReadline = (bool) $useReadline;
+        $this->useReadline = (bool)$useReadline;
     }
 
     /**
@@ -579,7 +579,7 @@ class Configuration
      */
     public function setUseBracketedPaste($useBracketedPaste)
     {
-        $this->useBracketedPaste = (bool) $useBracketedPaste;
+        $this->useBracketedPaste = (bool)$useBracketedPaste;
     }
 
     /**
@@ -625,7 +625,7 @@ class Configuration
      */
     public function setUsePcntl($usePcntl)
     {
-        $this->usePcntl = (bool) $usePcntl;
+        $this->usePcntl = (bool)$usePcntl;
     }
 
     /**
@@ -650,7 +650,7 @@ class Configuration
      */
     public function setRequireSemicolons($requireSemicolons)
     {
-        $this->requireSemicolons = (bool) $requireSemicolons;
+        $this->requireSemicolons = (bool)$requireSemicolons;
     }
 
     /**
@@ -677,7 +677,7 @@ class Configuration
      */
     public function setUseUnicode($useUnicode)
     {
-        $this->useUnicode = (bool) $useUnicode;
+        $this->useUnicode = (bool)$useUnicode;
     }
 
     /**
@@ -763,7 +763,7 @@ class Configuration
      */
     public function setUseTabCompletion($useTabCompletion)
     {
-        $this->useTabCompletion = (bool) $useTabCompletion;
+        $this->useTabCompletion = (bool)$useTabCompletion;
     }
 
     /**
@@ -1017,7 +1017,7 @@ class Configuration
      */
     public function setManualDbFile($filename)
     {
-        $this->manualDbFile = (string) $filename;
+        $this->manualDbFile = (string)$filename;
     }
 
     /**
@@ -1100,7 +1100,7 @@ class Configuration
      */
     public function setWarnOnMultipleConfigs($warnOnMultipleConfigs)
     {
-        $this->warnOnMultipleConfigs = (bool) $warnOnMultipleConfigs;
+        $this->warnOnMultipleConfigs = (bool)$warnOnMultipleConfigs;
     }
 
     /**

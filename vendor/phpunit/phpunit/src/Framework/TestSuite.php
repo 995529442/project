@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework;
 
 use Iterator;
@@ -121,7 +122,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
      *     name of an existing class) or constructs an empty TestSuite
      *     with the given name.
      *
-     * @param mixed  $theClass
+     * @param mixed $theClass
      * @param string $name
      *
      * @throws Exception
@@ -214,7 +215,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
     /**
      * Adds a test to the suite.
      *
-     * @param Test  $test
+     * @param Test $test
      * @param array $groups
      */
     public function addTest(Test $test, $groups = [])
@@ -222,7 +223,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
         $class = new ReflectionClass($test);
 
         if (!$class->isAbstract()) {
-            $this->tests[]  = $test;
+            $this->tests[] = $test;
             $this->numTests = -1;
 
             if ($test instanceof self && empty($groups)) {
@@ -322,7 +323,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
 
         // The given file may contain further stub classes in addition to the
         // test class itself. Figure out the actual test class.
-        $filename   = Fileloader::checkAndLoad($filename);
+        $filename = Fileloader::checkAndLoad($filename);
         $newClasses = \array_diff(\get_declared_classes(), $this->declaredClasses);
 
         // The diff is empty in case a parent class (with test methods) is added
@@ -333,7 +334,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
             // On the assumption that test classes are defined first in files,
             // process discovered classes in approximate LIFO order, so as to
             // avoid unnecessary reflection.
-            $this->foundClasses    = \array_merge($newClasses, $this->foundClasses);
+            $this->foundClasses = \array_merge($newClasses, $this->foundClasses);
             $this->declaredClasses = \get_declared_classes();
         }
 
@@ -341,7 +342,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
         // a PEAR/PSR-0 prefixed shortname ('NameSpace_ShortName'), or as a
         // PSR-1 local shortname ('NameSpace\ShortName'). The comparison must be
         // anchored to prevent false-positive matches (e.g., 'OtherShortName').
-        $shortname      = \basename($filename, '.php');
+        $shortname = \basename($filename, '.php');
         $shortnameRegEx = '/(?:^|_|\\\\)' . \preg_quote($shortname, '/') . '$/';
 
         foreach ($this->foundClasses as $i => $className) {
@@ -400,7 +401,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
         }
 
         foreach ($filenames as $filename) {
-            $this->addTestFile((string) $filename);
+            $this->addTestFile((string)$filename);
         }
     }
 
@@ -430,7 +431,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
 
     /**
      * @param ReflectionClass $theClass
-     * @param string          $name
+     * @param string $name
      *
      * @return Test
      *
@@ -787,7 +788,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
      *
      * @deprecated
      *
-     * @param Test       $test
+     * @param Test $test
      * @param TestResult $result
      */
     public function runTest(Test $test, TestResult $result)
@@ -854,7 +855,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
     }
 
     /**
-     * @param ReflectionClass  $class
+     * @param ReflectionClass $class
      * @param ReflectionMethod $method
      */
     protected function addTestMethod(ReflectionClass $class, ReflectionMethod $method)

@@ -55,7 +55,8 @@ final class DocBlock
         Location $location = null,
         $isTemplateStart = false,
         $isTemplateEnd = false
-    ) {
+    )
+    {
         Assert::string($summary);
         Assert::boolean($isTemplateStart);
         Assert::boolean($isTemplateEnd);

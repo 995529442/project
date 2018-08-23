@@ -16,7 +16,8 @@ class ExifCommand extends BaseCommand
     /**
      *
      */
-    public function dontPreferExtension() {
+    public function dontPreferExtension()
+    {
         $this->preferExtension = false;
     }
 
@@ -34,7 +35,7 @@ class ExifCommand extends BaseCommand
 
         $core = $image->getCore();
 
-        if ( ! method_exists($core, 'getImageProperties')) {
+        if (!method_exists($core, 'getImageProperties')) {
             throw new \Intervention\Image\Exception\NotSupportedException(
                 "Reading Exif data is not supported by this PHP installation."
             );

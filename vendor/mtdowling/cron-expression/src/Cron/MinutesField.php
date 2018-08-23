@@ -47,8 +47,7 @@ class MinutesField extends AbstractField
         if ((!$invert && $current_minute >= $minutes[$position]) || ($invert && $current_minute <= $minutes[$position])) {
             $date->modify(($invert ? '-' : '+') . '1 hour');
             $date->setTime($date->format('H'), $invert ? 59 : 0);
-        }
-        else {
+        } else {
             $date->setTime($date->format('H'), $minutes[$position]);
         }
 
@@ -57,6 +56,6 @@ class MinutesField extends AbstractField
 
     public function validate($value)
     {
-        return (bool) preg_match('/^[\*,\/\-0-9]+$/', $value);
+        return (bool)preg_match('/^[\*,\/\-0-9]+$/', $value);
     }
 }

@@ -165,7 +165,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      *  * lock_mode: The strategy for locking, see constants [default: LOCK_TRANSACTIONAL]
      *
      * @param \PDO|string|null $pdoOrDsn A \PDO instance or DSN string or URL string or null
-     * @param array            $options  An associative array of options
+     * @param array $options An associative array of options
      *
      * @throws \InvalidArgumentException When PDO error mode is not PDO::ERRMODE_EXCEPTION
      */
@@ -323,7 +323,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      */
     protected function doWrite($sessionId, $data)
     {
-        $maxlifetime = (int) ini_get('session.gc_maxlifetime');
+        $maxlifetime = (int)ini_get('session.gc_maxlifetime');
 
         try {
             // We use a single MERGE SQL query when supported by the database.
@@ -369,7 +369,7 @@ class PdoSessionHandler extends AbstractSessionHandler
      */
     public function updateTimestamp($sessionId, $data)
     {
-        $maxlifetime = (int) ini_get('session.gc_maxlifetime');
+        $maxlifetime = (int)ini_get('session.gc_maxlifetime');
 
         try {
             $updateStmt = $this->pdo->prepare(
@@ -486,25 +486,25 @@ class PdoSessionHandler extends AbstractSessionHandler
         switch ($driver) {
             case 'mysql':
             case 'pgsql':
-                $dsn = $driver.':';
+                $dsn = $driver . ':';
 
                 if (isset($params['host']) && '' !== $params['host']) {
-                    $dsn .= 'host='.$params['host'].';';
+                    $dsn .= 'host=' . $params['host'] . ';';
                 }
 
                 if (isset($params['port']) && '' !== $params['port']) {
-                    $dsn .= 'port='.$params['port'].';';
+                    $dsn .= 'port=' . $params['port'] . ';';
                 }
 
                 if (isset($params['path'])) {
                     $dbName = substr($params['path'], 1); // Remove the leading slash
-                    $dsn .= 'dbname='.$dbName.';';
+                    $dsn .= 'dbname=' . $dbName . ';';
                 }
 
                 return $dsn;
 
             case 'sqlite':
-                return 'sqlite:'.substr($params['path'], 1);
+                return 'sqlite:' . substr($params['path'], 1);
 
             case 'sqlsrv':
                 $dsn = 'sqlsrv:server=';
@@ -514,12 +514,12 @@ class PdoSessionHandler extends AbstractSessionHandler
                 }
 
                 if (isset($params['port']) && '' !== $params['port']) {
-                    $dsn .= ','.$params['port'];
+                    $dsn .= ',' . $params['port'];
                 }
 
                 if (isset($params['path'])) {
                     $dbName = substr($params['path'], 1); // Remove the leading slash
-                    $dsn .= ';Database='.$dbName;
+                    $dsn .= ';Database=' . $dbName;
                 }
 
                 return $dsn;
@@ -775,9 +775,9 @@ class PdoSessionHandler extends AbstractSessionHandler
     /**
      * Returns an insert statement supported by the database for writing session data.
      *
-     * @param string $sessionId   Session ID
+     * @param string $sessionId Session ID
      * @param string $sessionData Encoded session data
-     * @param int    $maxlifetime session.gc_maxlifetime
+     * @param int $maxlifetime session.gc_maxlifetime
      *
      * @return \PDOStatement The insert statement
      */
@@ -808,9 +808,9 @@ class PdoSessionHandler extends AbstractSessionHandler
     /**
      * Returns an update statement supported by the database for writing session data.
      *
-     * @param string $sessionId   Session ID
+     * @param string $sessionId Session ID
      * @param string $sessionData Encoded session data
-     * @param int    $maxlifetime session.gc_maxlifetime
+     * @param int $maxlifetime session.gc_maxlifetime
      *
      * @return \PDOStatement The update statement
      */
@@ -841,9 +841,9 @@ class PdoSessionHandler extends AbstractSessionHandler
     /**
      * Returns a merge/upsert (i.e. insert or update) statement when supported by the database for writing session data.
      *
-     * @param string $sessionId   Session ID
-     * @param string $data        Encoded session data
-     * @param int    $maxlifetime session.gc_maxlifetime
+     * @param string $sessionId Session ID
+     * @param string $data Encoded session data
+     * @param int $maxlifetime session.gc_maxlifetime
      *
      * @return \PDOStatement|null The merge statement or null when not supported
      */
@@ -851,21 +851,21 @@ class PdoSessionHandler extends AbstractSessionHandler
     {
         switch (true) {
             case 'mysql' === $this->driver:
-                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :lifetime, :time) ".
+                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :lifetime, :time) " .
                     "ON DUPLICATE KEY UPDATE $this->dataCol = VALUES($this->dataCol), $this->lifetimeCol = VALUES($this->lifetimeCol), $this->timeCol = VALUES($this->timeCol)";
                 break;
             case 'sqlsrv' === $this->driver && version_compare($this->pdo->getAttribute(\PDO::ATTR_SERVER_VERSION), '10', '>='):
                 // MERGE is only available since SQL Server 2008 and must be terminated by semicolon
                 // It also requires HOLDLOCK according to http://weblogs.sqlteam.com/dang/archive/2009/01/31/UPSERT-Race-Condition-With-MERGE.aspx
-                $mergeSql = "MERGE INTO $this->table WITH (HOLDLOCK) USING (SELECT 1 AS dummy) AS src ON ($this->idCol = ?) ".
-                    "WHEN NOT MATCHED THEN INSERT ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (?, ?, ?, ?) ".
+                $mergeSql = "MERGE INTO $this->table WITH (HOLDLOCK) USING (SELECT 1 AS dummy) AS src ON ($this->idCol = ?) " .
+                    "WHEN NOT MATCHED THEN INSERT ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (?, ?, ?, ?) " .
                     "WHEN MATCHED THEN UPDATE SET $this->dataCol = ?, $this->lifetimeCol = ?, $this->timeCol = ?;";
                 break;
             case 'sqlite' === $this->driver:
                 $mergeSql = "INSERT OR REPLACE INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :lifetime, :time)";
                 break;
             case 'pgsql' === $this->driver && version_compare($this->pdo->getAttribute(\PDO::ATTR_SERVER_VERSION), '9.5', '>='):
-                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :lifetime, :time) ".
+                $mergeSql = "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) VALUES (:id, :data, :lifetime, :time) " .
                     "ON CONFLICT ($this->idCol) DO UPDATE SET ($this->dataCol, $this->lifetimeCol, $this->timeCol) = (EXCLUDED.$this->dataCol, EXCLUDED.$this->lifetimeCol, EXCLUDED.$this->timeCol)";
                 break;
             default:

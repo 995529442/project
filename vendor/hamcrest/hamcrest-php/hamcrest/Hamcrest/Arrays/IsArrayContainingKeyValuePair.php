@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Arrays;
 
 /**
  * Tests for the presence of both a key and value inside an array.
  */
+
 use Hamcrest\Description;
 use Hamcrest\Matcher;
 use Hamcrest\TypeSafeMatcher;
@@ -12,7 +14,6 @@ use Hamcrest\Util;
 /**
  * @namespace
  */
-
 class IsArrayContainingKeyValuePair extends TypeSafeMatcher
 {
 
@@ -42,8 +43,7 @@ class IsArrayContainingKeyValuePair extends TypeSafeMatcher
     {
         //Not using appendValueList() so that keys can be shown
         $mismatchDescription->appendText('array was ')
-                                                ->appendText('[')
-                                                ;
+            ->appendText('[');
         $loop = false;
         foreach ($array as $key => $value) {
             if ($loop) {
@@ -58,11 +58,10 @@ class IsArrayContainingKeyValuePair extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('array containing [')
-                                ->appendDescriptionOf($this->_keyMatcher)
-                                ->appendText(' => ')
-                                ->appendDescriptionOf($this->_valueMatcher)
-                                ->appendText(']')
-                                ;
+            ->appendDescriptionOf($this->_keyMatcher)
+            ->appendText(' => ')
+            ->appendDescriptionOf($this->_valueMatcher)
+            ->appendText(']');
     }
 
     /**

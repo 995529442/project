@@ -22,7 +22,7 @@ class UriSigner
     private $parameter;
 
     /**
-     * @param string $secret    A secret
+     * @param string $secret A secret
      * @param string $parameter Query string parameter to use
      */
     public function __construct($secret, $parameter = '_hash')
@@ -52,7 +52,7 @@ class UriSigner
 
         $uri = $this->buildUrl($url, $params);
 
-        return $uri.(false === strpos($uri, '?') ? '?' : '&').$this->parameter.'='.$this->computeHash($uri);
+        return $uri . (false === strpos($uri, '?') ? '?' : '&') . $this->parameter . '=' . $this->computeHash($uri);
     }
 
     /**
@@ -91,16 +91,16 @@ class UriSigner
         ksort($params, SORT_STRING);
         $url['query'] = http_build_query($params, '', '&');
 
-        $scheme = isset($url['scheme']) ? $url['scheme'].'://' : '';
+        $scheme = isset($url['scheme']) ? $url['scheme'] . '://' : '';
         $host = isset($url['host']) ? $url['host'] : '';
-        $port = isset($url['port']) ? ':'.$url['port'] : '';
+        $port = isset($url['port']) ? ':' . $url['port'] : '';
         $user = isset($url['user']) ? $url['user'] : '';
-        $pass = isset($url['pass']) ? ':'.$url['pass'] : '';
+        $pass = isset($url['pass']) ? ':' . $url['pass'] : '';
         $pass = ($user || $pass) ? "$pass@" : '';
         $path = isset($url['path']) ? $url['path'] : '';
-        $query = isset($url['query']) && $url['query'] ? '?'.$url['query'] : '';
-        $fragment = isset($url['fragment']) ? '#'.$url['fragment'] : '';
+        $query = isset($url['query']) && $url['query'] ? '?' . $url['query'] : '';
+        $fragment = isset($url['fragment']) ? '#' . $url['fragment'] : '';
 
-        return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
+        return $scheme . $user . $pass . $host . $port . $path . $query . $fragment;
     }
 }

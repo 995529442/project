@@ -43,14 +43,14 @@ class GNUReadline implements Readline
      * GNU Readline constructor.
      *
      * @param string|false $historyFile
-     * @param int          $historySize
-     * @param bool         $eraseDups
+     * @param int $historySize
+     * @param bool $eraseDups
      */
     public function __construct($historyFile = null, $historySize = 0, $eraseDups = false)
     {
         $this->historyFile = ($historyFile !== null) ? $historyFile : false;
         $this->historySize = $historySize;
-        $this->eraseDups   = $eraseDups;
+        $this->eraseDups = $eraseDups;
     }
 
     /**

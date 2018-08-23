@@ -18,7 +18,7 @@ class CreateCaterFormTable extends Migration
             $table->increments('id');
             $table->integer('admin_id')->index()->comment("关联admins表");
             $table->integer('user_id')->index()->comment("关联cater_users表");
-            $table->string('form_id',50)->default('')->comment("form_id");
+            $table->string('form_id', 50)->default('')->comment("form_id");
             $table->tinyInteger('isvalid')->defalut('0')->comment("是否有效 1为有效 0为无效");
             $table->timestamps();
         });

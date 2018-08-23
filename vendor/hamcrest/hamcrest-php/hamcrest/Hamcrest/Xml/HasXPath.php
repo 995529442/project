@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Xml;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Core\IsEqual;
 use Hamcrest\Description;
 use Hamcrest\DiagnosingMatcher;
@@ -131,7 +133,7 @@ class HasXPath extends DiagnosingMatcher
                 $content[] = $node->textContent;
             }
             $mismatchDescription->appendText('XPath returned ')
-                                                    ->appendValue($content);
+                ->appendValue($content);
         }
 
         return false;
@@ -152,7 +154,7 @@ class HasXPath extends DiagnosingMatcher
                 return true;
             }
             $mismatchDescription->appendText('XPath expression result was ')
-                                                    ->appendValue($result);
+                ->appendValue($result);
         } else {
             if ($this->_matcher->matches($result)) {
                 return true;
@@ -167,8 +169,8 @@ class HasXPath extends DiagnosingMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('XML or HTML document with XPath "')
-                                ->appendText($this->_xpath)
-                                ->appendText('"');
+            ->appendText($this->_xpath)
+            ->appendText('"');
         if ($this->_matcher !== null) {
             $description->appendText(' ');
             $this->_matcher->describeTo($description);

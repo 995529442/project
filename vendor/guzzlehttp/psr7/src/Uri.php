@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp\Psr7;
 
 use Psr\Http\Message\UriInterface;
@@ -21,7 +22,7 @@ class Uri implements UriInterface
     const HTTP_DEFAULT_HOST = 'localhost';
 
     private static $defaultPorts = [
-        'http'  => 80,
+        'http' => 80,
         'https' => 443,
         'ftp' => 21,
         'gopher' => 70,
@@ -120,7 +121,7 @@ class Uri implements UriInterface
             $uri .= $scheme . ':';
         }
 
-        if ($authority != ''|| $scheme === 'file') {
+        if ($authority != '' || $scheme === 'file') {
             $uri .= '//' . $authority;
         }
 
@@ -233,7 +234,7 @@ class Uri implements UriInterface
      * component, identical to the base URI. When no base URI is given, only an empty
      * URI reference (apart from its fragment) is considered a same-document reference.
      *
-     * @param UriInterface      $uri  The URI to check
+     * @param UriInterface $uri The URI to check
      * @param UriInterface|null $base An optional base URI to compare against
      *
      * @return bool
@@ -271,8 +272,8 @@ class Uri implements UriInterface
     /**
      * Converts the relative URI into a new URI that is resolved against the base URI.
      *
-     * @param UriInterface        $base Base URI
-     * @param string|UriInterface $rel  Relative URI
+     * @param UriInterface $base Base URI
+     * @param string|UriInterface $rel Relative URI
      *
      * @return UriInterface
      *
@@ -295,7 +296,7 @@ class Uri implements UriInterface
      * removed.
      *
      * @param UriInterface $uri URI to use as a base.
-     * @param string       $key Query string key to remove.
+     * @param string $key Query string key to remove.
      *
      * @return UriInterface
      */
@@ -323,9 +324,9 @@ class Uri implements UriInterface
      * A value of null will set the query string key without a value, e.g. "key"
      * instead of "key=value".
      *
-     * @param UriInterface $uri   URI to use as a base.
-     * @param string       $key   Key to set.
-     * @param string|null  $value Value to set
+     * @param UriInterface $uri URI to use as a base.
+     * @param string $key Key to set.
+     * @param string|null $value Value to set
      *
      * @return UriInterface
      */
@@ -610,7 +611,7 @@ class Uri implements UriInterface
             return null;
         }
 
-        $port = (int) $port;
+        $port = (int)$port;
         if (1 > $port || 0xffff < $port) {
             throw new \InvalidArgumentException(
                 sprintf('Invalid port: %d. Must be between 1 and 65535', $port)
@@ -695,7 +696,7 @@ class Uri implements UriInterface
                 'by adding a leading slash to the path is deprecated since version 1.4 and will throw an exception instead.',
                 E_USER_DEPRECATED
             );
-            $this->path = '/'. $this->path;
+            $this->path = '/' . $this->path;
             //throw new \InvalidArgumentException('The path of a URI with an authority must start with a slash "/" or be empty');
         }
     }

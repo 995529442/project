@@ -27,7 +27,7 @@ class PolygonShape extends \Intervention\Image\AbstractShape
     /**
      * Draw polygon on given image
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $x
      * @param  integer $y
      * @return boolean
@@ -66,7 +66,7 @@ class PolygonShape extends \Intervention\Image\AbstractShape
         $count = 1;
 
         foreach ($points as $key => $value) {
-            if ($count%2 === 0) {
+            if ($count % 2 === 0) {
                 $y = $value;
                 $ipoints[] = ['x' => $x, 'y' => $y];
             } else {

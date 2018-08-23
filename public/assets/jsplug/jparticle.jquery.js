@@ -1,614 +1,614 @@
-(function initJParticle( $ ){
+(function initJParticle($) {
 
-	"use strict";
+    "use strict";
 
-	var createParticlesSandbox, Utils;
+    var createParticlesSandbox, Utils;
 
-	Utils = {};
+    Utils = {};
 
-	/*
-	 * Create jParticle animation.
-	 * @param {Object} options Few jParticle options.
-	 * @return {Object} jQuery object for chaining.
-	 */
-	$.fn.jParticle = function jParticle( options ){
-	
-		this.each(function( _, el ){
+    /*
+     * Create jParticle animation.
+     * @param {Object} options Few jParticle options.
+     * @return {Object} jQuery object for chaining.
+     */
+    $.fn.jParticle = function jParticle(options) {
 
-			if ( typeof el.sandbox === 'object' ) {
+        this.each(function (_, el) {
 
-				$( el ).removeJParticle();
-			}
+            if (typeof el.sandbox === 'object') {
 
-			el.sandbox = createParticlesSandbox( el, options );
-		});
-	
-		return this;
-	};
+                $(el).removeJParticle();
+            }
 
-	/*
-	 * Remove jParticle canvas.
-	 * @return {Object} jQuery object for chaining.
-	 */
-	$.fn.removeJParticle = function removeJParticle(){
+            el.sandbox = createParticlesSandbox(el, options);
+        });
 
-		this.each(function( _, el ){
+        return this;
+    };
 
-			if ( el.sandbox ) {
-
-				el.sandbox.remove();
-				delete el.sandbox;
-			}
-		});
-
-		return this;
-	};
-
-	/*
-	 * Freeze jParticle animation.
-	 * @return {Object} jQuery object for chaining.
-	 */
-	$.fn.freezeJParticle = function freezeJParticle(){
-
-		this.each(function( _, el ){
-
-			if ( el.sandbox ) {
+    /*
+     * Remove jParticle canvas.
+     * @return {Object} jQuery object for chaining.
+     */
+    $.fn.removeJParticle = function removeJParticle() {
 
-				el.sandbox.freeze();
-			}
-		});
+        this.each(function (_, el) {
 
-		return this;
-	};
+            if (el.sandbox) {
 
-	/*
-	 * Unfreeze jParticle animation.
-	 * @return {Object} jQuery object for chaining.
-	 */
-	$.fn.unfreezeJParticle = function unfreezeJParticle(){
+                el.sandbox.remove();
+                delete el.sandbox;
+            }
+        });
 
-		this.each(function( _, el ){
+        return this;
+    };
 
-			if ( el.sandbox ) {
+    /*
+     * Freeze jParticle animation.
+     * @return {Object} jQuery object for chaining.
+     */
+    $.fn.freezeJParticle = function freezeJParticle() {
 
-				el.sandbox.unfreeze();
-			}
-		});
+        this.each(function (_, el) {
 
-		return this;
-	};
+            if (el.sandbox) {
 
-	/*
-	 * Create a particles sandbox instance.
-	 * @param {Object} element Element for the sandbox.
-	 * @param {Object} params Few sandbox's params.
-	 * @return {Object} Particles sandbox object.
-	 */
-	createParticlesSandbox = function createParticlesSandbox( element, params ){
+                el.sandbox.freeze();
+            }
+        });
 
-		var ParticlesSandbox, createParticle;
+        return this;
+    };
 
-		ParticlesSandbox = {};
-        
-		ParticlesSandbox.canvas = {};
-		ParticlesSandbox.mouse = {};
-		ParticlesSandbox.particles = [];
+    /*
+     * Unfreeze jParticle animation.
+     * @return {Object} jQuery object for chaining.
+     */
+    $.fn.unfreezeJParticle = function unfreezeJParticle() {
 
-		ParticlesSandbox.isAnimated = false;
+        this.each(function (_, el) {
 
-		/*
-		 * Initialize the sandbox
-		 * @param {Object} element Element for the sandbox.
-		 * @param {Object} params Few sandbox's params.
-		 */
-		ParticlesSandbox.initialize = function initialize( element, params ){
+            if (el.sandbox) {
 
-			ParticlesSandbox.initParams( params );
-			ParticlesSandbox.initHTML( element );
-			ParticlesSandbox.initParticles();
-			ParticlesSandbox.initEvents();
-			ParticlesSandbox.initAnimation();
-		};
+                el.sandbox.unfreeze();
+            }
+        });
 
-		/*
-		 * Initialize sandbox's params.
-		 * @param {Object} params Few sandbox's params.
-		 */
-		ParticlesSandbox.initParams = function initParams( params ){
+        return this;
+    };
 
-			if ( params && params.color && (!params.particle || ( params.particle && !params.particle.color ) ) ) {
+    /*
+     * Create a particles sandbox instance.
+     * @param {Object} element Element for the sandbox.
+     * @param {Object} params Few sandbox's params.
+     * @return {Object} Particles sandbox object.
+     */
+    createParticlesSandbox = function createParticlesSandbox(element, params) {
 
-				if ( !params.particle ) {
+        var ParticlesSandbox, createParticle;
 
-					params.particle = {};
-				}
+        ParticlesSandbox = {};
 
-				params.particle.color = params.color;
-			}
+        ParticlesSandbox.canvas = {};
+        ParticlesSandbox.mouse = {};
+        ParticlesSandbox.particles = [];
 
-			ParticlesSandbox.params = $.extend({
-				particlesNumber: 100,
-				linkDist: 50,
-				createLinkDist: 150,
-				disableLinks: false,
-				disableMouse: false,
-				background: 'black',
-				color: 'white',
-				width: null,
-				height: null,
-				linksWidth: 1
-			}, params );
-		};
+        ParticlesSandbox.isAnimated = false;
 
-		/*
-		 * Initialize the sandbox's html.
-		 * @param {Object} element Element for the sandbox.
-		 */
-		ParticlesSandbox.initHTML = function initHTML( element ){
+        /*
+         * Initialize the sandbox
+         * @param {Object} element Element for the sandbox.
+         * @param {Object} params Few sandbox's params.
+         */
+        ParticlesSandbox.initialize = function initialize(element, params) {
 
-			var canvas;
+            ParticlesSandbox.initParams(params);
+            ParticlesSandbox.initHTML(element);
+            ParticlesSandbox.initParticles();
+            ParticlesSandbox.initEvents();
+            ParticlesSandbox.initAnimation();
+        };
 
-			canvas = ParticlesSandbox.canvas;
+        /*
+         * Initialize sandbox's params.
+         * @param {Object} params Few sandbox's params.
+         */
+        ParticlesSandbox.initParams = function initParams(params) {
 
-			canvas.container = $( element );
-			canvas.element = $('<canvas/>');
+            if (params && params.color && (!params.particle || (params.particle && !params.particle.color))) {
 
-			canvas.context = canvas.element.get(0).getContext('2d');
+                if (!params.particle) {
 
-			canvas.container.append( canvas.element );
+                    params.particle = {};
+                }
 
-			canvas.element.css( 'display', 'block' );
+                params.particle.color = params.color;
+            }
 
-			canvas.element.get(0).width = ( ParticlesSandbox.params.width ) ? ParticlesSandbox.params.width : canvas.container.width();
-			canvas.element.get(0).height = ( ParticlesSandbox.params.height ) ? ParticlesSandbox.params.height : canvas.container.height();
+            ParticlesSandbox.params = $.extend({
+                particlesNumber: 100,
+                linkDist: 50,
+                createLinkDist: 150,
+                disableLinks: false,
+                disableMouse: false,
+                background: 'black',
+                color: 'white',
+                width: null,
+                height: null,
+                linksWidth: 1
+            }, params);
+        };
 
-			canvas.element.css( 'background', ParticlesSandbox.params.background );
-		};
+        /*
+         * Initialize the sandbox's html.
+         * @param {Object} element Element for the sandbox.
+         */
+        ParticlesSandbox.initHTML = function initHTML(element) {
 
-		/*
-		 * Resize canvas.
-		 */
-		ParticlesSandbox.resize = function resize( width, height ){
+            var canvas;
 
-			if ( width ) {
+            canvas = ParticlesSandbox.canvas;
 
-				canvas.element.get(0).width = width;
-			}
+            canvas.container = $(element);
+            canvas.element = $('<canvas/>');
 
-			if ( height ) {
+            canvas.context = canvas.element.get(0).getContext('2d');
 
-				canvas.element.get(0).height = height;
-			}
-		};
+            canvas.container.append(canvas.element);
 
-		/*
-		 * Create all particles in the sandbox.
-		 */
-		ParticlesSandbox.initParticles = function initParticles(){
+            canvas.element.css('display', 'block');
 
-			var i, count;
+            canvas.element.get(0).width = (ParticlesSandbox.params.width) ? ParticlesSandbox.params.width : canvas.container.width();
+            canvas.element.get(0).height = (ParticlesSandbox.params.height) ? ParticlesSandbox.params.height : canvas.container.height();
 
-			i = 0;
-			count = ParticlesSandbox.params.particlesNumber;
+            canvas.element.css('background', ParticlesSandbox.params.background);
+        };
 
-			for ( ; i < count; i += 1 ) {
+        /*
+         * Resize canvas.
+         */
+        ParticlesSandbox.resize = function resize(width, height) {
 
-				ParticlesSandbox.particles.push( createParticle(
-					ParticlesSandbox.canvas.element.get(0),
-					ParticlesSandbox.params.particle
-				) );
-			}
-		};
+            if (width) {
 
-		/*
-		 * Initialize the sandbox's events.
-		 */
-		ParticlesSandbox.initEvents = function initEvents(){
+                canvas.element.get(0).width = width;
+            }
 
-			ParticlesSandbox.canvas.element.mouseenter(function mouseEnterCallback(){
+            if (height) {
 
-				ParticlesSandbox.mouse.hoverCanvas = true;
+                canvas.element.get(0).height = height;
+            }
+        };
 
-				if ( !ParticlesSandbox.isAnimated ) {
+        /*
+         * Create all particles in the sandbox.
+         */
+        ParticlesSandbox.initParticles = function initParticles() {
 
-					ParticlesSandbox.draw();
-				}
-			});
+            var i, count;
 
-			ParticlesSandbox.canvas.element.mouseleave(function mouseLeaveCallback(){
+            i = 0;
+            count = ParticlesSandbox.params.particlesNumber;
 
-				ParticlesSandbox.mouse.hoverCanvas = false;
-			});
+            for (; i < count; i += 1) {
 
-			ParticlesSandbox.canvas.element.mousemove(function mouseMoveCallback(e){
+                ParticlesSandbox.particles.push(createParticle(
+                    ParticlesSandbox.canvas.element.get(0),
+                    ParticlesSandbox.params.particle
+                ));
+            }
+        };
 
-				ParticlesSandbox.mouse = $.extend( ParticlesSandbox.mouse, Utils.getMousePosition( e, ParticlesSandbox.canvas.element[0] ) );
-			});
-		};
+        /*
+         * Initialize the sandbox's events.
+         */
+        ParticlesSandbox.initEvents = function initEvents() {
 
-		/*
-		 * Initialize the sandbox's animation.
-		 */
-		ParticlesSandbox.initAnimation = function initAnimation(){
+            ParticlesSandbox.canvas.element.mouseenter(function mouseEnterCallback() {
 
-			window.requestAnimFrame = 
-				window.requestAnimationFrame || 
-				window.webkitRequestAnimationFrame ||
-				window.mozRequestAnimationFrame || 
-				window.ORequestAnimationFrame || 
-				window.msRequestAnimationFrame ||
+                ParticlesSandbox.mouse.hoverCanvas = true;
 
-				function requestAnimFrame( callback ){
+                if (!ParticlesSandbox.isAnimated) {
 
-					setTimeOut( callback, 1000/60 );
-				};
+                    ParticlesSandbox.draw();
+                }
+            });
 
-			ParticlesSandbox.isAnimated = true;
+            ParticlesSandbox.canvas.element.mouseleave(function mouseLeaveCallback() {
 
-			ParticlesSandbox.draw();
-		};
+                ParticlesSandbox.mouse.hoverCanvas = false;
+            });
 
-		/*
-		 * Draw the sandbox canvas.
-		 */
-		ParticlesSandbox.draw = function draw(){
+            ParticlesSandbox.canvas.element.mousemove(function mouseMoveCallback(e) {
 
-			var i, j, count, canvas, particle, particle2;
+                ParticlesSandbox.mouse = $.extend(ParticlesSandbox.mouse, Utils.getMousePosition(e, ParticlesSandbox.canvas.element[0]));
+            });
+        };
 
-			i = 0;
-			count = ParticlesSandbox.particles.length;
-			canvas = ParticlesSandbox.canvas;
+        /*
+         * Initialize the sandbox's animation.
+         */
+        ParticlesSandbox.initAnimation = function initAnimation() {
 
-			canvas.context.clearRect( 0, 0, canvas.element.get(0).width, canvas.element.get(0).height );
-		
-			for ( ; i < count; i += 1 ) {
+            window.requestAnimFrame =
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.ORequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
 
-				particle = ParticlesSandbox.particles[i];
+                function requestAnimFrame(callback) {
 
-				if ( ParticlesSandbox.isAnimated ) {
+                    setTimeOut(callback, 1000 / 60);
+                };
 
-					particle.update();
-				}
+            ParticlesSandbox.isAnimated = true;
 
-				particle.draw();
+            ParticlesSandbox.draw();
+        };
 
-				if ( !ParticlesSandbox.params.disableMouse && ParticlesSandbox.mouse.hoverCanvas ) {
-					ParticlesSandbox.drawLink(
-						particle.getPosition('x'),
-						particle.getPosition('y'), 
-						ParticlesSandbox.mouse.x,
-						ParticlesSandbox.mouse.y
-					);
-				}
+        /*
+         * Draw the sandbox canvas.
+         */
+        ParticlesSandbox.draw = function draw() {
 
-				if ( !ParticlesSandbox.params.disableLinks ) {
+            var i, j, count, canvas, particle, particle2;
 
-					for ( j = i+1; j < count; j += 1 ) {
+            i = 0;
+            count = ParticlesSandbox.particles.length;
+            canvas = ParticlesSandbox.canvas;
 
-						particle2 = ParticlesSandbox.particles[j];
+            canvas.context.clearRect(0, 0, canvas.element.get(0).width, canvas.element.get(0).height);
 
-						ParticlesSandbox.drawLink( 
-							particle.getPosition('x'),
-							particle.getPosition('y'), 
-							particle2.getPosition('x'),
-							particle2.getPosition('y') 
-						);
-					}
-				}
-			}
+            for (; i < count; i += 1) {
 
-			ParticlesSandbox.requestID = window.requestAnimFrame( ParticlesSandbox.draw );
-		};
+                particle = ParticlesSandbox.particles[i];
 
-		/*
-		 * Draw a link between two particles.
-		 * @param {int} x First object abscissa coords.
-		 * @param {int} y First object ordered coords.
-		 * @param {int} x2 Second object abscissa coords.
-		 * @param {int} y2 Second object ordered coords.
-		 */
-		ParticlesSandbox.drawLink = function drawLink( x, y, x2, y2 ){
+                if (ParticlesSandbox.isAnimated) {
 
-			var context;
+                    particle.update();
+                }
 
-			if ( Utils.getDistance( x, y, x2, y2 ) <= ParticlesSandbox.params.createLinkDist ) {
+                particle.draw();
 
-				context = ParticlesSandbox.canvas.context;
+                if (!ParticlesSandbox.params.disableMouse && ParticlesSandbox.mouse.hoverCanvas) {
+                    ParticlesSandbox.drawLink(
+                        particle.getPosition('x'),
+                        particle.getPosition('y'),
+                        ParticlesSandbox.mouse.x,
+                        ParticlesSandbox.mouse.y
+                    );
+                }
 
-				context.save();
+                if (!ParticlesSandbox.params.disableLinks) {
 
-				context.beginPath();
-				context.lineWidth = ParticlesSandbox.params.linksWidth; 
-				context.moveTo( x, y );
-				context.lineTo( x2, y2 );
-				context.globalAlpha = ParticlesSandbox.getOpacityLink( x, y, x2, y2 );
-				context.strokeStyle = ParticlesSandbox.params.color;
-				context.lineCap = 'round';
-				context.stroke();
-				context.closePath();
+                    for (j = i + 1; j < count; j += 1) {
 
-				context.restore();
-			}
-		};
+                        particle2 = ParticlesSandbox.particles[j];
 
-		/*
-		 * Get opacity for link two particles.
-		 * @param {int} x First object abscissa coords.
-		 * @param {int} y First object ordered coords.
-		 * @param {int} x2 Second object abscissa coords.
-		 * @param {int} y2 Second object ordered coords.
-		 * @return {int} 0 <= opacity <= 1
-		 */
-		ParticlesSandbox.getOpacityLink = function getOpacityLink( x, y, x2, y2 ){
+                        ParticlesSandbox.drawLink(
+                            particle.getPosition('x'),
+                            particle.getPosition('y'),
+                            particle2.getPosition('x'),
+                            particle2.getPosition('y')
+                        );
+                    }
+                }
+            }
 
-			var dist, opacity, linkDist, createLinkDist;
+            ParticlesSandbox.requestID = window.requestAnimFrame(ParticlesSandbox.draw);
+        };
 
-			dist = Utils.getDistance( x, y, x2, y2 );
-			linkDist = ParticlesSandbox.params.linkDist;
-			createLinkDist = ParticlesSandbox.params.createLinkDist;
+        /*
+         * Draw a link between two particles.
+         * @param {int} x First object abscissa coords.
+         * @param {int} y First object ordered coords.
+         * @param {int} x2 Second object abscissa coords.
+         * @param {int} y2 Second object ordered coords.
+         */
+        ParticlesSandbox.drawLink = function drawLink(x, y, x2, y2) {
 
-			if ( dist <= linkDist ) {
+            var context;
 
-				opacity = 1;
-			} else if ( dist >  createLinkDist ) {
+            if (Utils.getDistance(x, y, x2, y2) <= ParticlesSandbox.params.createLinkDist) {
 
-				opacity = 0;
-			} else {
+                context = ParticlesSandbox.canvas.context;
 
-				opacity = 1 - ( ( ( dist - linkDist ) * 100 ) / ( createLinkDist - linkDist ) ) / 100;
-			}
+                context.save();
 
-			return opacity;
-		};
+                context.beginPath();
+                context.lineWidth = ParticlesSandbox.params.linksWidth;
+                context.moveTo(x, y);
+                context.lineTo(x2, y2);
+                context.globalAlpha = ParticlesSandbox.getOpacityLink(x, y, x2, y2);
+                context.strokeStyle = ParticlesSandbox.params.color;
+                context.lineCap = 'round';
+                context.stroke();
+                context.closePath();
 
-		/*
-		 * Freeze the animation.
-		 */
-		ParticlesSandbox.freeze = function freeze(){
+                context.restore();
+            }
+        };
 
-			if ( ParticlesSandbox.isAnimated ) {
+        /*
+         * Get opacity for link two particles.
+         * @param {int} x First object abscissa coords.
+         * @param {int} y First object ordered coords.
+         * @param {int} x2 Second object abscissa coords.
+         * @param {int} y2 Second object ordered coords.
+         * @return {int} 0 <= opacity <= 1
+         */
+        ParticlesSandbox.getOpacityLink = function getOpacityLink(x, y, x2, y2) {
 
-				ParticlesSandbox.isAnimated = false;
-			}
-		};
+            var dist, opacity, linkDist, createLinkDist;
 
-		/*
-		 * Unfreeze the animation.
-		 */
-		ParticlesSandbox.unfreeze = function unfreeze(){
+            dist = Utils.getDistance(x, y, x2, y2);
+            linkDist = ParticlesSandbox.params.linkDist;
+            createLinkDist = ParticlesSandbox.params.createLinkDist;
 
-			if ( !ParticlesSandbox.isAnimated ) {
+            if (dist <= linkDist) {
 
-				ParticlesSandbox.isAnimated = true;
-			}
-		};
+                opacity = 1;
+            } else if (dist > createLinkDist) {
 
-		/*
-		 * Remove the animation's canvas.
-		 */
-		ParticlesSandbox.remove = function remove(){
+                opacity = 0;
+            } else {
 
-			ParticlesSandbox.canvas.element.remove();
-		};
+                opacity = 1 - (((dist - linkDist) * 100) / (createLinkDist - linkDist)) / 100;
+            }
 
-		/*
-		 * Create a particle instance.
-		 * @param {Object} canvas DOM element.
-		 * @param {Object} params Few particle's params.
-		 * @return {Object} Particle object.
-		 */
-		createParticle = function createParticle( canvas, params ){
+            return opacity;
+        };
 
-			var Particle;
+        /*
+         * Freeze the animation.
+         */
+        ParticlesSandbox.freeze = function freeze() {
 
-			Particle = {};
+            if (ParticlesSandbox.isAnimated) {
 
-			Particle.canvas = {};
-			Particle.vector = {};
+                ParticlesSandbox.isAnimated = false;
+            }
+        };
 
-			/*
-			 * Initialize the particle.
-			 * @param {Object} canvas DOM element.
-			 * @param {Object} params Few particle's params.
-			 */
-			Particle.initialize = function initialize( canvas, params ){
+        /*
+         * Unfreeze the animation.
+         */
+        ParticlesSandbox.unfreeze = function unfreeze() {
 
-				Particle.params = $.extend({
-					color: 'white',
-					minSize: 2,
-					maxSize: 4,
-					speed: 60
-				}, params );
+            if (!ParticlesSandbox.isAnimated) {
 
-				Particle.setCanvasContext( canvas );
+                ParticlesSandbox.isAnimated = true;
+            }
+        };
 
-				Particle.initSize();
-				Particle.initPosition();
-				Particle.initVectors();
-			};
+        /*
+         * Remove the animation's canvas.
+         */
+        ParticlesSandbox.remove = function remove() {
 
-			/*
-			 * Initialize particle's position.
-			 */
-			Particle.initPosition = function initPosition(){
+            ParticlesSandbox.canvas.element.remove();
+        };
 
-				Particle.x = Utils.getRandNumber( 0 + Particle.radius, Particle.canvas.element.width - Particle.radius );
-				Particle.y = Utils.getRandNumber( 0 + Particle.radius, Particle.canvas.element.height - Particle.radius );
-			};
+        /*
+         * Create a particle instance.
+         * @param {Object} canvas DOM element.
+         * @param {Object} params Few particle's params.
+         * @return {Object} Particle object.
+         */
+        createParticle = function createParticle(canvas, params) {
 
-			/*
-			 * Initialize particle's size.
-			 */
-			Particle.initSize = function initSize(){
+            var Particle;
 
-				Particle.size = Utils.getRandNumber( Particle.params.minSize, Particle.params.maxSize );
-				Particle.radius = Particle.size / 2;
-			};
+            Particle = {};
 
-			/*
-			 * Initialize particle's vectors for speed.
-			 */
-			Particle.initVectors = function initVectors(){
+            Particle.canvas = {};
+            Particle.vector = {};
 
-				do {
-					Particle.vector.x = Utils.getRandNumber( -Particle.params.speed / 60, Particle.params.speed / 60, false );
-					Particle.vector.y = Utils.getRandNumber( -Particle.params.speed / 60, Particle.params.speed / 60, false );
+            /*
+             * Initialize the particle.
+             * @param {Object} canvas DOM element.
+             * @param {Object} params Few particle's params.
+             */
+            Particle.initialize = function initialize(canvas, params) {
 
-				} while ( Particle.vector.x == 0 || Particle.vector.y == 0 )
-			};
+                Particle.params = $.extend({
+                    color: 'white',
+                    minSize: 2,
+                    maxSize: 4,
+                    speed: 60
+                }, params);
 
-			/*
-			 * Set the context to draw particles.
-			 * @param {Object} canvas Canvas.
-			 */
-			Particle.setCanvasContext = function setCanvasContext( canvas ){
+                Particle.setCanvasContext(canvas);
 
-				var context;
+                Particle.initSize();
+                Particle.initPosition();
+                Particle.initVectors();
+            };
 
-				Particle.canvas.element = canvas;
-				context = canvas.getContext('2d');
+            /*
+             * Initialize particle's position.
+             */
+            Particle.initPosition = function initPosition() {
 
-				if ( typeof context === 'object' && typeof context.canvas === 'object' ) {
+                Particle.x = Utils.getRandNumber(0 + Particle.radius, Particle.canvas.element.width - Particle.radius);
+                Particle.y = Utils.getRandNumber(0 + Particle.radius, Particle.canvas.element.height - Particle.radius);
+            };
 
-					Particle.canvas.context = context;
-				} else {
+            /*
+             * Initialize particle's size.
+             */
+            Particle.initSize = function initSize() {
 
-					throw "Error: Can't set canvas context to Particle because context isn't a CanvasRenderingContext2D object.";
-				}
-			};
+                Particle.size = Utils.getRandNumber(Particle.params.minSize, Particle.params.maxSize);
+                Particle.radius = Particle.size / 2;
+            };
 
-			/*
-			 * Draw particle.
-			 */
-			Particle.draw = function draw(){
+            /*
+             * Initialize particle's vectors for speed.
+             */
+            Particle.initVectors = function initVectors() {
 
-				var context = Particle.canvas.context;
+                do {
+                    Particle.vector.x = Utils.getRandNumber(-Particle.params.speed / 60, Particle.params.speed / 60, false);
+                    Particle.vector.y = Utils.getRandNumber(-Particle.params.speed / 60, Particle.params.speed / 60, false);
 
-				context.beginPath(); 
-				context.arc( Particle.x, Particle.y, Particle.size /2, 0, Math.PI*2 ); 
-				context.fillStyle = Particle.params.color;
-				context.fill();
-				context.closePath();
-			};
+                } while (Particle.vector.x == 0 || Particle.vector.y == 0)
+            };
 
-			/*
-			 * Update the particle's position.
-			 */
-			Particle.update = function update(){
+            /*
+             * Set the context to draw particles.
+             * @param {Object} canvas Canvas.
+             */
+            Particle.setCanvasContext = function setCanvasContext(canvas) {
 
-				Particle.x += Particle.vector.x;
-				Particle.y += Particle.vector.y;
+                var context;
 
-				if ( 0 > ( Particle.x - Particle.radius ) || ( Particle.x + Particle.radius ) > Particle.canvas.element.width ) {
+                Particle.canvas.element = canvas;
+                context = canvas.getContext('2d');
 
-					Particle.vector.x = -Particle.vector.x;
-				}
+                if (typeof context === 'object' && typeof context.canvas === 'object') {
 
-				if ( 0 > ( Particle.y - Particle.radius ) || ( Particle.y + Particle.radius ) > Particle.canvas.element.height ) {
+                    Particle.canvas.context = context;
+                } else {
 
-					Particle.vector.y = -Particle.vector.y;
-				}
-			};
+                    throw "Error: Can't set canvas context to Particle because context isn't a CanvasRenderingContext2D object.";
+                }
+            };
 
-			/*
-			 * Return position of particle.
-			 * @param {string} axis Optionnal axis.
-			 * @return {int|Object} Return object if axis is not defined, else return int.
-			 */
-			Particle.getPosition = function getPosition( axis ){
+            /*
+             * Draw particle.
+             */
+            Particle.draw = function draw() {
 
-				if ( typeof axis === 'string' && ( axis != 'x' && axis != 'y' ) ) {
+                var context = Particle.canvas.context;
 
-					axis = null;
-				}
+                context.beginPath();
+                context.arc(Particle.x, Particle.y, Particle.size / 2, 0, Math.PI * 2);
+                context.fillStyle = Particle.params.color;
+                context.fill();
+                context.closePath();
+            };
 
-				return ( typeof( axis ) === 'string' ) ? Particle[ axis ] : { x: Particle.x, y: Particle.y };
-			};
+            /*
+             * Update the particle's position.
+             */
+            Particle.update = function update() {
 
-			Particle.initialize( canvas, params );
+                Particle.x += Particle.vector.x;
+                Particle.y += Particle.vector.y;
 
-			return {
-				getPosition: Particle.getPosition,
-				update: Particle.update,
-				draw: Particle.draw
-			};
-		};
+                if (0 > (Particle.x - Particle.radius) || (Particle.x + Particle.radius) > Particle.canvas.element.width) {
 
-		ParticlesSandbox.initialize( element, params );
+                    Particle.vector.x = -Particle.vector.x;
+                }
 
-		return {
-			remove: ParticlesSandbox.remove,
-			freeze: ParticlesSandbox.freeze,
-			unfreeze: ParticlesSandbox.unfreeze,
-			resize: ParticlesSandbox.resize
-		};
-	};
+                if (0 > (Particle.y - Particle.radius) || (Particle.y + Particle.radius) > Particle.canvas.element.height) {
 
-	/*
-	 * Get rand number between x and y.
-	 * @param {int} x Minimal number.
-	 * @param {int} y Maximal number.
-	 * @param {Boolean} round True is value shouldn't be round.
-	 * @return {int} Rand number.
-	 */
-	Utils.getRandNumber = function getRandNumber( x, y, round ){
+                    Particle.vector.y = -Particle.vector.y;
+                }
+            };
 
-		var value;
+            /*
+             * Return position of particle.
+             * @param {string} axis Optionnal axis.
+             * @return {int|Object} Return object if axis is not defined, else return int.
+             */
+            Particle.getPosition = function getPosition(axis) {
 
-		if( x == null ) {
+                if (typeof axis === 'string' && (axis != 'x' && axis != 'y')) {
 
-			x = 0;
-		}
+                    axis = null;
+                }
 
-		if( y == null ) {
+                return (typeof(axis) === 'string') ? Particle[axis] : {x: Particle.x, y: Particle.y};
+            };
 
-			y = 10;
-		}
+            Particle.initialize(canvas, params);
 
-		if( round == null ) {
+            return {
+                getPosition: Particle.getPosition,
+                update: Particle.update,
+                draw: Particle.draw
+            };
+        };
 
-			round = true;
-		}
+        ParticlesSandbox.initialize(element, params);
 
-		value = Math.random() * ( y - x ) + x;
+        return {
+            remove: ParticlesSandbox.remove,
+            freeze: ParticlesSandbox.freeze,
+            unfreeze: ParticlesSandbox.unfreeze,
+            resize: ParticlesSandbox.resize
+        };
+    };
 
-		return ( round ) ? Math.round( value ) : value;
-	};
+    /*
+     * Get rand number between x and y.
+     * @param {int} x Minimal number.
+     * @param {int} y Maximal number.
+     * @param {Boolean} round True is value shouldn't be round.
+     * @return {int} Rand number.
+     */
+    Utils.getRandNumber = function getRandNumber(x, y, round) {
 
-	/*
-	 * Get distance between to cartesian points.
-	 * @param {int} x First object abscissa coords.
-	 * @param {int} y First object ordered coords.
-	 * @param {int} x2 Second object abscissa coords.
-	 * @param {int} y2 Second object ordered coords.
-	 * @return {int} Distance.
-	 */
-	Utils.getDistance = function getDistance( x, y, x2, y2 ){
+        var value;
 
-		return Math.sqrt( Math.pow( x2 - x, 2 ) + Math.pow( y2 - y, 2 ) );
-	};
+        if (x == null) {
 
-	/*
-	 * Get mouse position.
-	 * @param {Object} event The HTML DOM events.
-	 * @param {Object} element The DOM element.
-	 * @return {Object} x/y position.
-	 */
-	Utils.getMousePosition = function getMousePosition( event, element ){
+            x = 0;
+        }
 
-		var rect;
+        if (y == null) {
 
-		if ( typeof element === 'undefined' ) {
+            y = 10;
+        }
 
-			element = $('body')[0];
-		}
+        if (round == null) {
 
-		rect = element.getBoundingClientRect();
+            round = true;
+        }
 
-		return {
-			x: event.clientX - rect.left,
-			y: event.clientY - rect.top
-		};
-	};
+        value = Math.random() * (y - x) + x;
 
-})( jQuery )
+        return (round) ? Math.round(value) : value;
+    };
+
+    /*
+     * Get distance between to cartesian points.
+     * @param {int} x First object abscissa coords.
+     * @param {int} y First object ordered coords.
+     * @param {int} x2 Second object abscissa coords.
+     * @param {int} y2 Second object ordered coords.
+     * @return {int} Distance.
+     */
+    Utils.getDistance = function getDistance(x, y, x2, y2) {
+
+        return Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2));
+    };
+
+    /*
+     * Get mouse position.
+     * @param {Object} event The HTML DOM events.
+     * @param {Object} element The DOM element.
+     * @return {Object} x/y position.
+     */
+    Utils.getMousePosition = function getMousePosition(event, element) {
+
+        var rect;
+
+        if (typeof element === 'undefined') {
+
+            element = $('body')[0];
+        }
+
+        rect = element.getBoundingClientRect();
+
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        };
+    };
+
+})(jQuery)

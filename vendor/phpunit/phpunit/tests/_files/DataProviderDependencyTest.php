@@ -1,4 +1,5 @@
 <?php
+
 class DataProviderDependencyTest extends PHPUnit\Framework\TestCase
 {
     public function testReference()
@@ -9,7 +10,7 @@ class DataProviderDependencyTest extends PHPUnit\Framework\TestCase
 
     /**
      * @see https://github.com/sebastianbergmann/phpunit/issues/1896
-     * @depends testReference
+     * @depends      testReference
      * @dataProvider provider
      */
     public function testDependency($param)

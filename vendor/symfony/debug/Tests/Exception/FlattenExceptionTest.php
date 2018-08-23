@@ -205,12 +205,13 @@ class FlattenExceptionTest extends TestCase
         $incomplete = unserialize('O:14:"BogusTestClass":0:{}');
 
         $exception = $this->createException(array(
-            (object) array('foo' => 1),
+            (object)array('foo' => 1),
             new NotFoundHttpException(),
             $incomplete,
             $dh,
             $fh,
-            function () {},
+            function () {
+            },
             array(1, 2),
             array('foo' => 123),
             null,

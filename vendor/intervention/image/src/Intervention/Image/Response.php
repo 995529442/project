@@ -28,8 +28,8 @@ class Response
     /**
      * Creates a new instance of response
      *
-     * @param Image   $image
-     * @param string  $format
+     * @param Image $image
+     * @param string $format
      * @param integer $quality
      */
     public function __construct(Image $image, $format = null, $quality = null)

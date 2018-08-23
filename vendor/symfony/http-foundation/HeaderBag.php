@@ -48,7 +48,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
         foreach ($headers as $name => $values) {
             $name = implode('-', array_map('ucfirst', explode('-', $name)));
             foreach ($values as $value) {
-                $content .= sprintf("%-{$max}s %s\r\n", $name.':', $value);
+                $content .= sprintf("%-{$max}s %s\r\n", $name . ':', $value);
             }
         }
 
@@ -101,9 +101,9 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Returns a header value by name.
      *
-     * @param string          $key     The header name
+     * @param string $key The header name
      * @param string|string[] $default The default value
-     * @param bool            $first   Whether to return the first value or all header values
+     * @param bool $first Whether to return the first value or all header values
      *
      * @return string|string[] The first header value or default value if $first is true, an array of values otherwise
      */
@@ -130,9 +130,9 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Sets a header by name.
      *
-     * @param string          $key     The key
-     * @param string|string[] $values  The value or an array of values
-     * @param bool            $replace Whether to replace the actual value or not (true by default)
+     * @param string $key The key
+     * @param string|string[] $values The value or an array of values
+     * @param bool $replace Whether to replace the actual value or not (true by default)
      */
     public function set($key, $values, $replace = true)
     {
@@ -174,7 +174,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Returns true if the given HTTP header contains the given value.
      *
-     * @param string $key   The HTTP header name
+     * @param string $key The HTTP header name
      * @param string $value The HTTP value
      *
      * @return bool true if the value is contained in the header, false otherwise
@@ -203,7 +203,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Returns the HTTP header value converted to a date.
      *
-     * @param string    $key     The parameter key
+     * @param string $key The parameter key
      * @param \DateTime $default The default value
      *
      * @return null|\DateTime The parsed DateTime or the default value if the header does not exist
@@ -226,8 +226,8 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Adds a custom Cache-Control directive.
      *
-     * @param string $key   The Cache-Control directive name
-     * @param mixed  $value The Cache-Control directive value
+     * @param string $key The Cache-Control directive name
+     * @param mixed $value The Cache-Control directive value
      */
     public function addCacheControlDirective($key, $value = true)
     {
@@ -301,7 +301,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
                 $parts[] = $key;
             } else {
                 if (preg_match('#[^a-zA-Z0-9._-]#', $value)) {
-                    $value = '"'.$value.'"';
+                    $value = '"' . $value . '"';
                 }
 
                 $parts[] = "$key=$value";

@@ -110,11 +110,11 @@ class File extends AbstractNode
     /**
      * Constructor.
      *
-     * @param string       $name
+     * @param string $name
      * @param AbstractNode $parent
-     * @param array        $coverageData
-     * @param array        $testData
-     * @param bool         $cacheTokens
+     * @param array $coverageData
+     * @param array $testData
+     * @param bool $cacheTokens
      *
      * @throws InvalidArgumentException
      */
@@ -130,8 +130,8 @@ class File extends AbstractNode
         parent::__construct($name, $parent);
 
         $this->coverageData = $coverageData;
-        $this->testData     = $testData;
-        $this->cacheTokens  = $cacheTokens;
+        $this->testData = $testData;
+        $this->cacheTokens = $cacheTokens;
 
         $this->calculateStatistics();
     }
@@ -478,7 +478,7 @@ class File extends AbstractNode
 
                     if ($classStack) {
                         \end($classStack);
-                        $key          = \key($classStack);
+                        $key = \key($classStack);
                         $currentClass = &$classStack[$key];
                         unset($classStack[$key]);
                     }
@@ -494,7 +494,7 @@ class File extends AbstractNode
 
                     if ($functionStack) {
                         \end($functionStack);
-                        $key             = \key($functionStack);
+                        $key = \key($functionStack);
                         $currentFunction = &$functionStack[$key];
                         unset($functionStack[$key]);
                     }
@@ -605,26 +605,26 @@ class File extends AbstractNode
             }
 
             $this->classes[$className] = [
-                'className'       => $className,
-                'methods'         => [],
-                'startLine'       => $class['startLine'],
+                'className' => $className,
+                'methods' => [],
+                'startLine' => $class['startLine'],
                 'executableLines' => 0,
-                'executedLines'   => 0,
-                'ccn'             => 0,
-                'coverage'        => 0,
-                'crap'            => 0,
-                'package'         => $class['package'],
-                'link'            => $link . $class['startLine']
+                'executedLines' => 0,
+                'ccn' => 0,
+                'coverage' => 0,
+                'crap' => 0,
+                'package' => $class['package'],
+                'link' => $link . $class['startLine']
             ];
 
             $this->startLines[$class['startLine']] = &$this->classes[$className];
-            $this->endLines[$class['endLine']]     = &$this->classes[$className];
+            $this->endLines[$class['endLine']] = &$this->classes[$className];
 
             foreach ($class['methods'] as $methodName => $method) {
                 $this->classes[$className]['methods'][$methodName] = $this->newMethod($methodName, $method, $link);
 
                 $this->startLines[$method['startLine']] = &$this->classes[$className]['methods'][$methodName];
-                $this->endLines[$method['endLine']]     = &$this->classes[$className]['methods'][$methodName];
+                $this->endLines[$method['endLine']] = &$this->classes[$className]['methods'][$methodName];
             }
         }
     }
@@ -641,26 +641,26 @@ class File extends AbstractNode
 
         foreach ($traits as $traitName => $trait) {
             $this->traits[$traitName] = [
-                'traitName'       => $traitName,
-                'methods'         => [],
-                'startLine'       => $trait['startLine'],
+                'traitName' => $traitName,
+                'methods' => [],
+                'startLine' => $trait['startLine'],
                 'executableLines' => 0,
-                'executedLines'   => 0,
-                'ccn'             => 0,
-                'coverage'        => 0,
-                'crap'            => 0,
-                'package'         => $trait['package'],
-                'link'            => $link . $trait['startLine']
+                'executedLines' => 0,
+                'ccn' => 0,
+                'coverage' => 0,
+                'crap' => 0,
+                'package' => $trait['package'],
+                'link' => $link . $trait['startLine']
             ];
 
             $this->startLines[$trait['startLine']] = &$this->traits[$traitName];
-            $this->endLines[$trait['endLine']]     = &$this->traits[$traitName];
+            $this->endLines[$trait['endLine']] = &$this->traits[$traitName];
 
             foreach ($trait['methods'] as $methodName => $method) {
                 $this->traits[$traitName]['methods'][$methodName] = $this->newMethod($methodName, $method, $link);
 
                 $this->startLines[$method['startLine']] = &$this->traits[$traitName]['methods'][$methodName];
-                $this->endLines[$method['endLine']]     = &$this->traits[$traitName]['methods'][$methodName];
+                $this->endLines[$method['endLine']] = &$this->traits[$traitName]['methods'][$methodName];
             }
         }
     }
@@ -677,19 +677,19 @@ class File extends AbstractNode
 
         foreach ($functions as $functionName => $function) {
             $this->functions[$functionName] = [
-                'functionName'    => $functionName,
-                'signature'       => $function['signature'],
-                'startLine'       => $function['startLine'],
+                'functionName' => $functionName,
+                'signature' => $function['signature'],
+                'startLine' => $function['startLine'],
                 'executableLines' => 0,
-                'executedLines'   => 0,
-                'ccn'             => $function['ccn'],
-                'coverage'        => 0,
-                'crap'            => 0,
-                'link'            => $link . $function['startLine']
+                'executedLines' => 0,
+                'ccn' => $function['ccn'],
+                'coverage' => 0,
+                'crap' => 0,
+                'link' => $link . $function['startLine']
             ];
 
             $this->startLines[$function['startLine']] = &$this->functions[$functionName];
-            $this->endLines[$function['endLine']]     = &$this->functions[$functionName];
+            $this->endLines[$function['endLine']] = &$this->functions[$functionName];
         }
     }
 
@@ -697,7 +697,7 @@ class File extends AbstractNode
      * Calculates the Change Risk Anti-Patterns (CRAP) index for a unit of code
      * based on its cyclomatic complexity and percentage of code coverage.
      *
-     * @param int   $ccn
+     * @param int $ccn
      * @param float $coverage
      *
      * @return string
@@ -705,11 +705,11 @@ class File extends AbstractNode
     protected function crap($ccn, $coverage)
     {
         if ($coverage == 0) {
-            return (string) (\pow($ccn, 2) + $ccn);
+            return (string)(\pow($ccn, 2) + $ccn);
         }
 
         if ($coverage >= 95) {
-            return (string) $ccn;
+            return (string)$ccn;
         }
 
         return \sprintf(
@@ -720,7 +720,7 @@ class File extends AbstractNode
 
     /**
      * @param string $methodName
-     * @param array  $method
+     * @param array $method
      * @param string $link
      *
      * @return array
@@ -728,17 +728,17 @@ class File extends AbstractNode
     private function newMethod($methodName, array $method, $link)
     {
         return [
-            'methodName'      => $methodName,
-            'visibility'      => $method['visibility'],
-            'signature'       => $method['signature'],
-            'startLine'       => $method['startLine'],
-            'endLine'         => $method['endLine'],
+            'methodName' => $methodName,
+            'visibility' => $method['visibility'],
+            'signature' => $method['signature'],
+            'startLine' => $method['startLine'],
+            'endLine' => $method['endLine'],
             'executableLines' => 0,
-            'executedLines'   => 0,
-            'ccn'             => $method['ccn'],
-            'coverage'        => 0,
-            'crap'            => 0,
-            'link'            => $link . $method['startLine'],
+            'executedLines' => 0,
+            'ccn' => $method['ccn'],
+            'coverage' => 0,
+            'crap' => 0,
+            'link' => $link . $method['startLine'],
         ];
     }
 }

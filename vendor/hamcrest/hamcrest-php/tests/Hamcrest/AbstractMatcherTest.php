@@ -1,7 +1,9 @@
 <?php
+
 namespace Hamcrest;
 
-class UnknownType {
+class UnknownType
+{
 }
 
 abstract class AbstractMatcherTest extends \PHPUnit_Framework_TestCase
@@ -26,7 +28,7 @@ abstract class AbstractMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $description = new \Hamcrest\StringDescription();
         $description->appendDescriptionOf($matcher);
-        $this->assertEquals($expected, (string) $description, 'Expected description');
+        $this->assertEquals($expected, (string)$description, 'Expected description');
     }
 
     public function assertMismatchDescription($expected, \Hamcrest\Matcher $matcher, $arg)
@@ -39,7 +41,7 @@ abstract class AbstractMatcherTest extends \PHPUnit_Framework_TestCase
         $matcher->describeMismatch($arg, $description);
         $this->assertEquals(
             $expected,
-            (string) $description,
+            (string)$description,
             'Expected mismatch description'
         );
     }

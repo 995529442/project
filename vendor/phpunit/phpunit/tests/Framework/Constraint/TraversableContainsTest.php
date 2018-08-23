@@ -98,7 +98,7 @@ EOF
 
     public function testConstraintTraversableToStringMethodsWithStdClass()
     {
-        $object     = new \stdClass;
+        $object = new \stdClass;
         $constraint = new TraversableContains($object);
         $this->assertStringMatchesFormat('contains stdClass Object &%s ()', $constraint->toString());
     }
@@ -112,7 +112,7 @@ EOF
 
     public function testConstraintTraversableToStringMethodsWithSplObjectStorage()
     {
-        $object     = new \stdClass;
+        $object = new \stdClass;
         $constraint = new TraversableContains($object);
 
         $storage = new \SplObjectStorage;
@@ -124,7 +124,7 @@ EOF
 
     public function testConstraintTraversableStdClassForFailSplObjectStorage()
     {
-        $object     = new \stdClass;
+        $object = new \stdClass;
         $constraint = new TraversableContains($object);
 
         try {
@@ -147,7 +147,7 @@ EOF
 
     public function testConstraintTraversableStdClassForFailSplObjectStorageWithCustomMessage()
     {
-        $object     = new \stdClass;
+        $object = new \stdClass;
         $constraint = new TraversableContains($object);
 
         try {

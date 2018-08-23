@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use PHPUnit\Framework\Exception;
@@ -18,9 +19,9 @@ use PHPUnit\Framework\Exception;
 class InvalidArgumentHelper
 {
     /**
-     * @param int    $argument
+     * @param int $argument
      * @param string $type
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return Exception
      */

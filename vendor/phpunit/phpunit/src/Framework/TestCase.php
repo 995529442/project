@@ -336,7 +336,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * Constructs a test case with the given name.
      *
      * @param string $name
-     * @param array  $data
+     * @param array $data
      * @param string $dataName
      */
     public function __construct($name = null, array $data = [], $dataName = '')
@@ -345,7 +345,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
             $this->setName($name);
         }
 
-        $this->data     = $data;
+        $this->data = $data;
         $this->dataName = $dataName;
     }
 
@@ -782,7 +782,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
             return;
         }
 
-        $runEntireClass =  $this->runClassInSeparateProcess && !$this->runTestInSeparateProcess;
+        $runEntireClass = $this->runClassInSeparateProcess && !$this->runTestInSeparateProcess;
 
         if (($this->runTestInSeparateProcess === true || $this->runClassInSeparateProcess === true) &&
             $this->inIsolation !== true &&
@@ -800,10 +800,10 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
             }
 
             if ($this->preserveGlobalState) {
-                $constants     = GlobalState::getConstantsAsString();
-                $globals       = GlobalState::getGlobalsAsString();
+                $constants = GlobalState::getConstantsAsString();
+                $globals = GlobalState::getGlobalsAsString();
                 $includedFiles = GlobalState::getIncludedFilesAsString();
-                $iniSettings   = GlobalState::getIniSettingsAsString();
+                $iniSettings = GlobalState::getIniSettingsAsString();
             } else {
                 $constants = '';
                 if (!empty($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
@@ -812,14 +812,14 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
                     $globals = '';
                 }
                 $includedFiles = '';
-                $iniSettings   = '';
+                $iniSettings = '';
             }
 
-            $coverage                                   = $result->getCollectCodeCoverageInformation() ? 'true' : 'false';
-            $isStrictAboutTestsThatDoNotTestAnything    = $result->isStrictAboutTestsThatDoNotTestAnything() ? 'true' : 'false';
-            $isStrictAboutOutputDuringTests             = $result->isStrictAboutOutputDuringTests() ? 'true' : 'false';
-            $enforcesTimeLimit                          = $result->enforcesTimeLimit() ? 'true' : 'false';
-            $isStrictAboutTodoAnnotatedTests            = $result->isStrictAboutTodoAnnotatedTests() ? 'true' : 'false';
+            $coverage = $result->getCollectCodeCoverageInformation() ? 'true' : 'false';
+            $isStrictAboutTestsThatDoNotTestAnything = $result->isStrictAboutTestsThatDoNotTestAnything() ? 'true' : 'false';
+            $isStrictAboutOutputDuringTests = $result->isStrictAboutOutputDuringTests() ? 'true' : 'false';
+            $enforcesTimeLimit = $result->enforcesTimeLimit() ? 'true' : 'false';
+            $isStrictAboutTodoAnnotatedTests = $result->isStrictAboutTodoAnnotatedTests() ? 'true' : 'false';
             $isStrictAboutResourceUsageDuringSmallTests = $result->isStrictAboutResourceUsageDuringSmallTests() ? 'true' : 'false';
 
             if (\defined('PHPUNIT_COMPOSER_INSTALL')) {
@@ -840,43 +840,43 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
                 $codeCoverageFilter = null;
             }
 
-            $data               = \var_export(\serialize($this->data), true);
-            $dataName           = \var_export($this->dataName, true);
-            $dependencyInput    = \var_export(\serialize($this->dependencyInput), true);
-            $includePath        = \var_export(\get_include_path(), true);
+            $data = \var_export(\serialize($this->data), true);
+            $dataName = \var_export($this->dataName, true);
+            $dependencyInput = \var_export(\serialize($this->dependencyInput), true);
+            $includePath = \var_export(\get_include_path(), true);
             $codeCoverageFilter = \var_export(\serialize($codeCoverageFilter), true);
             // must do these fixes because TestCaseMethod.tpl has unserialize('{data}') in it, and we can't break BC
             // the lines above used to use addcslashes() rather than var_export(), which breaks null byte escape sequences
-            $data               = "'." . $data . ".'";
-            $dataName           = "'.(" . $dataName . ").'";
-            $dependencyInput    = "'." . $dependencyInput . ".'";
-            $includePath        = "'." . $includePath . ".'";
+            $data = "'." . $data . ".'";
+            $dataName = "'.(" . $dataName . ").'";
+            $dependencyInput = "'." . $dependencyInput . ".'";
+            $includePath = "'." . $includePath . ".'";
             $codeCoverageFilter = "'." . $codeCoverageFilter . ".'";
 
             $configurationFilePath = $GLOBALS['__PHPUNIT_CONFIGURATION_FILE'] ?? '';
 
             $var = [
-                'composerAutoload'                           => $composerAutoload,
-                'phar'                                       => $phar,
-                'filename'                                   => $class->getFileName(),
-                'className'                                  => $class->getName(),
-                'collectCodeCoverageInformation'             => $coverage,
-                'data'                                       => $data,
-                'dataName'                                   => $dataName,
-                'dependencyInput'                            => $dependencyInput,
-                'constants'                                  => $constants,
-                'globals'                                    => $globals,
-                'include_path'                               => $includePath,
-                'included_files'                             => $includedFiles,
-                'iniSettings'                                => $iniSettings,
-                'isStrictAboutTestsThatDoNotTestAnything'    => $isStrictAboutTestsThatDoNotTestAnything,
-                'isStrictAboutOutputDuringTests'             => $isStrictAboutOutputDuringTests,
-                'enforcesTimeLimit'                          => $enforcesTimeLimit,
-                'isStrictAboutTodoAnnotatedTests'            => $isStrictAboutTodoAnnotatedTests,
+                'composerAutoload' => $composerAutoload,
+                'phar' => $phar,
+                'filename' => $class->getFileName(),
+                'className' => $class->getName(),
+                'collectCodeCoverageInformation' => $coverage,
+                'data' => $data,
+                'dataName' => $dataName,
+                'dependencyInput' => $dependencyInput,
+                'constants' => $constants,
+                'globals' => $globals,
+                'include_path' => $includePath,
+                'included_files' => $includedFiles,
+                'iniSettings' => $iniSettings,
+                'isStrictAboutTestsThatDoNotTestAnything' => $isStrictAboutTestsThatDoNotTestAnything,
+                'isStrictAboutOutputDuringTests' => $isStrictAboutOutputDuringTests,
+                'enforcesTimeLimit' => $enforcesTimeLimit,
+                'isStrictAboutTodoAnnotatedTests' => $isStrictAboutTodoAnnotatedTests,
                 'isStrictAboutResourceUsageDuringSmallTests' => $isStrictAboutResourceUsageDuringSmallTests,
-                'codeCoverageFilter'                         => $codeCoverageFilter,
-                'configurationFilePath'                      => $configurationFilePath,
-                'name'                                       => $this->getName(false),
+                'codeCoverageFilter' => $codeCoverageFilter,
+                'configurationFilePath' => $configurationFilePath,
+                'name' => $this->getName(false),
             ];
 
             if (!$runEntireClass) {
@@ -952,19 +952,19 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
 
             $this->status = BaseTestRunner::STATUS_PASSED;
         } catch (IncompleteTest $e) {
-            $this->status        = BaseTestRunner::STATUS_INCOMPLETE;
+            $this->status = BaseTestRunner::STATUS_INCOMPLETE;
             $this->statusMessage = $e->getMessage();
         } catch (SkippedTest $e) {
-            $this->status        = BaseTestRunner::STATUS_SKIPPED;
+            $this->status = BaseTestRunner::STATUS_SKIPPED;
             $this->statusMessage = $e->getMessage();
         } catch (Warning $e) {
-            $this->status        = BaseTestRunner::STATUS_WARNING;
+            $this->status = BaseTestRunner::STATUS_WARNING;
             $this->statusMessage = $e->getMessage();
         } catch (AssertionFailedError $e) {
-            $this->status        = BaseTestRunner::STATUS_FAILURE;
+            $this->status = BaseTestRunner::STATUS_FAILURE;
             $this->statusMessage = $e->getMessage();
         } catch (PredictionException $e) {
-            $this->status        = BaseTestRunner::STATUS_FAILURE;
+            $this->status = BaseTestRunner::STATUS_FAILURE;
             $this->statusMessage = $e->getMessage();
         } catch (Throwable $_e) {
             $e = $_e;
@@ -972,7 +972,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
 
         // Clean up the mock objects.
         $this->mockObjects = [];
-        $this->prophet     = null;
+        $this->prophet = null;
 
         // Tear down the fixture. An exception raised in tearDown() will be
         // caught and passed on when no exception was raised before.
@@ -1003,7 +1003,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         }
 
         if (isset($_e)) {
-            $this->status        = BaseTestRunner::STATUS_ERROR;
+            $this->status = BaseTestRunner::STATUS_ERROR;
             $this->statusMessage = $_e->getMessage();
         }
 
@@ -1058,7 +1058,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         }
 
         try {
-            $class  = new ReflectionClass($this);
+            $class = new ReflectionClass($this);
             $method = $class->getMethod($this->name);
         } catch (ReflectionException $e) {
             $this->fail($e->getMessage());
@@ -1423,7 +1423,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * This method is a wrapper for the setlocale() function that automatically
      * resets the locale to its original value after the test is run.
      *
-     * @param int    $category
+     * @param int $category
      * @param string $locale
      *
      * @throws Exception
@@ -1491,18 +1491,18 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     protected function createMock($originalClassName)
     {
         return $this->getMockBuilder($originalClassName)
-                    ->disableOriginalConstructor()
-                    ->disableOriginalClone()
-                    ->disableArgumentCloning()
-                    ->disallowMockingUnknownTypes()
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->getMock();
     }
 
     /**
      * Returns a configured test double for the specified class.
      *
      * @param string $originalClassName
-     * @param array  $configuration
+     * @param array $configuration
      *
      * @return MockObject
      *
@@ -1522,7 +1522,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     /**
      * Returns a partial test double for the specified class.
      *
-     * @param string   $originalClassName
+     * @param string $originalClassName
      * @param string[] $methods
      *
      * @return MockObject
@@ -1532,19 +1532,19 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     protected function createPartialMock($originalClassName, array $methods)
     {
         return $this->getMockBuilder($originalClassName)
-                    ->disableOriginalConstructor()
-                    ->disableOriginalClone()
-                    ->disableArgumentCloning()
-                    ->disallowMockingUnknownTypes()
-                    ->setMethods(empty($methods) ? null : $methods)
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->setMethods(empty($methods) ? null : $methods)
+            ->getMock();
     }
 
     /**
      * Returns a test proxy for the specified class.
      *
      * @param string $originalClassName
-     * @param array  $constructorArguments
+     * @param array $constructorArguments
      *
      * @return MockObject
      *
@@ -1553,22 +1553,22 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     protected function createTestProxy($originalClassName, array $constructorArguments = [])
     {
         return $this->getMockBuilder($originalClassName)
-                    ->setConstructorArgs($constructorArguments)
-                    ->enableProxyingToOriginalMethods()
-                    ->getMock();
+            ->setConstructorArgs($constructorArguments)
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
     }
 
     /**
      * Mocks the specified class and returns the name of the mocked class.
      *
      * @param string $originalClassName
-     * @param array  $methods
-     * @param array  $arguments
+     * @param array $methods
+     * @param array $arguments
      * @param string $mockClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
-     * @param bool   $cloneArguments
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param bool $cloneArguments
      *
      * @return string
      *
@@ -1596,13 +1596,13 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * To mock concrete methods, use the 7th parameter ($mockedMethods).
      *
      * @param string $originalClassName
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $mockClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
-     * @param array  $mockedMethods
-     * @param bool   $cloneArguments
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param array $mockedMethods
+     * @param bool $cloneArguments
      *
      * @return MockObject
      *
@@ -1632,9 +1632,9 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * @param string $wsdlFile
      * @param string $originalClassName
      * @param string $mockClassName
-     * @param array  $methods
-     * @param bool   $callOriginalConstructor
-     * @param array  $options                 An array of options passed to SOAPClient::_construct
+     * @param array $methods
+     * @param bool $callOriginalConstructor
+     * @param array $options An array of options passed to SOAPClient::_construct
      *
      * @return MockObject
      */
@@ -1646,12 +1646,12 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
 
         if (!\class_exists($originalClassName)) {
             eval(
-                $this->getMockObjectGenerator()->generateClassFromWsdl(
-                    $wsdlFile,
-                    $originalClassName,
-                    $methods,
-                    $options
-                )
+            $this->getMockObjectGenerator()->generateClassFromWsdl(
+                $wsdlFile,
+                $originalClassName,
+                $methods,
+                $options
+            )
             );
         }
 
@@ -1676,13 +1676,13 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * `$mockedMethods` parameter.
      *
      * @param string $traitName
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $mockClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
-     * @param array  $mockedMethods
-     * @param bool   $cloneArguments
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
+     * @param array $mockedMethods
+     * @param bool $cloneArguments
      *
      * @return MockObject
      *
@@ -1710,11 +1710,11 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * Returns an object for the specified trait.
      *
      * @param string $traitName
-     * @param array  $arguments
+     * @param array $arguments
      * @param string $traitClassName
-     * @param bool   $callOriginalConstructor
-     * @param bool   $callOriginalClone
-     * @param bool   $callAutoload
+     * @param bool $callOriginalConstructor
+     * @param bool $callOriginalClone
+     * @param bool $callAutoload
      *
      * @return object
      *
@@ -2015,10 +2015,10 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     protected function handleDependencies()
     {
         if (!empty($this->dependencies) && !$this->inIsolation) {
-            $className  = \get_class($this);
-            $passed     = $this->result->passed();
+            $className = \get_class($this);
+            $passed = $this->result->passed();
             $passedKeys = \array_keys($passed);
-            $numKeys    = \count($passedKeys);
+            $numKeys = \count($passedKeys);
 
             for ($i = 0; $i < $numKeys; $i++) {
                 $pos = \strpos($passedKeys[$i], ' with data set');
@@ -2031,23 +2031,23 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
             $passedKeys = \array_flip(\array_unique($passedKeys));
 
             foreach ($this->dependencies as $dependency) {
-                $deepClone    = false;
+                $deepClone = false;
                 $shallowClone = false;
 
                 if (\strpos($dependency, 'clone ') === 0) {
-                    $deepClone  = true;
+                    $deepClone = true;
                     $dependency = \substr($dependency, \strlen('clone '));
                 } elseif (\strpos($dependency, '!clone ') === 0) {
-                    $deepClone  = false;
+                    $deepClone = false;
                     $dependency = \substr($dependency, \strlen('!clone '));
                 }
 
                 if (\strpos($dependency, 'shallowClone ') === 0) {
                     $shallowClone = true;
-                    $dependency   = \substr($dependency, \strlen('shallowClone '));
+                    $dependency = \substr($dependency, \strlen('shallowClone '));
                 } elseif (\strpos($dependency, '!shallowClone ') === 0) {
                     $shallowClone = false;
-                    $dependency   = \substr($dependency, \strlen('!shallowClone '));
+                    $dependency = \substr($dependency, \strlen('!shallowClone '));
                 }
 
                 if (\strpos($dependency, '::') === false) {
@@ -2195,7 +2195,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         \ob_start();
 
         $this->outputBufferingActive = true;
-        $this->outputBufferingLevel  = \ob_get_level();
+        $this->outputBufferingLevel = \ob_get_level();
     }
 
     private function stopOutputBuffering()
@@ -2224,7 +2224,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         \ob_end_clean();
 
         $this->outputBufferingActive = false;
-        $this->outputBufferingLevel  = \ob_get_level();
+        $this->outputBufferingLevel = \ob_get_level();
     }
 
     private function snapshotGlobalState()
@@ -2307,7 +2307,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         return new Snapshot(
             $blacklist,
             $backupGlobals,
-            (bool) $this->backupStaticAttributes,
+            (bool)$this->backupStaticAttributes,
             false,
             false,
             false,
@@ -2352,8 +2352,8 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     }
 
     /**
-     * @param array  $before
-     * @param array  $after
+     * @param array $before
+     * @param array $after
      * @param string $header
      *
      * @throws RiskyTestError
@@ -2361,7 +2361,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
     private function compareGlobalStateSnapshotPart(array $before, array $after, $header)
     {
         if ($before != $after) {
-            $differ   = new Differ($header);
+            $differ = new Differ($header);
             $exporter = new Exporter;
 
             $diff = $differ->diff(

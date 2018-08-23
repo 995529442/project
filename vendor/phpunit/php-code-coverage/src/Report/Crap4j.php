@@ -39,8 +39,8 @@ class Crap4j
 
     /**
      * @param CodeCoverage $coverage
-     * @param string       $target
-     * @param string       $name
+     * @param string $target
+     * @param string $name
      *
      * @return string
      *
@@ -48,7 +48,7 @@ class Crap4j
      */
     public function process(CodeCoverage $coverage, $target = null, $name = null)
     {
-        $document               = new \DOMDocument('1.0', 'UTF-8');
+        $document = new \DOMDocument('1.0', 'UTF-8');
         $document->formatOutput = true;
 
         $root = $document->createElement('crap_result');
@@ -56,18 +56,18 @@ class Crap4j
 
         $project = $document->createElement('project', \is_string($name) ? $name : '');
         $root->appendChild($project);
-        $root->appendChild($document->createElement('timestamp', \date('Y-m-d H:i:s', (int) $_SERVER['REQUEST_TIME'])));
+        $root->appendChild($document->createElement('timestamp', \date('Y-m-d H:i:s', (int)$_SERVER['REQUEST_TIME'])));
 
-        $stats       = $document->createElement('stats');
+        $stats = $document->createElement('stats');
         $methodsNode = $document->createElement('methods');
 
         $report = $coverage->getReport();
         unset($coverage);
 
-        $fullMethodCount     = 0;
+        $fullMethodCount = 0;
         $fullCrapMethodCount = 0;
-        $fullCrapLoad        = 0;
-        $fullCrap            = 0;
+        $fullCrapLoad = 0;
+        $fullCrap = 0;
 
         foreach ($report as $item) {
             $namespace = 'global';
@@ -153,7 +153,7 @@ class Crap4j
 
     /**
      * @param float $crapValue
-     * @param int   $cyclomaticComplexity
+     * @param int $cyclomaticComplexity
      * @param float $coveragePercent
      *
      * @return float

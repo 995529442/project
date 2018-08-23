@@ -34,18 +34,18 @@ class ExceptionComparatorTest extends TestCase
     public function acceptsSucceedsProvider()
     {
         return [
-          [new Exception, new Exception],
-          [new RuntimeException, new RuntimeException],
-          [new Exception, new RuntimeException]
+            [new Exception, new Exception],
+            [new RuntimeException, new RuntimeException],
+            [new Exception, new RuntimeException]
         ];
     }
 
     public function acceptsFailsProvider()
     {
         return [
-          [new Exception, null],
-          [null, new Exception],
-          [null, null]
+            [new Exception, null],
+            [null, new Exception],
+            [null, null]
         ];
     }
 
@@ -58,16 +58,16 @@ class ExceptionComparatorTest extends TestCase
         $exception4 = new RuntimeException('Error', 100);
 
         return [
-          [$exception1, $exception1],
-          [$exception1, $exception2],
-          [$exception3, $exception3],
-          [$exception3, $exception4]
+            [$exception1, $exception1],
+            [$exception1, $exception2],
+            [$exception3, $exception3],
+            [$exception3, $exception4]
         ];
     }
 
     public function assertEqualsFailsProvider()
     {
-        $typeMessage  = 'not instance of expected class';
+        $typeMessage = 'not instance of expected class';
         $equalMessage = 'Failed asserting that two objects are equal.';
 
         $exception1 = new Exception('Error', 100);
@@ -78,11 +78,11 @@ class ExceptionComparatorTest extends TestCase
         $exception5 = new RuntimeException('Error', 101);
 
         return [
-          [$exception1, $exception2, $equalMessage],
-          [$exception1, $exception3, $equalMessage],
-          [$exception1, $exception4, $typeMessage],
-          [$exception2, $exception3, $equalMessage],
-          [$exception4, $exception5, $equalMessage]
+            [$exception1, $exception2, $equalMessage],
+            [$exception1, $exception3, $equalMessage],
+            [$exception1, $exception4, $typeMessage],
+            [$exception2, $exception3, $equalMessage],
+            [$exception4, $exception5, $equalMessage]
         ];
     }
 
@@ -93,7 +93,7 @@ class ExceptionComparatorTest extends TestCase
     public function testAcceptsSucceeds($expected, $actual)
     {
         $this->assertTrue(
-          $this->comparator->accepts($expected, $actual)
+            $this->comparator->accepts($expected, $actual)
         );
     }
 
@@ -104,7 +104,7 @@ class ExceptionComparatorTest extends TestCase
     public function testAcceptsFails($expected, $actual)
     {
         $this->assertFalse(
-          $this->comparator->accepts($expected, $actual)
+            $this->comparator->accepts($expected, $actual)
         );
     }
 

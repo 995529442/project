@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Text;
 
 /*
@@ -35,7 +36,7 @@ class StringContains extends SubstringMatcher
 
     protected function evalSubstringOf($item)
     {
-        return (false !== strpos((string) $item, $this->_substring));
+        return (false !== strpos((string)$item, $this->_substring));
     }
 
     protected function relationship()

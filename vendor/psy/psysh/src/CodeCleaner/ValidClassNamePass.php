@@ -34,9 +34,9 @@ use Psy\Exception\FatalErrorException;
  */
 class ValidClassNamePass extends NamespaceAwarePass
 {
-    const CLASS_TYPE     = 'class';
+    const CLASS_TYPE = 'class';
     const INTERFACE_TYPE = 'interface';
-    const TRAIT_TYPE     = 'trait';
+    const TRAIT_TYPE = 'trait';
 
     protected $checkTraits;
     private $conditionalScopes = 0;
@@ -225,7 +225,7 @@ class ValidClassNamePass extends NamespaceAwarePass
      * @throws FatalErrorException
      *
      * @param string $name
-     * @param Stmt   $stmt
+     * @param Stmt $stmt
      */
     protected function ensureClassExists($name, $stmt)
     {
@@ -240,7 +240,7 @@ class ValidClassNamePass extends NamespaceAwarePass
      * @throws FatalErrorException
      *
      * @param string $name
-     * @param Stmt   $stmt
+     * @param Stmt $stmt
      */
     protected function ensureClassOrInterfaceExists($name, $stmt)
     {
@@ -256,7 +256,7 @@ class ValidClassNamePass extends NamespaceAwarePass
      *
      * @param string $class
      * @param string $name
-     * @param Stmt   $stmt
+     * @param Stmt $stmt
      */
     protected function ensureMethodExists($class, $name, $stmt)
     {
@@ -288,7 +288,7 @@ class ValidClassNamePass extends NamespaceAwarePass
      * @throws FatalErrorException
      *
      * @param Interface_[] $interfaces
-     * @param Stmt         $stmt
+     * @param Stmt $stmt
      */
     protected function ensureInterfacesExist($interfaces, $stmt)
     {
@@ -383,7 +383,7 @@ class ValidClassNamePass extends NamespaceAwarePass
      * Error creation factory.
      *
      * @param string $msg
-     * @param Stmt   $stmt
+     * @param Stmt $stmt
      *
      * @return FatalErrorException
      */

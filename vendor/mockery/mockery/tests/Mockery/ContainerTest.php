@@ -42,6 +42,7 @@ class ContainerTest extends MockeryTestCase
             Mockery::getContainer()->getKeyOfDemeterMockFor('foo', get_class($m))
         );
     }
+
     public function testGetKeyOfDemeterMockShouldReturnNullWhenNoMatchingMock()
     {
         $method = 'unknownMethod';
@@ -63,13 +64,13 @@ class ContainerTest extends MockeryTestCase
         try {
             $m->foo();
         } catch (\Mockery\Exception $e) {
-            $this->assertTrue((bool) preg_match("/Foo/", $e->getMessage()));
+            $this->assertTrue((bool)preg_match("/Foo/", $e->getMessage()));
         }
     }
 
     public function testSimpleMockWithArrayDefs()
     {
-        $m = mock(array('foo'=>1, 'bar'=>2));
+        $m = mock(array('foo' => 1, 'bar' => 2));
         $this->assertEquals(1, $m->foo());
         $this->assertEquals(2, $m->bar());
     }
@@ -89,13 +90,13 @@ class ContainerTest extends MockeryTestCase
 
     public function testNamedMockWithArrayDefs()
     {
-        $m = mock('Foo', array('foo'=>1, 'bar'=>2));
+        $m = mock('Foo', array('foo' => 1, 'bar' => 2));
         $this->assertEquals(1, $m->foo());
         $this->assertEquals(2, $m->bar());
         try {
             $m->f();
         } catch (BadMethodCallException $e) {
-            $this->assertTrue((bool) preg_match("/Foo/", $e->getMessage()));
+            $this->assertTrue((bool)preg_match("/Foo/", $e->getMessage()));
         }
     }
 
@@ -112,21 +113,21 @@ class ContainerTest extends MockeryTestCase
         try {
             $m->f();
         } catch (BadMethodCallException $e) {
-            $this->assertTrue((bool) preg_match("/Foo/", $e->getMessage()));
+            $this->assertTrue((bool)preg_match("/Foo/", $e->getMessage()));
         }
     }
 
     public function testNamedMockMultipleInterfaces()
     {
-        $m = mock('stdClass, ArrayAccess, Countable', array('foo'=>1, 'bar'=>2));
+        $m = mock('stdClass, ArrayAccess, Countable', array('foo' => 1, 'bar' => 2));
         $this->assertEquals(1, $m->foo());
         $this->assertEquals(2, $m->bar());
         try {
             $m->f();
         } catch (BadMethodCallException $e) {
-            $this->assertTrue((bool) preg_match("/stdClass/", $e->getMessage()));
-            $this->assertTrue((bool) preg_match("/ArrayAccess/", $e->getMessage()));
-            $this->assertTrue((bool) preg_match("/Countable/", $e->getMessage()));
+            $this->assertTrue((bool)preg_match("/stdClass/", $e->getMessage()));
+            $this->assertTrue((bool)preg_match("/ArrayAccess/", $e->getMessage()));
+            $this->assertTrue((bool)preg_match("/Countable/", $e->getMessage()));
         }
     }
 
@@ -225,13 +226,13 @@ class ContainerTest extends MockeryTestCase
 
     public function testBlockForwardingToPartialObject()
     {
-        $m = mock(new MockeryTestBar1, array('foo'=>1, Mockery\Container::BLOCKS => array('method1')));
+        $m = mock(new MockeryTestBar1, array('foo' => 1, Mockery\Container::BLOCKS => array('method1')));
         $this->assertSame($m, $m->method1());
     }
 
     public function testPartialWithArrayDefs()
     {
-        $m = mock(new MockeryTestBar1, array('foo'=>1, Mockery\Container::BLOCKS => array('method1')));
+        $m = mock(new MockeryTestBar1, array('foo' => 1, Mockery\Container::BLOCKS => array('method1')));
         $this->assertEquals(1, $m->foo());
     }
 
@@ -795,7 +796,7 @@ class ContainerTest extends MockeryTestCase
                 return true;
             })
         );
-        $data ='bar';
+        $data = 'bar';
         $m->modify($data);
         $this->assertEquals('foo', $data);
         Mockery::getConfiguration()->resetInternalClassMethodParamMaps();
@@ -823,7 +824,7 @@ class ContainerTest extends MockeryTestCase
             }),
             Mockery::type('array')
         );
-        $data = array('a'=>1,'b'=>2);
+        $data = array('a' => 1, 'b' => 2);
         $m->insert($data, array());
         $this->assertArrayHasKey('_id', $data);
         $this->assertEquals(123, $data['_id']);
@@ -1319,8 +1320,8 @@ class ContainerTest extends MockeryTestCase
             array(false, ' '), // just a space
             array(false, 'ClassName.WithDot'),
             array(false, '\\\\TooManyBackSlashes'),
-            array(true,  'Foo'),
-            array(true,  '\\Foo\\Bar'),
+            array(true, 'Foo'),
+            array(true, '\\Foo\\Bar'),
         );
     }
 }
@@ -1371,7 +1372,7 @@ class MockeryTestIsset_Foo
 
     public function __isset($name)
     {
-        return (bool) strlen($this->__get($name));
+        return (bool)strlen($this->__get($name));
     }
 }
 
@@ -1448,9 +1449,11 @@ class MockeryFoo4
 interface MockeryTest_Interface
 {
 }
+
 interface MockeryTest_Interface1
 {
 }
+
 interface MockeryTest_Interface2
 {
 }
@@ -1591,6 +1594,7 @@ class MockeryTest_MethodParamRef
         return true;
     }
 }
+
 class MockeryTest_MethodParamRef2
 {
     public function method1(&$foo)
@@ -1598,6 +1602,7 @@ class MockeryTest_MethodParamRef2
         return true;
     }
 }
+
 class MockeryTestRef1
 {
     public function foo(&$a, $b)

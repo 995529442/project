@@ -52,8 +52,8 @@ final class Differ
     /**
      * Returns the diff between two arrays or strings as string.
      *
-     * @param array|string                            $from
-     * @param array|string                            $to
+     * @param array|string $from
+     * @param array|string $to
      * @param LongestCommonSubsequenceCalculator|null $lcs
      *
      * @return string
@@ -61,7 +61,7 @@ final class Differ
     public function diff($from, $to, LongestCommonSubsequenceCalculator $lcs = null): string
     {
         $from = $this->validateDiffInput($from);
-        $to   = $this->validateDiffInput($to);
+        $to = $this->validateDiffInput($to);
         $diff = $this->diffToArray($from, $to, $lcs);
 
         return $this->outputBuilder->getDiff($diff);
@@ -77,7 +77,7 @@ final class Differ
     private function validateDiffInput($input): string
     {
         if (!\is_array($input) && !\is_string($input)) {
-            return (string) $input;
+            return (string)$input;
         }
 
         return $input;
@@ -94,8 +94,8 @@ final class Differ
      * - 1: ADDED: $token was added to $from
      * - 0: OLD: $token is not changed in $to
      *
-     * @param array|string                       $from
-     * @param array|string                       $to
+     * @param array|string $from
+     * @param array|string $to
      * @param LongestCommonSubsequenceCalculator $lcs
      *
      * @return array
@@ -121,7 +121,7 @@ final class Differ
         }
 
         $common = $lcs->calculate(\array_values($from), \array_values($to));
-        $diff   = [];
+        $diff = [];
 
         foreach ($start as $token) {
             $diff[] = [$token, 0 /* OLD */];
@@ -226,7 +226,7 @@ final class Differ
 
         foreach ($diff as $entry) {
             if (0 === $entry[1]) { /* OLD */
-                $ln                 = $this->getLinebreak($entry[0]);
+                $ln = $this->getLinebreak($entry[0]);
                 $oldLineBreaks[$ln] = true;
                 $newLineBreaks[$ln] = true;
             } elseif (1 === $entry[1]) {  /* ADDED */
@@ -282,7 +282,7 @@ final class Differ
     private static function getArrayDiffParted(array &$from, array &$to): array
     {
         $start = [];
-        $end   = [];
+        $end = [];
 
         \reset($to);
 
@@ -303,7 +303,7 @@ final class Differ
 
         do {
             $fromK = \key($from);
-            $toK   = \key($to);
+            $toK = \key($to);
 
             if (null === $fromK || null === $toK || \current($from) !== \current($to)) {
                 break;

@@ -126,17 +126,17 @@ class Address extends \Faker\Provider\Address
 
     public static function area()
     {
-         return static::randomElement(static::$areas);
+        return static::randomElement(static::$areas);
     }
 
     public static function country()
     {
-         return static::randomElement(static::$country);
+        return static::randomElement(static::$country);
     }
 
     public function address()
     {
-         return $this->city() . static::area();
+        return $this->city() . static::area();
     }
 
     public static function postcode()

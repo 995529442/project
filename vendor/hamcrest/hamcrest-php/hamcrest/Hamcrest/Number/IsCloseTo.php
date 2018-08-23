@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Number;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\TypeSafeMatcher;
 
@@ -33,18 +35,16 @@ class IsCloseTo extends TypeSafeMatcher
     protected function describeMismatchSafely($item, Description $mismatchDescription)
     {
         $mismatchDescription->appendValue($item)
-                                                ->appendText(' differed by ')
-                                                ->appendValue($this->_actualDelta($item))
-                                                ;
+            ->appendText(' differed by ')
+            ->appendValue($this->_actualDelta($item));
     }
 
     public function describeTo(Description $description)
     {
         $description->appendText('a numeric value within ')
-                                ->appendValue($this->_delta)
-                                ->appendText(' of ')
-                                ->appendValue($this->_value)
-                                ;
+            ->appendValue($this->_delta)
+            ->appendText(' of ')
+            ->appendValue($this->_value);
     }
 
     /**

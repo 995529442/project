@@ -39,7 +39,7 @@ class MockingNullableMethodsTest extends MockeryTestCase
     {
         parent::setUp();
 
-        require_once __DIR__."/Fixtures/MethodWithNullableReturnType.php";
+        require_once __DIR__ . "/Fixtures/MethodWithNullableReturnType.php";
     }
 
     /**
@@ -180,7 +180,7 @@ class MockingNullableMethodsTest extends MockeryTestCase
     /** @test */
     public function it_allows_returning_null_for_nullable_object_return_types()
     {
-        $double= \Mockery::mock(MethodWithNullableReturnType::class);
+        $double = \Mockery::mock(MethodWithNullableReturnType::class);
 
         $double->shouldReceive("nullableClass")->andReturnNull();
 
@@ -190,7 +190,7 @@ class MockingNullableMethodsTest extends MockeryTestCase
     /** @test */
     public function it_allows_returning_null_for_nullable_string_return_types()
     {
-        $double= \Mockery::mock(MethodWithNullableReturnType::class);
+        $double = \Mockery::mock(MethodWithNullableReturnType::class);
 
         $double->shouldReceive("nullableString")->andReturnNull();
 
@@ -200,7 +200,7 @@ class MockingNullableMethodsTest extends MockeryTestCase
     /** @test */
     public function it_allows_returning_null_for_nullable_int_return_types()
     {
-        $double= \Mockery::mock(MethodWithNullableReturnType::class);
+        $double = \Mockery::mock(MethodWithNullableReturnType::class);
 
         $double->shouldReceive("nullableInt")->andReturnNull();
 

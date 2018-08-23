@@ -10,7 +10,7 @@ trait RoutesNotifications
     /**
      * Send the given notification.
      *
-     * @param  mixed  $instance
+     * @param  mixed $instance
      * @return void
      */
     public function notify($instance)
@@ -21,8 +21,8 @@ trait RoutesNotifications
     /**
      * Send the given notification immediately.
      *
-     * @param  mixed  $instance
-     * @param  array|null  $channels
+     * @param  mixed $instance
+     * @param  array|null $channels
      * @return void
      */
     public function notifyNow($instance, array $channels = null)
@@ -33,12 +33,12 @@ trait RoutesNotifications
     /**
      * Get the notification routing information for the given driver.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return mixed
      */
     public function routeNotificationFor($driver)
     {
-        if (method_exists($this, $method = 'routeNotificationFor'.Str::studly($driver))) {
+        if (method_exists($this, $method = 'routeNotificationFor' . Str::studly($driver))) {
             return $this->{$method}();
         }
 

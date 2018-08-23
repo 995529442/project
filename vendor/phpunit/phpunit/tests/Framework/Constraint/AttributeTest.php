@@ -17,7 +17,7 @@ class AttributeTest extends ConstraintTestCase
 {
     public function testAttributeEqualTo()
     {
-        $object     = new \ClassWithNonPublicAttributes;
+        $object = new \ClassWithNonPublicAttributes;
 
         $constraint = new Attribute(
             new IsEqual(1),
@@ -55,7 +55,7 @@ EOF
 
     public function testAttributeEqualTo2()
     {
-        $object     = new \ClassWithNonPublicAttributes;
+        $object = new \ClassWithNonPublicAttributes;
         $constraint = new Attribute(
             new IsEqual(2),
             'foo'

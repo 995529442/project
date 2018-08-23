@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Core;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\BaseMatcher;
 use Hamcrest\Description;
 
@@ -29,9 +31,8 @@ class IsSame extends BaseMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('sameInstance(')
-                                ->appendValue($this->_object)
-                                ->appendText(')')
-                                ;
+            ->appendValue($this->_object)
+            ->appendText(')');
     }
 
     /**

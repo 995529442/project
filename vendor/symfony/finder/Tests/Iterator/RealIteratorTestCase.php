@@ -18,7 +18,7 @@ abstract class RealIteratorTestCase extends IteratorTestCase
 
     public static function setUpBeforeClass()
     {
-        self::$tmpDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR.'symfony_finder';
+        self::$tmpDir = realpath(sys_get_temp_dir()) . DIRECTORY_SEPARATOR . 'symfony_finder';
 
         self::$files = array(
             '.git/',
@@ -75,7 +75,7 @@ abstract class RealIteratorTestCase extends IteratorTestCase
          * Without the call to setUpBeforeClass() property can be null.
          */
         if (!self::$tmpDir) {
-            self::$tmpDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR.'symfony_finder';
+            self::$tmpDir = realpath(sys_get_temp_dir()) . DIRECTORY_SEPARATOR . 'symfony_finder';
         }
 
         if (is_array($files)) {
@@ -84,7 +84,7 @@ abstract class RealIteratorTestCase extends IteratorTestCase
                 if (is_array($file)) {
                     $f[] = self::toAbsolute($file);
                 } else {
-                    $f[] = self::$tmpDir.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $file);
+                    $f[] = self::$tmpDir . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $file);
                 }
             }
 
@@ -92,7 +92,7 @@ abstract class RealIteratorTestCase extends IteratorTestCase
         }
 
         if (is_string($files)) {
-            return self::$tmpDir.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $files);
+            return self::$tmpDir . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $files);
         }
 
         return self::$tmpDir;
@@ -102,7 +102,7 @@ abstract class RealIteratorTestCase extends IteratorTestCase
     {
         $f = array();
         foreach ($files as $file) {
-            $f[] = realpath(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Fixtures'.DIRECTORY_SEPARATOR.$file);
+            $f[] = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . $file);
         }
 
         return $f;

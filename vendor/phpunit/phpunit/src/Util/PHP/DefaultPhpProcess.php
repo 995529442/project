@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util\PHP;
 
 use PHPUnit\Framework\Exception;
@@ -30,7 +31,7 @@ class DefaultPhpProcess extends AbstractPhpProcess
      * Runs a single job (PHP code) using a separate PHP process.
      *
      * @param string $job
-     * @param array  $settings
+     * @param array $settings
      *
      * @return array<string, string>
      *
@@ -66,7 +67,7 @@ class DefaultPhpProcess extends AbstractPhpProcess
      * Handles creating the child process and returning the STDOUT and STDERR
      *
      * @param string $job
-     * @param array  $settings
+     * @param array $settings
      *
      * @return array<string, string>
      *
@@ -214,7 +215,7 @@ class DefaultPhpProcess extends AbstractPhpProcess
 
     /**
      * @param resource $pipe
-     * @param string   $job
+     * @param string $job
      *
      * @throws Exception
      */

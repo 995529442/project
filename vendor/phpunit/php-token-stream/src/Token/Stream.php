@@ -106,7 +106,7 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
     {
         if (is_file($sourceCode)) {
             $this->filename = $sourceCode;
-            $sourceCode     = file_get_contents($sourceCode);
+            $sourceCode = file_get_contents($sourceCode);
         }
 
         $this->scan($sourceCode);
@@ -150,16 +150,16 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
      */
     protected function scan($sourceCode)
     {
-        $id        = 0;
-        $line      = 1;
-        $tokens    = token_get_all($sourceCode);
+        $id = 0;
+        $line = 1;
+        $tokens = token_get_all($sourceCode);
         $numTokens = count($tokens);
 
         $lastNonWhitespaceTokenWasDoubleColon = false;
 
         for ($i = 0; $i < $numTokens; ++$i) {
             $token = $tokens[$i];
-            $skip  = 0;
+            $skip = 0;
 
             if (is_array($token)) {
                 $name = substr(token_name($token[0]), 2);
@@ -175,12 +175,12 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
 
                 $tokenClass = 'PHP_Token_' . $name;
             } else {
-                $text       = $token;
+                $text = $token;
                 $tokenClass = self::$customTokens[$token];
             }
 
             $this->tokens[] = new $tokenClass($text, $line, $this, $id++);
-            $lines          = substr_count($text, "\n");
+            $lines = substr_count($text, "\n");
             $line += $lines;
 
             if ($tokenClass == 'PHP_Token_HALT_COMPILER') {
@@ -199,9 +199,9 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
             $i += $skip;
         }
 
-        $this->linesOfCode['loc']   = substr_count($sourceCode, "\n");
+        $this->linesOfCode['loc'] = substr_count($sourceCode, "\n");
         $this->linesOfCode['ncloc'] = $this->linesOfCode['loc'] -
-                                      $this->linesOfCode['cloc'];
+            $this->linesOfCode['cloc'];
     }
 
     /**
@@ -286,8 +286,8 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
      *
      * Parameter $category allow to filter following specific inclusion type
      *
-     * @param bool   $categorize OPTIONAL
-     * @param string $category   OPTIONAL Either 'require_once', 'require',
+     * @param bool $categorize OPTIONAL
+     * @param string $category OPTIONAL Either 'require_once', 'require',
      *                           'include_once', 'include'.
      *
      * @return array
@@ -296,10 +296,10 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
     {
         if ($this->includes === null) {
             $this->includes = [
-              'require_once' => [],
-              'require'      => [],
-              'include_once' => [],
-              'include'      => []
+                'require_once' => [],
+                'require' => [],
+                'include_once' => [],
+                'include' => []
             ];
 
             foreach ($this->tokens as $token) {
@@ -347,14 +347,14 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
     protected function parse()
     {
         $this->interfaces = [];
-        $this->classes    = [];
-        $this->traits     = [];
-        $this->functions  = [];
-        $class            = [];
-        $classEndLine     = [];
-        $trait            = false;
-        $traitEndLine     = false;
-        $interface        = false;
+        $this->classes = [];
+        $this->traits = [];
+        $this->functions = [];
+        $class = [];
+        $classEndLine = [];
+        $trait = false;
+        $traitEndLine = false;
+        $interface = false;
         $interfaceEndLine = false;
 
         foreach ($this->tokens as $token) {
@@ -363,58 +363,58 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
                     return;
 
                 case 'PHP_Token_INTERFACE':
-                    $interface        = $token->getName();
+                    $interface = $token->getName();
                     $interfaceEndLine = $token->getEndLine();
 
                     $this->interfaces[$interface] = [
-                      'methods'   => [],
-                      'parent'    => $token->getParent(),
-                      'keywords'  => $token->getKeywords(),
-                      'docblock'  => $token->getDocblock(),
-                      'startLine' => $token->getLine(),
-                      'endLine'   => $interfaceEndLine,
-                      'package'   => $token->getPackage(),
-                      'file'      => $this->filename
+                        'methods' => [],
+                        'parent' => $token->getParent(),
+                        'keywords' => $token->getKeywords(),
+                        'docblock' => $token->getDocblock(),
+                        'startLine' => $token->getLine(),
+                        'endLine' => $interfaceEndLine,
+                        'package' => $token->getPackage(),
+                        'file' => $this->filename
                     ];
                     break;
 
                 case 'PHP_Token_CLASS':
                 case 'PHP_Token_TRAIT':
                     $tmp = [
-                      'methods'   => [],
-                      'parent'    => $token->getParent(),
-                      'interfaces'=> $token->getInterfaces(),
-                      'keywords'  => $token->getKeywords(),
-                      'docblock'  => $token->getDocblock(),
-                      'startLine' => $token->getLine(),
-                      'endLine'   => $token->getEndLine(),
-                      'package'   => $token->getPackage(),
-                      'file'      => $this->filename
+                        'methods' => [],
+                        'parent' => $token->getParent(),
+                        'interfaces' => $token->getInterfaces(),
+                        'keywords' => $token->getKeywords(),
+                        'docblock' => $token->getDocblock(),
+                        'startLine' => $token->getLine(),
+                        'endLine' => $token->getEndLine(),
+                        'package' => $token->getPackage(),
+                        'file' => $this->filename
                     ];
 
                     if ($token instanceof PHP_Token_CLASS) {
-                        $class[]        = $token->getName();
+                        $class[] = $token->getName();
                         $classEndLine[] = $token->getEndLine();
 
                         $this->classes[$class[count($class) - 1]] = $tmp;
                     } else {
-                        $trait                = $token->getName();
-                        $traitEndLine         = $token->getEndLine();
+                        $trait = $token->getName();
+                        $traitEndLine = $token->getEndLine();
                         $this->traits[$trait] = $tmp;
                     }
                     break;
 
                 case 'PHP_Token_FUNCTION':
                     $name = $token->getName();
-                    $tmp  = [
-                      'docblock'  => $token->getDocblock(),
-                      'keywords'  => $token->getKeywords(),
-                      'visibility'=> $token->getVisibility(),
-                      'signature' => $token->getSignature(),
-                      'startLine' => $token->getLine(),
-                      'endLine'   => $token->getEndLine(),
-                      'ccn'       => $token->getCCN(),
-                      'file'      => $this->filename
+                    $tmp = [
+                        'docblock' => $token->getDocblock(),
+                        'keywords' => $token->getKeywords(),
+                        'visibility' => $token->getVisibility(),
+                        'signature' => $token->getSignature(),
+                        'startLine' => $token->getLine(),
+                        'endLine' => $token->getEndLine(),
+                        'ccn' => $token->getCCN(),
+                        'file' => $this->filename
                     ];
 
                     if (empty($class) &&
@@ -455,11 +455,11 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
                         array_pop($class);
                     } elseif ($traitEndLine !== false &&
                         $traitEndLine == $token->getLine()) {
-                        $trait        = false;
+                        $trait = false;
                         $traitEndLine = false;
                     } elseif ($interfaceEndLine !== false &&
                         $interfaceEndLine == $token->getLine()) {
-                        $interface        = false;
+                        $interface = false;
                         $interfaceEndLine = false;
                     }
                     break;
@@ -545,7 +545,7 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
     }
 
     /**
-     * @param int   $offset
+     * @param int $offset
      * @param mixed $value
      */
     public function offsetSet($offset, $value)
@@ -595,8 +595,8 @@ class PHP_Token_Stream implements ArrayAccess, Countable, SeekableIterator
 
     /**
      * @param string $name
-     * @param int    $startLine
-     * @param int    $endLine
+     * @param int $startLine
+     * @param int $endLine
      */
     private function addFunctionToMap($name, $startLine, $endLine)
     {

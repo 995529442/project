@@ -31,7 +31,7 @@ class XmlFileLoader extends FileLoader
     /**
      * Loads an XML file.
      *
-     * @param string      $file An XML file path
+     * @param string $file An XML file path
      * @param string|null $type The resource type
      *
      * @return RouteCollection A RouteCollection instance
@@ -64,9 +64,9 @@ class XmlFileLoader extends FileLoader
      * Parses a node from a loaded XML file.
      *
      * @param RouteCollection $collection Collection to associate with the node
-     * @param \DOMElement     $node       Element to parse
-     * @param string          $path       Full path of the XML file being processed
-     * @param string          $file       Loaded file name
+     * @param \DOMElement $node Element to parse
+     * @param string $path Full path of the XML file being processed
+     * @param string $file Loaded file name
      *
      * @throws \InvalidArgumentException When the XML is invalid
      */
@@ -100,8 +100,8 @@ class XmlFileLoader extends FileLoader
      * Parses a route and adds it to the RouteCollection.
      *
      * @param RouteCollection $collection RouteCollection instance
-     * @param \DOMElement     $node       Element to parse that represents a Route
-     * @param string          $path       Full path of the XML file being processed
+     * @param \DOMElement $node Element to parse that represents a Route
+     * @param string $path Full path of the XML file being processed
      *
      * @throws \InvalidArgumentException When the XML is invalid
      */
@@ -124,9 +124,9 @@ class XmlFileLoader extends FileLoader
      * Parses an import and adds the routes in the resource to the RouteCollection.
      *
      * @param RouteCollection $collection RouteCollection instance
-     * @param \DOMElement     $node       Element to parse that represents a Route
-     * @param string          $path       Full path of the XML file being processed
-     * @param string          $file       Loaded file name
+     * @param \DOMElement $node Element to parse that represents a Route
+     * @param string $path Full path of the XML file being processed
+     * @param string $file Loaded file name
      *
      * @throws \InvalidArgumentException When the XML is invalid
      */
@@ -188,14 +188,14 @@ class XmlFileLoader extends FileLoader
      */
     protected function loadFile($file)
     {
-        return XmlUtils::loadFile($file, __DIR__.static::SCHEME_PATH);
+        return XmlUtils::loadFile($file, __DIR__ . static::SCHEME_PATH);
     }
 
     /**
      * Parses the config elements (default, requirement, option).
      *
      * @param \DOMElement $node Element to parse that contains the configs
-     * @param string      $path Full path of the XML file being processed
+     * @param string $path Full path of the XML file being processed
      *
      * @return array An array with the defaults as first item, requirements as second and options as third
      *
@@ -253,7 +253,7 @@ class XmlFileLoader extends FileLoader
      * Parses the "default" elements.
      *
      * @param \DOMElement $element The "default" element to parse
-     * @param string      $path    Full path of the XML file being processed
+     * @param string $path Full path of the XML file being processed
      *
      * @return array|bool|float|int|string|null The parsed value of the "default" element
      */
@@ -288,7 +288,7 @@ class XmlFileLoader extends FileLoader
      * Recursively parses the value of a "default" element.
      *
      * @param \DOMElement $node The node value
-     * @param string      $path Full path of the XML file being processed
+     * @param string $path Full path of the XML file being processed
      *
      * @return array|bool|float|int|string The parsed value
      *
@@ -304,9 +304,9 @@ class XmlFileLoader extends FileLoader
             case 'bool':
                 return 'true' === trim($node->nodeValue) || '1' === trim($node->nodeValue);
             case 'int':
-                return (int) trim($node->nodeValue);
+                return (int)trim($node->nodeValue);
             case 'float':
-                return (float) trim($node->nodeValue);
+                return (float)trim($node->nodeValue);
             case 'string':
                 return trim($node->nodeValue);
             case 'list':

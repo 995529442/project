@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use Closure;
@@ -42,8 +43,8 @@ class GlobalState
     public static function processIncludedFilesAsString(array $files)
     {
         $blacklist = new Blacklist;
-        $prefix    = false;
-        $result    = '';
+        $prefix = false;
+        $result = '';
 
         if (\defined('__PHPUNIT_PHAR__')) {
             $prefix = 'phar://' . __PHPUNIT_PHAR__ . '/';
@@ -79,7 +80,7 @@ class GlobalState
      */
     public static function getIniSettingsAsString()
     {
-        $result      = '';
+        $result = '';
         $iniSettings = \ini_get_all(null, false);
 
         foreach ($iniSettings as $key => $value) {
@@ -99,7 +100,7 @@ class GlobalState
     public static function getConstantsAsString()
     {
         $constants = \get_defined_constants(true);
-        $result    = '';
+        $result = '';
 
         if (isset($constants['user'])) {
             foreach ($constants['user'] as $name => $value) {
@@ -120,7 +121,7 @@ class GlobalState
      */
     public static function getGlobalsAsString()
     {
-        $result            = '';
+        $result = '';
         $superGlobalArrays = self::getSuperGlobalArrays();
 
         foreach ($superGlobalArrays as $superGlobalArray) {
@@ -140,7 +141,7 @@ class GlobalState
             }
         }
 
-        $blacklist   = $superGlobalArrays;
+        $blacklist = $superGlobalArrays;
         $blacklist[] = 'GLOBALS';
 
         foreach (\array_keys($GLOBALS) as $key) {

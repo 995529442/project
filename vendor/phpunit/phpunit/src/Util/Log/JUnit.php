@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util\Log;
 
 use DOMDocument;
@@ -102,11 +103,11 @@ class JUnit extends Printer implements TestListener
      * Constructor.
      *
      * @param mixed $out
-     * @param bool  $reportUselessTests
+     * @param bool $reportUselessTests
      */
     public function __construct($out = null, $reportUselessTests = false)
     {
-        $this->document               = new DOMDocument('1.0', 'UTF-8');
+        $this->document = new DOMDocument('1.0', 'UTF-8');
         $this->document->formatOutput = true;
 
         $this->root = $this->document->createElement('testsuites');
@@ -132,9 +133,9 @@ class JUnit extends Printer implements TestListener
     /**
      * An error occurred.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addError(Test $test, \Exception $e, $time)
     {
@@ -145,9 +146,9 @@ class JUnit extends Printer implements TestListener
     /**
      * A warning occurred.
      *
-     * @param Test    $test
+     * @param Test $test
      * @param Warning $e
-     * @param float   $time
+     * @param float $time
      */
     public function addWarning(Test $test, Warning $e, $time)
     {
@@ -158,9 +159,9 @@ class JUnit extends Printer implements TestListener
     /**
      * A failure occurred.
      *
-     * @param Test                 $test
+     * @param Test $test
      * @param AssertionFailedError $e
-     * @param float                $time
+     * @param float $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
@@ -171,9 +172,9 @@ class JUnit extends Printer implements TestListener
     /**
      * Incomplete test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addIncompleteTest(Test $test, \Exception $e, $time)
     {
@@ -183,9 +184,9 @@ class JUnit extends Printer implements TestListener
     /**
      * Risky test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addRiskyTest(Test $test, \Exception $e, $time)
     {
@@ -211,9 +212,9 @@ class JUnit extends Printer implements TestListener
     /**
      * Skipped test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addSkippedTest(Test $test, \Exception $e, $time)
     {
@@ -246,13 +247,13 @@ class JUnit extends Printer implements TestListener
         }
 
         $this->testSuiteLevel++;
-        $this->testSuites[$this->testSuiteLevel]          = $testSuite;
-        $this->testSuiteTests[$this->testSuiteLevel]      = 0;
+        $this->testSuites[$this->testSuiteLevel] = $testSuite;
+        $this->testSuiteTests[$this->testSuiteLevel] = 0;
         $this->testSuiteAssertions[$this->testSuiteLevel] = 0;
-        $this->testSuiteErrors[$this->testSuiteLevel]     = 0;
-        $this->testSuiteFailures[$this->testSuiteLevel]   = 0;
-        $this->testSuiteSkipped[$this->testSuiteLevel]    = 0;
-        $this->testSuiteTimes[$this->testSuiteLevel]      = 0;
+        $this->testSuiteErrors[$this->testSuiteLevel] = 0;
+        $this->testSuiteFailures[$this->testSuiteLevel] = 0;
+        $this->testSuiteSkipped[$this->testSuiteLevel] = 0;
+        $this->testSuiteTimes[$this->testSuiteLevel] = 0;
     }
 
     /**
@@ -315,7 +316,7 @@ class JUnit extends Printer implements TestListener
         $testCase->setAttribute('name', $test->getName());
 
         if ($test instanceof TestCase) {
-            $class      = new ReflectionClass($test);
+            $class = new ReflectionClass($test);
             $methodName = $test->getName(!$test->usesDataProvider());
 
             if ($class->hasMethod($methodName)) {
@@ -334,7 +335,7 @@ class JUnit extends Printer implements TestListener
     /**
      * A test ended.
      *
-     * @param Test  $test
+     * @param Test $test
      * @param float $time
      */
     public function endTest(Test $test, $time)
@@ -402,10 +403,10 @@ class JUnit extends Printer implements TestListener
     /**
      * Method which generalizes addError() and addFailure()
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
-     * @param string     $type
+     * @param float $time
+     * @param string $type
      */
     private function doAddFault(Test $test, \Exception $e, $time, $type)
     {
@@ -420,7 +421,7 @@ class JUnit extends Printer implements TestListener
         }
 
         $buffer .= TestFailure::exceptionToString($e) . "\n" .
-                   Filter::getFilteredStacktrace($e);
+            Filter::getFilteredStacktrace($e);
 
         $fault = $this->document->createElement(
             $type,

@@ -14,7 +14,7 @@ class AlterShopMailCaterShopTable extends Migration
     public function up()
     {
         Schema::table('cater_shop', function (Blueprint $table) {
-            $table->string('shop_mail',50)->default('')->comment("商家通知邮箱");
+            $table->string('shop_mail', 50)->default('')->comment("商家通知邮箱");
         });
     }
 

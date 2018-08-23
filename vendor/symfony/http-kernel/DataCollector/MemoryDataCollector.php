@@ -102,17 +102,21 @@ class MemoryDataCollector extends DataCollector implements LateDataCollectorInte
         } elseif (0 === strpos($max, '0')) {
             $max = intval($max, 8);
         } else {
-            $max = (int) $max;
+            $max = (int)$max;
         }
 
         switch (substr($memoryLimit, -1)) {
-            case 't': $max *= 1024;
+            case 't':
+                $max *= 1024;
             // no break
-            case 'g': $max *= 1024;
+            case 'g':
+                $max *= 1024;
             // no break
-            case 'm': $max *= 1024;
+            case 'm':
+                $max *= 1024;
             // no break
-            case 'k': $max *= 1024;
+            case 'k':
+                $max *= 1024;
         }
 
         return $max;

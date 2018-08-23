@@ -103,7 +103,7 @@ EOT;
         $chars = array();
 
         foreach (preg_split('//u', str_replace(PHP_EOL, '', $text)) as $char) {
-            if (! empty($char)) {
+            if (!empty($char)) {
                 $chars[] = $char;
             }
         }
@@ -120,7 +120,7 @@ EOT;
 
     protected static function validStart($word)
     {
-        return ! in_array($word, static::$notBeginPunct);
+        return !in_array($word, static::$notBeginPunct);
     }
 
     protected static function appendEnd($text)
@@ -173,19 +173,19 @@ EOT;
             switch (true) {
                 case $ord > 251:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 247:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 239:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 223:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 191:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
             }
 
             $encoding[] = $temp;

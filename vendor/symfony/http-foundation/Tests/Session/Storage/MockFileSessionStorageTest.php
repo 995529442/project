@@ -35,7 +35,7 @@ class MockFileSessionStorageTest extends TestCase
 
     protected function setUp()
     {
-        $this->sessionDir = sys_get_temp_dir().'/sf2test';
+        $this->sessionDir = sys_get_temp_dir() . '/sf2test';
         $this->storage = $this->getStorage();
     }
 
@@ -43,7 +43,7 @@ class MockFileSessionStorageTest extends TestCase
     {
         $this->sessionDir = null;
         $this->storage = null;
-        array_map('unlink', glob($this->sessionDir.'/*.session'));
+        array_map('unlink', glob($this->sessionDir . '/*.session'));
         if (is_dir($this->sessionDir)) {
             rmdir($this->sessionDir);
         }

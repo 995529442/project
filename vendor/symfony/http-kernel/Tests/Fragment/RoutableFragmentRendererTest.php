@@ -30,7 +30,7 @@ class RoutableFragmentRendererTest extends TestCase
      */
     public function testGenerateAbsoluteFragmentUri($uri, $controller)
     {
-        $this->assertEquals('http://localhost'.$uri, $this->callGenerateFragmentUriMethod($controller, Request::create('/'), true));
+        $this->assertEquals('http://localhost' . $uri, $this->callGenerateFragmentUriMethod($controller, Request::create('/'), true));
     }
 
     public function getGenerateFragmentUriData()

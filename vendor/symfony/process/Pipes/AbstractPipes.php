@@ -36,7 +36,7 @@ abstract class AbstractPipes implements PipesInterface
         } elseif (is_string($input)) {
             $this->inputBuffer = $input;
         } else {
-            $this->inputBuffer = (string) $input;
+            $this->inputBuffer = (string)$input;
         }
     }
 
@@ -105,7 +105,7 @@ abstract class AbstractPipes implements PipesInterface
                     if (!is_scalar($input)) {
                         throw new InvalidArgumentException(sprintf('%s yielded a value of type "%s", but only scalars and stream resources are supported', get_class($this->input), gettype($input)));
                     }
-                    $input = (string) $input;
+                    $input = (string)$input;
                 }
                 $this->inputBuffer = $input;
                 $this->input->next();
@@ -133,7 +133,7 @@ abstract class AbstractPipes implements PipesInterface
             }
 
             if ($input) {
-                for (;;) {
+                for (; ;) {
                     $data = fread($input, self::CHUNK_SIZE);
                     if (!isset($data[0])) {
                         break;

@@ -9,6 +9,6 @@ class CaterCategory extends Model
     protected $table = 'cater_category';
 
     protected $fillable = [
-        'cate_name','sort'
+        'cate_name', 'sort'
     ];
 }

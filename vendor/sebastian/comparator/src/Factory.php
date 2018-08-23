@@ -54,7 +54,7 @@ class Factory
      * Returns the correct comparator for comparing two values.
      *
      * @param mixed $expected The first value to compare
-     * @param mixed $actual   The second value to compare
+     * @param mixed $actual The second value to compare
      *
      * @return Comparator
      */

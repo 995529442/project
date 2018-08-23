@@ -42,7 +42,7 @@ class TrustProxies
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      *
@@ -91,11 +91,11 @@ class TrustProxies
      * We specify the IP addresses to trust explicitly.
      *
      * @param \Illuminate\Http\Request $request
-     * @param array                    $trustedIps
+     * @param array $trustedIps
      */
     private function setTrustedProxyIpAddressesToSpecificIps($request, $trustedIps)
     {
-        $request->setTrustedProxies((array) $trustedIps, $this->getTrustedHeaderSet());
+        $request->setTrustedProxies((array)$trustedIps, $this->getTrustedHeaderSet());
     }
 
     /**
@@ -134,7 +134,9 @@ class TrustProxies
     {
         $trustedHeaderNames = $this->getTrustedHeaderNames();
 
-        if(!is_array($trustedHeaderNames)) { return; } // Leave the defaults
+        if (!is_array($trustedHeaderNames)) {
+            return;
+        } // Leave the defaults
 
         foreach ($trustedHeaderNames as $headerKey => $headerName) {
             $request->setTrustedHeaderName($headerKey, $headerName);
@@ -165,7 +167,7 @@ class TrustProxies
             // PHP 7+ gives a warning if non-numeric value is used
             // resulting in a thrown ErrorException within Laravel
             // This error occurs with Symfony < 3.3, PHP7+
-            if(! is_numeric($key)) {
+            if (!is_numeric($key)) {
                 return $set;
             }
 

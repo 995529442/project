@@ -26,17 +26,17 @@ class LoginController extends Controller
      */
     public function checkLogin(Request $request)
     {
-        if ($request->isMethod('post')){
+        if ($request->isMethod('post')) {
 
-            $username = $request -> input("username","");  //用户名
-            $password = $request -> input("password","");  //密码
-            $remember = $request -> input("remember",0);   //是否记住我
-            $code     = $request -> input("code","");      //验证码
+            $username = $request->input("username", "");  //用户名
+            $password = $request->input("password", "");  //密码
+            $remember = $request->input("remember", 0);   //是否记住我
+            $code = $request->input("code", "");      //验证码
 
             $rules = [
                 'username' => 'required|max:50',
                 'password' => 'required|max:100',
-                'code'     => 'required',
+                'code' => 'required',
             ];
             $messages = [
                 'username.required' => '用户名不能为空！',
@@ -48,39 +48,39 @@ class LoginController extends Controller
 
             $this->validate($request, $rules, $messages);
 
-            if(!Captcha::check($code)){ //验证码
-              return back()->withErrors(['验证码错误'])->withInput();
+            if (!Captcha::check($code)) { //验证码
+                return back()->withErrors(['验证码错误'])->withInput();
             }
-            if (Auth::guard('admins')->attempt(['username' => $username, 'password' => $password,'isvalid'=>true],$remember)) {
+            if (Auth::guard('admins')->attempt(['username' => $username, 'password' => $password, 'isvalid' => true], $remember)) {
                 // 认证通过...
                 return redirect()->to('/');
-            }else{
+            } else {
                 return back()->withErrors(['用户名或密码错误'])->withInput();
             }
-        }else{
+        } else {
             return redirect()->to('login/home');
         }
     }
 
     /**
      * 退出登录
-     * @return 
+     * @return
      */
     public function logout()
     {
         Auth::guard('admins')->logout();
-        
+
         return redirect()->to('login/home');
     }
-    
-     /**
+
+    /**
      * 验证码
-     * @return 
-     */ 
+     * @return
+     */
     public function captcha()
     {
         return Captcha::create();
-        
+
     }
-    
+
 }

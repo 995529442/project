@@ -37,19 +37,19 @@ class ProgressIndicatorTest extends TestCase
         rewind($output->getStream());
 
         $this->assertEquals(
-            $this->generateOutput(' - Starting...').
-            $this->generateOutput(' \\ Starting...').
-            $this->generateOutput(' | Starting...').
-            $this->generateOutput(' / Starting...').
-            $this->generateOutput(' - Starting...').
-            $this->generateOutput(' \\ Starting...').
-            $this->generateOutput(' \\ Advancing...').
-            $this->generateOutput(' | Advancing...').
-            $this->generateOutput(' | Done...').
-            PHP_EOL.
-            $this->generateOutput(' - Starting Again...').
-            $this->generateOutput(' \\ Starting Again...').
-            $this->generateOutput(' \\ Done Again...').
+            $this->generateOutput(' - Starting...') .
+            $this->generateOutput(' \\ Starting...') .
+            $this->generateOutput(' | Starting...') .
+            $this->generateOutput(' / Starting...') .
+            $this->generateOutput(' - Starting...') .
+            $this->generateOutput(' \\ Starting...') .
+            $this->generateOutput(' \\ Advancing...') .
+            $this->generateOutput(' | Advancing...') .
+            $this->generateOutput(' | Done...') .
+            PHP_EOL .
+            $this->generateOutput(' - Starting Again...') .
+            $this->generateOutput(' \\ Starting Again...') .
+            $this->generateOutput(' \\ Done Again...') .
             PHP_EOL,
             stream_get_contents($output->getStream())
         );
@@ -70,9 +70,9 @@ class ProgressIndicatorTest extends TestCase
         rewind($output->getStream());
 
         $this->assertEquals(
-            ' Starting...'.PHP_EOL.
-            ' Midway...'.PHP_EOL.
-            ' Done...'.PHP_EOL.PHP_EOL,
+            ' Starting...' . PHP_EOL .
+            ' Midway...' . PHP_EOL .
+            ' Done...' . PHP_EOL . PHP_EOL,
             stream_get_contents($output->getStream())
         );
     }
@@ -92,9 +92,9 @@ class ProgressIndicatorTest extends TestCase
         rewind($output->getStream());
 
         $this->assertEquals(
-            $this->generateOutput(' a Starting...').
-            $this->generateOutput(' b Starting...').
-            $this->generateOutput(' c Starting...').
+            $this->generateOutput(' a Starting...') .
+            $this->generateOutput(' b Starting...') .
+            $this->generateOutput(' c Starting...') .
             $this->generateOutput(' a Starting...'),
             stream_get_contents($output->getStream())
         );
@@ -178,6 +178,6 @@ class ProgressIndicatorTest extends TestCase
     {
         $count = substr_count($expected, "\n");
 
-        return "\x0D\x1B[2K".($count ? sprintf("\033[%dA", $count) : '').$expected;
+        return "\x0D\x1B[2K" . ($count ? sprintf("\033[%dA", $count) : '') . $expected;
     }
 }

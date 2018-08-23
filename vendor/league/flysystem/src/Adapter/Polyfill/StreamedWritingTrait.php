@@ -10,10 +10,10 @@ trait StreamedWritingTrait
     /**
      * Stream fallback delegator.
      *
-     * @param string   $path
+     * @param string $path
      * @param resource $resource
-     * @param Config   $config
-     * @param string   $fallback
+     * @param Config $config
+     * @param string $fallback
      *
      * @return mixed fallback result
      */
@@ -29,9 +29,9 @@ trait StreamedWritingTrait
     /**
      * Write using a stream.
      *
-     * @param string   $path
+     * @param string $path
      * @param resource $resource
-     * @param Config   $config
+     * @param Config $config
      *
      * @return mixed false or file metadata
      */
@@ -43,9 +43,9 @@ trait StreamedWritingTrait
     /**
      * Update a file using a stream.
      *
-     * @param string   $path
+     * @param string $path
      * @param resource $resource
-     * @param Config   $config   Config object or visibility setting
+     * @param Config $config Config object or visibility setting
      *
      * @return mixed false of file metadata
      */
@@ -56,5 +56,6 @@ trait StreamedWritingTrait
 
     // Required abstract methods
     abstract public function write($pash, $contents, Config $config);
+
     abstract public function update($pash, $contents, Config $config);
 }

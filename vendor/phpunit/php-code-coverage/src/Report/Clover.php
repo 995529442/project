@@ -21,8 +21,8 @@ class Clover
 {
     /**
      * @param CodeCoverage $coverage
-     * @param string       $target
-     * @param string       $name
+     * @param string $target
+     * @param string $name
      *
      * @return string
      *
@@ -30,15 +30,15 @@ class Clover
      */
     public function process(CodeCoverage $coverage, $target = null, $name = null)
     {
-        $xmlDocument               = new \DOMDocument('1.0', 'UTF-8');
+        $xmlDocument = new \DOMDocument('1.0', 'UTF-8');
         $xmlDocument->formatOutput = true;
 
         $xmlCoverage = $xmlDocument->createElement('coverage');
-        $xmlCoverage->setAttribute('generated', (int) $_SERVER['REQUEST_TIME']);
+        $xmlCoverage->setAttribute('generated', (int)$_SERVER['REQUEST_TIME']);
         $xmlDocument->appendChild($xmlCoverage);
 
         $xmlProject = $xmlDocument->createElement('project');
-        $xmlProject->setAttribute('timestamp', (int) $_SERVER['REQUEST_TIME']);
+        $xmlProject->setAttribute('timestamp', (int)$_SERVER['REQUEST_TIME']);
 
         if (\is_string($name)) {
             $xmlProject->setAttribute('name', $name);
@@ -47,7 +47,7 @@ class Clover
         $xmlCoverage->appendChild($xmlProject);
 
         $packages = [];
-        $report   = $coverage->getReport();
+        $report = $coverage->getReport();
         unset($coverage);
 
         foreach ($report as $item) {
@@ -60,16 +60,16 @@ class Clover
             $xmlFile = $xmlDocument->createElement('file');
             $xmlFile->setAttribute('name', $item->getPath());
 
-            $classes   = $item->getClassesAndTraits();
-            $coverage  = $item->getCoverageData();
-            $lines     = [];
+            $classes = $item->getClassesAndTraits();
+            $coverage = $item->getCoverageData();
+            $lines = [];
             $namespace = 'global';
 
             foreach ($classes as $className => $class) {
-                $classStatements        = 0;
+                $classStatements = 0;
                 $coveredClassStatements = 0;
-                $coveredMethods         = 0;
-                $classMethods           = 0;
+                $coveredMethods = 0;
+                $classMethods = 0;
 
                 foreach ($class['methods'] as $methodName => $method) {
                     if ($method['executableLines'] == 0) {
@@ -93,12 +93,12 @@ class Clover
                     }
 
                     $lines[$method['startLine']] = [
-                        'ccn'         => $method['ccn'],
-                        'count'       => $methodCount,
-                        'crap'        => $method['crap'],
-                        'type'        => 'method',
-                        'visibility'  => $method['visibility'],
-                        'name'        => $methodName
+                        'ccn' => $method['ccn'],
+                        'count' => $methodCount,
+                        'crap' => $method['crap'],
+                        'type' => 'method',
+                        'visibility' => $method['visibility'],
+                        'name' => $methodName
                     ];
                 }
 

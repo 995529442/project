@@ -35,9 +35,9 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     /**
      * Creates a new MailboxHeader with $name.
      *
-     * @param string                   $name           of Header
+     * @param string $name of Header
      * @param Swift_Mime_HeaderEncoder $encoder
-     * @param EmailValidator           $emailValidator
+     * @param EmailValidator $emailValidator
      */
     public function __construct($name, Swift_Mime_HeaderEncoder $encoder, EmailValidator $emailValidator)
     {
@@ -113,7 +113,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     public function setNameAddresses($mailboxes)
     {
-        $this->mailboxes = $this->normalizeMailboxes((array) $mailboxes);
+        $this->mailboxes = $this->normalizeMailboxes((array)$mailboxes);
         $this->setCachedValue(null); //Clear any cached value
     }
 
@@ -198,7 +198,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     public function setAddresses($addresses)
     {
-        $this->setNameAddresses(array_values((array) $addresses));
+        $this->setNameAddresses(array_values((array)$addresses));
     }
 
     /**
@@ -221,7 +221,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     public function removeAddresses($addresses)
     {
         $this->setCachedValue(null);
-        foreach ((array) $addresses as $address) {
+        foreach ((array)$addresses as $address) {
             unset($this->mailboxes[$address]);
         }
     }
@@ -279,7 +279,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      * Produces a compliant, formatted display-name based on the string given.
      *
      * @param string $displayName as displayed
-     * @param bool   $shorten     the first line to make remove for header name
+     * @param bool $shorten the first line to make remove for header name
      *
      * @return string
      */
@@ -333,7 +333,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
             $mailboxStr = $email;
             if (null !== $name) {
                 $nameStr = $this->createDisplayNameString($name, empty($strings));
-                $mailboxStr = $nameStr.' <'.$mailboxStr.'>';
+                $mailboxStr = $nameStr . ' <' . $mailboxStr . '>';
             }
             $strings[] = $mailboxStr;
         }
@@ -352,7 +352,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
     {
         if (!$this->emailValidator->isValid($address, new RFCValidation())) {
             throw new Swift_RfcComplianceException(
-                'Address in mailbox given ['.$address.'] does not comply with RFC 2822, 3.6.2.'
+                'Address in mailbox given [' . $address . '] does not comply with RFC 2822, 3.6.2.'
             );
         }
     }

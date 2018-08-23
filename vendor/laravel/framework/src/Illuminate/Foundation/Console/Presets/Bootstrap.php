@@ -19,15 +19,15 @@ class Bootstrap extends Preset
     /**
      * Update the given package array.
      *
-     * @param  array  $packages
+     * @param  array $packages
      * @return array
      */
     protected static function updatePackageArray(array $packages)
     {
         return [
-            'bootstrap-sass' => '^3.3.7',
-            'jquery' => '^3.1.1',
-        ] + $packages;
+                'bootstrap-sass' => '^3.3.7',
+                'jquery' => '^3.1.1',
+            ] + $packages;
     }
 
     /**
@@ -37,7 +37,7 @@ class Bootstrap extends Preset
      */
     protected static function updateSass()
     {
-        copy(__DIR__.'/bootstrap-stubs/_variables.scss', resource_path('assets/sass/_variables.scss'));
-        copy(__DIR__.'/bootstrap-stubs/app.scss', resource_path('assets/sass/app.scss'));
+        copy(__DIR__ . '/bootstrap-stubs/_variables.scss', resource_path('assets/sass/_variables.scss'));
+        copy(__DIR__ . '/bootstrap-stubs/app.scss', resource_path('assets/sass/app.scss'));
     }
 }

@@ -782,7 +782,7 @@ class MimeType
     /**
      * Get the MIME type for a file based on the file's extension.
      *
-     * @param  string  $filename
+     * @param  string $filename
      * @return string
      */
     public static function from($filename)
@@ -795,7 +795,7 @@ class MimeType
     /**
      * Get the MIME type for a given extension or return all mimes.
      *
-     * @param  string  $extension
+     * @param  string $extension
      * @return string|array
      */
     public static function get($extension = null)
@@ -806,7 +806,7 @@ class MimeType
     /**
      * Search for the extension of a given MIME type.
      *
-     * @param  string  $mimeType
+     * @param  string $mimeType
      * @return string|null
      */
     public static function search($mimeType)
@@ -817,7 +817,7 @@ class MimeType
     /**
      * Get the MIME type for a given extension.
      *
-     * @param  string  $extension
+     * @param  string $extension
      * @return string
      */
     protected static function getMimeTypeFromExtension($extension)

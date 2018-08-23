@@ -45,7 +45,7 @@ abstract class AbstractNode implements \Countable
     /**
      * Constructor.
      *
-     * @param string       $name
+     * @param string $name
      * @param AbstractNode $parent
      */
     public function __construct($name, self $parent = null)
@@ -54,7 +54,7 @@ abstract class AbstractNode implements \Countable
             $name = \substr($name, 0, -1);
         }
 
-        $this->name   = $name;
+        $this->name = $name;
         $this->parent = $parent;
     }
 

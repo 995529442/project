@@ -62,13 +62,12 @@ class AddConsoleCommandPassTest extends TestCase
             ->register('my-command', MyCommand::class)
             ->setPublic(false)
             ->addTag('console.command', array('command' => 'my:command'))
-            ->addTag('console.command', array('command' => 'my:alias'))
-        ;
+            ->addTag('console.command', array('command' => 'my:alias'));
 
         (new AddConsoleCommandPass())->process($container);
 
         $commandLoader = $container->getDefinition('console.command_loader');
-        $commandLocator = $container->getDefinition((string) $commandLoader->getArgument(0));
+        $commandLocator = $container->getDefinition((string)$commandLoader->getArgument(0));
 
         $this->assertSame(ContainerCommandLoader::class, $commandLoader->getClass());
         $this->assertSame(array('my:command' => 'my-command', 'my:alias' => 'my-command'), $commandLoader->getArgument(1));
@@ -84,14 +83,13 @@ class AddConsoleCommandPassTest extends TestCase
         $container
             ->register('with-default-name', NamedCommand::class)
             ->setPublic(false)
-            ->addTag('console.command')
-        ;
+            ->addTag('console.command');
 
         $pass = new AddConsoleCommandPass();
         $pass->process($container);
 
         $commandLoader = $container->getDefinition('console.command_loader');
-        $commandLocator = $container->getDefinition((string) $commandLoader->getArgument(0));
+        $commandLocator = $container->getDefinition((string)$commandLoader->getArgument(0));
 
         $this->assertSame(ContainerCommandLoader::class, $commandLoader->getClass());
         $this->assertSame(array('default' => 'with-default-name'), $commandLoader->getArgument(1));
@@ -103,8 +101,7 @@ class AddConsoleCommandPassTest extends TestCase
         $container
             ->register('with-default-name', NamedCommand::class)
             ->setPublic(false)
-            ->addTag('console.command', array('command' => 'new-name'))
-        ;
+            ->addTag('console.command', array('command' => 'new-name'));
 
         $pass->process($container);
 
@@ -171,7 +168,7 @@ class AddConsoleCommandPassTest extends TestCase
         (new AddConsoleCommandPass())->process($container);
 
         $alias1 = 'console.command.symfony_component_console_tests_dependencyinjection_mycommand';
-        $alias2 = $alias1.'_my-command2';
+        $alias2 = $alias1 . '_my-command2';
         $this->assertTrue($container->hasAlias($alias1));
         $this->assertTrue($container->hasAlias($alias2));
     }

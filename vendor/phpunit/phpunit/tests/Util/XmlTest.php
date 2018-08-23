@@ -23,8 +23,8 @@ class XmlTest extends TestCase
         $e = null;
 
         $escapedString = Xml::prepareString($char);
-        $xml           = "<?xml version='1.0' encoding='UTF-8' ?><tag>$escapedString</tag>";
-        $dom           = new \DOMDocument('1.0', 'UTF-8');
+        $xml = "<?xml version='1.0' encoding='UTF-8' ?><tag>$escapedString</tag>";
+        $dom = new \DOMDocument('1.0', 'UTF-8');
 
         try {
             $dom->loadXML($xml);
@@ -100,7 +100,7 @@ class XmlTest extends TestCase
 
         $actual = Xml::xmlToVariable($dom->documentElement);
 
-        $this->assertSame($expected, (array) $actual);
+        $this->assertSame($expected, (array)$actual);
     }
 
     public function testXmlToVariableCanConstructObjectsWithConstructorArgumentsRecursively()

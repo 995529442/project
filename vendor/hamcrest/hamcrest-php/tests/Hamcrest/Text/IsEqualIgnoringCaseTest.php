@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Text;
 
 class IsEqualIgnoringCaseTest extends \Hamcrest\AbstractMatcherTest

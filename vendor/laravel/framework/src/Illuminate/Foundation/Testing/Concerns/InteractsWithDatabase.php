@@ -11,9 +11,9 @@ trait InteractsWithDatabase
     /**
      * Assert that a given where condition exists in the database.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function assertDatabaseHas($table, array $data, $connection = null)
@@ -28,9 +28,9 @@ trait InteractsWithDatabase
     /**
      * Assert that a given where condition does not exist in the database.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function assertDatabaseMissing($table, array $data, $connection = null)
@@ -47,9 +47,9 @@ trait InteractsWithDatabase
     /**
      * Assert the given record has been deleted.
      *
-     * @param  string  $table
-     * @param  array  $data
-     * @param  string  $connection
+     * @param  string $table
+     * @param  array $data
+     * @param  string $connection
      * @return $this
      */
     protected function assertSoftDeleted($table, array $data, $connection = null)
@@ -64,7 +64,7 @@ trait InteractsWithDatabase
     /**
      * Get the database connection.
      *
-     * @param  string|null  $connection
+     * @param  string|null $connection
      * @return \Illuminate\Database\Connection
      */
     protected function getConnection($connection = null)
@@ -79,7 +79,7 @@ trait InteractsWithDatabase
     /**
      * Seed a given database connection.
      *
-     * @param  string  $class
+     * @param  string $class
      * @return $this
      */
     public function seed($class = 'DatabaseSeeder')

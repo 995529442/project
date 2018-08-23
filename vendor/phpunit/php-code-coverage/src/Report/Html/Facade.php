@@ -42,21 +42,21 @@ class Facade
     /**
      * Constructor.
      *
-     * @param int    $lowUpperBound
-     * @param int    $highLowerBound
+     * @param int $lowUpperBound
+     * @param int $highLowerBound
      * @param string $generator
      */
     public function __construct($lowUpperBound = 50, $highLowerBound = 90, $generator = '')
     {
-        $this->generator      = $generator;
+        $this->generator = $generator;
         $this->highLowerBound = $highLowerBound;
-        $this->lowUpperBound  = $lowUpperBound;
-        $this->templatePath   = __DIR__ . '/Renderer/Template/';
+        $this->lowUpperBound = $lowUpperBound;
+        $this->templatePath = __DIR__ . '/Renderer/Template/';
     }
 
     /**
      * @param CodeCoverage $coverage
-     * @param string       $target
+     * @param string $target
      */
     public function process(CodeCoverage $coverage, $target)
     {

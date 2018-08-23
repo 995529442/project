@@ -47,7 +47,7 @@ class RunkitReloader extends AbstractListener
     /**
      * Reload code on input.
      *
-     * @param Shell  $shell
+     * @param Shell $shell
      * @param string $input
      */
     public function onInput(Shell $shell, $input)

@@ -30,37 +30,37 @@ use SebastianBergmann\Environment\Console;
  */
 class ResultPrinter extends Printer implements TestListener
 {
-    const EVENT_TEST_START      = 0;
-    const EVENT_TEST_END        = 1;
+    const EVENT_TEST_START = 0;
+    const EVENT_TEST_END = 1;
     const EVENT_TESTSUITE_START = 2;
-    const EVENT_TESTSUITE_END   = 3;
+    const EVENT_TESTSUITE_END = 3;
 
-    const COLOR_NEVER   = 'never';
-    const COLOR_AUTO    = 'auto';
-    const COLOR_ALWAYS  = 'always';
+    const COLOR_NEVER = 'never';
+    const COLOR_AUTO = 'auto';
+    const COLOR_ALWAYS = 'always';
     const COLOR_DEFAULT = self::COLOR_NEVER;
 
     /**
      * @var array
      */
     private static $ansiCodes = [
-        'bold'       => 1,
-        'fg-black'   => 30,
-        'fg-red'     => 31,
-        'fg-green'   => 32,
-        'fg-yellow'  => 33,
-        'fg-blue'    => 34,
+        'bold' => 1,
+        'fg-black' => 30,
+        'fg-red' => 31,
+        'fg-green' => 32,
+        'fg-yellow' => 33,
+        'fg-blue' => 34,
         'fg-magenta' => 35,
-        'fg-cyan'    => 36,
-        'fg-white'   => 37,
-        'bg-black'   => 40,
-        'bg-red'     => 41,
-        'bg-green'   => 42,
-        'bg-yellow'  => 43,
-        'bg-blue'    => 44,
+        'fg-cyan' => 36,
+        'fg-white' => 37,
+        'bg-black' => 40,
+        'bg-red' => 41,
+        'bg-green' => 42,
+        'bg-yellow' => 43,
+        'bg-blue' => 44,
         'bg-magenta' => 45,
-        'bg-cyan'    => 46,
-        'bg-white'   => 47
+        'bg-cyan' => 46,
+        'bg-white' => 47
     ];
 
     /**
@@ -131,12 +131,12 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * Constructor.
      *
-     * @param mixed      $out
-     * @param bool       $verbose
-     * @param string     $colors
-     * @param bool       $debug
+     * @param mixed $out
+     * @param bool $verbose
+     * @param string $colors
+     * @param bool $debug
      * @param int|string $numberOfColumns
-     * @param bool       $reverse
+     * @param bool $reverse
      *
      * @throws Exception
      */
@@ -169,7 +169,7 @@ class ResultPrinter extends Printer implements TestListener
             throw InvalidArgumentHelper::factory(6, 'boolean');
         }
 
-        $console            = new Console;
+        $console = new Console;
         $maxNumberOfColumns = $console->getNumberOfColumns();
 
         if ($numberOfColumns === 'max' || ($numberOfColumns !== 80 && $numberOfColumns > $maxNumberOfColumns)) {
@@ -177,9 +177,9 @@ class ResultPrinter extends Printer implements TestListener
         }
 
         $this->numberOfColumns = $numberOfColumns;
-        $this->verbose         = $verbose;
-        $this->debug           = $debug;
-        $this->reverse         = $reverse;
+        $this->verbose = $verbose;
+        $this->debug = $debug;
+        $this->reverse = $reverse;
 
         if ($colors === self::COLOR_AUTO && $console->hasColorSupport()) {
             $this->colors = true;
@@ -208,7 +208,7 @@ class ResultPrinter extends Printer implements TestListener
     }
 
     /**
-     * @param array  $defects
+     * @param array $defects
      * @param string $type
      */
     protected function printDefects(array $defects, $type)
@@ -248,7 +248,7 @@ class ResultPrinter extends Printer implements TestListener
 
     /**
      * @param TestFailure $defect
-     * @param int         $count
+     * @param int $count
      */
     protected function printDefect(TestFailure $defect, $count)
     {
@@ -258,7 +258,7 @@ class ResultPrinter extends Printer implements TestListener
 
     /**
      * @param TestFailure $defect
-     * @param int         $count
+     * @param int $count
      */
     protected function printDefectHeader(TestFailure $defect, $count)
     {
@@ -277,7 +277,7 @@ class ResultPrinter extends Printer implements TestListener
     protected function printDefectTrace(TestFailure $defect)
     {
         $e = $defect->thrownException();
-        $this->write((string) $e);
+        $this->write((string)$e);
 
         while ($e = $e->getPrevious()) {
             $this->write("\nCaused by\n" . $e);
@@ -424,9 +424,9 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * An error occurred.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addError(Test $test, \Exception $e, $time)
     {
@@ -437,9 +437,9 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * A failure occurred.
      *
-     * @param Test                 $test
+     * @param Test $test
      * @param AssertionFailedError $e
-     * @param float                $time
+     * @param float $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
@@ -450,9 +450,9 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * A warning occurred.
      *
-     * @param Test    $test
+     * @param Test $test
      * @param Warning $e
-     * @param float   $time
+     * @param float $time
      */
     public function addWarning(Test $test, Warning $e, $time)
     {
@@ -463,9 +463,9 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * Incomplete test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addIncompleteTest(Test $test, \Exception $e, $time)
     {
@@ -476,9 +476,9 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * Risky test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addRiskyTest(Test $test, \Exception $e, $time)
     {
@@ -489,9 +489,9 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * Skipped test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addSkippedTest(Test $test, \Exception $e, $time)
     {
@@ -507,9 +507,9 @@ class ResultPrinter extends Printer implements TestListener
     public function startTestSuite(TestSuite $suite)
     {
         if ($this->numTests == -1) {
-            $this->numTests      = \count($suite);
-            $this->numTestsWidth = \strlen((string) $this->numTests);
-            $this->maxColumn     = $this->numberOfColumns - \strlen('  /  (XXX%)') - (2 * $this->numTestsWidth);
+            $this->numTests = \count($suite);
+            $this->numTestsWidth = \strlen((string)$this->numTests);
+            $this->maxColumn = $this->numberOfColumns - \strlen('  /  (XXX%)') - (2 * $this->numTestsWidth);
         }
     }
 
@@ -542,7 +542,7 @@ class ResultPrinter extends Printer implements TestListener
     /**
      * A test ended.
      *
-     * @param Test  $test
+     * @param Test $test
      * @param float $time
      */
     public function endTest(Test $test, $time)
@@ -630,10 +630,10 @@ class ResultPrinter extends Printer implements TestListener
             return $buffer;
         }
 
-        $codes   = \array_map('trim', \explode(',', $color));
-        $lines   = \explode("\n", $buffer);
+        $codes = \array_map('trim', \explode(',', $color));
+        $lines = \explode("\n", $buffer);
         $padding = \max(\array_map('strlen', $lines));
-        $styles  = [];
+        $styles = [];
 
         foreach ($codes as $code) {
             $styles[] = self::$ansiCodes[$code];
@@ -655,7 +655,7 @@ class ResultPrinter extends Printer implements TestListener
      *
      * @param string $color
      * @param string $buffer
-     * @param bool   $lf
+     * @param bool $lf
      */
     protected function writeWithColor($color, $buffer, $lf = true)
     {
@@ -679,10 +679,10 @@ class ResultPrinter extends Printer implements TestListener
     }
 
     /**
-     * @param int    $count
+     * @param int $count
      * @param string $name
      * @param string $color
-     * @param bool   $always
+     * @param bool $always
      */
     private function writeCountString($count, $name, $color, $always = false)
     {

@@ -9,8 +9,8 @@ trait InteractsWithContentTypes
     /**
      * Determine if the given content types match.
      *
-     * @param  string  $actual
-     * @param  string  $type
+     * @param  string $actual
+     * @param  string $type
      * @return bool
      */
     public static function matchesType($actual, $type)
@@ -21,7 +21,7 @@ trait InteractsWithContentTypes
 
         $split = explode('/', $actual);
 
-        return isset($split[1]) && preg_match('#'.preg_quote($split[0], '#').'/.+\+'.preg_quote($split[1], '#').'#', $type);
+        return isset($split[1]) && preg_match('#' . preg_quote($split[0], '#') . '/.+\+' . preg_quote($split[1], '#') . '#', $type);
     }
 
     /**
@@ -41,7 +41,7 @@ trait InteractsWithContentTypes
      */
     public function expectsJson()
     {
-        return ($this->ajax() && ! $this->pjax()) || $this->wantsJson();
+        return ($this->ajax() && !$this->pjax()) || $this->wantsJson();
     }
 
     /**
@@ -59,7 +59,7 @@ trait InteractsWithContentTypes
     /**
      * Determines whether the current requests accepts a given content type.
      *
-     * @param  string|array  $contentTypes
+     * @param  string|array $contentTypes
      * @return bool
      */
     public function accepts($contentTypes)
@@ -70,7 +70,7 @@ trait InteractsWithContentTypes
             return true;
         }
 
-        $types = (array) $contentTypes;
+        $types = (array)$contentTypes;
 
         foreach ($accepts as $accept) {
             if ($accept === '*/*' || $accept === '*') {
@@ -78,7 +78,7 @@ trait InteractsWithContentTypes
             }
 
             foreach ($types as $type) {
-                if ($this->matchesType($accept, $type) || $accept === strtok($type, '/').'/*') {
+                if ($this->matchesType($accept, $type) || $accept === strtok($type, '/') . '/*') {
                     return true;
                 }
             }
@@ -90,14 +90,14 @@ trait InteractsWithContentTypes
     /**
      * Return the most suitable content type from the given array based on content negotiation.
      *
-     * @param  string|array  $contentTypes
+     * @param  string|array $contentTypes
      * @return string|null
      */
     public function prefers($contentTypes)
     {
         $accepts = $this->getAcceptableContentTypes();
 
-        $contentTypes = (array) $contentTypes;
+        $contentTypes = (array)$contentTypes;
 
         foreach ($accepts as $accept) {
             if (in_array($accept, ['*/*', '*'])) {
@@ -107,11 +107,11 @@ trait InteractsWithContentTypes
             foreach ($contentTypes as $contentType) {
                 $type = $contentType;
 
-                if (! is_null($mimeType = $this->getMimeType($contentType))) {
+                if (!is_null($mimeType = $this->getMimeType($contentType))) {
                     $type = $mimeType;
                 }
 
-                if ($this->matchesType($type, $accept) || $accept === strtok($type, '/').'/*') {
+                if ($this->matchesType($type, $accept) || $accept === strtok($type, '/') . '/*') {
                     return $contentType;
                 }
             }
@@ -141,7 +141,7 @@ trait InteractsWithContentTypes
     /**
      * Get the data format expected in the response.
      *
-     * @param  string  $default
+     * @param  string $default
      * @return string
      */
     public function format($default = 'html')

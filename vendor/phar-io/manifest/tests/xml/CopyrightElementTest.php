@@ -4,7 +4,8 @@ namespace PharIo\Manifest;
 
 use DOMDocument;
 
-class CopyrightElementTest extends \PHPUnit_Framework_TestCase {
+class CopyrightElementTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * @var DOMDocument
      */
@@ -15,23 +16,27 @@ class CopyrightElementTest extends \PHPUnit_Framework_TestCase {
      */
     private $copyright;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->dom = new DOMDocument();
         $this->dom->loadXML('<?xml version="1.0" ?><copyright xmlns="https://phar.io/xml/manifest/1.0" />');
         $this->copyright = new CopyrightElement($this->dom->documentElement);
     }
 
-    public function testThrowsExceptionWhenGetAuthroElementsIsCalledButNodesAreMissing() {
+    public function testThrowsExceptionWhenGetAuthroElementsIsCalledButNodesAreMissing()
+    {
         $this->expectException(ManifestElementException::class);
         $this->copyright->getAuthorElements();
     }
 
-    public function testThrowsExceptionWhenGetLicenseElementIsCalledButNodeIsMissing() {
+    public function testThrowsExceptionWhenGetLicenseElementIsCalledButNodeIsMissing()
+    {
         $this->expectException(ManifestElementException::class);
         $this->copyright->getLicenseElement();
     }
 
-    public function testGetAuthorElementsReturnsAuthorElementCollection() {
+    public function testGetAuthorElementsReturnsAuthorElementCollection()
+    {
         $this->dom->documentElement->appendChild(
             $this->dom->createElementNS('https://phar.io/xml/manifest/1.0', 'author')
         );
@@ -40,7 +45,8 @@ class CopyrightElementTest extends \PHPUnit_Framework_TestCase {
         );
     }
 
-    public function testGetLicenseElementReturnsLicenseElement() {
+    public function testGetLicenseElementReturnsLicenseElement()
+    {
         $this->dom->documentElement->appendChild(
             $this->dom->createElementNS('https://phar.io/xml/manifest/1.0', 'license')
         );

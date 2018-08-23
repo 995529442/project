@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest;
 
 class UtilTest extends \PhpUnit_Framework_TestCase

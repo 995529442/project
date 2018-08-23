@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework\MockObject\Invocation;
 
 use PHPUnit\Framework\MockObject\Generator;
@@ -24,12 +25,12 @@ class StaticInvocation implements Invocation, SelfDescribing
      * @var array
      */
     private static $uncloneableExtensions = [
-        'mysqli'    => true,
-        'SQLite'    => true,
-        'sqlite3'   => true,
-        'tidy'      => true,
+        'mysqli' => true,
+        'SQLite' => true,
+        'sqlite3' => true,
+        'tidy' => true,
         'xmlwriter' => true,
-        'xsl'       => true
+        'xsl' => true
     ];
 
     /**
@@ -73,18 +74,18 @@ class StaticInvocation implements Invocation, SelfDescribing
     /**
      * @param string $className
      * @param string $methodName
-     * @param array  $parameters
+     * @param array $parameters
      * @param string $returnType
-     * @param bool   $cloneObjects
+     * @param bool $cloneObjects
      */
     public function __construct($className, $methodName, array $parameters, $returnType, $cloneObjects = false)
     {
-        $this->className  = $className;
+        $this->className = $className;
         $this->methodName = $methodName;
         $this->parameters = $parameters;
 
         if (\strpos($returnType, '?') === 0) {
-            $returnType                 = \substr($returnType, 1);
+            $returnType = \substr($returnType, 1);
             $this->isReturnTypeNullable = true;
         }
 
@@ -210,7 +211,7 @@ class StaticInvocation implements Invocation, SelfDescribing
     private function cloneObject($original)
     {
         $cloneable = null;
-        $object    = new ReflectionObject($original);
+        $object = new ReflectionObject($original);
 
         // Check the blacklist before asking PHP reflection to work around
         // https://bugs.php.net/bug.php?id=53967
@@ -234,7 +235,7 @@ class StaticInvocation implements Invocation, SelfDescribing
         }
 
         if ($cloneable === null && $object->hasMethod('__clone')) {
-            $method    = $object->getMethod('__clone');
+            $method = $object->getMethod('__clone');
             $cloneable = $method->isPublic();
         }
 

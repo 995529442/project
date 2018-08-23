@@ -35,7 +35,7 @@ class PdoSessionHandlerTest extends TestCase
     {
         $this->dbFile = tempnam(sys_get_temp_dir(), 'sf2_sqlite_sessions');
 
-        return 'sqlite:'.$this->dbFile;
+        return 'sqlite:' . $this->dbFile;
     }
 
     protected function getMemorySqlitePdo()
@@ -119,7 +119,7 @@ class PdoSessionHandlerTest extends TestCase
 
     public function testReadWriteReadWithNullByte()
     {
-        $sessionData = 'da'."\0".'ta';
+        $sessionData = 'da' . "\0" . 'ta';
 
         $storage = new PdoSessionHandler($this->getMemorySqlitePdo());
         $storage->open('', 'sid');

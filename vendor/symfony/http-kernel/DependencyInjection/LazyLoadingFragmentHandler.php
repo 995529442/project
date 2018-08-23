@@ -30,9 +30,9 @@ class LazyLoadingFragmentHandler extends FragmentHandler
     private $initialized = array();
 
     /**
-     * @param ContainerInterface $container    A container
-     * @param RequestStack       $requestStack The Request stack that controls the lifecycle of requests
-     * @param bool               $debug        Whether the debug mode is enabled or not
+     * @param ContainerInterface $container A container
+     * @param RequestStack $requestStack The Request stack that controls the lifecycle of requests
+     * @param bool $debug Whether the debug mode is enabled or not
      */
     public function __construct(ContainerInterface $container, RequestStack $requestStack, $debug = false)
     {
@@ -44,7 +44,7 @@ class LazyLoadingFragmentHandler extends FragmentHandler
     /**
      * Adds a service as a fragment renderer.
      *
-     * @param string $name     The service name
+     * @param string $name The service name
      * @param string $renderer The render service id
      *
      * @deprecated since version 3.3, to be removed in 4.0

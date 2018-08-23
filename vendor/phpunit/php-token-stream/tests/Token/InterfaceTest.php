@@ -25,7 +25,7 @@ class PHP_Token_InterfaceTest extends TestCase
     protected function setUp()
     {
         $ts = new PHP_Token_Stream(TEST_FILES_PATH . 'source4.php');
-        $i  = 0;
+        $i = 0;
 
         foreach ($ts as $token) {
             if ($token instanceof PHP_Token_CLASS) {
@@ -133,11 +133,11 @@ class PHP_Token_InterfaceTest extends TestCase
 
     /**
      * @dataProvider provideFilesWithClassesWithinMultipleNamespaces
-     * @covers PHP_Token_INTERFACE::getPackage
+     * @covers       PHP_Token_INTERFACE::getPackage
      */
     public function testGetPackageNamespaceForFileWithMultipleNamespaces($filepath)
     {
-        $tokenStream     = new PHP_Token_Stream($filepath);
+        $tokenStream = new PHP_Token_Stream($filepath);
         $firstClassFound = false;
         foreach ($tokenStream as $token) {
             if ($firstClassFound === false && $token instanceof PHP_Token_INTERFACE) {
@@ -172,7 +172,7 @@ class PHP_Token_InterfaceTest extends TestCase
      */
     public function testGetPackageNamespaceWhenExtentingFromNamespaceClass()
     {
-        $tokenStream     = new PHP_Token_Stream(TEST_FILES_PATH . 'classExtendsNamespacedClass.php');
+        $tokenStream = new PHP_Token_Stream(TEST_FILES_PATH . 'classExtendsNamespacedClass.php');
         $firstClassFound = false;
         foreach ($tokenStream as $token) {
             if ($firstClassFound === false && $token instanceof PHP_Token_INTERFACE) {

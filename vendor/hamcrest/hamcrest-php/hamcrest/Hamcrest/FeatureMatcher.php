@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest;
 
 /*
@@ -50,7 +51,7 @@ abstract class FeatureMatcher extends TypeSafeDiagnosingMatcher
 
         if (!$this->_subMatcher->matches($featureValue)) {
             $mismatchDescription->appendText($this->_featureName)
-                                                    ->appendText(' was ')->appendValue($featureValue);
+                ->appendText(' was ')->appendValue($featureValue);
 
             return false;
         }
@@ -61,7 +62,6 @@ abstract class FeatureMatcher extends TypeSafeDiagnosingMatcher
     final public function describeTo(Description $description)
     {
         $description->appendText($this->_featureDescription)->appendText(' ')
-                                ->appendDescriptionOf($this->_subMatcher)
-                             ;
+            ->appendDescriptionOf($this->_subMatcher);
     }
 }

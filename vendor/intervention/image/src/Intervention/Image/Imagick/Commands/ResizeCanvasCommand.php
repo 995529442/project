@@ -79,7 +79,7 @@ class ResizeCanvasCommand extends \Intervention\Image\Commands\AbstractCommand
         // copy image into new canvas
         $image->getCore()->cropImage($src_w, $src_h, $src_x, $src_y);
         $canvas->getCore()->compositeImage($image->getCore(), \Imagick::COMPOSITE_DEFAULT, $dst_x, $dst_y);
-        $canvas->getCore()->setImagePage(0,0,0,0);
+        $canvas->getCore()->setImagePage(0, 0, 0, 0);
 
         // set new core to canvas
         $image->setCore($canvas->getCore());

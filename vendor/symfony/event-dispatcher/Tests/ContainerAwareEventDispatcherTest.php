@@ -37,8 +37,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container = new Container();
         $container->set('service.listener', $service);
@@ -58,20 +57,17 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $service
             ->expects($this->once())
             ->method('onEventWithPriority')
-            ->with($event)
-        ;
+            ->with($event);
 
         $service
             ->expects($this->once())
             ->method('onEventNested')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container = new Container();
         $container->set('service.subscriber', $service);
@@ -93,8 +89,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $container = new Container();
         $container->set('service.listener', $service);
@@ -121,8 +116,7 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $service
             ->expects($this->once())
             ->method('onEvent')
-            ->with($event)
-        ;
+            ->with($event);
 
         $this->assertTrue($dispatcher->hasListeners());
 

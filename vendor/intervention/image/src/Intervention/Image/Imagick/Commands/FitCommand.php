@@ -34,7 +34,7 @@ class FitCommand extends \Intervention\Image\Commands\AbstractCommand
 
         // resize image
         $image->getCore()->scaleImage($resized->getWidth(), $resized->getHeight());
-        $image->getCore()->setImagePage(0,0,0,0);
+        $image->getCore()->setImagePage(0, 0, 0, 0);
 
         return true;
     }

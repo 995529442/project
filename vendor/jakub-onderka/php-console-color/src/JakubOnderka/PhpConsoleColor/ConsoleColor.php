@@ -1,4 +1,5 @@
 <?php
+
 namespace JakubOnderka\PhpConsoleColor;
 
 class ConsoleColor
@@ -122,7 +123,7 @@ class ConsoleColor
      */
     public function setForceStyle($forceStyle)
     {
-        $this->forceStyle = (bool) $forceStyle;
+        $this->forceStyle = (bool)$forceStyle;
     }
 
     /**

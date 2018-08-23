@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Core;
 
 class SetTest extends \Hamcrest\AbstractMatcherTest

@@ -53,7 +53,7 @@ class ShowCommand extends ReflectingCommand
             ->setName('show')
             ->setDefinition([
                 new CodeArgument('target', CodeArgument::OPTIONAL, 'Function, class, instance, constant, method or property to show.'),
-                new InputOption('ex', null,  InputOption::VALUE_OPTIONAL, 'Show last exception context. Optionally specify a stack index.', 1),
+                new InputOption('ex', null, InputOption::VALUE_OPTIONAL, 'Show last exception context. Optionally specify a stack index.', 1),
             ])
             ->setDescription('Show the code for an object, class, constant, method or property.')
             ->setHelp(

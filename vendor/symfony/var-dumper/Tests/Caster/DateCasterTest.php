@@ -187,29 +187,29 @@ EODUMP;
         return array(
             array('PT0S', 0, 0, '0s', '0s'),
             array('PT0S', 0.1, 0, $withMs ? '+ 00:00:00.100' : '0s', '%is'),
-            array('PT1S', 0, 0, '+ 00:00:01'.$ms, '%is'),
-            array('PT2M', 0, 0, '+ 00:02:00'.$ms, '%is'),
-            array('PT3H', 0, 0, '+ 03:00:00'.$ms, '%ss'),
+            array('PT1S', 0, 0, '+ 00:00:01' . $ms, '%is'),
+            array('PT2M', 0, 0, '+ 00:02:00' . $ms, '%is'),
+            array('PT3H', 0, 0, '+ 03:00:00' . $ms, '%ss'),
             array('P4D', 0, 0, '+ 4d', '%ss'),
             array('P5M', 0, 0, '+ 5m', null),
             array('P6Y', 0, 0, '+ 6y', null),
-            array('P1Y2M3DT4H5M6S', 0, 0, '+ 1y 2m 3d 04:05:06'.$ms, null),
-            array('PT1M60S', 0, 0, '+ 00:02:00'.$ms, null),
-            array('PT1H60M', 0, 0, '+ 02:00:00'.$ms, null),
+            array('P1Y2M3DT4H5M6S', 0, 0, '+ 1y 2m 3d 04:05:06' . $ms, null),
+            array('PT1M60S', 0, 0, '+ 00:02:00' . $ms, null),
+            array('PT1H60M', 0, 0, '+ 02:00:00' . $ms, null),
             array('P1DT24H', 0, 0, '+ 2d', null),
             array('P1M32D', 0, 0, '+ 1m 32d', null),
 
             array('PT0S', 0, 1, '0s', '0s'),
             array('PT0S', 0.1, 1, $withMs ? '- 00:00:00.100' : '0s', '%is'),
-            array('PT1S', 0, 1, '- 00:00:01'.$ms, '%is'),
-            array('PT2M', 0, 1, '- 00:02:00'.$ms, '%is'),
-            array('PT3H', 0, 1, '- 03:00:00'.$ms, '%ss'),
+            array('PT1S', 0, 1, '- 00:00:01' . $ms, '%is'),
+            array('PT2M', 0, 1, '- 00:02:00' . $ms, '%is'),
+            array('PT3H', 0, 1, '- 03:00:00' . $ms, '%ss'),
             array('P4D', 0, 1, '- 4d', '%ss'),
             array('P5M', 0, 1, '- 5m', null),
             array('P6Y', 0, 1, '- 6y', null),
-            array('P1Y2M3DT4H5M6S', 0, 1, '- 1y 2m 3d 04:05:06'.$ms, null),
-            array('PT1M60S', 0, 1, '- 00:02:00'.$ms, null),
-            array('PT1H60M', 0, 1, '- 02:00:00'.$ms, null),
+            array('P1Y2M3DT4H5M6S', 0, 1, '- 1y 2m 3d 04:05:06' . $ms, null),
+            array('PT1M60S', 0, 1, '- 00:02:00' . $ms, null),
+            array('PT1H60M', 0, 1, '- 02:00:00' . $ms, null),
             array('P1DT24H', 0, 1, '- 2d', null),
             array('P1M32D', 0, 1, '- 1m 32d', null),
         );
@@ -407,7 +407,9 @@ EODUMP;
         );
 
         if (\PHP_VERSION_ID < 70107) {
-            array_walk($periods, function (&$i) { $i[5] = ''; });
+            array_walk($periods, function (&$i) {
+                $i[5] = '';
+            });
         }
 
         return $periods;

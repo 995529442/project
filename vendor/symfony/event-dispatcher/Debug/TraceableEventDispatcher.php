@@ -156,7 +156,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
         $called = array();
         foreach ($this->called as $eventName => $listeners) {
             foreach ($listeners as $listener) {
-                $called[$eventName.'.'.$listener->getPretty()] = $listener->getInfo($eventName);
+                $called[$eventName . '.' . $listener->getPretty()] = $listener->getInfo($eventName);
             }
         }
 
@@ -197,7 +197,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
                     if (!$listener instanceof WrappedListener) {
                         $listener = new WrappedListener($listener, null, $this->stopwatch, $this);
                     }
-                    $notCalled[$eventName.'.'.$listener->getPretty()] = $listener->getInfo($eventName);
+                    $notCalled[$eventName . '.' . $listener->getPretty()] = $listener->getInfo($eventName);
                 }
             }
         }
@@ -215,8 +215,8 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     /**
      * Proxies all method calls to the original event dispatcher.
      *
-     * @param string $method    The method name
-     * @param array  $arguments The method arguments
+     * @param string $method The method name
+     * @param array $arguments The method arguments
      *
      * @return mixed
      */
@@ -229,7 +229,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
      * Called before dispatching the event.
      *
      * @param string $eventName The event name
-     * @param Event  $event     The event
+     * @param Event $event The event
      */
     protected function preDispatch($eventName, Event $event)
     {
@@ -239,7 +239,7 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
      * Called after dispatching the event.
      *
      * @param string $eventName The event name
-     * @param Event  $event     The event
+     * @param Event $event The event
      */
     protected function postDispatch($eventName, Event $event)
     {

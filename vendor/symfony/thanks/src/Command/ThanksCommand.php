@@ -110,8 +110,7 @@ class ThanksCommand extends BaseCommand
             ->setDescription(sprintf('Give thanks (in the form of a GitHub %s) to your fellow PHP package maintainers.', $this->star))
             ->setDefinition([
                 new InputOption('dry-run', null, InputOption::VALUE_NONE, 'Don\'t actually send the stars'),
-            ])
-        ;
+            ]);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -158,20 +157,20 @@ class ThanksCommand extends BaseCommand
         $rfs = Factory::createRemoteFilesystem($this->getIo(), $composer->getConfig());
 
         $i = 0;
-        $template = '_%d: repository(owner:"%s",name:"%s"){id,viewerHasStarred}'."\n";
+        $template = '_%d: repository(owner:"%s",name:"%s"){id,viewerHasStarred}' . "\n";
         $graphql = '';
 
         foreach ($urls as $package => $url) {
             if (preg_match('#^https://github.com/([^/]++)/([^./]++)#', $url, $url)) {
                 $graphql .= sprintf($template, ++$i, $url[1], $url[2]);
-                $aliases['_'.$i] = [$package, $url[0]];
+                $aliases['_' . $i] = [$package, $url[0]];
             }
         }
 
         $failures = [];
         $repos = $this->callGitHub($rfs, sprintf("query{\n%s}", $graphql), $failures);
 
-        $template = '%1$s: addStar(input:{clientMutationId:"%s",starrableId:"%s"}){clientMutationId}'."\n";
+        $template = '%1$s: addStar(input:{clientMutationId:"%s",starrableId:"%s"}){clientMutationId}' . "\n";
         $graphql = '';
         $notStarred = [];
 

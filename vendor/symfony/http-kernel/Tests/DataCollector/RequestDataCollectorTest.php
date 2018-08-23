@@ -99,7 +99,7 @@ class RequestDataCollectorTest extends TestCase
                 '"Regular" callable',
                 array($this, 'testControllerInspection'),
                 array(
-                    'class' => __NAMESPACE__.'\RequestDataCollectorTest',
+                    'class' => __NAMESPACE__ . '\RequestDataCollectorTest',
                     'method' => 'testControllerInspection',
                     'file' => __FILE__,
                     'line' => $r1->getStartLine(),
@@ -108,9 +108,11 @@ class RequestDataCollectorTest extends TestCase
 
             array(
                 'Closure',
-                function () { return 'foo'; },
+                function () {
+                    return 'foo';
+                },
                 array(
-                    'class' => __NAMESPACE__.'\{closure}',
+                    'class' => __NAMESPACE__ . '\{closure}',
                     'method' => null,
                     'file' => __FILE__,
                     'line' => __LINE__ - 5,
@@ -119,7 +121,7 @@ class RequestDataCollectorTest extends TestCase
 
             array(
                 'Static callback as string',
-                __NAMESPACE__.'\RequestDataCollectorTest::staticControllerMethod',
+                __NAMESPACE__ . '\RequestDataCollectorTest::staticControllerMethod',
                 array(
                     'class' => 'Symfony\Component\HttpKernel\Tests\DataCollector\RequestDataCollectorTest',
                     'method' => 'staticControllerMethod',

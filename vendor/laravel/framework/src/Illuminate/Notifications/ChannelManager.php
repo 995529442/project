@@ -24,8 +24,8 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Send the given notification to the given notifiable entities.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
-     * @param  mixed  $notification
+     * @param  \Illuminate\Support\Collection|array|mixed $notifiables
+     * @param  mixed $notification
      * @return void
      */
     public function send($notifiables, $notification)
@@ -38,9 +38,9 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Send the given notification immediately.
      *
-     * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
-     * @param  mixed  $notification
-     * @param  array|null  $channels
+     * @param  \Illuminate\Support\Collection|array|mixed $notifiables
+     * @param  mixed $notification
+     * @param  array|null $channels
      * @return void
      */
     public function sendNow($notifiables, $notification, array $channels = null)
@@ -53,7 +53,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Get a channel instance.
      *
-     * @param  string|null  $name
+     * @param  string|null $name
      * @return mixed
      */
     public function channel($name = null)
@@ -120,7 +120,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Create a new driver instance.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return mixed
      *
      * @throws \InvalidArgumentException
@@ -161,7 +161,7 @@ class ChannelManager extends Manager implements DispatcherContract, FactoryContr
     /**
      * Set the default channel driver name.
      *
-     * @param  string  $channel
+     * @param  string $channel
      * @return void
      */
     public function deliverVia($channel)

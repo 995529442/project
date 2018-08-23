@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\Constraint\Constraint;
 
 final class NamedConstraint extends Constraint

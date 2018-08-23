@@ -26,26 +26,26 @@ class Person extends \Faker\Provider\Person
         '{{firstNameFemale}} {{firstNameFemale}} {{lastName}} {{lastName}} {{lastName}}',
     );
 
-    /** @link http://goo.gl/v6bScG document with all pt abreviations **/
+    /** @link http://goo.gl/v6bScG document with all pt abreviations * */
     protected static $titleMale = array('Sr.', 'Dr.', 'Exmo.', 'Eng.', 'Eng.º', 'Ex.', 'Exº');
     protected static $titleFemale = array('Sra.', 'Dra.', 'Exma', 'Eng.ª', 'Exª');
 
     protected static $firstEightDigitsFormat = array(
-      '1#######',
-      '2#######',
-      '3#######',
-      '45######',
-      '5#######',
-      '6#######',
-      '70######',
-      '71######',
-      '72######',
-      '77######',
-      '79######',
-      '8#######' ,
-      '90######',
-      '98######',
-      '99######'
+        '1#######',
+        '2#######',
+        '3#######',
+        '45######',
+        '5#######',
+        '6#######',
+        '70######',
+        '71######',
+        '72######',
+        '77######',
+        '79######',
+        '8#######',
+        '90######',
+        '98######',
+        '99######'
     );
 
     /**
@@ -60,7 +60,7 @@ class Person extends \Faker\Provider\Person
         $firstEightDigits = static::numerify(static::randomElement(static::$firstEightDigitsFormat));
         $lastDigit = static::dvCalcMod11($firstEightDigits);
 
-        return $firstEightDigits.$lastDigit;
+        return $firstEightDigits . $lastDigit;
     }
 
     /**
@@ -110,7 +110,7 @@ class Person extends \Faker\Provider\Person
         'Salvador', 'António', 'Vasco', 'Henrique', 'Lourenço', 'Manuel', 'Eduardo', 'Bernardo',
         'Leandro', 'Luís', 'Diego', 'Leonardo', 'Alexandre', 'Rúben', 'Mateus', 'Ricardo',
         'Vicente', 'Filipe', 'Bruno', 'Nuno', 'Carlos', 'Rui', 'Hugo', 'Samuel', 'Álvaro',
-        'Matias', 'Fábio', 'Ivo', 'Paulo', 'Jorge', 'Xavier', 'Marco', 'Isaac', 'Raúl','Benjamim',
+        'Matias', 'Fábio', 'Ivo', 'Paulo', 'Jorge', 'Xavier', 'Marco', 'Isaac', 'Raúl', 'Benjamim',
         'Renato', 'Artur', 'Mário', 'Frederico', 'Cristiano', 'Ivan', 'Sérgio', 'Micael',
         'Vítor', 'Edgar', 'Kevin', 'Joaquim', 'Igor', 'Ângelo', 'Enzo', 'Valentim', 'Flávio',
         'Joel', 'Fernando', 'Sebastião', 'Tomé', 'César', 'Cláudio', 'Nelson', 'Lisandro', 'Jaime',
@@ -132,7 +132,7 @@ class Person extends \Faker\Provider\Person
     );
 
     protected static $lastName = array(
-        'Abreu',  'Almeida',  'Alves', 'Amaral', 'Amorim', 'Andrade', 'Anjos', 'Antunes', 'Araújo', 'Assunção',
+        'Abreu', 'Almeida', 'Alves', 'Amaral', 'Amorim', 'Andrade', 'Anjos', 'Antunes', 'Araújo', 'Assunção',
         'Azevedo', 'Baptista', 'Barbosa', 'Barros', 'Batista', 'Borges', 'Branco', 'Brito', 'Campos', 'Cardoso',
         'Carneiro', 'Carvalho', 'Castro', 'Coelho', 'Correia', 'Costa', 'Cruz', 'Cunha', 'Domingues', 'Esteves',
         'Faria', 'Fernandes', 'Ferreira', 'Figueiredo', 'Fonseca', 'Freitas', 'Garcia', 'Gaspar', 'Gomes',

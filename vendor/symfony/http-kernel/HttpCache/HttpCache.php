@@ -223,7 +223,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * Forwards the Request to the backend without storing the Response in the cache.
      *
      * @param Request $request A Request instance
-     * @param bool    $catch   Whether to process exceptions
+     * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
      */
@@ -238,7 +238,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * Invalidates non-safe methods (like POST, PUT, and DELETE).
      *
      * @param Request $request A Request instance
-     * @param bool    $catch   Whether to process exceptions
+     * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
      *
@@ -287,7 +287,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * it triggers "miss" processing.
      *
      * @param Request $request A Request instance
-     * @param bool    $catch   Whether to process exceptions
+     * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
      *
@@ -332,9 +332,9 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * The original request is used as a template for a conditional
      * GET request with the backend.
      *
-     * @param Request  $request A Request instance
-     * @param Response $entry   A Response instance to validate
-     * @param bool     $catch   Whether to process exceptions
+     * @param Request $request A Request instance
+     * @param Response $entry A Response instance to validate
+     * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
      */
@@ -396,7 +396,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * stores it in the cache if is cacheable.
      *
      * @param Request $request A Request instance
-     * @param bool    $catch   Whether to process exceptions
+     * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
      */
@@ -428,9 +428,9 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * All backend requests (cache passes, fetches, cache validations)
      * run through this method.
      *
-     * @param Request  $request A Request instance
-     * @param bool     $catch   Whether to catch exceptions or not
-     * @param Response $entry   A Response instance (the stale entry if present, null otherwise)
+     * @param Request $request A Request instance
+     * @param bool $catch Whether to catch exceptions or not
+     * @param Response $entry A Response instance (the stale entry if present, null otherwise)
      *
      * @return Response A Response instance
      */
@@ -443,7 +443,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
         // modify the X-Forwarded-For header if needed
         $forwardedFor = $request->headers->get('X-Forwarded-For');
         if ($forwardedFor) {
-            $request->headers->set('X-Forwarded-For', $forwardedFor.', '.$request->server->get('REMOTE_ADDR'));
+            $request->headers->set('X-Forwarded-For', $forwardedFor . ', ' . $request->server->get('REMOTE_ADDR'));
         } else {
             $request->headers->set('X-Forwarded-For', $request->server->get('REMOTE_ADDR'));
         }
@@ -596,7 +596,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
             if ($response->headers->has('X-Body-File')) {
                 include $response->headers->get('X-Body-File');
             } else {
-                eval('; ?>'.$response->getContent().'<?php ;');
+                eval('; ?>' . $response->getContent() . '<?php ;');
             }
 
             $response->setContent(ob_get_clean());
@@ -651,7 +651,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * Records that an event took place.
      *
      * @param Request $request A Request instance
-     * @param string  $event   The event name
+     * @param string $event The event name
      */
     private function record(Request $request, $event)
     {
@@ -669,10 +669,10 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     {
         $path = $request->getPathInfo();
         if ($qs = $request->getQueryString()) {
-            $path .= '?'.$qs;
+            $path .= '?' . $qs;
         }
 
-        return $request->getMethod().' '.$path;
+        return $request->getMethod() . ' ' . $path;
     }
 
     /**

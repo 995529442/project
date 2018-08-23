@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest;
 
 /**
@@ -9,7 +10,6 @@ namespace Hamcrest;
  * be cast to certain data types such as numerics (or even strings if
  * __toString() has not be defined).
  */
-
 abstract class TypeSafeMatcher extends BaseMatcher
 {
 
@@ -88,13 +88,13 @@ abstract class TypeSafeMatcher extends BaseMatcher
 
             case self::TYPE_OBJECT:
                 return is_object($value)
-                        && ($this->_expectedSubtype === null
-                                || $value instanceof $this->_expectedSubtype);
+                    && ($this->_expectedSubtype === null
+                        || $value instanceof $this->_expectedSubtype);
 
             case self::TYPE_RESOURCE:
                 return is_resource($value)
-                        && ($this->_expectedSubtype === null
-                                || get_resource_type($value) == $this->_expectedSubtype);
+                    && ($this->_expectedSubtype === null
+                        || get_resource_type($value) == $this->_expectedSubtype);
 
             case self::TYPE_BOOLEAN:
                 return true;

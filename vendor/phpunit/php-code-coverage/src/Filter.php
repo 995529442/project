@@ -32,7 +32,7 @@ class Filter
     public function addDirectoryToWhitelist($directory, $suffix = '.php', $prefix = '')
     {
         $facade = new \File_Iterator_Facade;
-        $files  = $facade->getFilesAsArray($directory, $suffix, $prefix);
+        $files = $facade->getFilesAsArray($directory, $suffix, $prefix);
 
         foreach ($files as $file) {
             $this->addFileToWhitelist($file);
@@ -71,7 +71,7 @@ class Filter
     public function removeDirectoryFromWhitelist($directory, $suffix = '.php', $prefix = '')
     {
         $facade = new \File_Iterator_Facade;
-        $files  = $facade->getFilesAsArray($directory, $suffix, $prefix);
+        $files = $facade->getFilesAsArray($directory, $suffix, $prefix);
 
         foreach ($files as $file) {
             $this->removeFileFromWhitelist($file);

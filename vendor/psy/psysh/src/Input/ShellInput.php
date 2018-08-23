@@ -50,7 +50,7 @@ class ShellInput extends StringInput
         $hasCodeArgument = false;
 
         if ($definition->getArgumentCount() > 0) {
-            $args    = $definition->getArguments();
+            $args = $definition->getArguments();
             $lastArg = array_pop($args);
             foreach ($args as $arg) {
                 if ($arg instanceof CodeArgument) {
@@ -144,7 +144,7 @@ class ShellInput extends StringInput
      * Parses an argument, with bonus handling for code arguments.
      *
      * @param string $token The current token
-     * @param string $rest  The remaining unparsed input, including the current token
+     * @param string $rest The remaining unparsed input, including the current token
      *
      * @throws \RuntimeException When too many arguments are given
      */
@@ -262,7 +262,7 @@ class ShellInput extends StringInput
      * Adds a short option value.
      *
      * @param string $shortcut The short option key
-     * @param mixed  $value    The value for the option
+     * @param mixed $value The value for the option
      *
      * @throws \RuntimeException When option given doesn't exist
      */
@@ -278,8 +278,8 @@ class ShellInput extends StringInput
     /**
      * Adds a long option value.
      *
-     * @param string $name  The long option key
-     * @param mixed  $value The value for the option
+     * @param string $name The long option key
+     * @param mixed $value The value for the option
      *
      * @throws \RuntimeException When option given doesn't exist
      */

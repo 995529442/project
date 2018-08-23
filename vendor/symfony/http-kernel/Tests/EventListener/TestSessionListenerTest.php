@@ -46,8 +46,8 @@ class TestSessionListenerTest extends TestCase
         $this->listener = $this->getMockForAbstractClass('Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener');
         $this->session = $this->getSession();
         $this->listener->expects($this->any())
-             ->method('getSession')
-             ->will($this->returnValue($this->session));
+            ->method('getSession')
+            ->will($this->returnValue($this->session));
     }
 
     public function testShouldSaveMasterRequestSession()

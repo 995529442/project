@@ -33,13 +33,13 @@ class DOMNodeComparatorTest extends TestCase
     public function acceptsSucceedsProvider()
     {
         $document = new DOMDocument;
-        $node     = new DOMNode;
+        $node = new DOMNode;
 
         return [
-          [$document, $document],
-          [$node, $node],
-          [$document, $node],
-          [$node, $document]
+            [$document, $document],
+            [$node, $node],
+            [$document, $node],
+            [$node, $document]
         ];
     }
 
@@ -48,63 +48,63 @@ class DOMNodeComparatorTest extends TestCase
         $document = new DOMDocument;
 
         return [
-          [$document, null],
-          [null, $document],
-          [null, null]
+            [$document, null],
+            [null, $document],
+            [null, null]
         ];
     }
 
     public function assertEqualsSucceedsProvider()
     {
         return [
-          [
-            $this->createDOMDocument('<root></root>'),
-            $this->createDOMDocument('<root/>')
-          ],
-          [
-            $this->createDOMDocument('<root attr="bar"></root>'),
-            $this->createDOMDocument('<root attr="bar"/>')
-          ],
-          [
-            $this->createDOMDocument('<root><foo attr="bar"></foo></root>'),
-            $this->createDOMDocument('<root><foo attr="bar"/></root>')
-          ],
-          [
-            $this->createDOMDocument("<root>\n  <child/>\n</root>"),
-            $this->createDOMDocument('<root><child/></root>')
-          ],
+            [
+                $this->createDOMDocument('<root></root>'),
+                $this->createDOMDocument('<root/>')
+            ],
+            [
+                $this->createDOMDocument('<root attr="bar"></root>'),
+                $this->createDOMDocument('<root attr="bar"/>')
+            ],
+            [
+                $this->createDOMDocument('<root><foo attr="bar"></foo></root>'),
+                $this->createDOMDocument('<root><foo attr="bar"/></root>')
+            ],
+            [
+                $this->createDOMDocument("<root>\n  <child/>\n</root>"),
+                $this->createDOMDocument('<root><child/></root>')
+            ],
         ];
     }
 
     public function assertEqualsFailsProvider()
     {
         return [
-          [
-            $this->createDOMDocument('<root></root>'),
-            $this->createDOMDocument('<bar/>')
-          ],
-          [
-            $this->createDOMDocument('<foo attr1="bar"/>'),
-            $this->createDOMDocument('<foo attr1="foobar"/>')
-          ],
-          [
-            $this->createDOMDocument('<foo> bar </foo>'),
-            $this->createDOMDocument('<foo />')
-          ],
-          [
-            $this->createDOMDocument('<foo xmlns="urn:myns:bar"/>'),
-            $this->createDOMDocument('<foo xmlns="urn:notmyns:bar"/>')
-          ],
-          [
-            $this->createDOMDocument('<foo> bar </foo>'),
-            $this->createDOMDocument('<foo> bir </foo>')
-          ]
+            [
+                $this->createDOMDocument('<root></root>'),
+                $this->createDOMDocument('<bar/>')
+            ],
+            [
+                $this->createDOMDocument('<foo attr1="bar"/>'),
+                $this->createDOMDocument('<foo attr1="foobar"/>')
+            ],
+            [
+                $this->createDOMDocument('<foo> bar </foo>'),
+                $this->createDOMDocument('<foo />')
+            ],
+            [
+                $this->createDOMDocument('<foo xmlns="urn:myns:bar"/>'),
+                $this->createDOMDocument('<foo xmlns="urn:notmyns:bar"/>')
+            ],
+            [
+                $this->createDOMDocument('<foo> bar </foo>'),
+                $this->createDOMDocument('<foo> bir </foo>')
+            ]
         ];
     }
 
     private function createDOMDocument($content)
     {
-        $document                     = new DOMDocument;
+        $document = new DOMDocument;
         $document->preserveWhiteSpace = false;
         $document->loadXML($content);
 
@@ -118,7 +118,7 @@ class DOMNodeComparatorTest extends TestCase
     public function testAcceptsSucceeds($expected, $actual)
     {
         $this->assertTrue(
-          $this->comparator->accepts($expected, $actual)
+            $this->comparator->accepts($expected, $actual)
         );
     }
 
@@ -129,7 +129,7 @@ class DOMNodeComparatorTest extends TestCase
     public function testAcceptsFails($expected, $actual)
     {
         $this->assertFalse(
-          $this->comparator->accepts($expected, $actual)
+            $this->comparator->accepts($expected, $actual)
         );
     }
 

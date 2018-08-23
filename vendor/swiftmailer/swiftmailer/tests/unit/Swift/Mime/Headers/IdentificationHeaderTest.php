@@ -174,7 +174,7 @@ class Swift_Mime_Headers_IdentificationHeaderTest extends \PHPUnit\Framework\Tes
     {
         $header = $this->getHeader('References');
         $header->setIds(array('a@b', 'x@y'));
-        $this->assertEquals('References: <a@b> <x@y>'."\r\n", $header->toString());
+        $this->assertEquals('References: <a@b> <x@y>' . "\r\n", $header->toString());
     }
 
     private function getHeader($name)

@@ -153,10 +153,10 @@ class Connection implements ConnectionInterface
     /**
      * Create a new database connection instance.
      *
-     * @param  \PDO|\Closure     $pdo
-     * @param  string   $database
-     * @param  string   $tablePrefix
-     * @param  array    $config
+     * @param  \PDO|\Closure $pdo
+     * @param  string $database
+     * @param  string $tablePrefix
+     * @param  array $config
      * @return void
      */
     public function __construct($pdo, $database = '', $tablePrefix = '', array $config = [])
@@ -257,7 +257,7 @@ class Connection implements ConnectionInterface
     /**
      * Begin a fluent query against a database table.
      *
-     * @param  string  $table
+     * @param  string $table
      * @return \Illuminate\Database\Query\Builder
      */
     public function table($table)
@@ -280,9 +280,9 @@ class Connection implements ConnectionInterface
     /**
      * Run a select statement and return a single result.
      *
-     * @param  string  $query
-     * @param  array   $bindings
-     * @param  bool  $useReadPdo
+     * @param  string $query
+     * @param  array $bindings
+     * @param  bool $useReadPdo
      * @return mixed
      */
     public function selectOne($query, $bindings = [], $useReadPdo = true)
@@ -295,8 +295,8 @@ class Connection implements ConnectionInterface
     /**
      * Run a select statement against the database.
      *
-     * @param  string  $query
-     * @param  array   $bindings
+     * @param  string $query
+     * @param  array $bindings
      * @return array
      */
     public function selectFromWriteConnection($query, $bindings = [])
@@ -307,9 +307,9 @@ class Connection implements ConnectionInterface
     /**
      * Run a select statement against the database.
      *
-     * @param  string  $query
-     * @param  array  $bindings
-     * @param  bool  $useReadPdo
+     * @param  string $query
+     * @param  array $bindings
+     * @param  bool $useReadPdo
      * @return array
      */
     public function select($query, $bindings = [], $useReadPdo = true)
@@ -323,7 +323,7 @@ class Connection implements ConnectionInterface
             // of the database result set. Each element in the array will be a single
             // row from the database table, and will either be an array or objects.
             $statement = $this->prepared($this->getPdoForSelect($useReadPdo)
-                              ->prepare($query));
+                ->prepare($query));
 
             $this->bindValues($statement, $this->prepareBindings($bindings));
 
@@ -336,9 +336,9 @@ class Connection implements ConnectionInterface
     /**
      * Run a select statement against the database and returns a generator.
      *
-     * @param  string  $query
-     * @param  array  $bindings
-     * @param  bool  $useReadPdo
+     * @param  string $query
+     * @param  array $bindings
+     * @param  bool $useReadPdo
      * @return \Generator
      */
     public function cursor($query, $bindings = [], $useReadPdo = true)
@@ -352,7 +352,7 @@ class Connection implements ConnectionInterface
             // mode and prepare the bindings for the query. Once that's done we will be
             // ready to execute the query against the database and return the cursor.
             $statement = $this->prepared($this->getPdoForSelect($useReadPdo)
-                              ->prepare($query));
+                ->prepare($query));
 
             $this->bindValues(
                 $statement, $this->prepareBindings($bindings)
@@ -374,7 +374,7 @@ class Connection implements ConnectionInterface
     /**
      * Configure the PDO prepared statement.
      *
-     * @param  \PDOStatement  $statement
+     * @param  \PDOStatement $statement
      * @return \PDOStatement
      */
     protected function prepared(PDOStatement $statement)
@@ -391,7 +391,7 @@ class Connection implements ConnectionInterface
     /**
      * Get the PDO connection to use for a select query.
      *
-     * @param  bool  $useReadPdo
+     * @param  bool $useReadPdo
      * @return \PDO
      */
     protected function getPdoForSelect($useReadPdo = true)
@@ -402,8 +402,8 @@ class Connection implements ConnectionInterface
     /**
      * Run an insert statement against the database.
      *
-     * @param  string  $query
-     * @param  array   $bindings
+     * @param  string $query
+     * @param  array $bindings
      * @return bool
      */
     public function insert($query, $bindings = [])
@@ -414,8 +414,8 @@ class Connection implements ConnectionInterface
     /**
      * Run an update statement against the database.
      *
-     * @param  string  $query
-     * @param  array   $bindings
+     * @param  string $query
+     * @param  array $bindings
      * @return int
      */
     public function update($query, $bindings = [])
@@ -426,8 +426,8 @@ class Connection implements ConnectionInterface
     /**
      * Run a delete statement against the database.
      *
-     * @param  string  $query
-     * @param  array   $bindings
+     * @param  string $query
+     * @param  array $bindings
      * @return int
      */
     public function delete($query, $bindings = [])
@@ -438,8 +438,8 @@ class Connection implements ConnectionInterface
     /**
      * Execute an SQL statement and return the boolean result.
      *
-     * @param  string  $query
-     * @param  array   $bindings
+     * @param  string $query
+     * @param  array $bindings
      * @return bool
      */
     public function statement($query, $bindings = [])
@@ -462,8 +462,8 @@ class Connection implements ConnectionInterface
     /**
      * Run an SQL statement and get the number of rows affected.
      *
-     * @param  string  $query
-     * @param  array   $bindings
+     * @param  string $query
+     * @param  array $bindings
      * @return int
      */
     public function affectingStatement($query, $bindings = [])
@@ -493,7 +493,7 @@ class Connection implements ConnectionInterface
     /**
      * Run a raw, unprepared query against the PDO connection.
      *
-     * @param  string  $query
+     * @param  string $query
      * @return bool
      */
     public function unprepared($query)
@@ -514,7 +514,7 @@ class Connection implements ConnectionInterface
     /**
      * Execute the given callback in "dry run" mode.
      *
-     * @param  \Closure  $callback
+     * @param  \Closure $callback
      * @return array
      */
     public function pretend(Closure $callback)
@@ -536,7 +536,7 @@ class Connection implements ConnectionInterface
     /**
      * Execute the given callback in "dry run" mode.
      *
-     * @param  \Closure  $callback
+     * @param  \Closure $callback
      * @return array
      */
     protected function withFreshQueryLog($callback)
@@ -564,7 +564,7 @@ class Connection implements ConnectionInterface
      * Bind values to their parameters in the given statement.
      *
      * @param  \PDOStatement $statement
-     * @param  array  $bindings
+     * @param  array $bindings
      * @return void
      */
     public function bindValues($statement, $bindings)
@@ -580,7 +580,7 @@ class Connection implements ConnectionInterface
     /**
      * Prepare the query bindings for execution.
      *
-     * @param  array  $bindings
+     * @param  array $bindings
      * @return array
      */
     public function prepareBindings(array $bindings)
@@ -594,7 +594,7 @@ class Connection implements ConnectionInterface
             if ($value instanceof DateTimeInterface) {
                 $bindings[$key] = $value->format($grammar->getDateFormat());
             } elseif (is_bool($value)) {
-                $bindings[$key] = (int) $value;
+                $bindings[$key] = (int)$value;
             }
         }
 
@@ -604,9 +604,9 @@ class Connection implements ConnectionInterface
     /**
      * Run a SQL statement and log its execution context.
      *
-     * @param  string    $query
-     * @param  array     $bindings
-     * @param  \Closure  $callback
+     * @param  string $query
+     * @param  array $bindings
+     * @param  \Closure $callback
      * @return mixed
      *
      * @throws \Illuminate\Database\QueryException
@@ -641,9 +641,9 @@ class Connection implements ConnectionInterface
     /**
      * Run a SQL statement.
      *
-     * @param  string    $query
-     * @param  array     $bindings
-     * @param  \Closure  $callback
+     * @param  string $query
+     * @param  array $bindings
+     * @param  \Closure $callback
      * @return mixed
      *
      * @throws \Illuminate\Database\QueryException
@@ -657,9 +657,9 @@ class Connection implements ConnectionInterface
             $result = $callback($query, $bindings);
         }
 
-        // If an exception occurs when attempting to run a query, we'll format the error
-        // message to include the bindings with SQL, which will make this exception a
-        // lot more helpful to the developer instead of just the database's errors.
+            // If an exception occurs when attempting to run a query, we'll format the error
+            // message to include the bindings with SQL, which will make this exception a
+            // lot more helpful to the developer instead of just the database's errors.
         catch (Exception $e) {
             throw new QueryException(
                 $query, $this->prepareBindings($bindings), $e
@@ -672,9 +672,9 @@ class Connection implements ConnectionInterface
     /**
      * Log a query in the connection's query log.
      *
-     * @param  string  $query
-     * @param  array   $bindings
-     * @param  float|null  $time
+     * @param  string $query
+     * @param  array $bindings
+     * @param  float|null $time
      * @return void
      */
     public function logQuery($query, $bindings, $time = null)
@@ -689,7 +689,7 @@ class Connection implements ConnectionInterface
     /**
      * Get the elapsed time since a given starting point.
      *
-     * @param  int    $start
+     * @param  int $start
      * @return float
      */
     protected function getElapsedTime($start)
@@ -700,10 +700,10 @@ class Connection implements ConnectionInterface
     /**
      * Handle a query exception.
      *
-     * @param  \Exception  $e
-     * @param  string  $query
-     * @param  array  $bindings
-     * @param  \Closure  $callback
+     * @param  \Exception $e
+     * @param  string $query
+     * @param  array $bindings
+     * @param  \Closure $callback
      * @return mixed
      * @throws \Exception
      */
@@ -721,10 +721,10 @@ class Connection implements ConnectionInterface
     /**
      * Handle a query exception that occurred during query execution.
      *
-     * @param  \Illuminate\Database\QueryException  $e
-     * @param  string    $query
-     * @param  array     $bindings
-     * @param  \Closure  $callback
+     * @param  \Illuminate\Database\QueryException $e
+     * @param  string $query
+     * @param  array $bindings
+     * @param  \Closure $callback
      * @return mixed
      *
      * @throws \Illuminate\Database\QueryException
@@ -781,7 +781,7 @@ class Connection implements ConnectionInterface
     /**
      * Register a database query listener with the connection.
      *
-     * @param  \Closure  $callback
+     * @param  \Closure $callback
      * @return void
      */
     public function listen(Closure $callback)
@@ -794,12 +794,12 @@ class Connection implements ConnectionInterface
     /**
      * Fire an event for this connection.
      *
-     * @param  string  $event
+     * @param  string $event
      * @return array|null
      */
     protected function fireConnectionEvent($event)
     {
-        if (! isset($this->events)) {
+        if (!isset($this->events)) {
             return;
         }
 
@@ -816,7 +816,7 @@ class Connection implements ConnectionInterface
     /**
      * Fire the given event if possible.
      *
-     * @param  mixed  $event
+     * @param  mixed $event
      * @return void
      */
     protected function event($event)
@@ -829,7 +829,7 @@ class Connection implements ConnectionInterface
     /**
      * Get a new raw query expression.
      *
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return \Illuminate\Database\Query\Expression
      */
     public function raw($value)
@@ -840,12 +840,12 @@ class Connection implements ConnectionInterface
     /**
      * Indicate if any records have been modified.
      *
-     * @param  bool  $value
+     * @param  bool $value
      * @return void
      */
     public function recordsHaveBeenModified($value = true)
     {
-        if (! $this->recordsModified) {
+        if (!$this->recordsModified) {
             $this->recordsModified = $value;
         }
     }
@@ -863,8 +863,8 @@ class Connection implements ConnectionInterface
     /**
      * Get a Doctrine Schema Column instance.
      *
-     * @param  string  $table
-     * @param  string  $column
+     * @param  string $table
+     * @param  string $column
      * @return \Doctrine\DBAL\Schema\Column
      */
     public function getDoctrineColumn($table, $column)
@@ -943,7 +943,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the PDO connection.
      *
-     * @param  \PDO|\Closure|null  $pdo
+     * @param  \PDO|\Closure|null $pdo
      * @return $this
      */
     public function setPdo($pdo)
@@ -971,7 +971,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the reconnect instance on the connection.
      *
-     * @param  callable  $reconnector
+     * @param  callable $reconnector
      * @return $this
      */
     public function setReconnector(callable $reconnector)
@@ -994,7 +994,7 @@ class Connection implements ConnectionInterface
     /**
      * Get an option from the configuration options.
      *
-     * @param  string|null  $option
+     * @param  string|null $option
      * @return mixed
      */
     public function getConfig($option = null)
@@ -1025,7 +1025,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the query grammar used by the connection.
      *
-     * @param  \Illuminate\Database\Query\Grammars\Grammar  $grammar
+     * @param  \Illuminate\Database\Query\Grammars\Grammar $grammar
      * @return void
      */
     public function setQueryGrammar(Query\Grammars\Grammar $grammar)
@@ -1046,7 +1046,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the schema grammar used by the connection.
      *
-     * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+     * @param  \Illuminate\Database\Schema\Grammars\Grammar $grammar
      * @return void
      */
     public function setSchemaGrammar(Schema\Grammars\Grammar $grammar)
@@ -1067,7 +1067,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the query post processor used by the connection.
      *
-     * @param  \Illuminate\Database\Query\Processors\Processor  $processor
+     * @param  \Illuminate\Database\Query\Processors\Processor $processor
      * @return void
      */
     public function setPostProcessor(Processor $processor)
@@ -1088,7 +1088,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the event dispatcher instance on the connection.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param  \Illuminate\Contracts\Events\Dispatcher $events
      * @return void
      */
     public function setEventDispatcher(Dispatcher $events)
@@ -1169,7 +1169,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the name of the connected database.
      *
-     * @param  string  $database
+     * @param  string $database
      * @return string
      */
     public function setDatabaseName($database)
@@ -1190,7 +1190,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the table prefix in use by the connection.
      *
-     * @param  string  $prefix
+     * @param  string $prefix
      * @return void
      */
     public function setTablePrefix($prefix)
@@ -1203,7 +1203,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the table prefix and return the grammar.
      *
-     * @param  \Illuminate\Database\Grammar  $grammar
+     * @param  \Illuminate\Database\Grammar $grammar
      * @return \Illuminate\Database\Grammar
      */
     public function withTablePrefix(Grammar $grammar)
@@ -1216,8 +1216,8 @@ class Connection implements ConnectionInterface
     /**
      * Register a connection resolver.
      *
-     * @param  string  $driver
-     * @param  \Closure  $callback
+     * @param  string $driver
+     * @param  \Closure $callback
      * @return void
      */
     public static function resolverFor($driver, Closure $callback)
@@ -1228,7 +1228,7 @@ class Connection implements ConnectionInterface
     /**
      * Get the connection resolver for the given driver.
      *
-     * @param  string  $driver
+     * @param  string $driver
      * @return mixed
      */
     public static function getResolver($driver)

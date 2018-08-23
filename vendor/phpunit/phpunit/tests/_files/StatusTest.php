@@ -1,4 +1,5 @@
 <?php
+
 namespace vendor\project;
 
 use PHPUnit\Framework\TestCase;

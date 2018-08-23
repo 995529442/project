@@ -37,13 +37,13 @@ class Profiler
     private $enabled = true;
 
     /**
-     * @param bool $enable  The initial enabled state
+     * @param bool $enable The initial enabled state
      */
     public function __construct(ProfilerStorageInterface $storage, LoggerInterface $logger = null, $enable = true)
     {
         $this->storage = $storage;
         $this->logger = $logger;
-        $this->initiallyEnabled = $this->enabled = (bool) $enable;
+        $this->initiallyEnabled = $this->enabled = (bool)$enable;
     }
 
     /**
@@ -120,12 +120,12 @@ class Profiler
     /**
      * Finds profiler tokens for the given criteria.
      *
-     * @param string $ip         The IP
-     * @param string $url        The URL
-     * @param string $limit      The maximum number of tokens to return
-     * @param string $method     The request method
-     * @param string $start      The start date to search from
-     * @param string $end        The end date to search to
+     * @param string $ip The IP
+     * @param string $url The URL
+     * @param string $limit The maximum number of tokens to return
+     * @param string $method The request method
+     * @param string $start The start date to search from
+     * @param string $end The end date to search to
      * @param string $statusCode The request status code
      *
      * @return array An array of tokens
@@ -255,7 +255,7 @@ class Profiler
         }
 
         try {
-            $value = new \DateTime(is_numeric($value) ? '@'.$value : $value);
+            $value = new \DateTime(is_numeric($value) ? '@' . $value : $value);
         } catch (\Exception $e) {
             return;
         }

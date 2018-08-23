@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Number;
 
 class IsCloseToTest extends \Hamcrest\AbstractMatcherTest

@@ -115,7 +115,8 @@ class FeatureSet
         $forceNoBigNumber = false,
         $ignoreSystemNode = false,
         $enablePecl = false
-    ) {
+    )
+    {
         $this->disableBigNumber = $forceNoBigNumber;
         $this->disable64Bit = $force32Bit;
         $this->ignoreSystemNode = $ignoreSystemNode;

@@ -34,9 +34,9 @@ class FilterOptions
     public static function getOptions()
     {
         return [
-            new InputOption('grep',        'G', InputOption::VALUE_REQUIRED, 'Limit to items matching the given pattern (string or regex).'),
-            new InputOption('insensitive', 'i', InputOption::VALUE_NONE,     'Case-insensitive search (requires --grep).'),
-            new InputOption('invert',      'v', InputOption::VALUE_NONE,     'Inverted search (requires --grep).'),
+            new InputOption('grep', 'G', InputOption::VALUE_REQUIRED, 'Limit to items matching the given pattern (string or regex).'),
+            new InputOption('insensitive', 'i', InputOption::VALUE_NONE, 'Case-insensitive search (requires --grep).'),
+            new InputOption('invert', 'v', InputOption::VALUE_NONE, 'Inverted search (requires --grep).'),
         ];
     }
 
@@ -65,10 +65,10 @@ class FilterOptions
 
         $this->validateRegex($pattern);
 
-        $this->filter      = true;
-        $this->pattern     = $pattern;
+        $this->filter = true;
+        $this->pattern = $pattern;
         $this->insensitive = $insensitive;
-        $this->invert      = $input->getOption('invert');
+        $this->invert = $input->getOption('invert');
     }
 
     /**
@@ -85,7 +85,7 @@ class FilterOptions
      * Check whether a string matches the current filter options.
      *
      * @param string $string
-     * @param array  $matches
+     * @param array $matches
      *
      * @return bool
      */

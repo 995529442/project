@@ -38,7 +38,7 @@ class Carbon extends BaseCarbon implements JsonSerializable
     /**
      * JSON serialize all Carbon instances using the given callback.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return void
      */
     public static function serializeUsing($callback)

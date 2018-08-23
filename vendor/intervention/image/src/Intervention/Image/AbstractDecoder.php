@@ -64,24 +64,24 @@ abstract class AbstractDecoder
      */
     public function initFromUrl($url)
     {
-        
+
         $options = [
             'http' => [
-                'method'=>"GET",
-                'header'=>"Accept-language: en\r\n".
-                "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2\r\n"
-          ]
+                'method' => "GET",
+                'header' => "Accept-language: en\r\n" .
+                    "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2\r\n"
+            ]
         ];
-        
-        $context  = stream_context_create($options);
-        
+
+        $context = stream_context_create($options);
+
 
         if ($data = @file_get_contents($url, false, $context)) {
             return $this->initFromBinary($data);
         }
 
         throw new \Intervention\Image\Exception\NotReadableException(
-            "Unable to init from given url (".$url.")."
+            "Unable to init from given url (" . $url . ")."
         );
     }
 
@@ -207,7 +207,7 @@ abstract class AbstractDecoder
      */
     public function isUrl()
     {
-        return (bool) filter_var($this->data, FILTER_VALIDATE_URL);
+        return (bool)filter_var($this->data, FILTER_VALIDATE_URL);
     }
 
     /**
@@ -353,6 +353,6 @@ abstract class AbstractDecoder
      */
     public function __toString()
     {
-        return (string) $this->data;
+        return (string)$this->data;
     }
 }

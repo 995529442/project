@@ -55,12 +55,12 @@ class Address extends \Faker\Provider\Address
      * @link http://sh.wikipedia.org/wiki/Popis_gradova_u_Crnoj_Gori
      */
     protected static $cityNames = array(
-       'Bar', 'Budva', 'Herceg Novi',
-       'Kotor', 'Tivat', 'Ulcinj', 'Podgorica',
-       'Cetinje', 'Nikšić', 'Danilovgrad', 'Žabljak',
-       'Kolašin', 'Andrijevica', 'Berane', 'Bijelo Polje',
-       'Mojkovac', 'Plav', 'Plužine', 'Pljevlja', 'Rožaje',
-       'Šavnik', 'Petnjica', 'Gusinje', 'Petrovac','Sutomore',
+        'Bar', 'Budva', 'Herceg Novi',
+        'Kotor', 'Tivat', 'Ulcinj', 'Podgorica',
+        'Cetinje', 'Nikšić', 'Danilovgrad', 'Žabljak',
+        'Kolašin', 'Andrijevica', 'Berane', 'Bijelo Polje',
+        'Mojkovac', 'Plav', 'Plužine', 'Pljevlja', 'Rožaje',
+        'Šavnik', 'Petnjica', 'Gusinje', 'Petrovac', 'Sutomore',
     );
 
     /**

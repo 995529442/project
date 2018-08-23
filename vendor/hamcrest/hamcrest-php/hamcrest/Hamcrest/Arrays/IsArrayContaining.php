@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Arrays;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\Matcher;
 use Hamcrest\TypeSafeMatcher;
@@ -43,9 +45,8 @@ class IsArrayContaining extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description
-                 ->appendText('an array containing ')
-                 ->appendDescriptionOf($this->_elementMatcher)
-        ;
+            ->appendText('an array containing ')
+            ->appendDescriptionOf($this->_elementMatcher);
     }
 
     /**

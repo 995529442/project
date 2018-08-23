@@ -17,7 +17,7 @@ class Processor
     {
         $rulesString = $this->cleanup($rulesString);
 
-        return (array) explode('}', $rulesString);
+        return (array)explode('}', $rulesString);
     }
 
     /**
@@ -42,7 +42,7 @@ class Processor
      * Convert a rule-string into an object
      *
      * @param string $rule
-     * @param int    $originalOrder
+     * @param int $originalOrder
      * @return array
      */
     public function convertToObjects($rule, $originalOrder)
@@ -55,7 +55,7 @@ class Processor
         }
         $propertiesProcessor = new PropertyProcessor();
         $rules = array();
-        $selectors = (array) explode(',', trim($chunks[0]));
+        $selectors = (array)explode(',', trim($chunks[0]));
         $properties = $propertiesProcessor->splitIntoSeparateProperties($chunks[1]);
 
         foreach ($selectors as $selector) {

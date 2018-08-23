@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util\TestDox;
 
 use PHPUnit\Framework\AssertionFailedError;
@@ -96,14 +97,14 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * @param resource $out
-     * @param array    $groups
-     * @param array    $excludeGroups
+     * @param array $groups
+     * @param array $excludeGroups
      */
     public function __construct($out = null, array $groups = [], array $excludeGroups = [])
     {
         parent::__construct($out);
 
-        $this->groups        = $groups;
+        $this->groups = $groups;
         $this->excludeGroups = $excludeGroups;
 
         $this->prettifier = new NamePrettifier;
@@ -124,9 +125,9 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * An error occurred.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addError(Test $test, \Exception $e, $time)
     {
@@ -141,9 +142,9 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * A warning occurred.
      *
-     * @param Test    $test
+     * @param Test $test
      * @param Warning $e
-     * @param float   $time
+     * @param float $time
      */
     public function addWarning(Test $test, Warning $e, $time)
     {
@@ -158,9 +159,9 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * A failure occurred.
      *
-     * @param Test                 $test
+     * @param Test $test
      * @param AssertionFailedError $e
-     * @param float                $time
+     * @param float $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
@@ -175,9 +176,9 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * Incomplete test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addIncompleteTest(Test $test, \Exception $e, $time)
     {
@@ -192,9 +193,9 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * Risky test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addRiskyTest(Test $test, \Exception $e, $time)
     {
@@ -209,9 +210,9 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * Skipped test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addSkippedTest(Test $test, \Exception $e, $time)
     {
@@ -269,7 +270,7 @@ abstract class ResultPrinter extends Printer implements TestListener
             $this->startClass($class);
 
             $this->testClass = $class;
-            $this->tests     = [];
+            $this->tests = [];
         }
 
         if ($test instanceof TestCase) {
@@ -292,7 +293,7 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * A test ended.
      *
-     * @param Test  $test
+     * @param Test $test
      * @param float $time
      */
     public function endTest(Test $test, $time)
@@ -317,7 +318,7 @@ abstract class ResultPrinter extends Printer implements TestListener
             }
         }
 
-        $this->currentTestClassPrettified  = null;
+        $this->currentTestClassPrettified = null;
         $this->currentTestMethodPrettified = null;
     }
 
@@ -350,7 +351,7 @@ abstract class ResultPrinter extends Printer implements TestListener
      * Handler for 'on test' event.
      *
      * @param string $name
-     * @param bool   $success
+     * @param bool $success
      */
     protected function onTest($name, $success = true)
     {

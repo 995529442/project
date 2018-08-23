@@ -1,7 +1,9 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
+
 namespace TheSeer\Tokenizer;
 
-class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
+class TokenCollection implements \ArrayAccess, \Iterator, \Countable
+{
 
     /**
      * @var Token[]
@@ -16,28 +18,32 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
     /**
      * @param Token $token
      */
-    public function addToken(Token $token) {
+    public function addToken(Token $token)
+    {
         $this->tokens[] = $token;
     }
 
     /**
      * @return Token
      */
-    public function current(): Token {
+    public function current(): Token
+    {
         return current($this->tokens);
     }
 
     /**
      * @return int
      */
-    public function key(): int {
+    public function key(): int
+    {
         return key($this->tokens);
     }
 
     /**
      * @return void
      */
-    public function next() {
+    public function next()
+    {
         next($this->tokens);
         $this->pos++;
     }
@@ -45,14 +51,16 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
     /**
      * @return bool
      */
-    public function valid(): bool {
+    public function valid(): bool
+    {
         return $this->count() > $this->pos;
     }
 
     /**
      * @return void
      */
-    public function rewind() {
+    public function rewind()
+    {
         reset($this->tokens);
         $this->pos = 0;
     }
@@ -60,7 +68,8 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
     /**
      * @return int
      */
-    public function count(): int {
+    public function count(): int
+    {
         return count($this->tokens);
     }
 
@@ -69,7 +78,8 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
      *
      * @return bool
      */
-    public function offsetExists($offset): bool {
+    public function offsetExists($offset): bool
+    {
         return isset($this->tokens[$offset]);
     }
 
@@ -79,7 +89,8 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
      * @return Token
      * @throws TokenCollectionException
      */
-    public function offsetGet($offset): Token {
+    public function offsetGet($offset): Token
+    {
         if (!$this->offsetExists($offset)) {
             throw new TokenCollectionException(
                 sprintf('No Token at offest %s', $offset)
@@ -95,7 +106,8 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
      *
      * @throws TokenCollectionException
      */
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value)
+    {
         if (!is_int($offset)) {
             $type = gettype($offset);
             throw new TokenCollectionException(
@@ -121,7 +133,8 @@ class TokenCollection implements \ArrayAccess, \Iterator, \Countable {
     /**
      * @param mixed $offset
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         unset($this->tokens[$offset]);
     }
 

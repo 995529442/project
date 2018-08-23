@@ -89,11 +89,11 @@ class DomainPart extends Parser
             $this->warnings[IPV6ColonEnd::CODE] = new IPV6ColonEnd();
         }
 
-        $IPv6       = substr($addressLiteral, 5);
+        $IPv6 = substr($addressLiteral, 5);
         //Daniel Marschall's new IPv6 testing strategy
-        $matchesIP  = explode(':', $IPv6);
+        $matchesIP = explode(':', $IPv6);
         $groupCount = count($matchesIP);
-        $colons     = strpos($IPv6, '::');
+        $colons = strpos($IPv6, '::');
 
         if (count(preg_grep('/^[0-9A-Fa-f]{0,4}$/', $matchesIP, PREG_GREP_INVERT)) !== 0) {
             $this->warnings[IPV6BadChar::CODE] = new IPV6BadChar();
@@ -173,7 +173,7 @@ class DomainPart extends Parser
 
     private function checkNotAllowedChars($token)
     {
-        $notAllowed = [EmailLexer::S_BACKSLASH => true, EmailLexer::S_SLASH=> true];
+        $notAllowed = [EmailLexer::S_BACKSLASH => true, EmailLexer::S_SLASH => true];
         if (isset($notAllowed[$token['type']])) {
             throw new CharNotAllowed();
         }
@@ -205,7 +205,7 @@ class DomainPart extends Parser
             }
 
             if ($this->lexer->token['type'] === EmailLexer::INVALID ||
-                $this->lexer->token['type'] === EmailLexer::C_DEL   ||
+                $this->lexer->token['type'] === EmailLexer::C_DEL ||
                 $this->lexer->token['type'] === EmailLexer::S_LF
             ) {
                 $this->warnings[ObsoleteDTEXT::CODE] = new ObsoleteDTEXT();
@@ -264,14 +264,14 @@ class DomainPart extends Parser
 
     protected function checkIPV4Tag($addressLiteral)
     {
-        $matchesIP  = array();
+        $matchesIP = array();
 
         // Extract IPv4 part from the end of the address-literal (if there is one)
         if (preg_match(
-            '/\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/',
-            $addressLiteral,
-            $matchesIP
-        ) > 0
+                '/\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/',
+                $addressLiteral,
+                $matchesIP
+            ) > 0
         ) {
             $index = strrpos($addressLiteral, $matchesIP[0]);
             if ($index === 0) {

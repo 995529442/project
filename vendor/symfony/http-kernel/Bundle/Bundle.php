@@ -160,7 +160,7 @@ abstract class Bundle implements BundleInterface
      */
     public function registerCommands(Application $application)
     {
-        if (!is_dir($dir = $this->getPath().'/Command')) {
+        if (!is_dir($dir = $this->getPath() . '/Command')) {
             return;
         }
 
@@ -171,16 +171,16 @@ abstract class Bundle implements BundleInterface
         $finder = new Finder();
         $finder->files()->name('*Command.php')->in($dir);
 
-        $prefix = $this->getNamespace().'\\Command';
+        $prefix = $this->getNamespace() . '\\Command';
         foreach ($finder as $file) {
             $ns = $prefix;
             if ($relativePath = $file->getRelativePath()) {
-                $ns .= '\\'.str_replace('/', '\\', $relativePath);
+                $ns .= '\\' . str_replace('/', '\\', $relativePath);
             }
-            $class = $ns.'\\'.$file->getBasename('.php');
+            $class = $ns . '\\' . $file->getBasename('.php');
             if ($this->container) {
                 $commandIds = $this->container->hasParameter('console.command.ids') ? $this->container->getParameter('console.command.ids') : array();
-                $alias = 'console.command.'.strtolower(str_replace('\\', '_', $class));
+                $alias = 'console.command.' . strtolower(str_replace('\\', '_', $class));
                 if (isset($commandIds[$alias]) || $this->container->has($alias)) {
                     continue;
                 }
@@ -203,7 +203,7 @@ abstract class Bundle implements BundleInterface
     {
         $basename = preg_replace('/Bundle$/', '', $this->getName());
 
-        return $this->getNamespace().'\\DependencyInjection\\'.$basename.'Extension';
+        return $this->getNamespace() . '\\DependencyInjection\\' . $basename . 'Extension';
     }
 
     /**

@@ -14,7 +14,7 @@ class AlterColumnKeySystemTable extends Migration
     public function up()
     {
         Schema::table('cater_system', function (Blueprint $table) {
-            $table->string('key',50)->default('')->comment('key');
+            $table->string('key', 50)->default('')->comment('key');
         });
     }
 

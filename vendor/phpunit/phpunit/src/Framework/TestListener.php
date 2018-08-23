@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework;
 
 /**
@@ -17,54 +18,54 @@ interface TestListener
     /**
      * An error occurred.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addError(Test $test, \Exception $e, $time);
 
     /**
      * A warning occurred.
      *
-     * @param Test    $test
+     * @param Test $test
      * @param Warning $e
-     * @param float   $time
+     * @param float $time
      */
     public function addWarning(Test $test, Warning $e, $time);
 
     /**
      * A failure occurred.
      *
-     * @param Test                 $test
+     * @param Test $test
      * @param AssertionFailedError $e
-     * @param float                $time
+     * @param float $time
      */
     public function addFailure(Test $test, AssertionFailedError $e, $time);
 
     /**
      * Incomplete test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addIncompleteTest(Test $test, \Exception $e, $time);
 
     /**
      * Risky test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addRiskyTest(Test $test, \Exception $e, $time);
 
     /**
      * Skipped test.
      *
-     * @param Test       $test
+     * @param Test $test
      * @param \Exception $e
-     * @param float      $time
+     * @param float $time
      */
     public function addSkippedTest(Test $test, \Exception $e, $time);
 
@@ -92,7 +93,7 @@ interface TestListener
     /**
      * A test ended.
      *
-     * @param Test  $test
+     * @param Test $test
      * @param float $time
      */
     public function endTest(Test $test, $time);

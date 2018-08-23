@@ -39,7 +39,7 @@ class Exporter
      *  - Recursion and repeated rendering is treated properly
      *
      * @param mixed $value
-     * @param int   $indentation The indentation level of the 2nd+ line
+     * @param int $indentation The indentation level of the 2nd+ line
      *
      * @return string
      */
@@ -49,14 +49,14 @@ class Exporter
     }
 
     /**
-     * @param mixed   $data
+     * @param mixed $data
      * @param Context $context
      *
      * @return string
      */
     public function shortenedRecursiveExport(&$data, Context $context = null)
     {
-        $result   = [];
+        $result = [];
         $exporter = new self();
 
         if (!$context) {
@@ -146,12 +146,12 @@ class Exporter
     public function toArray($value)
     {
         if (!is_object($value)) {
-            return (array) $value;
+            return (array)$value;
         }
 
         $array = [];
 
-        foreach ((array) $value as $key => $val) {
+        foreach ((array)$value as $key => $val) {
             // properties are transformed to keys in the following way:
             // private   $property => "\0Classname\0property"
             // protected $property => "\0*\0property"
@@ -198,9 +198,9 @@ class Exporter
     /**
      * Recursive implementation of export
      *
-     * @param mixed                                       $value       The value to export
-     * @param int                                         $indentation The indentation level of the 2nd+ line
-     * @param \SebastianBergmann\RecursionContext\Context $processed   Previously processed objects
+     * @param mixed $value The value to export
+     * @param int $indentation The indentation level of the 2nd+ line
+     * @param \SebastianBergmann\RecursionContext\Context $processed Previously processed objects
      *
      * @return string
      *
@@ -239,14 +239,14 @@ class Exporter
             }
 
             return "'" .
-            str_replace('<lf>', "\n",
-                str_replace(
-                    ["\r\n", "\n\r", "\r", "\n"],
-                    ['\r\n<lf>', '\n\r<lf>', '\r<lf>', '\n<lf>'],
-                    $value
-                )
-            ) .
-            "'";
+                str_replace('<lf>', "\n",
+                    str_replace(
+                        ["\r\n", "\n\r", "\r", "\n"],
+                        ['\r\n<lf>', '\n\r<lf>', '\r<lf>', '\n<lf>'],
+                        $value
+                    )
+                ) .
+                "'";
         }
 
         $whitespace = str_repeat(' ', 4 * $indentation);
@@ -260,8 +260,8 @@ class Exporter
                 return 'Array &' . $key;
             }
 
-            $array  = $value;
-            $key    = $processed->add($value);
+            $array = $value;
+            $key = $processed->add($value);
             $values = '';
 
             if (count($array) > 0) {
@@ -287,9 +287,9 @@ class Exporter
                 return sprintf('%s Object &%s', $class, $hash);
             }
 
-            $hash   = $processed->add($value);
+            $hash = $processed->add($value);
             $values = '';
-            $array  = $this->toArray($value);
+            $array = $this->toArray($value);
 
             if (count($array) > 0) {
                 foreach ($array as $k => $v) {

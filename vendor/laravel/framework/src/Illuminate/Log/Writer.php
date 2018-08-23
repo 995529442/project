@@ -40,21 +40,21 @@ class Writer implements LogContract, PsrLoggerInterface
      * @var array
      */
     protected $levels = [
-        'debug'     => MonologLogger::DEBUG,
-        'info'      => MonologLogger::INFO,
-        'notice'    => MonologLogger::NOTICE,
-        'warning'   => MonologLogger::WARNING,
-        'error'     => MonologLogger::ERROR,
-        'critical'  => MonologLogger::CRITICAL,
-        'alert'     => MonologLogger::ALERT,
+        'debug' => MonologLogger::DEBUG,
+        'info' => MonologLogger::INFO,
+        'notice' => MonologLogger::NOTICE,
+        'warning' => MonologLogger::WARNING,
+        'error' => MonologLogger::ERROR,
+        'critical' => MonologLogger::CRITICAL,
+        'alert' => MonologLogger::ALERT,
         'emergency' => MonologLogger::EMERGENCY,
     ];
 
     /**
      * Create a new log writer instance.
      *
-     * @param  \Monolog\Logger  $monolog
-     * @param  \Illuminate\Contracts\Events\Dispatcher|null  $dispatcher
+     * @param  \Monolog\Logger $monolog
+     * @param  \Illuminate\Contracts\Events\Dispatcher|null $dispatcher
      * @return void
      */
     public function __construct(MonologLogger $monolog, Dispatcher $dispatcher = null)
@@ -69,8 +69,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log an emergency message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function emergency($message, array $context = [])
@@ -81,8 +81,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log an alert message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function alert($message, array $context = [])
@@ -93,8 +93,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log a critical message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function critical($message, array $context = [])
@@ -105,8 +105,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log an error message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function error($message, array $context = [])
@@ -117,8 +117,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log a warning message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function warning($message, array $context = [])
@@ -129,8 +129,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log a notice to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function notice($message, array $context = [])
@@ -141,8 +141,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log an informational message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function info($message, array $context = [])
@@ -153,8 +153,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log a debug message to the logs.
      *
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function debug($message, array $context = [])
@@ -165,9 +165,9 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Log a message to the logs.
      *
-     * @param  string  $level
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $level
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function log($level, $message, array $context = [])
@@ -178,9 +178,9 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Dynamically pass log calls into the writer.
      *
-     * @param  string  $level
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $level
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     public function write($level, $message, array $context = [])
@@ -191,9 +191,9 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Write a message to Monolog.
      *
-     * @param  string  $level
-     * @param  string  $message
-     * @param  array  $context
+     * @param  string $level
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     protected function writeLog($level, $message, $context)
@@ -206,8 +206,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Register a file log handler.
      *
-     * @param  string  $path
-     * @param  string  $level
+     * @param  string $path
+     * @param  string $level
      * @return void
      */
     public function useFiles($path, $level = 'debug')
@@ -220,9 +220,9 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Register a daily file log handler.
      *
-     * @param  string  $path
-     * @param  int     $days
-     * @param  string  $level
+     * @param  string $path
+     * @param  int $days
+     * @param  string $level
      * @return void
      */
     public function useDailyFiles($path, $days = 0, $level = 'debug')
@@ -237,9 +237,9 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Register a Syslog handler.
      *
-     * @param  string  $name
-     * @param  string  $level
-     * @param  mixed  $facility
+     * @param  string $name
+     * @param  string $level
+     * @param  mixed $facility
      * @return \Psr\Log\LoggerInterface
      */
     public function useSyslog($name = 'laravel', $level = 'debug', $facility = LOG_USER)
@@ -250,8 +250,8 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Register an error_log handler.
      *
-     * @param  string  $level
-     * @param  int  $messageType
+     * @param  string $level
+     * @param  int $messageType
      * @return void
      */
     public function useErrorLog($level = 'debug', $messageType = ErrorLogHandler::OPERATING_SYSTEM)
@@ -264,14 +264,14 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Register a new callback handler for when a log event is triggered.
      *
-     * @param  \Closure  $callback
+     * @param  \Closure $callback
      * @return void
      *
      * @throws \RuntimeException
      */
     public function listen(Closure $callback)
     {
-        if (! isset($this->dispatcher)) {
+        if (!isset($this->dispatcher)) {
             throw new RuntimeException('Events dispatcher has not been set.');
         }
 
@@ -281,9 +281,9 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Fires a log event.
      *
-     * @param  string  $level
-     * @param  string  $message
-     * @param  array   $context
+     * @param  string $level
+     * @param  string $message
+     * @param  array $context
      * @return void
      */
     protected function fireLogEvent($level, $message, array $context = [])
@@ -299,7 +299,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Format the parameters for the logger.
      *
-     * @param  mixed  $message
+     * @param  mixed $message
      * @return mixed
      */
     protected function formatMessage($message)
@@ -318,7 +318,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Parse the string level into a Monolog constant.
      *
-     * @param  string  $level
+     * @param  string $level
      * @return int
      *
      * @throws \InvalidArgumentException
@@ -367,7 +367,7 @@ class Writer implements LogContract, PsrLoggerInterface
     /**
      * Set the event dispatcher instance.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
+     * @param  \Illuminate\Contracts\Events\Dispatcher $dispatcher
      * @return void
      */
     public function setEventDispatcher(Dispatcher $dispatcher)

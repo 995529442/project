@@ -85,7 +85,7 @@ class TransportManager extends Manager
     /**
      * Add the SES credentials to the configuration array.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return array
      */
     protected function addSesCredentials(array $config)
@@ -173,7 +173,7 @@ class TransportManager extends Manager
     /**
      * Get a fresh Guzzle HTTP client instance.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return \GuzzleHttp\Client
      */
     protected function guzzle($config)
@@ -196,7 +196,7 @@ class TransportManager extends Manager
     /**
      * Set the default mail driver name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return void
      */
     public function setDefaultDriver($name)

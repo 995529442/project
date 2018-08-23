@@ -33,7 +33,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      * Creates a new PlainContentEncoder with $name (probably 7bit or 8bit).
      *
      * @param string $name
-     * @param bool   $canonical If canonicalization transformation should be done.
+     * @param bool $canonical If canonicalization transformation should be done.
      */
     public function __construct($name, $canonical = false)
     {
@@ -45,8 +45,8 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      * Encode a given string to produce an encoded string.
      *
      * @param string $string
-     * @param int    $firstLineOffset ignored
-     * @param int    $maxLineLength   - 0 means no wrapping will occur
+     * @param int $firstLineOffset ignored
+     * @param int $maxLineLength - 0 means no wrapping will occur
      *
      * @return string
      */
@@ -63,15 +63,15 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      * Encode stream $in to stream $out.
      *
      * @param Swift_OutputByteStream $os
-     * @param Swift_InputByteStream  $is
-     * @param int                    $firstLineOffset ignored
-     * @param int                    $maxLineLength   optional, 0 means no wrapping will occur
+     * @param Swift_InputByteStream $is
+     * @param int $firstLineOffset ignored
+     * @param int $maxLineLength optional, 0 means no wrapping will occur
      */
     public function encodeByteStream(Swift_OutputByteStream $os, Swift_InputByteStream $is, $firstLineOffset = 0, $maxLineLength = 0)
     {
         $leftOver = '';
         while (false !== $bytes = $os->read(8192)) {
-            $toencode = $leftOver.$bytes;
+            $toencode = $leftOver . $bytes;
             if ($this->canonical) {
                 $toencode = $this->canonicalize($toencode);
             }
@@ -108,7 +108,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
      * A safer (but weaker) wordwrap for unicode.
      *
      * @param string $string
-     * @param int    $length
+     * @param int $length
      * @param string $le
      *
      * @return string
@@ -133,7 +133,7 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
 
             foreach ($chunks as $chunk) {
                 if (0 != strlen($currentLine)
-                    && strlen($currentLine.$chunk) > $length) {
+                    && strlen($currentLine . $chunk) > $length) {
                     $lines[] = '';
                     $currentLine = &$lines[$lineCount++];
                 }
@@ -157,6 +157,6 @@ class Swift_Mime_ContentEncoder_PlainContentEncoder implements Swift_Mime_Conten
             array("\r\n", "\r", "\n"),
             array("\n", "\n", "\r\n"),
             $string
-            );
+        );
     }
 }

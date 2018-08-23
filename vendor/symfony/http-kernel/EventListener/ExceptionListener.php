@@ -97,7 +97,7 @@ class ExceptionListener implements EventSubscriberInterface
      * Logs an exception.
      *
      * @param \Exception $exception The \Exception instance
-     * @param string     $message   The error message to log
+     * @param string $message The error message to log
      */
     protected function logException(\Exception $exception, $message)
     {
@@ -114,7 +114,7 @@ class ExceptionListener implements EventSubscriberInterface
      * Clones the request for the exception.
      *
      * @param \Exception $exception The thrown exception
-     * @param Request    $request   The original request
+     * @param Request $request The original request
      *
      * @return Request $request The cloned request
      */

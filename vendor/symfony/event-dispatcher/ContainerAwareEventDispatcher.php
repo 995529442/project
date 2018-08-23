@@ -54,9 +54,9 @@ class ContainerAwareEventDispatcher extends EventDispatcher
      * Adds a service as event listener.
      *
      * @param string $eventName Event for which the listener is added
-     * @param array  $callback  The service ID of the listener service & the method
+     * @param array $callback The service ID of the listener service & the method
      *                          name that has to be called
-     * @param int    $priority  The higher this value, the earlier an event listener
+     * @param int $priority The higher this value, the earlier an event listener
      *                          will be triggered in the chain.
      *                          Defaults to 0.
      *
@@ -79,7 +79,7 @@ class ContainerAwareEventDispatcher extends EventDispatcher
 
         if (isset($this->listenerIds[$eventName])) {
             foreach ($this->listenerIds[$eventName] as $i => list($serviceId, $method)) {
-                $key = $serviceId.'.'.$method;
+                $key = $serviceId . '.' . $method;
                 if (isset($this->listeners[$eventName][$key]) && $listener === array($this->listeners[$eventName][$key], $method)) {
                     unset($this->listeners[$eventName][$key]);
                     if (empty($this->listeners[$eventName])) {
@@ -142,7 +142,7 @@ class ContainerAwareEventDispatcher extends EventDispatcher
      * Adds a service as event subscriber.
      *
      * @param string $serviceId The service ID of the subscriber service
-     * @param string $class     The service's class name (which must implement EventSubscriberInterface)
+     * @param string $class The service's class name (which must implement EventSubscriberInterface)
      */
     public function addSubscriberService($serviceId, $class)
     {
@@ -163,7 +163,7 @@ class ContainerAwareEventDispatcher extends EventDispatcher
 
     public function getContainer()
     {
-        @trigger_error('The '.__METHOD__.'() method is deprecated since Symfony 3.3 as its class will be removed in 4.0. Inject the container or the services you need in your listeners/subscribers instead.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __METHOD__ . '() method is deprecated since Symfony 3.3 as its class will be removed in 4.0. Inject the container or the services you need in your listeners/subscribers instead.', E_USER_DEPRECATED);
 
         return $this->container;
     }
@@ -182,7 +182,7 @@ class ContainerAwareEventDispatcher extends EventDispatcher
             foreach ($this->listenerIds[$eventName] as list($serviceId, $method, $priority)) {
                 $listener = $this->container->get($serviceId);
 
-                $key = $serviceId.'.'.$method;
+                $key = $serviceId . '.' . $method;
                 if (!isset($this->listeners[$eventName][$key])) {
                     $this->addListener($eventName, array($listener, $method), $priority);
                 } elseif ($this->listeners[$eventName][$key] !== $listener) {

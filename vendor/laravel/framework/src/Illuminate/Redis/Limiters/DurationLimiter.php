@@ -77,7 +77,7 @@ class DurationLimiter
     {
         $starting = time();
 
-        while (! $this->acquire()) {
+        while (!$this->acquire()) {
             if (time() - $timeout >= $starting) {
                 throw new LimiterTimeoutException;
             }
@@ -107,7 +107,7 @@ class DurationLimiter
 
         $this->remaining = max(0, $results[2]);
 
-        return (bool) $results[0];
+        return (bool)$results[0];
     }
 
     /**

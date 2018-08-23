@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Core;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\FeatureMatcher;
 use Hamcrest\Matcher;
@@ -41,7 +43,7 @@ class HasToString extends FeatureMatcher
             return $actual->toString();
         }
 
-        return (string) $actual;
+        return (string)$actual;
     }
 
     /**

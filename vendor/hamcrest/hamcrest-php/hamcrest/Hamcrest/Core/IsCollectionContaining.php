@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Core;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Description;
 use Hamcrest\Matcher;
 use Hamcrest\TypeSafeMatcher;
@@ -43,9 +45,8 @@ class IsCollectionContaining extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description
-                ->appendText('a collection containing ')
-                ->appendDescriptionOf($this->_elementMatcher)
-                ;
+            ->appendText('a collection containing ')
+            ->appendDescriptionOf($this->_elementMatcher);
     }
 
     /**

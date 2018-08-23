@@ -15,7 +15,7 @@ class AlterPaymentTypeCaterOrdersTable extends Migration
     {
         Schema::table('cater_orders', function (Blueprint $table) {
             $table->tinyInteger('payment_type')->defalut('0')->comment("支付方式 0为微信支付 1为购物币支付");
-        });   
+        });
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 class TestGeneratorMaker
 {
     public function create($array = [])

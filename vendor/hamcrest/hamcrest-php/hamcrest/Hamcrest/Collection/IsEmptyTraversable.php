@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Collection;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\BaseMatcher;
 use Hamcrest\Description;
 

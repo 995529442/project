@@ -13,8 +13,8 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Find a model in the collection by key.
      *
-     * @param  mixed  $key
-     * @param  mixed  $default
+     * @param  mixed $key
+     * @param  mixed $default
      * @return \Illuminate\Database\Eloquent\Model|static
      */
     public function find($key, $default = null)
@@ -43,7 +43,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Load a set of relationships onto the collection.
      *
-     * @param  mixed  $relations
+     * @param  mixed $relations
      * @return $this
      */
     public function load($relations)
@@ -64,7 +64,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Add an item to the collection.
      *
-     * @param  mixed  $item
+     * @param  mixed $item
      * @return $this
      */
     public function add($item)
@@ -77,9 +77,9 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Determine if a key exists in the collection.
      *
-     * @param  mixed  $key
-     * @param  mixed  $operator
-     * @param  mixed  $value
+     * @param  mixed $key
+     * @param  mixed $operator
+     * @param  mixed $value
      * @return bool
      */
     public function contains($key, $operator = null, $value = null)
@@ -114,7 +114,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Merge the collection with the given items.
      *
-     * @param  \ArrayAccess|array  $items
+     * @param  \ArrayAccess|array $items
      * @return static
      */
     public function merge($items)
@@ -131,7 +131,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Run a map over each of the items.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return \Illuminate\Support\Collection|static
      */
     public function map(callable $callback)
@@ -139,14 +139,14 @@ class Collection extends BaseCollection implements QueueableCollection
         $result = parent::map($callback);
 
         return $result->contains(function ($item) {
-            return ! $item instanceof Model;
+            return !$item instanceof Model;
         }) ? $result->toBase() : $result;
     }
 
     /**
      * Reload a fresh model instance from the database for all the entities.
      *
-     * @param  array|string  $with
+     * @param  array|string $with
      * @return static
      */
     public function fresh($with = [])
@@ -165,14 +165,14 @@ class Collection extends BaseCollection implements QueueableCollection
 
         return $this->map(function ($model) use ($freshModels) {
             return $model->exists && isset($freshModels[$model->getKey()])
-                    ? $freshModels[$model->getKey()] : null;
+                ? $freshModels[$model->getKey()] : null;
         });
     }
 
     /**
      * Diff the collection with the given items.
      *
-     * @param  \ArrayAccess|array  $items
+     * @param  \ArrayAccess|array $items
      * @return static
      */
     public function diff($items)
@@ -182,7 +182,7 @@ class Collection extends BaseCollection implements QueueableCollection
         $dictionary = $this->getDictionary($items);
 
         foreach ($this->items as $item) {
-            if (! isset($dictionary[$item->getKey()])) {
+            if (!isset($dictionary[$item->getKey()])) {
                 $diff->add($item);
             }
         }
@@ -193,7 +193,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Intersect the collection with the given items.
      *
-     * @param  \ArrayAccess|array  $items
+     * @param  \ArrayAccess|array $items
      * @return static
      */
     public function intersect($items)
@@ -214,13 +214,13 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Return only unique items from the collection.
      *
-     * @param  string|callable|null  $key
-     * @param  bool  $strict
+     * @param  string|callable|null $key
+     * @param  bool $strict
      * @return static|\Illuminate\Support\Collection
      */
     public function unique($key = null, $strict = false)
     {
-        if (! is_null($key)) {
+        if (!is_null($key)) {
             return parent::unique($key, $strict);
         }
 
@@ -230,7 +230,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Returns only the models from the collection with the specified keys.
      *
-     * @param  mixed  $keys
+     * @param  mixed $keys
      * @return static
      */
     public function only($keys)
@@ -247,7 +247,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Returns all models in the collection except the models with specified keys.
      *
-     * @param  mixed  $keys
+     * @param  mixed $keys
      * @return static
      */
     public function except($keys)
@@ -260,7 +260,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Make the given, typically visible, attributes hidden across the entire collection.
      *
-     * @param  array|string  $attributes
+     * @param  array|string $attributes
      * @return $this
      */
     public function makeHidden($attributes)
@@ -273,7 +273,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Make the given, typically hidden, attributes visible across the entire collection.
      *
-     * @param  array|string  $attributes
+     * @param  array|string $attributes
      * @return $this
      */
     public function makeVisible($attributes)
@@ -286,7 +286,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Get a dictionary keyed by primary keys.
      *
-     * @param  \ArrayAccess|array|null  $items
+     * @param  \ArrayAccess|array|null $items
      * @return array
      */
     public function getDictionary($items = null)
@@ -309,8 +309,8 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Get an array with the values of a given key.
      *
-     * @param  string  $value
-     * @param  string|null  $key
+     * @param  string $value
+     * @param  string|null $key
      * @return \Illuminate\Support\Collection
      */
     public function pluck($value, $key = null)
@@ -352,7 +352,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Get a flattened array of the items in the collection.
      *
-     * @param  int  $depth
+     * @param  int $depth
      * @return \Illuminate\Support\Collection
      */
     public function flatten($depth = INF)
@@ -373,7 +373,7 @@ class Collection extends BaseCollection implements QueueableCollection
     /**
      * Pad collection to the specified length with a value.
      *
-     * @param  int  $size
+     * @param  int $size
      * @param  mixed $value
      * @return \Illuminate\Support\Collection
      */

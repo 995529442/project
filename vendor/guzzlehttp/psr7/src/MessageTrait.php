@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp\Psr7;
 
 use Psr\Http\Message\StreamInterface;
@@ -12,7 +13,7 @@ trait MessageTrait
     private $headers = [];
 
     /** @var array Map of lowercase header name => original name at registration */
-    private $headerNames  = [];
+    private $headerNames = [];
 
     /** @var string */
     private $protocol = '1.1';

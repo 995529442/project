@@ -34,7 +34,7 @@ class LoggerTest extends TestCase
 
     protected function setUp()
     {
-        $this->tmpFile = sys_get_temp_dir().DIRECTORY_SEPARATOR.'log';
+        $this->tmpFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'log';
         $this->logger = new Logger(LogLevel::DEBUG, $this->tmpFile);
     }
 
@@ -48,7 +48,7 @@ class LoggerTest extends TestCase
     public static function assertLogsMatch(array $expected, array $given)
     {
         foreach ($given as $k => $line) {
-            self::assertThat(1 === preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[\+-][0-9]{2}:[0-9]{2} '.preg_quote($expected[$k]).'/', $line), self::isTrue(), "\"$line\" do not match expected pattern \"$expected[$k]\"");
+            self::assertThat(1 === preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[\+-][0-9]{2}:[0-9]{2} ' . preg_quote($expected[$k]) . '/', $line), self::isTrue(), "\"$line\" do not match expected pattern \"$expected[$k]\"");
         }
     }
 
@@ -192,7 +192,7 @@ class LoggerTest extends TestCase
     public function testFormatter()
     {
         $this->logger = new Logger(LogLevel::DEBUG, $this->tmpFile, function ($level, $message, $context) {
-            return json_encode(array('level' => $level, 'message' => $message, 'context' => $context)).\PHP_EOL;
+            return json_encode(array('level' => $level, 'message' => $message, 'context' => $context)) . \PHP_EOL;
         });
 
         $this->logger->error('An error', array('foo' => 'bar'));

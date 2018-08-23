@@ -1,4 +1,5 @@
 <?php
+
 class BeforeClassWithOnlyDataProviderTest extends \PHPUnit\Framework\TestCase
 {
     public static $setUpBeforeClassWasCalled;
@@ -7,7 +8,7 @@ class BeforeClassWithOnlyDataProviderTest extends \PHPUnit\Framework\TestCase
     public static function resetProperties()
     {
         self::$setUpBeforeClassWasCalled = false;
-        self::$beforeClassWasCalled      = false;
+        self::$beforeClassWasCalled = false;
     }
 
     public static function setUpBeforeClass()

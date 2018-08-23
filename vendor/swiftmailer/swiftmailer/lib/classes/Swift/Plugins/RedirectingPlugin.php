@@ -116,7 +116,7 @@ class Swift_Plugins_RedirectingPlugin implements Swift_Events_SendListener
             $to = array();
         }
 
-        foreach ((array) $this->recipient as $recipient) {
+        foreach ((array)$this->recipient as $recipient) {
             if (!array_key_exists($recipient, $to)) {
                 $message->addTo($recipient);
             }
@@ -127,7 +127,7 @@ class Swift_Plugins_RedirectingPlugin implements Swift_Events_SendListener
      * Filter header set against a whitelist of regular expressions.
      *
      * @param Swift_Mime_SimpleHeaderSet $headerSet
-     * @param string                     $type
+     * @param string $type
      */
     private function filterHeaderSet(Swift_Mime_SimpleHeaderSet $headerSet, $type)
     {
@@ -165,7 +165,7 @@ class Swift_Plugins_RedirectingPlugin implements Swift_Events_SendListener
      */
     protected function isWhitelisted($recipient)
     {
-        if (in_array($recipient, (array) $this->recipient)) {
+        if (in_array($recipient, (array)$this->recipient)) {
             return true;
         }
 

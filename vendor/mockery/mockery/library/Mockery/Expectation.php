@@ -291,11 +291,11 @@ class Expectation implements ExpectationInterface
     public function validateOrder()
     {
         if ($this->_orderNumber) {
-            $this->_mock->mockery_validateOrder((string) $this, $this->_orderNumber, $this->_mock);
+            $this->_mock->mockery_validateOrder((string)$this, $this->_orderNumber, $this->_mock);
         }
         if ($this->_globalOrderNumber) {
             $this->_mock->mockery_getContainer()
-                ->mockery_validateOrder((string) $this, $this->_globalOrderNumber, $this->_mock);
+                ->mockery_validateOrder((string)$this, $this->_globalOrderNumber, $this->_mock);
         }
     }
 
@@ -337,7 +337,7 @@ class Expectation implements ExpectationInterface
             return $this->_matchArg($this->_expectedArgs[0], $args);
         }
         $argCount = count($args);
-        if ($argCount !== count((array) $this->_expectedArgs)) {
+        if ($argCount !== count((array)$this->_expectedArgs)) {
             $lastExpectedArgument = end($this->_expectedArgs);
             reset($this->_expectedArgs);
 
@@ -362,7 +362,7 @@ class Expectation implements ExpectationInterface
     protected function _matchArgs($args)
     {
         $argCount = count($args);
-        for ($i=0; $i<$argCount; $i++) {
+        for ($i = 0; $i < $argCount; $i++) {
             $param =& $args[$i];
             if (!$this->_matchArg($this->_expectedArgs[$i], $param)) {
                 return false;
@@ -453,7 +453,7 @@ class Expectation implements ExpectationInterface
         } elseif ($argsOrClosure instanceof Closure) {
             $this->withArgsMatchedByClosure($argsOrClosure);
         } else {
-            throw new \InvalidArgumentException(sprintf('Call to %s with an invalid argument (%s), only array and '.
+            throw new \InvalidArgumentException(sprintf('Call to %s with an invalid argument (%s), only array and ' .
                 'closure are allowed', __METHOD__, $argsOrClosure));
         }
         return $this;

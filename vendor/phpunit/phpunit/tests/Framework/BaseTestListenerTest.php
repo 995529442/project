@@ -20,7 +20,7 @@ class BaseTestListenerTest extends TestCase
     public function testEndEventsAreCounted()
     {
         $this->result = new TestResult;
-        $listener     = new \BaseTestListenerSample;
+        $listener = new \BaseTestListenerSample;
 
         $this->result->addListener($listener);
 

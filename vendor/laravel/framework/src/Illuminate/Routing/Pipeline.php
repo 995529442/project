@@ -20,7 +20,7 @@ class Pipeline extends BasePipeline
     /**
      * Get the final piece of the Closure onion.
      *
-     * @param  \Closure  $destination
+     * @param  \Closure $destination
      * @return \Closure
      */
     protected function prepareDestination(Closure $destination)
@@ -63,16 +63,16 @@ class Pipeline extends BasePipeline
     /**
      * Handle the given exception.
      *
-     * @param  mixed  $passable
-     * @param  \Exception  $e
+     * @param  mixed $passable
+     * @param  \Exception $e
      * @return mixed
      *
      * @throws \Exception
      */
     protected function handleException($passable, Exception $e)
     {
-        if (! $this->container->bound(ExceptionHandler::class) ||
-            ! $passable instanceof Request) {
+        if (!$this->container->bound(ExceptionHandler::class) ||
+            !$passable instanceof Request) {
             throw $e;
         }
 

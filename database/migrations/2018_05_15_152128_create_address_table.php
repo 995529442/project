@@ -17,7 +17,7 @@ class CreateAddressTable extends Migration
             $table->engine = "InnoDb";
             $table->increments('id');
             $table->integer('pid')->comment("上级id");
-            $table->string('name',50)->default('')->comment("名称");
+            $table->string('name', 50)->default('')->comment("名称");
             $table->tinyInteger('type')->default('0')->comment("类型 0为国家 1为省份 2为城市 3为县区");
         });
 

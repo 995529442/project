@@ -1,9 +1,11 @@
 <?php
+
 namespace Hamcrest\Arrays;
 
 /*
  Copyright (c) 2009 hamcrest.org
  */
+
 use Hamcrest\Core\DescribedAs;
 use Hamcrest\Core\IsNot;
 use Hamcrest\FeatureMatcher;

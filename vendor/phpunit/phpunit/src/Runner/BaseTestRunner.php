@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Runner;
 
 use File_Iterator_Facade;
@@ -21,14 +22,14 @@ use ReflectionException;
  */
 abstract class BaseTestRunner
 {
-    const STATUS_PASSED     = 0;
-    const STATUS_SKIPPED    = 1;
+    const STATUS_PASSED = 0;
+    const STATUS_SKIPPED = 1;
     const STATUS_INCOMPLETE = 2;
-    const STATUS_FAILURE    = 3;
-    const STATUS_ERROR      = 4;
-    const STATUS_RISKY      = 5;
-    const STATUS_WARNING    = 6;
-    const SUITE_METHODNAME  = 'suite';
+    const STATUS_FAILURE = 3;
+    const STATUS_ERROR = 4;
+    const STATUS_RISKY = 5;
+    const STATUS_WARNING = 6;
+    const SUITE_METHODNAME = 'suite';
 
     /**
      * Returns the loader to be used.
@@ -47,7 +48,7 @@ abstract class BaseTestRunner
      *
      * @param string $suiteClassName
      * @param string $suiteClassFile
-     * @param mixed  $suffixes
+     * @param mixed $suffixes
      *
      * @return Test|null
      */
@@ -56,7 +57,7 @@ abstract class BaseTestRunner
         if (\is_dir($suiteClassName) &&
             !\is_file($suiteClassName . '.php') && empty($suiteClassFile)) {
             $facade = new File_Iterator_Facade;
-            $files  = $facade->getFilesAsArray(
+            $files = $facade->getFilesAsArray(
                 $suiteClassName,
                 $suffixes
             );

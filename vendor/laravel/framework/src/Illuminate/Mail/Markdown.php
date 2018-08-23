@@ -33,8 +33,8 @@ class Markdown
     /**
      * Create a new Markdown renderer instance.
      *
-     * @param  \Illuminate\Contracts\View\Factory  $view
-     * @param  array  $options
+     * @param  \Illuminate\Contracts\View\Factory $view
+     * @param  array $options
      * @return void
      */
     public function __construct(ViewFactory $view, array $options = [])
@@ -47,9 +47,9 @@ class Markdown
     /**
      * Render the Markdown template into HTML.
      *
-     * @param  string  $view
-     * @param  array  $data
-     * @param  \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles|null  $inliner
+     * @param  string $view
+     * @param  array $data
+     * @param  \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles|null $inliner
      * @return \Illuminate\Support\HtmlString
      */
     public function render($view, array $data = [], $inliner = null)
@@ -61,15 +61,15 @@ class Markdown
         )->make($view, $data)->render();
 
         return new HtmlString(($inliner ?: new CssToInlineStyles)->convert(
-            $contents, $this->view->make('mail::themes.'.$this->theme)->render()
+            $contents, $this->view->make('mail::themes.' . $this->theme)->render()
         ));
     }
 
     /**
      * Render the Markdown template into HTML.
      *
-     * @param  string  $view
-     * @param  array  $data
+     * @param  string $view
+     * @param  array $data
      * @return \Illuminate\Support\HtmlString
      */
     public function renderText($view, array $data = [])
@@ -88,7 +88,7 @@ class Markdown
     /**
      * Parse the given Markdown text into HTML.
      *
-     * @param  string  $text
+     * @param  string $text
      * @return \Illuminate\Support\HtmlString
      */
     public static function parse($text)
@@ -106,7 +106,7 @@ class Markdown
     public function htmlComponentPaths()
     {
         return array_map(function ($path) {
-            return $path.'/html';
+            return $path . '/html';
         }, $this->componentPaths());
     }
 
@@ -118,7 +118,7 @@ class Markdown
     public function markdownComponentPaths()
     {
         return array_map(function ($path) {
-            return $path.'/markdown';
+            return $path . '/markdown';
         }, $this->componentPaths());
     }
 
@@ -130,14 +130,14 @@ class Markdown
     protected function componentPaths()
     {
         return array_unique(array_merge($this->componentPaths, [
-            __DIR__.'/resources/views',
+            __DIR__ . '/resources/views',
         ]));
     }
 
     /**
      * Register new mail component paths.
      *
-     * @param  array  $paths
+     * @param  array $paths
      * @return void
      */
     public function loadComponentsFrom(array $paths = [])
@@ -148,7 +148,7 @@ class Markdown
     /**
      * Set the default theme to be used.
      *
-     * @param  string  $theme
+     * @param  string $theme
      * @return $this
      */
     public function theme($theme)

@@ -34,7 +34,7 @@ class PsrResponseCommand extends AbstractCommand
         $this->setOutput(new Response(
             200,
             [
-                'Content-Type'   => $mimetype,
+                'Content-Type' => $mimetype,
                 'Content-Length' => strlen($image->getEncoded())
             ],
             $stream

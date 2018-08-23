@@ -34,10 +34,10 @@ class JsonResponse extends Response
     protected $encodingOptions = self::DEFAULT_ENCODING_OPTIONS;
 
     /**
-     * @param mixed $data    The response data
-     * @param int   $status  The response status code
+     * @param mixed $data The response data
+     * @param int $status The response status code
      * @param array $headers An array of response headers
-     * @param bool  $json    If the data is already a JSON string
+     * @param bool $json If the data is already a JSON string
      */
     public function __construct($data = null, $status = 200, $headers = array(), $json = false)
     {
@@ -58,8 +58,8 @@ class JsonResponse extends Response
      *     return JsonResponse::create($data, 200)
      *         ->setSharedMaxAge(300);
      *
-     * @param mixed $data    The json response data
-     * @param int   $status  The response status code
+     * @param mixed $data The json response data
+     * @param int $status The response status code
      * @param array $headers An array of response headers
      *
      * @return static
@@ -96,7 +96,7 @@ class JsonResponse extends Response
             $pattern = '/^[$_\p{L}][$_\p{L}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]*(?:\[(?:"(?:\\\.|[^"\\\])*"|\'(?:\\\.|[^\'\\\])*\'|\d+)\])*?$/u';
             $reserved = array(
                 'break', 'do', 'instanceof', 'typeof', 'case', 'else', 'new', 'var', 'catch', 'finally', 'return', 'void', 'continue', 'for', 'switch', 'while',
-                'debugger', 'function', 'this', 'with', 'default', 'if', 'throw', 'delete', 'in', 'try', 'class', 'enum', 'extends', 'super',  'const', 'export',
+                'debugger', 'function', 'this', 'with', 'default', 'if', 'throw', 'delete', 'in', 'try', 'class', 'enum', 'extends', 'super', 'const', 'export',
                 'import', 'implements', 'let', 'private', 'public', 'yield', 'interface', 'package', 'protected', 'static', 'null', 'true', 'false',
             );
             $parts = explode('.', $callback);
@@ -146,7 +146,9 @@ class JsonResponse extends Response
             $data = json_encode($data, $this->encodingOptions);
         } else {
             if (!interface_exists('JsonSerializable', false)) {
-                set_error_handler(function () { return false; });
+                set_error_handler(function () {
+                    return false;
+                });
                 try {
                     $data = @json_encode($data, $this->encodingOptions);
                 } finally {
@@ -190,7 +192,7 @@ class JsonResponse extends Response
      */
     public function setEncodingOptions($encodingOptions)
     {
-        $this->encodingOptions = (int) $encodingOptions;
+        $this->encodingOptions = (int)$encodingOptions;
 
         return $this->setData(json_decode($this->data));
     }

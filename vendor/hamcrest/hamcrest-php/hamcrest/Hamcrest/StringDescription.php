@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest;
 
 /*
@@ -15,7 +16,7 @@ class StringDescription extends BaseDescription
 
     public function __construct($out = '')
     {
-        $this->_out = (string) $out;
+        $this->_out = (string)$out;
     }
 
     public function __toString()
@@ -37,7 +38,7 @@ class StringDescription extends BaseDescription
     {
         $self = new self();
 
-        return (string) $self->appendDescriptionOf($selfDescribing);
+        return (string)$self->appendDescriptionOf($selfDescribing);
     }
 
     /**

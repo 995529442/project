@@ -18,6 +18,7 @@ class PhraseBuilder implements PhraseBuilderInterface
      * @var string
      */
     public $charset;
+
     /**
      * Constructs a PhraseBuilder with given parameters
      */

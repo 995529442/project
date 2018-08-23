@@ -46,7 +46,7 @@ class ApplicationDescription
     /**
      * @param Application $application
      * @param string|null $namespace
-     * @param bool        $showHidden
+     * @param bool $showHidden
      */
     public function __construct(Application $application, $namespace = null, $showHidden = false)
     {

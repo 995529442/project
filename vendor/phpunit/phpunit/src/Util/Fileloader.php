@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use PHPUnit\Framework\Exception;
@@ -63,7 +64,7 @@ class Fileloader
 
         include_once $filename;
 
-        $newVariables     = \get_defined_vars();
+        $newVariables = \get_defined_vars();
         $newVariableNames = \array_diff(
             \array_keys($newVariables),
             $oldVariableNames

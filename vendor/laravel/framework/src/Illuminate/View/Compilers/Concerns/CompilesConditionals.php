@@ -37,7 +37,7 @@ trait CompilesConditionals
     /**
      * Compile the if-guest statements into valid PHP.
      *
-     * @param  string|null  $guard
+     * @param  string|null $guard
      * @return string
      */
     protected function compileGuest($guard = null)
@@ -60,7 +60,7 @@ trait CompilesConditionals
     /**
      * Compile the has-section statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileHasSection($expression)
@@ -71,7 +71,7 @@ trait CompilesConditionals
     /**
      * Compile the if statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileIf($expression)
@@ -82,7 +82,7 @@ trait CompilesConditionals
     /**
      * Compile the unless statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileUnless($expression)
@@ -93,7 +93,7 @@ trait CompilesConditionals
     /**
      * Compile the else-if statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileElseif($expression)
@@ -134,7 +134,7 @@ trait CompilesConditionals
     /**
      * Compile the if-isset statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileIsset($expression)
@@ -155,7 +155,7 @@ trait CompilesConditionals
     /**
      * Compile the switch statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileSwitch($expression)
@@ -168,7 +168,7 @@ trait CompilesConditionals
     /**
      * Compile the case statements into valid PHP.
      *
-     * @param  string  $expression
+     * @param  string $expression
      * @return string
      */
     protected function compileCase($expression)

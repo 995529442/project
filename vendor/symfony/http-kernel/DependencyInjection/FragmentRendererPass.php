@@ -30,7 +30,7 @@ class FragmentRendererPass implements CompilerPassInterface
 
     /**
      * @param string $handlerService Service name of the fragment handler in the container
-     * @param string $rendererTag    Tag name used for fragments
+     * @param string $rendererTag Tag name used for fragments
      */
     public function __construct($handlerService = 'fragment.handler', $rendererTag = 'kernel.fragment_renderer')
     {

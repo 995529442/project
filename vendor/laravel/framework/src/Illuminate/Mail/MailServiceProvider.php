@@ -65,9 +65,9 @@ class MailServiceProvider extends ServiceProvider
     /**
      * Set a global address on the mailer by type.
      *
-     * @param  \Illuminate\Mail\Mailer  $mailer
-     * @param  array  $config
-     * @param  string  $type
+     * @param  \Illuminate\Mail\Mailer $mailer
+     * @param  array $config
+     * @param  string $type
      * @return void
      */
     protected function setGlobalAddress($mailer, array $config, $type)
@@ -75,7 +75,7 @@ class MailServiceProvider extends ServiceProvider
         $address = Arr::get($config, $type);
 
         if (is_array($address) && isset($address['address'])) {
-            $mailer->{'always'.Str::studly($type)}($address['address'], $address['name']);
+            $mailer->{'always' . Str::studly($type)}($address['address'], $address['name']);
         }
     }
 
@@ -117,7 +117,7 @@ class MailServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/resources/views' => $this->app->resourcePath('views/vendor/mail'),
+                __DIR__ . '/resources/views' => $this->app->resourcePath('views/vendor/mail'),
             ], 'laravel-mail');
         }
 

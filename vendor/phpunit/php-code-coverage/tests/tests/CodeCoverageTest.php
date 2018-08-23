@@ -53,7 +53,7 @@ class CodeCoverageTest extends TestCase
             $this->markTestSkipped('Requires PHP CLI and Xdebug');
         }
 
-        $filter   = new Filter;
+        $filter = new Filter;
         $coverage = new CodeCoverage(null, $filter);
 
         $this->assertAttributeInstanceOf(
@@ -90,7 +90,7 @@ class CodeCoverageTest extends TestCase
             $this->markTestSkipped('Requires PHPDBG');
         }
 
-        $filter   = new Filter;
+        $filter = new Filter;
         $coverage = new CodeCoverage(null, $filter);
 
         $this->assertAttributeInstanceOf(
@@ -294,10 +294,10 @@ class CodeCoverageTest extends TestCase
 
         $this->assertEquals(
             [
-                'BankAccountTest::testBalanceIsInitiallyZero'       => ['size' => 'unknown', 'status' => null],
-                'BankAccountTest::testBalanceCannotBecomeNegative'  => ['size' => 'unknown', 'status' => null],
+                'BankAccountTest::testBalanceIsInitiallyZero' => ['size' => 'unknown', 'status' => null],
+                'BankAccountTest::testBalanceCannotBecomeNegative' => ['size' => 'unknown', 'status' => null],
                 'BankAccountTest::testBalanceCannotBecomeNegative2' => ['size' => 'unknown', 'status' => null],
-                'BankAccountTest::testDepositWithdrawMoney'         => ['size' => 'unknown', 'status' => null]
+                'BankAccountTest::testDepositWithdrawMoney' => ['size' => 'unknown', 'status' => null]
             ],
             $coverage->getTests()
         );

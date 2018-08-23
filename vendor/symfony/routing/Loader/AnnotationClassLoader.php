@@ -87,8 +87,8 @@ abstract class AnnotationClassLoader implements LoaderInterface
     /**
      * Loads from annotations from a class.
      *
-     * @param string      $class A class name
-     * @param string|null $type  The resource type
+     * @param string $class A class name
+     * @param string|null $type The resource type
      *
      * @return RouteCollection A RouteCollection instance
      *
@@ -139,11 +139,11 @@ abstract class AnnotationClassLoader implements LoaderInterface
         if (null === $name) {
             $name = $this->getDefaultRouteName($class, $method);
         }
-        $name = $globals['name'].$name;
+        $name = $globals['name'] . $name;
 
         $defaults = array_replace($globals['defaults'], $annot->getDefaults());
         foreach ($method->getParameters() as $param) {
-            if (false !== strpos($globals['path'].$annot->getPath(), sprintf('{%s}', $param->getName())) && !isset($defaults[$param->getName()]) && $param->isDefaultValueAvailable()) {
+            if (false !== strpos($globals['path'] . $annot->getPath(), sprintf('{%s}', $param->getName())) && !isset($defaults[$param->getName()]) && $param->isDefaultValueAvailable()) {
                 $defaults[$param->getName()] = $param->getDefaultValue();
             }
         }
@@ -162,7 +162,7 @@ abstract class AnnotationClassLoader implements LoaderInterface
             $condition = $globals['condition'];
         }
 
-        $route = $this->createRoute($globals['path'].$annot->getPath(), $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
+        $route = $this->createRoute($globals['path'] . $annot->getPath(), $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
 
         $this->configureRoute($route, $class, $method, $annot);
 
@@ -194,16 +194,16 @@ abstract class AnnotationClassLoader implements LoaderInterface
     /**
      * Gets the default route name for a class method.
      *
-     * @param \ReflectionClass  $class
+     * @param \ReflectionClass $class
      * @param \ReflectionMethod $method
      *
      * @return string
      */
     protected function getDefaultRouteName(\ReflectionClass $class, \ReflectionMethod $method)
     {
-        $name = strtolower(str_replace('\\', '_', $class->name).'_'.$method->name);
+        $name = strtolower(str_replace('\\', '_', $class->name) . '_' . $method->name);
         if ($this->defaultRouteIndex > 0) {
-            $name .= '_'.$this->defaultRouteIndex;
+            $name .= '_' . $this->defaultRouteIndex;
         }
         ++$this->defaultRouteIndex;
 

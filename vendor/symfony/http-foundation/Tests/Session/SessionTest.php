@@ -101,7 +101,7 @@ class SessionTest extends TestCase
     {
         $this->session->set($key, $value);
         $this->assertTrue($this->session->has($key));
-        $this->assertFalse($this->session->has($key.'non_value'));
+        $this->assertFalse($this->session->has($key . 'non_value'));
     }
 
     public function testReplace()

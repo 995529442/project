@@ -27,7 +27,7 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
 
     public function __construct(string $header = "--- Original\n+++ New\n", bool $addLineNumbers = false)
     {
-        $this->header         = $header;
+        $this->header = $header;
         $this->addLineNumbers = $addLineNumbers;
     }
 
@@ -56,9 +56,9 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
     private function writeDiffChunked($output, array $diff, array $old)
     {
         $upperLimit = \count($diff);
-        $start      = 0;
-        $fromStart  = 0;
-        $toStart    = 0;
+        $start = 0;
+        $fromStart = 0;
+        $toStart = 0;
 
         if (\count($old)) { // no common parts, list all diff entries
             \reset($old);
@@ -66,7 +66,7 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
             // iterate the diff, go from chunk to chunk skipping common chunk of lines between those
             do {
                 $commonStart = \key($old);
-                $commonEnd   = \current($old);
+                $commonEnd = \current($old);
 
                 if ($commonStart !== $start) {
                     list($fromRange, $toRange) = $this->getChunkRange($diff, $start, $commonStart);
@@ -76,7 +76,7 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
                     $toStart += $toRange;
                 }
 
-                $start        = $commonEnd + 1;
+                $start = $commonEnd + 1;
                 $commonLength = $commonEnd - $commonStart + 1; // calculate number of non-change lines in the common part
                 $fromStart += $commonLength;
                 $toStart += $commonLength;
@@ -110,7 +110,8 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
         int $fromRange,
         int $toStart,
         int $toRange
-    ) {
+    )
+    {
         if ($this->addLineNumbers) {
             \fwrite($output, '@@ -' . (1 + $fromStart));
 
@@ -146,7 +147,7 @@ final class UnifiedDiffOutputBuilder extends AbstractChunkOutputBuilder
 
     private function getChunkRange(array $diff, int $diffStartIndex, int $diffEndIndex): array
     {
-        $toRange   = 0;
+        $toRange = 0;
         $fromRange = 0;
 
         for ($i = $diffStartIndex; $i < $diffEndIndex; ++$i) {

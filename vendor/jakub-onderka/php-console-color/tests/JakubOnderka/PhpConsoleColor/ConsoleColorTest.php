@@ -1,4 +1,5 @@
 <?php
+
 use JakubOnderka\PhpConsoleColor\ConsoleColor;
 
 class ConsoleColorWithForceSupport extends ConsoleColor

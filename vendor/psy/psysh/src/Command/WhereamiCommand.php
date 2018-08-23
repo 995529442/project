@@ -80,7 +80,7 @@ HELP
 
     private static function isDebugCall(array $stackFrame)
     {
-        $class    = isset($stackFrame['class']) ? $stackFrame['class'] : null;
+        $class = isset($stackFrame['class']) ? $stackFrame['class'] : null;
         $function = isset($stackFrame['function']) ? $stackFrame['function'] : null;
 
         return ($class === null && $function === 'Psy\debug') ||
@@ -98,7 +98,7 @@ HELP
         if (preg_match('/eval\(/', $stackFrame['file'])) {
             preg_match_all('/([^\(]+)\((\d+)/', $stackFrame['file'], $matches);
             $file = $matches[1][0];
-            $line = (int) $matches[2][0];
+            $line = (int)$matches[2][0];
         } else {
             $file = $stackFrame['file'];
             $line = $stackFrame['line'];
@@ -112,12 +112,12 @@ HELP
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $info        = $this->fileInfo();
-        $num         = $input->getOption('num');
-        $factory     = new ConsoleColorFactory($this->colorMode);
-        $colors      = $factory->getConsoleColor();
+        $info = $this->fileInfo();
+        $num = $input->getOption('num');
+        $factory = new ConsoleColorFactory($this->colorMode);
+        $colors = $factory->getConsoleColor();
         $highlighter = new Highlighter($colors);
-        $contents    = file_get_contents($info['file']);
+        $contents = file_get_contents($info['file']);
 
         $output->startPaging();
         $output->writeln('');

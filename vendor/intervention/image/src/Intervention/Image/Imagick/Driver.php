@@ -12,7 +12,7 @@ class Driver extends \Intervention\Image\AbstractDriver
      */
     public function __construct(Decoder $decoder = null, Encoder $encoder = null)
     {
-        if ( ! $this->coreAvailable()) {
+        if (!$this->coreAvailable()) {
             throw new \Intervention\Image\Exception\NotSupportedException(
                 "ImageMagick module not available with this PHP installation."
             );
@@ -27,7 +27,7 @@ class Driver extends \Intervention\Image\AbstractDriver
      *
      * @param  integer $width
      * @param  integer $height
-     * @param  mixed   $background
+     * @param  mixed $background
      * @return \Intervention\Image\Image
      */
     public function newImage($width, $height, $background = null)

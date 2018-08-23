@@ -69,7 +69,7 @@ final class Example extends BaseTag
             if ($this->isURI) {
                 $filePath = $this->isUriRelative($this->filePath)
                     ? str_replace('%2F', '/', rawurlencode($this->filePath))
-                    :$this->filePath;
+                    : $this->filePath;
             }
 
             return trim($filePath . ' ' . parent::getDescription());
@@ -84,12 +84,12 @@ final class Example extends BaseTag
     public static function create($body)
     {
         // File component: File path in quotes or File URI / Source information
-        if (! preg_match('/^(?:\"([^\"]+)\"|(\S+))(?:\s+(.*))?$/sux', $body, $matches)) {
+        if (!preg_match('/^(?:\"([^\"]+)\"|(\S+))(?:\s+(.*))?$/sux', $body, $matches)) {
             return null;
         }
 
         $filePath = null;
-        $fileUri  = null;
+        $fileUri = null;
         if ('' !== $matches[1]) {
             $filePath = $matches[1];
         } else {
@@ -97,8 +97,8 @@ final class Example extends BaseTag
         }
 
         $startingLine = 1;
-        $lineCount    = null;
-        $description  = null;
+        $lineCount = null;
+        $description = null;
 
         if (array_key_exists(3, $matches)) {
             $description = $matches[3];
@@ -117,7 +117,7 @@ final class Example extends BaseTag
         }
 
         return new static(
-            $filePath !== null?$filePath:$fileUri,
+            $filePath !== null ? $filePath : $fileUri,
             $fileUri !== null,
             $startingLine,
             $lineCount,

@@ -31,7 +31,7 @@ class ConfigDataCollector extends DataCollector implements LateDataCollectorInte
     private $hasVarDumper;
 
     /**
-     * @param string $name    The name of the application using the web profiler
+     * @param string $name The name of the application using the web profiler
      * @param string $version The version of the application using the web profiler
      */
     public function __construct($name = null, $version = null)

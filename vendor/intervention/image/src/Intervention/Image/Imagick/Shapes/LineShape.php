@@ -72,7 +72,7 @@ class LineShape extends \Intervention\Image\AbstractShape
     /**
      * Draw current instance of line to given endpoint on given image
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $x
      * @param  integer $y
      * @return boolean

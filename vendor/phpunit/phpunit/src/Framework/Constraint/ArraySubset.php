@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework\Constraint;
 
 use PHPUnit\Framework\ExpectationFailedException;
@@ -32,7 +33,7 @@ class ArraySubset extends Constraint
 
     /**
      * @param array|\Traversable $subset
-     * @param bool               $strict Check for object identity
+     * @param bool $strict Check for object identity
      */
     public function __construct($subset, $strict = false)
     {
@@ -52,9 +53,9 @@ class ArraySubset extends Constraint
      * a boolean value instead: true in case of success, false in case of a
      * failure.
      *
-     * @param mixed  $other        Value or object to evaluate.
-     * @param string $description  Additional information about the test
-     * @param bool   $returnResult Whether to return a result or throw an exception
+     * @param mixed $other Value or object to evaluate.
+     * @param string $description Additional information about the test
+     * @param bool $returnResult Whether to return a result or throw an exception
      *
      * @return mixed
      *
@@ -64,7 +65,7 @@ class ArraySubset extends Constraint
     {
         //type cast $other & $this->subset as an array to allow
         //support in standard array functions.
-        $other        = $this->toArray($other);
+        $other = $this->toArray($other);
         $this->subset = $this->toArray($this->subset);
 
         $patched = \array_replace_recursive($other, $this->subset);
@@ -136,6 +137,6 @@ class ArraySubset extends Constraint
         }
 
         // Keep BC even if we know that array would not be the expected one
-        return (array) $other;
+        return (array)$other;
     }
 }

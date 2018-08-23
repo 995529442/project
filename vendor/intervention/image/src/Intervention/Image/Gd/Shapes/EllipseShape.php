@@ -36,7 +36,7 @@ class EllipseShape extends \Intervention\Image\AbstractShape
     /**
      * Draw ellipse instance on given image
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $x
      * @param  integer $y
      * @return boolean
@@ -48,7 +48,7 @@ class EllipseShape extends \Intervention\Image\AbstractShape
 
         if ($this->hasBorder()) {
             // slightly smaller ellipse to keep 1px bordered edges clean
-            imagefilledellipse($image->getCore(), $x, $y, $this->width-1, $this->height-1, $background->getInt());
+            imagefilledellipse($image->getCore(), $x, $y, $this->width - 1, $this->height - 1, $background->getInt());
 
             $border_color = new Color($this->border_color);
             imagesetthickness($image->getCore(), $this->border_width);

@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestResult;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Test;

@@ -33,7 +33,7 @@ class PhpExecutableFinderTest extends TestCase
         $current = PHP_BINARY;
         $args = 'phpdbg' === PHP_SAPI ? ' -qrr' : '';
 
-        $this->assertEquals($current.$args, $f->find(), '::find() returns the executable PHP');
+        $this->assertEquals($current . $args, $f->find(), '::find() returns the executable PHP');
         $this->assertEquals($current, $f->find(false), '::find() returns the executable PHP');
     }
 
@@ -50,7 +50,7 @@ class PhpExecutableFinderTest extends TestCase
 
         $current = getenv('PHP_BINARY') ?: PHP_BINARY;
 
-        $this->assertEquals($current.' --php', $f->find(), '::find() returns the executable PHP');
+        $this->assertEquals($current . ' --php', $f->find(), '::find() returns the executable PHP');
         $this->assertEquals($current, $f->find(false), '::find() returns the executable PHP');
     }
 

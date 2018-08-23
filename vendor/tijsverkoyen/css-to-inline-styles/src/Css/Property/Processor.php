@@ -16,7 +16,7 @@ class Processor
     {
         $propertiesString = $this->cleanup($propertiesString);
 
-        $properties = (array) explode(';', $propertiesString);
+        $properties = (array)explode(';', $propertiesString);
         $keysToRemove = array();
         $numberOfProperties = count($properties);
 

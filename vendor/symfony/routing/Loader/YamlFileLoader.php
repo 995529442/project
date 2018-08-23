@@ -34,7 +34,7 @@ class YamlFileLoader extends FileLoader
     /**
      * Loads a Yaml file.
      *
-     * @param string      $file A Yaml file path
+     * @param string $file A Yaml file path
      * @param string|null $type The resource type
      *
      * @return RouteCollection A RouteCollection instance
@@ -58,7 +58,7 @@ class YamlFileLoader extends FileLoader
         }
 
         $prevErrorHandler = set_error_handler(function ($level, $message, $script, $line) use ($file, &$prevErrorHandler) {
-            $message = E_USER_DEPRECATED === $level ? preg_replace('/ on line \d+/', ' in "'.$file.'"$0', $message) : $message;
+            $message = E_USER_DEPRECATED === $level ? preg_replace('/ on line \d+/', ' in "' . $file . '"$0', $message) : $message;
 
             return $prevErrorHandler ? $prevErrorHandler($level, $message, $script, $line) : false;
         });
@@ -109,9 +109,9 @@ class YamlFileLoader extends FileLoader
      * Parses a route and adds it to the RouteCollection.
      *
      * @param RouteCollection $collection A RouteCollection instance
-     * @param string          $name       Route name
-     * @param array           $config     Route definition
-     * @param string          $path       Full path of the YAML file being processed
+     * @param string $name Route name
+     * @param array $config Route definition
+     * @param string $path Full path of the YAML file being processed
      */
     protected function parseRoute(RouteCollection $collection, $name, array $config, $path)
     {
@@ -136,9 +136,9 @@ class YamlFileLoader extends FileLoader
      * Parses an import and adds the routes in the resource to the RouteCollection.
      *
      * @param RouteCollection $collection A RouteCollection instance
-     * @param array           $config     Route definition
-     * @param string          $path       Full path of the YAML file being processed
-     * @param string          $file       Loaded file name
+     * @param array $config Route definition
+     * @param string $path Full path of the YAML file being processed
+     * @param string $file Loaded file name
      */
     protected function parseImport(RouteCollection $collection, array $config, $path, $file)
     {
@@ -190,9 +190,9 @@ class YamlFileLoader extends FileLoader
     /**
      * Validates the route configuration.
      *
-     * @param array  $config A resource config
-     * @param string $name   The config key
-     * @param string $path   The loaded file path
+     * @param array $config A resource config
+     * @param string $name The config key
+     * @param string $path The loaded file path
      *
      * @throws \InvalidArgumentException If one of the provided config keys is not supported,
      *                                   something is missing or the combination is nonsense

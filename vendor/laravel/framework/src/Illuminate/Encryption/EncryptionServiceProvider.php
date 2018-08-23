@@ -32,7 +32,7 @@ class EncryptionServiceProvider extends ServiceProvider
     /**
      * Extract the encryption key from the given configuration.
      *
-     * @param  array  $config
+     * @param  array $config
      * @return string
      */
     protected function key(array $config)

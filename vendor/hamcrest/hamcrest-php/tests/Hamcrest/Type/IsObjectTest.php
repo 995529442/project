@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Type;
 
 class IsObjectTest extends \Hamcrest\AbstractMatcherTest

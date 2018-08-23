@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Util;
 
 use PHPUnit\Framework\Exception;
@@ -21,7 +22,7 @@ class Filter
      * Filters stack frames from PHPUnit classes.
      *
      * @param \Throwable $e
-     * @param bool       $asString
+     * @param bool $asString
      *
      * @return string|string[]
      */
@@ -42,19 +43,19 @@ class Filter
 
         if ($e instanceof SyntheticError) {
             $eTrace = $e->getSyntheticTrace();
-            $eFile  = $e->getSyntheticFile();
-            $eLine  = $e->getSyntheticLine();
+            $eFile = $e->getSyntheticFile();
+            $eLine = $e->getSyntheticLine();
         } elseif ($e instanceof Exception) {
             $eTrace = $e->getSerializableTrace();
-            $eFile  = $e->getFile();
-            $eLine  = $e->getLine();
+            $eFile = $e->getFile();
+            $eLine = $e->getLine();
         } else {
             if ($e->getPrevious()) {
                 $e = $e->getPrevious();
             }
             $eTrace = $e->getTrace();
-            $eFile  = $e->getFile();
-            $eLine  = $e->getLine();
+            $eFile = $e->getFile();
+            $eLine = $e->getLine();
         }
 
         if (!self::frameExists($eTrace, $eFile, $eLine)) {
@@ -87,9 +88,9 @@ class Filter
     }
 
     /**
-     * @param array  $trace
+     * @param array $trace
      * @param string $file
-     * @param int    $line
+     * @param int $line
      *
      * @return bool
      */

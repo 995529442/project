@@ -22,7 +22,7 @@ class TypeErrorException extends \Exception implements Exception
      * Constructor!
      *
      * @param string $message (default: "")
-     * @param int    $code    (default: 0)
+     * @param int $code (default: 0)
      */
     public function __construct($message = '', $code = 0)
     {

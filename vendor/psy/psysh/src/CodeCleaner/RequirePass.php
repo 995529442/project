@@ -67,13 +67,13 @@ class RequirePass extends CodeCleanerPass
      * @throws ErrorException      if $file is empty and E_WARNING is included in error_reporting level
      *
      * @param string $file
-     * @param int    $lineNumber Line number of the original require expression
+     * @param int $lineNumber Line number of the original require expression
      *
      * @return string Exactly the same as $file
      */
     public static function resolve($file, $lineNumber = null)
     {
-        $file = (string) $file;
+        $file = (string)$file;
 
         if ($file === '') {
             // @todo Shell::handleError would be better here, because we could

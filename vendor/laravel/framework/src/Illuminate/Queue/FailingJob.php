@@ -11,8 +11,8 @@ class FailingJob
     /**
      * Delete the job, call the "failed" method, and raise the failed job event.
      *
-     * @param  string  $connectionName
-     * @param  \Illuminate\Queue\Jobs\Job  $job
+     * @param  string $connectionName
+     * @param  \Illuminate\Queue\Jobs\Job $job
      * @param  \Exception $e
      * @return void
      */

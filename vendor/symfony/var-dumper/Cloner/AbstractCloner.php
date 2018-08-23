@@ -178,7 +178,7 @@ abstract class AbstractCloner implements ClonerInterface
      */
     public function setMaxItems($maxItems)
     {
-        $this->maxItems = (int) $maxItems;
+        $this->maxItems = (int)$maxItems;
     }
 
     /**
@@ -188,7 +188,7 @@ abstract class AbstractCloner implements ClonerInterface
      */
     public function setMaxString($maxString)
     {
-        $this->maxString = (int) $maxString;
+        $this->maxString = (int)$maxString;
     }
 
     /**
@@ -199,14 +199,14 @@ abstract class AbstractCloner implements ClonerInterface
      */
     public function setMinDepth($minDepth)
     {
-        $this->minDepth = (int) $minDepth;
+        $this->minDepth = (int)$minDepth;
     }
 
     /**
      * Clones a PHP variable.
      *
-     * @param mixed $var    Any PHP variable
-     * @param int   $filter A bit field of Caster::EXCLUDE_* constants
+     * @param mixed $var Any PHP variable
+     * @param int $filter A bit field of Caster::EXCLUDE_* constants
      *
      * @return Data The cloned variable represented by a Data object
      */
@@ -252,7 +252,7 @@ abstract class AbstractCloner implements ClonerInterface
     /**
      * Casts an object to an array representation.
      *
-     * @param Stub $stub     The Stub for the casted object
+     * @param Stub $stub The Stub for the casted object
      * @param bool $isNested True if the object is nested in the dumped structure
      *
      * @return array The object casted as array
@@ -263,7 +263,7 @@ abstract class AbstractCloner implements ClonerInterface
         $class = $stub->class;
 
         if (isset($class[15]) && "\0" === $class[15] && 0 === strpos($class, "class@anonymous\x00")) {
-            $stub->class = get_parent_class($class).'@anonymous';
+            $stub->class = get_parent_class($class) . '@anonymous';
         }
         if (isset($this->classInfo[$class])) {
             list($i, $parents, $hasDebugInfo) = $this->classInfo[$class];
@@ -296,7 +296,7 @@ abstract class AbstractCloner implements ClonerInterface
                 }
             }
         } catch (\Exception $e) {
-            $a = array((Stub::TYPE_OBJECT === $stub->type ? Caster::PREFIX_VIRTUAL : '').'⚠' => new ThrowingCasterException($e)) + $a;
+            $a = array((Stub::TYPE_OBJECT === $stub->type ? Caster::PREFIX_VIRTUAL : '') . '⚠' => new ThrowingCasterException($e)) + $a;
         }
 
         return $a;
@@ -305,7 +305,7 @@ abstract class AbstractCloner implements ClonerInterface
     /**
      * Casts a resource to an array representation.
      *
-     * @param Stub $stub     The Stub for the casted resource
+     * @param Stub $stub The Stub for the casted resource
      * @param bool $isNested True if the object is nested in the dumped structure
      *
      * @return array The resource casted as array
@@ -317,13 +317,13 @@ abstract class AbstractCloner implements ClonerInterface
         $type = $stub->class;
 
         try {
-            if (!empty($this->casters[':'.$type])) {
-                foreach ($this->casters[':'.$type] as $callback) {
+            if (!empty($this->casters[':' . $type])) {
+                foreach ($this->casters[':' . $type] as $callback) {
                     $a = $callback($res, $a, $stub, $isNested, $this->filter);
                 }
             }
         } catch (\Exception $e) {
-            $a = array((Stub::TYPE_OBJECT === $stub->type ? Caster::PREFIX_VIRTUAL : '').'⚠' => new ThrowingCasterException($e)) + $a;
+            $a = array((Stub::TYPE_OBJECT === $stub->type ? Caster::PREFIX_VIRTUAL : '') . '⚠' => new ThrowingCasterException($e)) + $a;
         }
 
         return $a;

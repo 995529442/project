@@ -13,7 +13,7 @@ class PhpRedisConnection extends Connection
     /**
      * Create a new PhpRedis connection.
      *
-     * @param  \Redis  $client
+     * @param  \Redis $client
      * @return void
      */
     public function __construct($client)
@@ -24,7 +24,7 @@ class PhpRedisConnection extends Connection
     /**
      * Returns the value of the given key.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return string|null
      */
     public function get($key)
@@ -37,7 +37,7 @@ class PhpRedisConnection extends Connection
     /**
      * Get the values of all the given keys.
      *
-     * @param  array  $keys
+     * @param  array $keys
      * @return array
      */
     public function mget(array $keys)
@@ -50,7 +50,7 @@ class PhpRedisConnection extends Connection
     /**
      * Determine if the given keys exist.
      *
-     * @param  dynamic  $keys
+     * @param  dynamic $keys
      * @return int
      */
     public function exists(...$keys)
@@ -65,11 +65,11 @@ class PhpRedisConnection extends Connection
     /**
      * Set the string value in argument as value of the key.
      *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @param  string|null  $expireResolution
-     * @param  int|null  $expireTTL
-     * @param  string|null  $flag
+     * @param  string $key
+     * @param  mixed $value
+     * @param  string|null $expireResolution
+     * @param  int|null $expireTTL
+     * @param  string|null $flag
      * @return bool
      */
     public function set($key, $value, $expireResolution = null, $expireTTL = null, $flag = null)
@@ -84,20 +84,20 @@ class PhpRedisConnection extends Connection
     /**
      * Set the given key if it doesn't exist.
      *
-     * @param  string  $key
-     * @param  string  $value
+     * @param  string $key
+     * @param  string $value
      * @return int
      */
     public function setnx($key, $value)
     {
-        return (int) $this->client->setnx($key, $value);
+        return (int)$this->client->setnx($key, $value);
     }
 
     /**
      * Get the value of the given hash fields.
      *
-     * @param  string  $key
-     * @param  dynamic  $dictionary
+     * @param  string $key
+     * @param  dynamic $dictionary
      * @return int
      */
     public function hmget($key, ...$dictionary)
@@ -112,8 +112,8 @@ class PhpRedisConnection extends Connection
     /**
      * Set the given hash fields to their respective values.
      *
-     * @param  string  $key
-     * @param  dynamic  $dictionary
+     * @param  string $key
+     * @param  dynamic $dictionary
      * @return int
      */
     public function hmset($key, ...$dictionary)
@@ -132,22 +132,22 @@ class PhpRedisConnection extends Connection
     /**
      * Set the given hash field if it doesn't exist.
      *
-     * @param  string  $hash
-     * @param  string  $key
-     * @param  string  $value
+     * @param  string $hash
+     * @param  string $key
+     * @param  string $value
      * @return int
      */
     public function hsetnx($hash, $key, $value)
     {
-        return (int) $this->client->hsetnx($hash, $key, $value);
+        return (int)$this->client->hsetnx($hash, $key, $value);
     }
 
     /**
      * Removes the first count occurrences of the value element from the list.
      *
-     * @param  string  $key
-     * @param  int  $count
-     * @param  $value  $value
+     * @param  string $key
+     * @param  int $count
+     * @param  $value $value
      * @return int|false
      */
     public function lrem($key, $count, $value)
@@ -158,8 +158,8 @@ class PhpRedisConnection extends Connection
     /**
      * Removes and returns a random element from the set value at key.
      *
-     * @param  string  $key
-     * @param  int|null  $count
+     * @param  string $key
+     * @param  int|null $count
      * @return mixed|false
      */
     public function spop($key, $count = null)
@@ -170,8 +170,8 @@ class PhpRedisConnection extends Connection
     /**
      * Add one or more members to a sorted set or update its score if it already exists.
      *
-     * @param  string  $key
-     * @param  dynamic  $dictionary
+     * @param  string $key
+     * @param  dynamic $dictionary
      * @return int
      */
     public function zadd($key, ...$dictionary)
@@ -191,10 +191,10 @@ class PhpRedisConnection extends Connection
     /**
      * Return elements with score between $min and $max.
      *
-     * @param  string  $key
-     * @param  mixed  $min
-     * @param  mixed  $max
-     * @param  array  $options
+     * @param  string $key
+     * @param  mixed $min
+     * @param  mixed $max
+     * @param  array $options
      * @return int
      */
     public function zrangebyscore($key, $min, $max, $options = [])
@@ -212,10 +212,10 @@ class PhpRedisConnection extends Connection
     /**
      * Return elements with score between $min and $max.
      *
-     * @param  string  $key
-     * @param  mixed  $min
-     * @param  mixed  $max
-     * @param  array  $options
+     * @param  string $key
+     * @param  mixed $min
+     * @param  mixed $max
+     * @param  array $options
      * @return int
      */
     public function zrevrangebyscore($key, $min, $max, $options = [])
@@ -233,9 +233,9 @@ class PhpRedisConnection extends Connection
     /**
      * Find the intersection between sets and store in a new set.
      *
-     * @param  string  $output
-     * @param  array  $keys
-     * @param  array  $options
+     * @param  string $output
+     * @param  array $keys
+     * @param  array $options
      * @return int
      */
     public function zinterstore($output, $keys, $options = [])
@@ -249,9 +249,9 @@ class PhpRedisConnection extends Connection
     /**
      * Find the union between sets and store in a new set.
      *
-     * @param  string  $output
-     * @param  array  $keys
-     * @param  array  $options
+     * @param  string $output
+     * @param  array $keys
+     * @param  array $options
      * @return int
      */
     public function zunionstore($output, $keys, $options = [])
@@ -265,7 +265,7 @@ class PhpRedisConnection extends Connection
     /**
      * Execute commands in a pipeline.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return \Redis|array
      */
     public function pipeline(callable $callback = null)
@@ -280,7 +280,7 @@ class PhpRedisConnection extends Connection
     /**
      * Execute commands in a transaction.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return \Redis|array
      */
     public function transaction(callable $callback = null)
@@ -295,9 +295,9 @@ class PhpRedisConnection extends Connection
     /**
      * Evaluate a LUA script serverside, from the SHA1 hash of the script instead of the script itself.
      *
-     * @param  string  $script
-     * @param  int  $numkeys
-     * @param  mixed  $arguments
+     * @param  string $script
+     * @param  int $numkeys
+     * @param  mixed $arguments
      * @return mixed
      */
     public function evalsha($script, $numkeys, ...$arguments)
@@ -310,9 +310,9 @@ class PhpRedisConnection extends Connection
     /**
      * Evaluate a script and retunr its result.
      *
-     * @param  string  $script
-     * @param  int  $numberOfKeys
-     * @param  dynamic  $arguments
+     * @param  string $script
+     * @param  int $numberOfKeys
+     * @param  dynamic $arguments
      * @return mixed
      */
     public function eval($script, $numberOfKeys, ...$arguments)
@@ -323,13 +323,13 @@ class PhpRedisConnection extends Connection
     /**
      * Subscribe to a set of given channels for messages.
      *
-     * @param  array|string  $channels
-     * @param  \Closure  $callback
+     * @param  array|string $channels
+     * @param  \Closure $callback
      * @return void
      */
     public function subscribe($channels, Closure $callback)
     {
-        $this->client->subscribe((array) $channels, function ($redis, $channel, $message) use ($callback) {
+        $this->client->subscribe((array)$channels, function ($redis, $channel, $message) use ($callback) {
             $callback($message, $channel);
         });
     }
@@ -337,13 +337,13 @@ class PhpRedisConnection extends Connection
     /**
      * Subscribe to a set of given channels with wildcards.
      *
-     * @param  array|string  $channels
-     * @param  \Closure  $callback
+     * @param  array|string $channels
+     * @param  \Closure $callback
      * @return void
      */
     public function psubscribe($channels, Closure $callback)
     {
-        $this->client->psubscribe((array) $channels, function ($redis, $pattern, $channel, $message) use ($callback) {
+        $this->client->psubscribe((array)$channels, function ($redis, $pattern, $channel, $message) use ($callback) {
             $callback($message, $channel);
         });
     }
@@ -351,9 +351,9 @@ class PhpRedisConnection extends Connection
     /**
      * Subscribe to a set of given channels for messages.
      *
-     * @param  array|string  $channels
-     * @param  \Closure  $callback
-     * @param  string  $method
+     * @param  array|string $channels
+     * @param  \Closure $callback
+     * @param  string $method
      * @return void
      */
     public function createSubscription($channels, Closure $callback, $method = 'subscribe')
@@ -364,7 +364,7 @@ class PhpRedisConnection extends Connection
     /**
      * Execute a raw command.
      *
-     * @param  array  $parameters
+     * @param  array $parameters
      * @return mixed
      */
     public function executeRaw(array $parameters)
@@ -385,21 +385,21 @@ class PhpRedisConnection extends Connection
     /**
      * Apply prefix to the given key if necessary.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return string
      */
     private function applyPrefix($key)
     {
-        $prefix = (string) $this->client->getOption(Redis::OPT_PREFIX);
+        $prefix = (string)$this->client->getOption(Redis::OPT_PREFIX);
 
-        return $prefix.$key;
+        return $prefix . $key;
     }
 
     /**
      * Pass other method calls down to the underlying client.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param  string $method
+     * @param  array $parameters
      * @return mixed
      */
     public function __call($method, $parameters)

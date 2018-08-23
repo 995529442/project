@@ -106,10 +106,10 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
                                 $fileExcerpt = array();
 
                                 for ($i = max($line - 3, 1), $max = min($line + 3, count($src)); $i <= $max; ++$i) {
-                                    $fileExcerpt[] = '<li'.($i === $line ? ' class="selected"' : '').'><code>'.$this->htmlEncode($src[$i - 1]).'</code></li>';
+                                    $fileExcerpt[] = '<li' . ($i === $line ? ' class="selected"' : '') . '><code>' . $this->htmlEncode($src[$i - 1]) . '</code></li>';
                                 }
 
-                                $fileExcerpt = '<ol start="'.max($line - 3, 1).'">'.implode("\n", $fileExcerpt).'</ol>';
+                                $fileExcerpt = '<ol start="' . max($line - 3, 1) . '">' . implode("\n", $fileExcerpt) . '</ol>';
                             }
                         }
                         break;
@@ -245,7 +245,7 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
 
             $h = headers_list();
             $i = count($h);
-            array_unshift($h, 'Content-Type: '.ini_get('default_mimetype'));
+            array_unshift($h, 'Content-Type: ' . ini_get('default_mimetype'));
             while (0 !== stripos($h[$i], 'Content-Type:')) {
                 --$i;
             }
@@ -277,16 +277,16 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
                         $f = strip_tags($this->style('', $file));
                         $name = strip_tags($this->style('', $name));
                         if ($fmt && $link = is_string($fmt) ? strtr($fmt, array('%f' => $file, '%l' => $line)) : $fmt->format($file, $line)) {
-                            $name = sprintf('<a href="%s" title="%s">'.$s.'</a>', strip_tags($this->style('', $link)), $f, $name);
+                            $name = sprintf('<a href="%s" title="%s">' . $s . '</a>', strip_tags($this->style('', $link)), $f, $name);
                         } else {
-                            $name = sprintf('<abbr title="%s">'.$s.'</abbr>', $f, $name);
+                            $name = sprintf('<abbr title="%s">' . $s . '</abbr>', $f, $name);
                         }
                     } else {
                         $name = $this->style('meta', $name);
                     }
-                    $this->line = $name.' on line '.$this->style('meta', $line).':';
+                    $this->line = $name . ' on line ' . $this->style('meta', $line) . ':';
                 } else {
-                    $this->line = $this->style('meta', $name).' on line '.$this->style('meta', $line).':';
+                    $this->line = $this->style('meta', $name) . ' on line ' . $this->style('meta', $line) . ':';
                 }
                 $this->dumpLine(0);
             };
@@ -294,7 +294,7 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
             $contextDumper($name, $file, $line, $this->fileLinkFormat);
         } else {
             $cloner = new VarCloner();
-            $this->dumper->dump($cloner->cloneVar($name.' on line '.$line.':'));
+            $this->dumper->dump($cloner->cloneVar($name . ' on line ' . $line . ':'));
         }
         $this->dumper->dump($data);
     }
@@ -303,7 +303,9 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
     {
         $html = '';
 
-        $dumper = new HtmlDumper(function ($line) use (&$html) { $html .= $line; }, $this->charset);
+        $dumper = new HtmlDumper(function ($line) use (&$html) {
+            $html .= $line;
+        }, $this->charset);
         $dumper->setDumpHeader('');
         $dumper->setDumpBoundaries('', '');
 

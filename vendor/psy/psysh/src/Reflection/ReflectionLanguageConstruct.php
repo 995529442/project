@@ -25,7 +25,7 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
         'isset' => [
             'var' => [],
             '...' => [
-                'isOptional'   => true,
+                'isOptional' => true,
                 'defaultValue' => null,
             ],
         ],
@@ -33,7 +33,7 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
         'unset' => [
             'var' => [],
             '...' => [
-                'isOptional'   => true,
+                'isOptional' => true,
                 'defaultValue' => null,
             ],
         ],
@@ -44,8 +44,8 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
 
         'echo' => [
             'arg1' => [],
-            '...'  => [
-                'isOptional'   => true,
+            '...' => [
+                'isOptional' => true,
                 'defaultValue' => null,
             ],
         ],
@@ -56,14 +56,14 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
 
         'die' => [
             'status' => [
-                'isOptional'   => true,
+                'isOptional' => true,
                 'defaultValue' => 0,
             ],
         ],
 
         'exit' => [
             'status' => [
-                'isOptional'   => true,
+                'isOptional' => true,
                 'defaultValue' => 0,
             ],
         ],

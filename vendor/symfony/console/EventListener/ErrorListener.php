@@ -80,10 +80,10 @@ class ErrorListener implements EventSubscriberInterface
 
         if (method_exists($input, '__toString')) {
             if ($commandName) {
-                return str_replace(array("'$commandName'", "\"$commandName\""), $commandName, (string) $input);
+                return str_replace(array("'$commandName'", "\"$commandName\""), $commandName, (string)$input);
             }
 
-            return (string) $input;
+            return (string)$input;
         }
 
         return $commandName;

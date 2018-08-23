@@ -56,7 +56,7 @@ abstract class AbstractFont
     /**
      * Draws font to given image on given position
      *
-     * @param  Image   $image
+     * @param  Image $image
      * @param  integer $posx
      * @param  integer $posy
      * @return boolean

@@ -78,7 +78,7 @@ class Application
     private $initialized;
 
     /**
-     * @param string $name    The name of the application
+     * @param string $name The name of the application
      * @param string $version The version of the application
      */
     public function __construct($name = 'UNKNOWN', $version = 'UNKNOWN')
@@ -108,8 +108,8 @@ class Application
      */
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
-        putenv('LINES='.$this->terminal->getHeight());
-        putenv('COLUMNS='.$this->terminal->getWidth());
+        putenv('LINES=' . $this->terminal->getHeight());
+        putenv('COLUMNS=' . $this->terminal->getWidth());
 
         if (null === $input) {
             $input = new ArgvInput();
@@ -155,7 +155,7 @@ class Application
 
             $exitCode = $e->getCode();
             if (is_numeric($exitCode)) {
-                $exitCode = (int) $exitCode;
+                $exitCode = (int)$exitCode;
                 if (0 === $exitCode) {
                     $exitCode = 1;
                 }
@@ -323,7 +323,7 @@ class Application
      */
     public function setCatchExceptions($boolean)
     {
-        $this->catchExceptions = (bool) $boolean;
+        $this->catchExceptions = (bool)$boolean;
     }
 
     /**
@@ -343,7 +343,7 @@ class Application
      */
     public function setAutoExit($boolean)
     {
-        $this->autoExit = (bool) $boolean;
+        $this->autoExit = (bool)$boolean;
     }
 
     /**
@@ -545,8 +545,10 @@ class Application
     public function findNamespace($namespace)
     {
         $allNamespaces = $this->getNamespaces();
-        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) { return preg_quote($matches[1]).'[^:]*'; }, $namespace);
-        $namespaces = preg_grep('{^'.$expr.'}', $allNamespaces);
+        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) {
+            return preg_quote($matches[1]) . '[^:]*';
+        }, $namespace);
+        $namespaces = preg_grep('{^' . $expr . '}', $allNamespaces);
 
         if (empty($namespaces)) {
             $message = sprintf('There are no commands defined in the "%s" namespace.', $namespace);
@@ -590,15 +592,17 @@ class Application
 
         $aliases = array();
         $allCommands = $this->commandLoader ? array_merge($this->commandLoader->getNames(), array_keys($this->commands)) : array_keys($this->commands);
-        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) { return preg_quote($matches[1]).'[^:]*'; }, $name);
-        $commands = preg_grep('{^'.$expr.'}', $allCommands);
+        $expr = preg_replace_callback('{([^:]+|)}', function ($matches) {
+            return preg_quote($matches[1]) . '[^:]*';
+        }, $name);
+        $commands = preg_grep('{^' . $expr . '}', $allCommands);
 
         if (empty($commands)) {
-            $commands = preg_grep('{^'.$expr.'}i', $allCommands);
+            $commands = preg_grep('{^' . $expr . '}i', $allCommands);
         }
 
         // if no commands matched or we just matched namespaces
-        if (empty($commands) || count(preg_grep('{^'.$expr.'$}i', $commands)) < 1) {
+        if (empty($commands) || count(preg_grep('{^' . $expr . '$}i', $commands)) < 1) {
             if (false !== $pos = strrpos($name, ':')) {
                 // check if a namespace exists and contains commands
                 $this->findNamespace(substr($name, 0, $pos));
@@ -641,9 +645,9 @@ class Application
                 if (!$commandList[$cmd] instanceof Command) {
                     return $cmd;
                 }
-                $abbrev = str_pad($cmd, $maxLen, ' ').' '.$commandList[$cmd]->getDescription();
+                $abbrev = str_pad($cmd, $maxLen, ' ') . ' ' . $commandList[$cmd]->getDescription();
 
-                return Helper::strlen($abbrev) > $usableWidth ? Helper::substr($abbrev, 0, $usableWidth - 3).'...' : $abbrev;
+                return Helper::strlen($abbrev) > $usableWidth ? Helper::substr($abbrev, 0, $usableWidth - 3) . '...' : $abbrev;
             }, array_values($commands));
             $suggestions = $this->getAbbreviationSuggestions($abbrevs);
 
@@ -739,7 +743,7 @@ class Application
         do {
             $message = trim($e->getMessage());
             if ('' === $message || OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {
-                $title = sprintf('  [%s%s]  ', get_class($e), 0 !== ($code = $e->getCode()) ? ' ('.$code.')' : '');
+                $title = sprintf('  [%s%s]  ', get_class($e), 0 !== ($code = $e->getCode()) ? ' (' . $code . ')' : '');
                 $len = Helper::strlen($title);
             } else {
                 $len = 0;
@@ -845,7 +849,7 @@ class Application
      *
      * Can be useful to force terminal dimensions for functional tests.
      *
-     * @param int $width  The width
+     * @param int $width The width
      * @param int $height The height
      *
      * @return $this
@@ -856,8 +860,8 @@ class Application
     {
         @trigger_error(sprintf('%s is deprecated as of 3.2 and will be removed in 4.0. Set the COLUMNS and LINES env vars instead.', __METHOD__), E_USER_DEPRECATED);
 
-        putenv('COLUMNS='.$width);
-        putenv('LINES='.$height);
+        putenv('COLUMNS=' . $width);
+        putenv('LINES=' . $height);
 
         return $this;
     }
@@ -893,12 +897,22 @@ class Application
             }
         }
 
-        switch ($shellVerbosity = (int) getenv('SHELL_VERBOSITY')) {
-            case -1: $output->setVerbosity(OutputInterface::VERBOSITY_QUIET); break;
-            case 1: $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE); break;
-            case 2: $output->setVerbosity(OutputInterface::VERBOSITY_VERY_VERBOSE); break;
-            case 3: $output->setVerbosity(OutputInterface::VERBOSITY_DEBUG); break;
-            default: $shellVerbosity = 0; break;
+        switch ($shellVerbosity = (int)getenv('SHELL_VERBOSITY')) {
+            case -1:
+                $output->setVerbosity(OutputInterface::VERBOSITY_QUIET);
+                break;
+            case 1:
+                $output->setVerbosity(OutputInterface::VERBOSITY_VERBOSE);
+                break;
+            case 2:
+                $output->setVerbosity(OutputInterface::VERBOSITY_VERY_VERBOSE);
+                break;
+            case 3:
+                $output->setVerbosity(OutputInterface::VERBOSITY_DEBUG);
+                break;
+            default:
+                $shellVerbosity = 0;
+                break;
         }
 
         if (true === $input->hasParameterOption(array('--quiet', '-q'), true)) {
@@ -921,7 +935,7 @@ class Application
             $input->setInteractive(false);
         }
 
-        putenv('SHELL_VERBOSITY='.$shellVerbosity);
+        putenv('SHELL_VERBOSITY=' . $shellVerbosity);
         $_ENV['SHELL_VERBOSITY'] = $shellVerbosity;
         $_SERVER['SHELL_VERBOSITY'] = $shellVerbosity;
     }
@@ -1061,7 +1075,7 @@ class Application
      */
     private function getAbbreviationSuggestions($abbrevs)
     {
-        return '    '.implode("\n    ", $abbrevs);
+        return '    ' . implode("\n    ", $abbrevs);
     }
 
     /**
@@ -1069,7 +1083,7 @@ class Application
      *
      * This method is not part of public API and should not be used directly.
      *
-     * @param string $name  The full name of the command
+     * @param string $name The full name of the command
      * @param string $limit The maximum number of parts of the namespace
      *
      * @return string The namespace of the command
@@ -1086,7 +1100,7 @@ class Application
      * Finds alternative of $name among $collection,
      * if nothing is found in $collection, try in $abbrevs.
      *
-     * @param string   $name       The string
+     * @param string $name The string
      * @param iterable $collection The collection
      *
      * @return string[] A sorted array of similar string
@@ -1127,7 +1141,9 @@ class Application
             }
         }
 
-        $alternatives = array_filter($alternatives, function ($lev) use ($threshold) { return $lev < 2 * $threshold; });
+        $alternatives = array_filter($alternatives, function ($lev) use ($threshold) {
+            return $lev < 2 * $threshold;
+        });
         ksort($alternatives, SORT_NATURAL | SORT_FLAG_CASE);
 
         return array_keys($alternatives);
@@ -1136,8 +1152,8 @@ class Application
     /**
      * Sets the default Command name.
      *
-     * @param string $commandName     The Command name
-     * @param bool   $isSingleCommand Set to true if there is only one command in this application
+     * @param string $commandName The Command name
+     * @param bool $isSingleCommand Set to true if there is only one command in this application
      *
      * @return self
      */
@@ -1169,7 +1185,7 @@ class Application
         $line = '';
         foreach (preg_split('//u', $utf8String) as $char) {
             // test if $char could be appended to current line
-            if (mb_strwidth($line.$char, 'utf8') <= $width) {
+            if (mb_strwidth($line . $char, 'utf8') <= $width) {
                 $line .= $char;
                 continue;
             }
@@ -1200,7 +1216,7 @@ class Application
 
         foreach ($parts as $part) {
             if (count($namespaces)) {
-                $namespaces[] = end($namespaces).':'.$part;
+                $namespaces[] = end($namespaces) . ':' . $part;
             } else {
                 $namespaces[] = $part;
             }

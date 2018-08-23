@@ -163,10 +163,10 @@ EOF
 
         foreach ($collection->getItems() as $item) {
             if ($item instanceof StaticPrefixCollection) {
-                $lines[] = $prefix.$item->getPrefix();
-                $lines[] = $this->dumpCollection($item, $prefix.'-> ');
+                $lines[] = $prefix . $item->getPrefix();
+                $lines[] = $this->dumpCollection($item, $prefix . '-> ');
             } else {
-                $lines[] = $prefix.implode(' ', $item);
+                $lines[] = $prefix . implode(' ', $item);
             }
         }
 

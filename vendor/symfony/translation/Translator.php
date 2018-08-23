@@ -74,10 +74,10 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     private $configCacheFactory;
 
     /**
-     * @param string                         $locale    The locale
+     * @param string $locale The locale
      * @param MessageFormatterInterface|null $formatter The message formatter
-     * @param string|null                    $cacheDir  The directory to use for the cache
-     * @param bool                           $debug     Use cache in debug mode ?
+     * @param string|null $cacheDir The directory to use for the cache
+     * @param bool $debug Use cache in debug mode ?
      *
      * @throws InvalidArgumentException If a locale contains invalid characters
      */
@@ -105,7 +105,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     /**
      * Adds a Loader.
      *
-     * @param string          $format The name of the loader (@see addResource())
+     * @param string $format The name of the loader (@see addResource())
      * @param LoaderInterface $loader A LoaderInterface instance
      */
     public function addLoader($format, LoaderInterface $loader)
@@ -116,10 +116,10 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     /**
      * Adds a Resource.
      *
-     * @param string $format   The name of the loader (@see addLoader())
-     * @param mixed  $resource The resource name
-     * @param string $locale   The locale
-     * @param string $domain   The domain
+     * @param string $format The name of the loader (@see addLoader())
+     * @param mixed $resource The resource name
+     * @param string $locale The locale
+     * @param string $domain The domain
      *
      * @throws InvalidArgumentException If the locale contains invalid characters
      */
@@ -195,7 +195,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
             $domain = 'messages';
         }
 
-        return $this->formatter->format($this->getCatalogue($locale)->get((string) $id, $domain), $locale, $parameters);
+        return $this->formatter->format($this->getCatalogue($locale)->get((string)$id, $domain), $locale, $parameters);
     }
 
     /**
@@ -211,7 +211,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
             $domain = 'messages';
         }
 
-        $id = (string) $id;
+        $id = (string)$id;
         $catalogue = $this->getCatalogue($locale);
         $locale = $catalogue->getLocale();
         while (!$catalogue->defines($id, $domain)) {
@@ -366,7 +366,7 @@ EOF
 
     private function getCatalogueCachePath($locale)
     {
-        return $this->cacheDir.'/catalogue.'.$locale.'.'.strtr(substr(base64_encode(hash('sha256', serialize($this->fallbackLocales), true)), 0, 7), '/', '_').'.php';
+        return $this->cacheDir . '/catalogue.' . $locale . '.' . strtr(substr(base64_encode(hash('sha256', serialize($this->fallbackLocales), true)), 0, 7), '/', '_') . '.php';
     }
 
     private function doLoadCatalogue($locale)

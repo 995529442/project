@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Arrays;
 
 /*
@@ -55,13 +56,12 @@ class IsArray extends TypeSafeMatcher
             return;
         } elseif (array_keys($actual) != array_keys($this->_elementMatchers)) {
             $mismatchDescription->appendText('array keys were ')
-                                                    ->appendValueList(
-                                                        $this->descriptionStart(),
-                                                        $this->descriptionSeparator(),
-                                                        $this->descriptionEnd(),
-                                                        array_keys($actual)
-                                                    )
-                                                    ;
+                ->appendValueList(
+                    $this->descriptionStart(),
+                    $this->descriptionSeparator(),
+                    $this->descriptionEnd(),
+                    array_keys($actual)
+                );
 
             return;
         }

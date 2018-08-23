@@ -20,10 +20,10 @@ class Error extends Exception
     /**
      * Constructor.
      *
-     * @param string     $message
-     * @param int        $code
-     * @param string     $file
-     * @param int        $line
+     * @param string $message
+     * @param int $code
+     * @param string $file
+     * @param int $line
      * @param \Exception $previous
      */
     public function __construct($message, $code, $file, $line, \Exception $previous = null)

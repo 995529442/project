@@ -832,7 +832,7 @@ class ResponseTest extends ResponseTestCase
     {
         $response = new Response();
         $response->setContent($content);
-        $this->assertEquals((string) $content, $response->getContent());
+        $this->assertEquals((string)$content, $response->getContent());
     }
 
     /**
@@ -940,7 +940,7 @@ class ResponseTest extends ResponseTestCase
         )));
 
         $ianaHttpStatusCodes->load('https://www.iana.org/assignments/http-status-codes/http-status-codes.xml');
-        if (!$ianaHttpStatusCodes->relaxNGValidate(__DIR__.'/schema/http-status-codes.rng')) {
+        if (!$ianaHttpStatusCodes->relaxNGValidate(__DIR__ . '/schema/http-status-codes.rng')) {
             self::fail('Invalid IANA\'s HTTP status code list.');
         }
 

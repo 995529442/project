@@ -286,7 +286,7 @@ class Snapshot
     private function snapshotStaticAttributes()
     {
         foreach ($this->classes as $className) {
-            $class    = new ReflectionClass($className);
+            $class = new ReflectionClass($className);
             $snapshot = [];
 
             foreach ($class->getProperties() as $attribute) {

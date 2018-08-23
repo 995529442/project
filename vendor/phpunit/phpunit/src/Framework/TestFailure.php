@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework;
 
 use PHPUnit\Framework\Error\Error;
@@ -35,7 +36,7 @@ class TestFailure
     /**
      * Constructs a TestFailure with the given test and exception.
      *
-     * @param Test      $failedTest
+     * @param Test $failedTest
      * @param Throwable $t
      */
     public function __construct(Test $failedTest, $t)

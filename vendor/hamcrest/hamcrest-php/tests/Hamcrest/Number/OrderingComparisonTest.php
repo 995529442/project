@@ -1,4 +1,5 @@
 <?php
+
 namespace Hamcrest\Number;
 
 class OrderingComparisonTest extends \Hamcrest\AbstractMatcherTest

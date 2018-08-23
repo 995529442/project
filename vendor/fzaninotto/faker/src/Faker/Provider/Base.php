@@ -68,7 +68,7 @@ class Base
      * The maximum value returned is mt_getrandmax()
      *
      * @param integer $nbDigits Defaults to a random number between 1 and 9
-     * @param boolean $strict   Whether the returned number should have exactly $nbDigits
+     * @param boolean $strict Whether the returned number should have exactly $nbDigits
      * @example 79907610
      *
      * @return integer
@@ -95,7 +95,7 @@ class Base
     /**
      * Return a random float number
      *
-     * @param int       $nbMaxDecimals
+     * @param int $nbMaxDecimals
      * @param int|float $min
      * @param int|float $max
      * @example 48.8932
@@ -161,9 +161,9 @@ class Base
     /**
      * Returns randomly ordered subsequence of $count elements from a provided array
      *
-     * @param  array            $array           Array to take elements from. Defaults to a-f
-     * @param  integer          $count           Number of elements to take.
-     * @param  boolean          $allowDuplicates Allow elements to be picked several times. Defaults to false
+     * @param  array $array Array to take elements from. Defaults to a-f
+     * @param  integer $count Number of elements to take.
+     * @param  boolean $allowDuplicates Allow elements to be picked several times. Defaults to false
      * @throws \LengthException When requesting more elements than provided
      *
      * @return array New array with $count elements from $array
@@ -283,9 +283,9 @@ class Base
                 $j = mt_rand(0, $i);
             }
             if ($j == $i) {
-                $shuffledArray[]= $value;
+                $shuffledArray[] = $value;
             } else {
-                $shuffledArray[]= $shuffledArray[$j];
+                $shuffledArray[] = $shuffledArray[$j];
                 $shuffledArray[$j] = $value;
             }
             $i++;
@@ -317,7 +317,7 @@ class Base
             $array = array();
             $strlen = mb_strlen($string, $encoding);
             for ($i = 0; $i < $strlen; $i++) {
-                $array []= mb_substr($string, $i, 1, $encoding);
+                $array [] = mb_substr($string, $i, 1, $encoding);
             }
         } else {
             $array = str_split($string, 1);
@@ -358,7 +358,7 @@ class Base
             }
         }
         if ($nbReplacements = count($toReplace)) {
-            $maxAtOnce = strlen((string) mt_getrandmax()) - 1;
+            $maxAtOnce = strlen((string)mt_getrandmax()) - 1;
             $numbers = '';
             $i = 0;
             while ($i < $nbReplacements) {
@@ -470,8 +470,8 @@ class Base
         // All A-F inside of [] become ABCDEF
         $regex = preg_replace_callback('/\[([^\]]+)\]/', function ($matches) {
             return '[' . preg_replace_callback('/(\w|\d)\-(\w|\d)/', function ($range) {
-                return implode(range($range[1], $range[2]), '');
-            }, $matches[1]) . ']';
+                    return implode(range($range[1], $range[2]), '');
+                }, $matches[1]) . ']';
         }, $regex);
         // All [ABC] become B (or A or C)
         $regex = preg_replace_callback('/\[([^\]]+)\]/', function ($matches) {
@@ -544,7 +544,7 @@ class Base
      * $faker->unique()->randomElement(array(1, 2, 3));
      * </code>
      *
-     * @param boolean $reset      If set to true, resets the list of existing values
+     * @param boolean $reset If set to true, resets the list of existing values
      * @param integer $maxRetries Maximum number of retries to find a unique value,
      *                                       After which an OverflowException is thrown.
      * @throws \OverflowException When no unique value can be found by iterating $maxRetries times
@@ -568,15 +568,15 @@ class Base
      * <code>
      * $values = array();
      * $evenValidator = function ($digit) {
-     * 	 return $digit % 2 === 0;
+     *     return $digit % 2 === 0;
      * };
      * for ($i=0; $i < 10; $i++) {
-     * 	 $values []= $faker->valid($evenValidator)->randomDigit;
+     *     $values []= $faker->valid($evenValidator)->randomDigit;
      * }
      * print_r($values); // [0, 4, 8, 4, 2, 6, 0, 8, 8, 6]
      * </code>
      *
-     * @param Closure $validator  A function returning true for valid values
+     * @param Closure $validator A function returning true for valid values
      * @param integer $maxRetries Maximum number of retries to find a unique value,
      *                            After which an OverflowException is thrown.
      * @throws \OverflowException When no valid value can be found by iterating $maxRetries times
