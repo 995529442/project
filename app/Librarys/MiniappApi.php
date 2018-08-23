@@ -148,7 +148,8 @@ class MiniappApi
         } else {
             $error = curl_errno($ch);
             curl_close($ch);
-            return $this->setError("curl出错，错误码:$error");
+            return $error;
+            //return $this->setError("curl出错，错误码:$error");
         }
     }
 }

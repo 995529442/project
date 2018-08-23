@@ -7,6 +7,7 @@
 
 namespace App\Librarys;
 
+date_default_timezone_set('PRC');
 use DB;
 
 class Sms
