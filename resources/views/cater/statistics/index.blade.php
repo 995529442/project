@@ -23,7 +23,7 @@
 <section class="larry-wrapper">
     <!-- overview -->
     <div class="row state-overview">
-        <div id="container" style="width:95%;height:400px;"></div>
+        <div id="container" style="width:80%;height:400px;margin:0 auto;"></div>
     </div>
 
     <div class="row state-overview">
