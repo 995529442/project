@@ -89,7 +89,7 @@ class orderController extends Controller
 
         if ((int)$shop_info->status == 2) {
             $return['errcode'] = -1;
-            $return['errmsg'] = "商家已打样";
+            $return['errmsg'] = "商家已打烊";
 
             return json_encode($return);
         }
