@@ -20,7 +20,7 @@ class CaterStatisticsController extends Controller
 	//微餐饮-统计首页
 	public function index(Request $request)
 	{
-		var_dump("Y-m-d H:i:s",time());
+		var_dump(date("Y-m-d H:i:s",time()));
 		$admins = Auth::guard('admins')->user();
 		$admin_id = $admins->id;
 		//当前日期
