@@ -27,7 +27,8 @@ class CaterStatisticsController extends Controller
 		$waimai = ""; //外卖
 
 		for($k=30;$k>=1;$k--){
-			$day = date("m-d",strtotime("-$k day"));
+			$micro_time = strtotime("-$k day");
+			$day = date("m-d",$micro_time);
 
 			$categories .= $day.",";
 			//获取点餐和外卖的订单情况
@@ -38,8 +39,8 @@ class CaterStatisticsController extends Controller
 				"isvalid"=>true
 			);
 
-			$order_model = DB::table("cater_orders")->where($where)->where("create_time",">",strtotime($day))
-				->where("create_time","<",strtotime($day)+3600*24-1);
+			$order_model = DB::table("cater_orders")->where($where)->where("create_time",">",strtotime(date("Y-m-d",$micro_time)))
+				->where("create_time","<",strtotime(date("Y-m-d",$micro_time))+3600*24-1);
 			$tangshi_count = $order_model->where(['type'=>1])->count();
 			$waimai_count = $order_model->where(['type'=>2])->count();
 
