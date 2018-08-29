@@ -46,7 +46,7 @@ var_dump(strtotime(date("Y-m-d",$micro_time)));
 			//$tangshi_count = $order_model->where(['type'=>1])->count();
 			$waimai_count = $order_model->where(['type'=>2])->toSql();
 			var_dump($waimai_count);
-			$tangshi .= $tangshi_count.",";
+			//$tangshi .= $tangshi_count.",";
 			$waimai .= $waimai_count.",";
 		}
 exit;
