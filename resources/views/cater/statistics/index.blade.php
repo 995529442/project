@@ -48,17 +48,15 @@
 
     if(tangshi != ""){
         tangshi_arr = tangshi.split(",");
-
-        for(var k=0;k<=tangshi_arr.length;k++){
+        for(var k=0;k<tangshi_arr.length;k++){
             tangshi_arr[k] = parseInt(tangshi_arr[k]);
         }
     }
 
     if(waimai != ""){
         waimai_arr = waimai.split(",");
-
-        for(var k=0;k<=waimai_arr.length;k++){
-            waimai_arr[k] = parseInt(waimai_arr[k]);
+        for(var kk=0;kk<waimai_arr.length;kk++){
+            waimai_arr[kk] = parseInt(waimai_arr[kk]);
         }
 
     }
