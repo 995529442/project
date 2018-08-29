@@ -53,6 +53,9 @@
     if(waimai != ""){
         waimai_arr = waimai.split(",");
     }
+    console.log(categories_arr)
+    console.log(tangshi_arr)
+    console.log(waimai_arr)
     var chart = Highcharts.chart('container', {
         chart: {
             type: 'line'
