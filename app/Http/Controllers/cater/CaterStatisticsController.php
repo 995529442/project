@@ -45,12 +45,11 @@ class CaterStatisticsController extends Controller
 				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1)->where(['type'=>1])->count();
 			$waimai_count = DB::table("cater_orders")->where($where)->where("create_time",">",strtotime(date("Y-m-d",$micro_time)))
 				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1)->where(['type'=>2])->count();
-			var_dump($waimai_count);
+
 			$tangshi .= $tangshi_count.",";
 			$waimai .= $waimai_count.",";
 		}
-        //var_dump($tangshi);
-		var_dump($waimai);
+
         //获取微信和支付宝支付份额
 		$wx_count = DB::table("cater_orders")->where($where)->where(['payment_type'=>0])->count();
 		$currency_count = DB::table("cater_orders")->where($where)->where(['payment_type'=>1])->count();
