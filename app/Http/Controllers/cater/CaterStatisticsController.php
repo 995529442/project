@@ -41,12 +41,12 @@ class CaterStatisticsController extends Controller
 				"isvalid"=>true
 			);
 
-			$order_model = DB::table("cater_orders")->where($where)->where("create_time",">",strtotime(date("Y-m-d",$micro_time)))
-				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1);
-			$tangshi_count = $order_model->where(['type'=>1])->count();
-			$waimai_count = $order_model->where(['type'=>2])->count();
+			$tangshi_count =  DB::table("cater_orders")->where($where)->where("create_time",">",strtotime(date("Y-m-d",$micro_time)))
+				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1)->where(['type'=>1])->count();
+			$waimai_count = DB::table("cater_orders")->where($where)->where("create_time",">",strtotime(date("Y-m-d",$micro_time)))
+				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1)->where(['type'=>2])->count();
 			var_dump($waimai_count);
-			//$tangshi .= $tangshi_count.",";
+			$tangshi .= $tangshi_count.",";
 			$waimai .= $waimai_count.",";
 		}
         //var_dump($tangshi);
