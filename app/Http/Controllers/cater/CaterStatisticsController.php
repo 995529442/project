@@ -21,7 +21,6 @@ class CaterStatisticsController extends Controller
 	//微餐饮-统计首页
 	public function index(Request $request)
 	{
-		var_dump(date("Y-m-d H:i:s",time()));
 		$admins = Auth::guard('admins')->user();
 		$admin_id = $admins->id;
 		//当前日期
@@ -29,7 +28,7 @@ class CaterStatisticsController extends Controller
 		$tangshi = ""; //堂食
 		$waimai = ""; //外卖
 
-		for($k=30;$k>=1;$k--){
+		for($k=7;$k>=1;$k--){
 			$micro_time = strtotime("-$k day");
 			$day = date("m-d",$micro_time);
 
