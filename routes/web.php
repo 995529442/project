@@ -26,7 +26,7 @@ Route::group(['middleware' => 'AdminLogin'], function () {
     Route::get('/', 'IndexController@index')->name('index');
     Route::get('Index/home', 'IndexController@index')->name('index');
     //Route::get('Index', 'IndexController@index')->name('index');
-    Route::get('Index/main', 'IndexController@main')->name('main');
+    //Route::get('Index/main', 'IndexController@main')->name('main');
     Route::get('main.html', 'IndexController@main')->name('main');
     Route::get('Index/manage', 'IndexController@manage')->name('manage');
     Route::get('Index/add_admin', 'IndexController@add_admin')->name('add_admin'); //新增管理员
@@ -129,6 +129,11 @@ Route::group(['middleware' => 'AdminLogin'], function () {
             Route::post('saveTemplate', 'cater\CaterTemplateController@saveTemplate')->name('cater.template.saveTemplate'); //保存
             Route::post('delTemplate', 'cater\CaterTemplateController@delTemplate')->name('cater.template.delTemplate'); //保存
         });
+
+		//统计管理
+		Route::group(['prefix' => 'statistics'], function () {
+			Route::get('home', 'cater\CaterStatisticsController@index')->name('cater.statistics.index'); //统计管理
+		});
     });
 });
 

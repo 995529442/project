@@ -89,7 +89,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;" kit-target
-                               data-options="{url:'{{ route('cater.template.index') }}',icon:'',title:'模板管理',id:'8'}"><span> 模板管理</span></a>
+                               data-options="{url:'{{ route('cater.template.index') }}',icon:'',title:'模板管理',id:'8'}"><span> 消息模板</span></a>
                         </dd>
                         <dd>
                             <a href="javascript:;" kit-target
@@ -114,6 +114,10 @@
                         <dd>
                             <a href="javascript:;" kit-target
                                data-options="{url:'{{ route('cater.system.index') }}',icon:'',title:'小程序管理',id:'14'}"><span> 小程序管理</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'{{ route('cater.statistics.index') }}',icon:'',title:'统计管理',id:'15'}"><span> 统计管理</span></a>
                         </dd>
                     </dl>
                 </li>
@@ -155,25 +159,16 @@
     });
 
     //轮询获取订单
-    window.setInterval(function () {
-        console.log("ss")
+/*    window.setInterval(function () {
         $.ajax({
             type: "POST",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             url: "{{ route('getOrders') }}",
             dataType: "json",
             success: function (data) {
-                console.log(data);
-                // if(data.errcode == 1){
-                //    layer.msg(data.errmsg, {icon: 1},function(){
-                //        location.reload();
-                //    });
-                // }else{
-                //    layer.msg(data.errmsg, {icon: 2},1500);
-                // }
             }
         });
-    }, 1000 * 60);
+    }, 1000 * 60);*/
 </script>
 </body>
 
