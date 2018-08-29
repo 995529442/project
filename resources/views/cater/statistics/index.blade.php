@@ -41,19 +41,26 @@
 
     var waimai = '{{$waimai}}';
     var waimai_arr = new Array();
-    console.log(categories)
-    console.log(tangshi)
-    console.log(waimai)
+
     if(categories != ""){
         categories_arr = categories.split(",");
     }
 
     if(tangshi != ""){
         tangshi_arr = tangshi.split(",");
+
+        for(var k=0;k<=tangshi_arr.length;k++){
+            tangshi_arr[k] = parseInt(tangshi_arr[k]);
+        }
     }
 
     if(waimai != ""){
         waimai_arr = waimai.split(",");
+
+        for(var k=0;k<=waimai_arr.length;k++){
+            waimai_arr[k] = parseInt(waimai_arr[k]);
+        }
+
     }
     console.log(categories_arr)
     console.log(tangshi_arr)
