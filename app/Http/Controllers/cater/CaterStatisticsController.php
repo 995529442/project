@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\cater;
 
+date_default_timezone_set('PRC');
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
