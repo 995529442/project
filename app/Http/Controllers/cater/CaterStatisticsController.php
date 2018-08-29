@@ -28,7 +28,7 @@ class CaterStatisticsController extends Controller
 		$tangshi = ""; //堂食
 		$waimai = ""; //外卖
 
-		for($k=7;$k>=1;$k--){
+		for($k=6;$k>=0;$k--){
 			$micro_time = strtotime("-$k day");
 			$day = date("m-d",$micro_time);
 
@@ -42,7 +42,7 @@ class CaterStatisticsController extends Controller
 			);
 
 			$order_model = DB::table("cater_orders")->where($where)->where("create_time",">",strtotime(date("Y-m-d",$micro_time)))
-				->where("create_time","<",strtotime(date("Y-m-d",$micro_time))+3600*24-1);
+				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1);
 			$tangshi_count = $order_model->where(['type'=>1])->count();
 			$waimai_count = $order_model->where(['type'=>2])->count();
 
