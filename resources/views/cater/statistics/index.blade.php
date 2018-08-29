@@ -41,7 +41,9 @@
 
     var waimai = '{{$waimai}}';
     var waimai_arr = new Array();
-
+    console.log(categories)
+    console.log(tangshi)
+    console.log(waimai)
     if(categories != ""){
         categories_arr = categories.split(",");
     }
