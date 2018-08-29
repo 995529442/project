@@ -45,7 +45,7 @@ class CaterStatisticsController extends Controller
 				->where("create_time","<=",strtotime(date("Y-m-d",$micro_time))+3600*24-1);
 			$tangshi_count = $order_model->where(['type'=>1])->count();
 			$waimai_count = $order_model->where(['type'=>2])->count();
-
+			var_dump($waimai_count);
 			$tangshi .= $tangshi_count.",";
 			$waimai .= $waimai_count.",";
 		}
