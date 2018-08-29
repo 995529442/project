@@ -18,7 +18,10 @@ Page({
         currentCouponTab: 0,
         orderNumber: ['点餐', '外卖'],
         is_set_password: 0,  //是否已设置密码
-        code_phone: ""   //验证手机号码
+        code_phone: "",   //验证手机号码
+        code_text :"验证码",
+        disabled:false,
+        currentTime:181
     },
 
     /**
@@ -394,6 +397,7 @@ Page({
     getCode: function () {
         var that = this;
         var code_phone = that.data.code_phone;
+        var currentTime = that.data.currentTime;
 
         if (code_phone == "") {
             wx.showToast({
@@ -429,6 +433,23 @@ Page({
             success: function (res) {
                 wx.hideLoading()
                 if (res.data.errcode > 0) {
+                    that.setData({
+                        disabled: true
+                    })
+                    var interval = setInterval(function () {
+                        currentTime--;
+                        that.setData({
+                            code_text: currentTime + '秒'
+                        })
+                        if (currentTime <= 0) {
+                            clearInterval(interval)
+                            that.setData({
+                                code_text: '重新发送',
+                                currentTime: 181,
+                                disabled: false
+                            })
+                        }
+                    }, 1000)  
                     wx.showToast({
                         title: '发送成功',
                         icon: 'success',
