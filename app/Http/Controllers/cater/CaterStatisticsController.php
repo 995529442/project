@@ -28,7 +28,7 @@ class CaterStatisticsController extends Controller
 		$tangshi = ""; //堂食
 		$waimai = ""; //外卖
 
-		for($k=6;$k>=0;$k--){
+		for($k=30;$k>=0;$k--){
 			$micro_time = strtotime("-$k day");
 			$day = date("m-d",$micro_time);
 
