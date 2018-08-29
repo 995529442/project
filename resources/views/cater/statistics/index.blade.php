@@ -66,7 +66,7 @@
             type: 'line'
         },
         title: {
-            text: '最近30天订单趋势统计'
+            text: '最近7天订单趋势统计'
         },
         subtitle: {
             text: '已完成订单数'
