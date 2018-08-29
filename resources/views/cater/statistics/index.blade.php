@@ -79,6 +79,9 @@
                 text: '订单数(/笔)'
             }
         },
+        credits:{
+            enabled: false // 禁用版权信息
+        },
         plotOptions: {
             line: {
                 dataLabels: {
@@ -110,6 +113,9 @@
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        credits:{
+            enabled: false // 禁用版权信息
         },
         plotOptions: {
             pie: {
