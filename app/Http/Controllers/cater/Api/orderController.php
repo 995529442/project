@@ -103,7 +103,7 @@ class orderController extends Controller
 
         if (strtotime(date("Y-m-d") . " " . $shop_info->end_time) < time()) {
             $return['errcode'] = -1;
-            $return['errmsg'] = "商家已打样";
+            $return['errmsg'] = "商家已打烊";
 
             return json_encode($return);
         }
