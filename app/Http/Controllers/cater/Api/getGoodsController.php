@@ -83,7 +83,7 @@ class getGoodsController extends Controller
 
                 if ($good_list) {
                     foreach ($good_list as $kk => $vv) {
-                        $list[$kk]['img'] = "http://" . $_SERVER['HTTP_HOST'] . $vv->thumb_img;
+                        $list[$kk]['img'] = "https://" . $_SERVER['HTTP_HOST'] . $vv->thumb_img;
                         $list[$kk]['name'] = $vv->good_name;
                         $list[$kk]['count'] = $vv->sell_count + $vv->virtual_sell_count;
                         $list[$kk]['original_price'] = $vv->original_price;
@@ -136,7 +136,7 @@ class getGoodsController extends Controller
         if ($goods) {
             foreach ($goods as $k => $v) {
                 $temp = (object)array();
-                $temp->img = "http://" . $_SERVER['HTTP_HOST'] . $v->thumb_img;
+                $temp->img = "https://" . $_SERVER['HTTP_HOST'] . $v->thumb_img;
                 $temp->name = $v->good_name;
                 $temp->count = $v->sell_count + $v->virtual_sell_count;
                 $temp->original_price = $v->original_price;
@@ -206,7 +206,7 @@ class getGoodsController extends Controller
 
                 if ($figure_img) {
                     foreach ($figure_img as $k => $v) {
-                        $figure_img[$k]->img_path = "http://" . $_SERVER['HTTP_HOST'] . $v->img_path;
+                        $figure_img[$k]->img_path = "https://" . $_SERVER['HTTP_HOST'] . $v->img_path;
                     }
                 }
                 $good_info->figure_img = $figure_img;
