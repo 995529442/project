@@ -1,70 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>后台登录</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <!-- load css -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>后台管理系统</title>
     <link rel="stylesheet" type="text/css" href="/assets/common/layui/css/layui.css" media="all">
-    <link rel="stylesheet" type="text/css" href="/assets/css/login.css" media="all">
+    <link href="/assets/css/login1.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-<div class="layui-canvs"></div>
-<div class="layui-layout layui-layout-login">
-    <h1>
-        <strong>后台管理系统</strong>
-        <em>Management System</em>
-    </h1>
-    <form action="{{ route('login.checkLogin') }}" method="post" onsubmit="return check_login();">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <div class="layui-user-icon larry-login">
-            <input type="text" id="username" name="username" value="{{ old('username') }}" placeholder="用户名"
-                   class="login_txtbx"/>
+<div class="login_box">
+    <div class="login_l_img"><img src="/assets/images/login-img.png" /></div>
+    <div class="login">
+        <div class="login_logo"><img src="/assets/images/login_logo.png" /></div>
+        <div class="login_name">
+            <p>后台管理系统</p>
         </div>
-        <div class="layui-pwd-icon larry-login">
-            <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="密码"
-                   class="login_txtbx"/>
-        </div>
-        <div class="layui-val-icon larry-login">
-            <input type="text" id="code" value="{{ old('code') }}" name="code" placeholder="验证码" maxlength="4"
-                   class="login_txtbx" style="width:52%;">
+        <form action="{{ route('login.checkLogin') }}" method="post" onsubmit="return check_login();">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+            <input type="text" id="username" name="username" value="{{ old('username') }}" placeholder="用户名" />
+            <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="密码" />
+            <input type="text" id="code" name="code" value="{{ old('code') }}" placeholder="验证码" maxlength="4" style="width:52%;"/>
             <img src="{{ route('login.captcha') }}" alt="" class="verifyImg" id="verifyImg"
-                 onClick="javascript:this.src='{{ route('login.captcha') }}?r='+Math.random();">
-        </div>
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul style="color:red;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="layui-submit larry-login">
-            <input type="submit" value="立即登陆" class="submit_btn"/>
-        </div>
-    </form>
-    <div class="layui-login-text">
-        <p>© 2007-2018 牛叔叔 版权所有</p>
-        <p>粤1088-1044-1123</p>
+                 onClick="javascript:this.src='{{ route('login.captcha') }}?r='+Math.random();" style="width:45%;height:48px;margin-top:-18px;">
+            <input value="立即登陆" style="width:100%;" type="submit">
+        </form>
     </div>
+    <div class="copyright">@2018 牛叔叔技术分享 粤ICP备18107654号-1 & 版权所有</div>
 </div>
+<div style="text-align:center;display:none">
+    <p>更多模板：<a href="http://www.aspku.com/" target="_blank">网站源码库</a></p>
+</div>
+</body>
 <script type="text/javascript" src="/assets/common/layui/lay/dest/layui.all.js"></script>
 <script type="text/javascript" src="/assets/js/login.js"></script>
 <script type="text/javascript" src="/assets/jsplug/jparticle.jquery.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $(".layui-canvs").jParticle({
-            background: "#141414",
-            color: "#E6E6E6"
-        });
-    });
-
+<script>
     //登录验证
     function check_login() {
         var username = $("#username").val();
@@ -87,5 +60,4 @@
         }
     }
 </script>
-</body>
 </html>
