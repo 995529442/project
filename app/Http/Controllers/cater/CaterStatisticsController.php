@@ -54,12 +54,14 @@ class CaterStatisticsController extends Controller
 		$wx_count = DB::table("cater_orders")->where($where)->where(['payment_type'=>0])->count();
 		$currency_count = DB::table("cater_orders")->where($where)->where(['payment_type'=>1])->count();
 
+		$total_count = $wx_count+$currency_count;
+
 		return view('cater.statistics.index',[
 			"categories" => rtrim($categories,','),
 			"tangshi" => rtrim($tangshi,','),
 			"waimai" => rtrim($waimai,','),
-			'wx_count' => round($wx_count/($wx_count+$currency_count),2),
-			'currency_count' => round($currency_count/($wx_count+$currency_count),2)
+			'wx_count' => empty($total_count)?0:round($wx_count/$total_count,2),
+			'currency_count' => empty($total_count)?0:round($currency_count/$total_count,2)
 		]);
 	}
 }
