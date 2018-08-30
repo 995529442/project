@@ -131,9 +131,9 @@
     </div>
 
     <div class="layui-footer">
-        @2018 &copy;
+        @2018
         <a href="javascript::void(0);">
-            牛叔叔技术分享 粤ICP备18107654号-1 @ 版权所有
+            牛叔叔技术分享 粤ICP备18107654号-1 & 版权所有
         </a>
     </div>
 </div>
