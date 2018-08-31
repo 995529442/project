@@ -19,10 +19,10 @@ Page({
         orderNumber: ['点餐', '外卖'],
         is_set_password: 0,  //是否已设置密码
         code_phone: "",   //验证手机号码
-        code_text :"验证码",
-        disabled:false,
-        currentTime:181,
-        change_type:1  //修改密码方式 1密码修改，2验证码修改
+        code_text: "验证码",
+        disabled: false,
+        currentTime: 181,
+        change_type: 2  //修改密码方式 1密码修改，2验证码修改
     },
 
     /**
@@ -450,7 +450,7 @@ Page({
                                 disabled: false
                             })
                         }
-                    }, 1000)  
+                    }, 1000)
                     wx.showToast({
                         title: '发送成功',
                         icon: 'success',
@@ -470,6 +470,7 @@ Page({
      * 保存密码设置信息
      */
     formSubmit: function (e) {
+        console.log(e)
         var that = this;
         var old_currency_password = typeof (e.detail.value.old_currency_password) == 'undefined' ? '' : e.detail.value.old_currency_password;
         var code = e.detail.value.code;
@@ -560,21 +561,32 @@ Page({
             success: function (res) {
                 wx.hideLoading()
                 if (res.data.errcode > 0) {
-                    wx.showToast({
-                        title: '设置成功',
-                        icon: 'success',
-                        duration: 3000,
-                        success: function () {
-                            wx.navigateBack({
-                                delta: 1
-                            })
+                    wx.showModal({
+                        title: '提示',
+                        content: '设置成功',
+                        success: function (res) {
+                            if (res.confirm) {
+                                wx.navigateBack({
+                                    delta: 1
+                                })
+                            } else if (res.cancel) {
+                                wx.navigateBack({
+                                    delta: 1
+                                })
+                            }
                         }
                     })
                 } else {
-                    wx.showToast({
-                        title: res.data.errmsg,
-                        icon: 'none',
-                        duration: 3000
+                    wx.showModal({
+                        title: '提示',
+                        content: res.data.errmsg,
+                        success: function (res) {
+                            if (res.confirm) {
+
+                            } else if (res.cancel) {
+
+                            }
+                        }
                     })
                 }
             }
@@ -646,14 +658,14 @@ Page({
     /**
      * 选取修改密码方式
      */
-    radioChange:function(e){
+    radioChange: function (e) {
         var that = this;
         var change_type = e.detail.value;
 
         that.setData({
             change_type: change_type
         })
-    }, 
+    },
     // 授权提示
     UserInfo_click: function (e) {
         var that = this;
@@ -663,7 +675,7 @@ Page({
                 icon: 'loading',
                 duration: 1200,
                 success: () => {
-                    that.setData({userinfo_box: false});
+                    that.setData({ userinfo_box: false });
                 },
             })
             return;

@@ -99,16 +99,16 @@
             <form bindsubmit="formSubmit">
                 <radio-group class="radio-group" bindchange="radioChange">
                     <label class="lxr">
-                    <view style="margin:0 auto;">
-                        <radio value="1" checked='checked' />密码
-                        <radio value="2" />验证码
+                        <view style="margin:0 auto;">
+                            <radio value="2" checked='checked' />验证码
+                            <radio value="1" />密码
                         </view>
                     </label>
                 </radio-group>
                 <block wx:if="{{change_type ==1}}">
                     <view class="lxr" wx:if="{{is_set_password == 1}}">
                         <text>原密码</text>
-                        <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" style="text-aligin:center;" />
+                        <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" type="password" style="text-aligin:center;" />
                     </view>
                     <view class="lxr">
                         <text wx:if="{{is_set_password == 1}}">新密码</text>
@@ -122,8 +122,7 @@
                 </block>
                 <block wx:if="{{change_type ==2}}">
                     <view class="lxr">
-                        <text wx:if="{{is_set_password == 1}}">新密码</text>
-                        <text wx:else>密码</text>
+                        <text>密码</text>
                         <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="password" style="text-aligin:center;" />
                     </view>
                     <view class="lxr">
@@ -136,8 +135,8 @@
                     </view>
                     <view class="lxr">
                         <text>验证码</text>
-                        <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:85%;text-aligin:center;" />
-                        <button bindtap="getCode" disabled='{{disabled}}' type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">{{code_text}}</button>
+                        <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:55%;text-aligin:center;margin-right:30rpx;" />
+                        <button type="button" bindtap="getCode" disabled='{{disabled}}' type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">{{code_text}}</button>
                     </view>
                 </block>
                 <button formType="submit" class="start-shop">保存</button>
