@@ -13,7 +13,7 @@
 
 <body>
 <div class="layui-layout layui-layout-admin kit-layout-admin">
-    <div class="layui-header">
+    <div class="layui-header" style="background-color: #393D49">
         <div class="layui-logo">后台管理系统</div>
         <!--             <div class="layui-logo kit-logo-mobile">K</div>
                     <ul class="layui-nav layui-layout-left kit-nav">
