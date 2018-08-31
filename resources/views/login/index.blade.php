@@ -24,7 +24,7 @@
             <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="密码" />
             <input type="text" id="code" name="code" value="{{ old('code') }}" placeholder="验证码" maxlength="4" style="width:52%;"/>
             <img src="{{ route('login.captcha') }}" alt="" class="verifyImg" id="verifyImg"
-                 onClick="javascript:this.src='{{ route('login.captcha') }}?r='+Math.random();" style="width:45%;height:48px;margin-top:-18px;">
+                 onClick="javascript:this.src='{{ route('login.captcha') }}?r='+Math.random();" style="width:45%;height:48px;margin-top:-18px;cursor: pointer;">
             <input value="立即登陆" style="width:100%;" type="submit">
         </form>
     </div>
