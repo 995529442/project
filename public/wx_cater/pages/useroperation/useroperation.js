@@ -21,7 +21,8 @@ Page({
         code_phone: "",   //验证手机号码
         code_text :"验证码",
         disabled:false,
-        currentTime:181
+        currentTime:181,
+        change_type:1  //修改密码方式 1密码修改，2验证码修改
     },
 
     /**
@@ -477,8 +478,9 @@ Page({
         var re_currency_password = e.detail.value.re_currency_password;
         var is_set_password = that.data.is_set_password;
         var pay_type = that.data.pay_type;
+        var change_type = that.data.change_type;
 
-        if (is_set_password == 1 && old_currency_password == "") {
+        if (is_set_password == 1 && old_currency_password == "" && change_type == 1) {
             wx.showToast({
                 title: '请输入原密码',
                 icon: 'none',
@@ -510,7 +512,7 @@ Page({
             })
             return;
         }
-        if (phone == "") {
+        if (phone == "" && change_type == 2) {
             wx.showToast({
                 title: '请输入手机号码',
                 icon: 'none',
@@ -520,7 +522,7 @@ Page({
         }
 
         var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-        if (!myreg.test(phone)) {
+        if (!myreg.test(phone) && change_type == 2) {
             wx.showToast({
                 title: '请输入正确的手机号码',
                 icon: 'none',
@@ -529,7 +531,7 @@ Page({
             return;
         }
 
-        if (code == "") {
+        if (code == "" && change_type == 2) {
             wx.showToast({
                 title: '请输入验证码',
                 icon: 'none',
@@ -549,7 +551,8 @@ Page({
                 currency_password: currency_password,
                 re_currency_password: re_currency_password,
                 phone: phone,
-                old_currency_password: old_currency_password
+                old_currency_password: old_currency_password,
+                change_type: change_type
             },
             header: {
                 'content-type': 'application/json'
@@ -640,6 +643,17 @@ Page({
         })
 
     },
+    /**
+     * 选取修改密码方式
+     */
+    radioChange:function(e){
+        var that = this;
+        var change_type = e.detail.value;
+
+        that.setData({
+            change_type: change_type
+        })
+    }, 
     // 授权提示
     UserInfo_click: function (e) {
         var that = this;

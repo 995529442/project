@@ -2,125 +2,146 @@
 <import src="../template/userInfo.wxml" />
 <template is="userinfo" data="{{userinfo_box:userinfo_box}}" />
 <view class="user-opertaion" style="height:100vh;background-color:#FFFFFF;">
-  <!--我的订单-->
-  <view wx:if="{{ operation == 'order' }}" class="order">
-    <view class="coupon-top">
-      <view bindtap="chooseCouponTab" data-tabid="{{ index }}" class="coupon-top-item {{ currentCouponTab == index ? 'active' : '' }}" wx:for="{{ orderNumber }}">
-        {{ item }}
-      </view>
-    </view>
-    <view class="order-pend ">
-      <scroll-view scroll-y style="height: 92vh;" bindscrolltolower="scroll">
-        <view class="go-pay" wx:for="{{ orders }}" wx:for-index="index" wx:for-item="item">
-          <view style="display:inline-block;font-size:30rpx;color:#7d7d7b;margin-bottom:20rpx;margin-top:-20rpx;">
-            订单号:{{ item.batchcode }}
-          </view>
-          <view style="display:inline-block;font-size:30rpx;color:#7d7d7b;margin-bottom:20rpx;border-bottom:1px solid #EDEDED;">
-            下单时间:{{ item.create_time }}
-          </view>
-          <view style="display:inline-block;float:right;font-size:30rpx;color:#F72424;margin-top:10rpx;">
-            <text wx:if="{{item.status == -1}}">已取消</text>
-            <text wx:if="{{item.status == 0}}">待付款</text>
-            <text wx:if="{{item.status == 1}}">待接单</text>
-            <text wx:if="{{item.status == 2}}">已接单</text>
-            <text wx:if="{{item.status == 3}}">配送中</text>
-            <text wx:if="{{item.status == 4}}">配送完成</text>
-            <text wx:if="{{item.status == 5}}">已完成</text>
-            <text wx:if="{{item.status == 6}}">退款中</text>
-            <text wx:if="{{item.status == 7}}">已退款</text>
-            <text wx:if="{{item.status == 8}}">拒绝退款</text>
-            <text wx:if="{{item.status == 9}}">已拒单</text>
-          </view>
-          <view class="go-pay-top" wx:for="{{ item.goods_list }}" wx:for-index="index" wx:for-item="item">
-            <image src="{{url}}{{ item.thumb_img }}"></image>
-            <view class="g-p-t-center">
-              <text>商品名称:{{ item.good_name }}</text>
-              <text>数量：{{ item.number }}</text>
-              <text>总价：￥{{ item.total_price }}</text>
+    <!--我的订单-->
+    <view wx:if="{{ operation == 'order' }}" class="order">
+        <view class="coupon-top">
+            <view bindtap="chooseCouponTab" data-tabid="{{ index }}" class="coupon-top-item {{ currentCouponTab == index ? 'active' : '' }}" wx:for="{{ orderNumber }}">
+                {{ item }}
             </view>
-          </view>
-          <view class="go-pay-bottom" style="border-bottom:1px solid #EDEDED;">
-            <text>共{{ item.total_num }}件菜品</text>
-            <text>合计<text style="color:red;">￥{{ item.total_money }}</text></text>
-            <!-- <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn">去支付</view> -->
-            <view wx:if="{{item.pay_type == 1 && item.status==1}}" class="go-pay-btn" bindtap="operate" data-type="refund" data-order_id="{{item.order_id}}">申请退款</view>
-            <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn" bindtap="operate" data-type="cancel" data-order_id="{{item.order_id}}">取消订单</view>
-            <view wx:if="{{item.pay_type == 1 && (item.status==3 || item.status==4)}}" class="go-pay-btn" bindtap="operate" data-type="done" data-order_id="{{item.order_id}}">完成订单</view>
-          </view>
         </view>
-      </scroll-view>
+        <view class="order-pend ">
+            <scroll-view scroll-y style="height: 92vh;" bindscrolltolower="scroll">
+                <view class="go-pay" wx:for="{{ orders }}" wx:for-index="index" wx:for-item="item">
+                    <view style="display:inline-block;font-size:30rpx;color:#7d7d7b;margin-bottom:20rpx;margin-top:-20rpx;">
+                        订单号:{{ item.batchcode }}
+                    </view>
+                    <view style="display:inline-block;font-size:30rpx;color:#7d7d7b;margin-bottom:20rpx;border-bottom:1px solid #EDEDED;">
+                        下单时间:{{ item.create_time }}
+                    </view>
+                    <view style="display:inline-block;float:right;font-size:30rpx;color:#F72424;margin-top:10rpx;">
+                        <text wx:if="{{item.status == -1}}">已取消</text>
+                        <text wx:if="{{item.status == 0}}">待付款</text>
+                        <text wx:if="{{item.status == 1}}">待接单</text>
+                        <text wx:if="{{item.status == 2}}">已接单</text>
+                        <text wx:if="{{item.status == 3}}">配送中</text>
+                        <text wx:if="{{item.status == 4}}">配送完成</text>
+                        <text wx:if="{{item.status == 5}}">已完成</text>
+                        <text wx:if="{{item.status == 6}}">退款中</text>
+                        <text wx:if="{{item.status == 7}}">已退款</text>
+                        <text wx:if="{{item.status == 8}}">拒绝退款</text>
+                        <text wx:if="{{item.status == 9}}">已拒单</text>
+                    </view>
+                    <view class="go-pay-top" wx:for="{{ item.goods_list }}" wx:for-index="index" wx:for-item="item">
+                        <image src="{{url}}{{ item.thumb_img }}"></image>
+                        <view class="g-p-t-center">
+                            <text>商品名称:{{ item.good_name }}</text>
+                            <text>数量：{{ item.number }}</text>
+                            <text>总价：￥{{ item.total_price }}</text>
+                        </view>
+                    </view>
+                    <view class="go-pay-bottom" style="border-bottom:1px solid #EDEDED;">
+                        <text>共{{ item.total_num }}件菜品</text>
+                        <text>合计<text style="color:red;">￥{{ item.total_money }}</text></text>
+                        <!-- <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn">去支付</view> -->
+                        <view wx:if="{{item.pay_type == 1 && item.status==1}}" class="go-pay-btn" bindtap="operate" data-type="refund" data-order_id="{{item.order_id}}">申请退款</view>
+                        <view wx:if="{{item.pay_type == 0 && item.status==0}}" class="go-pay-btn" bindtap="operate" data-type="cancel" data-order_id="{{item.order_id}}">取消订单</view>
+                        <view wx:if="{{item.pay_type == 1 && (item.status==3 || item.status==4)}}" class="go-pay-btn" bindtap="operate" data-type="done" data-order_id="{{item.order_id}}">完成订单</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
     </view>
-  </view>
-  <!--我的地址-->
-  <view wx:if="{{ operation == 'address' }}" class="number" style="height:85vh;">
-    <scroll-view scroll-y style="height: 88vh;" bindscrolltolower="scroll">
-      <block wx:for="{{address}}" wx:for-item="item" wx:for-index="idx">
-        <view class="number-top" bindtap="select_address" data-address_id="{{item.id}}" data-is_out="{{item.is_out}}">
-          <view class="n-t-center">
-            <text>{{item.user_name}} {{item.phone}}</text>
-            <text>{{item.province}}{{item.city}}{{item.country}}</text>
-            <text>{{item.address}}</text>
-            <view style="position:absolute;right:40rpx;" wx:if="{{pay_type == 0}}">
-              <text bindtap="add_address" data-id="{{item.id}}" class="iconfont icon-canshi before" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;padding-left:10rpx;"></text>
-              <text bindtap="del_address" data-id="{{item.id}}" class="iconfont icon-chuliyuyue:before" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;padding-left:10rpx;"></text>
+    <!--我的地址-->
+    <view wx:if="{{ operation == 'address' }}" class="number" style="height:85vh;">
+        <!-- <scroll-view scroll-y style="height: 88vh;" bindscrolltolower="scroll"> -->
+        <block wx:for="{{address}}" wx:for-item="item" wx:for-index="idx">
+            <view class="number-top" bindtap="select_address" data-address_id="{{item.id}}" data-is_out="{{item.is_out}}">
+                <view class="n-t-center">
+                    <text>{{item.user_name}} {{item.phone}}</text>
+                    <text>{{item.province}}{{item.city}}{{item.country}}</text>
+                    <text>{{item.address}}</text>
+                    <view style="position:absolute;right:40rpx;" wx:if="{{pay_type == 0}}">
+                        <text bindtap="add_address" data-id="{{item.id}}" class="iconfont icon-canshi before" style="font-size: 60rpx;color:#4cbafa;padding-top:10rpx;padding-left:10rpx;"></text>
+                        <text bindtap="del_address" data-id="{{item.id}}" class="iconfont icon-chuliyuyue:before" style="font-size: 60rpx;color:#ED5A21;padding-top:10rpx;padding-left:10rpx;"></text>
+                    </view>
+                    <view style="position:absolute;right:40rpx;" wx:if="{{pay_type == 1 && item.is_out ==1 }}">
+                        <text style="font-size: 30rpx;padding-top:10rpx;padding-left:10rpx;">不在配送范围</text>
+                    </view>
+                </view>
             </view>
-            <view style="position:absolute;right:40rpx;" wx:if="{{pay_type == 1 && item.is_out ==1 }}">
-              <text style="font-size: 30rpx;padding-top:10rpx;padding-left:10rpx;">不在配送范围</text>
-            </view>
-          </view>
-        </view>
-      </block>
-    </scroll-view>
-    <button type="primary" bindtap="add_address" style="position:absolute;bottom:20rpx;width:45%;">添加地址</button>
-    <button type="warn" bindtap="add_wx_address" style="position:absolute;left:50%;bottom:20rpx;width:45%;">获取微信地址</button>
-  </view>
-  <!--购物币消费记录-->
-  <view wx:if="{{ operation == 'currency' }}" class="number" style="height:100vh;">
-    <!-- <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll"> -->
-      <block wx:for="{{currency}}" wx:for-item="item" wx:for-index="idx">
-        <view class="number-top" style="width:85%;display:inline-block;">
-          <view class="n-t-center">
-            <text>{{item.remark}} </text>
-            <text>操作人：{{item.operate_from}} 时间：{{item.create_time}}</text>
-          </view>
-        </view>
-        <view style="width:8%;display:inline-block;color: #2995F0;position:relative;top:30rpx;right:30rpx;" wx:if="{{item.type == 1}}">
-          <text>+{{item.currency_money}}</text>
-        </view>
-        <view style="width:8%;display:inline-block;color: #F54D1A;position:relative;top:30rpx;right:30rpx;" wx:if="{{item.type == 2}}">
-          <text>-{{item.currency_money}}</text>
-        </view>
-      </block>
-    <!-- </scroll-view> -->
-  </view>
-  <!--修改支付密码-->
-  <view wx:if="{{ operation == 'password' }}" class="number">
-    <view class="businessCooperation">
-      <form bindsubmit="formSubmit">
-        <view class="lxr" wx:if="{{is_set_password == 1}}">
-          <text>原密码</text>
-          <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" style="text-aligin:center;" />
-        </view>
-        <view class="lxr">
-          <text wx:if="{{is_set_password == 1}}">新密码</text>
-          <text wx:else>密码</text>
-          <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="password" style="text-aligin:center;" />
-        </view>
-        <view class="lxr">
-          <text>确认密码</text>
-          <input value="" name="re_currency_password" id="re_currency_password" placeholder="请再次输入密码" type="password" style="text-aligin:center;" />
-        </view>
-        <view class="lxr">
-          <text>手机号码</text>
-          <input value="" name="phone" id="phone" placeholder="请输入手机号码" type="number" bindblur="setPhone" style="text-aligin:center;" />
-        </view>
-        <view class="lxr">
-          <text>验证码</text>
-          <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:85%;text-aligin:center;" />
-          <button bindtap="getCode" disabled='{{disabled}}' type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">{{code_text}}</button>
-        </view>
-        <button formType="submit" class="start-shop">保存</button>
-      </form>
+        </block>
+        <!-- </scroll-view> -->
+        <button type="primary" bindtap="add_address" style="position:absolute;bottom:20rpx;width:45%;">添加地址</button>
+        <button type="warn" bindtap="add_wx_address" style="position:absolute;left:50%;bottom:20rpx;width:45%;">获取微信地址</button>
     </view>
-  </view>
+    <!--购物币消费记录-->
+    <view wx:if="{{ operation == 'currency' }}" class="number" style="height:100vh;">
+        <scroll-view scroll-y style="height: 98vh;" bindscrolltolower="scroll">
+            <block wx:for="{{currency}}" wx:for-item="item" wx:for-index="idx">
+                <view class="number-top" style="width:85%;display:inline-block;">
+                    <view class="n-t-center">
+                        <text>{{item.remark}} </text>
+                        <text>操作人：{{item.operate_from}} 时间：{{item.create_time}}</text>
+                    </view>
+                </view>
+                <view style="width:8%;display:inline-block;color: #2995F0;position:relative;top:30rpx;right:40rpx;" wx:if="{{item.type == 1}}">
+                    <text>+{{item.currency_money}}</text>
+                </view>
+                <view style="width:8%;display:inline-block;color: #F54D1A;position:relative;top:30rpx;right:40rpx;" wx:if="{{item.type == 2}}">
+                    <text>-{{item.currency_money}}</text>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+    <!--修改支付密码-->
+    <view wx:if="{{ operation == 'password' }}" class="number">
+        <view class="businessCooperation">
+            <form bindsubmit="formSubmit">
+                <radio-group class="radio-group" bindchange="radioChange">
+                    <label class="lxr">
+                    <view style="margin:0 auto;">
+                        <radio value="1" checked='checked' />密码
+                        <radio value="2" />验证码
+                        </view>
+                    </label>
+                </radio-group>
+                <block wx:if="{{change_type ==1}}">
+                    <view class="lxr" wx:if="{{is_set_password == 1}}">
+                        <text>原密码</text>
+                        <input value="" name="old_currency_password" id="old_currency_password" placeholder="请填写原密码" style="text-aligin:center;" />
+                    </view>
+                    <view class="lxr">
+                        <text wx:if="{{is_set_password == 1}}">新密码</text>
+                        <text wx:else>密码</text>
+                        <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="password" style="text-aligin:center;" />
+                    </view>
+                    <view class="lxr">
+                        <text>确认密码</text>
+                        <input value="" name="re_currency_password" id="re_currency_password" placeholder="请再次输入密码" type="password" style="text-aligin:center;" />
+                    </view>
+                </block>
+                <block wx:if="{{change_type ==2}}">
+                    <view class="lxr">
+                        <text wx:if="{{is_set_password == 1}}">新密码</text>
+                        <text wx:else>密码</text>
+                        <input value="" name="currency_password" id="currency_password" placeholder="请输入密码" type="password" style="text-aligin:center;" />
+                    </view>
+                    <view class="lxr">
+                        <text>确认密码</text>
+                        <input value="" name="re_currency_password" id="re_currency_password" placeholder="请再次输入密码" type="password" style="text-aligin:center;" />
+                    </view>
+                    <view class="lxr">
+                        <text>手机号码</text>
+                        <input value="" name="phone" id="phone" placeholder="请输入手机号码" type="number" bindblur="setPhone" style="text-aligin:center;" />
+                    </view>
+                    <view class="lxr">
+                        <text>验证码</text>
+                        <input value="" name="code" id="code" placeholder="请输入验证码" type="number" style="width:85%;text-aligin:center;" />
+                        <button bindtap="getCode" disabled='{{disabled}}' type="primary" style="height:60rpx;line-height:60rpx;margin-top:-10rpx;">{{code_text}}</button>
+                    </view>
+                </block>
+                <button formType="submit" class="start-shop">保存</button>
+            </form>
+        </view>
+    </view>
 </view>

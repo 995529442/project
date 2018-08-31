@@ -112,26 +112,35 @@ class getShopController extends Controller
         $phone = $request->input("phone", "");
         $currency_password = $request->input("currency_password", "");
         $code = $request->input("code", "");
+        $change_type = $request->input("change_type", 0);
 
         $return = array(
             "errcode" => -1,
             "errmsg" => "失败"
         );
 
-        if ($code) {
+        if($change_type == 1){ //密码
+            //判断原密码是否正确
+            if (!empty($old_currency_password)) {
+                $ori_old_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
+
+                if (Crypt::decrypt($ori_old_currency_password) != $old_currency_password) {
+                    $return['errmsg'] = "原密码错误，请重新输入";
+
+                    return json_encode($return);
+                }else{
+                    $result = DB::table("cater_users")->whereId($user_id)->update(['currency_password' => Crypt::encrypt($currency_password)]);
+
+                    if ($result) {
+                        $return['errcode'] = 1;
+                        $return['errmsg'] = "设置成功";
+                    }
+                }
+            }
+        }else{//验证码
             if (\Cache::has('code')) {
                 $old_code = \Cache::get("code");
 
-                //判断原密码是否正确
-                if (!empty($old_currency_password)) {
-                    $ori_old_currency_password = DB::table("cater_users")->whereId($user_id)->value("currency_password");
-
-                    if (Crypt::decrypt($ori_old_currency_password) != $old_currency_password) {
-                        $return['errmsg'] = "原密码错误，请重新输入";
-
-                        return json_encode($return);
-                    }
-                }
                 if ($code == $old_code) {
                     //修改用户支付密码和手机号
                     $result = DB::table("cater_users")->whereId($user_id)->update(['currency_password' => Crypt::encrypt($currency_password), 'mobile' => $phone]);
@@ -149,6 +158,5 @@ class getShopController extends Controller
         }
 
         return json_encode($return);
-
     }
 }

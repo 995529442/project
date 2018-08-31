@@ -31,20 +31,17 @@ page {
   color: #333;
   font-size: 24rpx;
   padding-top: 10rpx;
-  width: 70%;
 }
 
 .number .number-top .n-t-center text:nth-child(2) {
   font-size: 20rpx;
   color: #666;
   padding-top: 10rpx;
-    width: 70%;
 }
 
 .number .number-top .n-t-center text:nth-child(3) {
   font-size: 20rpx;
   color: #666;
-  padding-top: 10rpx;
 }
 
 .number .number-bottom {
