@@ -126,7 +126,7 @@
         </div>
     </div>
     <div class="layui-body" id="container">
-        <!-- 内容主体区域 -->
+         <!-- 内容主体区域 -->
         <div style="padding: 15px;">主体内容加载中,请稍等...</div>
     </div>
 
